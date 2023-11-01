@@ -2,19 +2,24 @@ import React from 'react';
 
 export const Navbar = () => {
   return (
-    <>
+    <div>
       <div className='.container-fluid'>
-        <img src="/assets/Banner.png" className="img-fluid rounded" alt="Banner" />
+        <img src="/assets/Banner.png" className="img-fluid rounded mt-1" alt="Banner" />
       </div>
-      <nav class="navbar navbar-expand-lg rounded-2 navbar">
+      <nav class="navbar navbar-expand-sm rounded-2 navbar" data-bs-theme="dark">
         <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor04" aria-controls="navbarColor04" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarColor04">
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link active " style={{color : 'whitesmoke', fontSize: 'large'}} href="#">FutStore
+                <a class="nav-link active" 
+                  style={{ color: 'whitesmoke', fontSize: 'large' }} 
+                  href="#"
+                  onMouseOver={(e) => (e.target.style.color = 'yellow')}
+                  onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}>
+                    FutStore
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
@@ -33,8 +38,7 @@ export const Navbar = () => {
             </ul>
           </div>
         </div>
-      </nav>
-
-    </>
+      </nav>     
+      </div>
   );
-}
+} 

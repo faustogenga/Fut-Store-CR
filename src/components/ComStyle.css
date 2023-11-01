@@ -4,35 +4,35 @@
     height: 40px;
 }
 
+
 .nav-link {
     color: #F4F5F6;
 }
 
 .main-box{
     background-color: #538D22;
-    height: 500px;
-    margin-bottom: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    height: 550px;
+    margin-bottom: 5%;
   }
+
 .main-left {
     width: 50%;
-    display: flex;
-    background-color: red;
-    flex-direction: column;
+    height: 100%;
 }
 
 .main-right {
+    background-image: url(/public/assets/Main1.png);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: right;
     display: flex;
-    flex-direction: column;
     width: 50%;
-    height: 50%;
-    background-color: blue;
+    height: 100%;
 }
 
 
 .main-boton {
+    font-family: 'Poppins', sans-serif;
     color:#F4F5F6;
     background-color: #245501;
     border-color: #538D22;
@@ -49,23 +49,16 @@
   
 .top-content {
     color: #F4F5F6;
-    position: relative;
-    flex-direction: column;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 200%;
-    gap: 41px;
-    width: 500px;
   }
 
-  h1 {
-    color: rebeccapurple;
-  }
 
   .main-box .main-info {
-    position: relative;
+    font-family: 'Poppins', sans-serif;
     color: #F4F5F6;
-    top: 35%;
+    
   }
 
   .right-image {

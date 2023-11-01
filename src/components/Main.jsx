@@ -4,21 +4,21 @@ import React from 'react'
 export const Main = () => {
     return (
         <>
-            <div className="container main-box mx-auto p-5 mt-5 rounded">
-                <div className='main-left col-md-6'>
+            <div className="container main-box mx-auto mt-4 p-0 rounded d-flex">
+                <div className='main-left container-fluid p-5'>
                 <div className="top-content">
-                    <p> FUTBOL </p>
-                    <p> Deporte que Llena el Alma</p>
-                    <button className='btn btn-outline-success main-boton'>Ver Coleccion</button>
+                    <p> FUTSTORE </p>
+                    <p>¡Marca la diferencia en el campo con estilo!</p>
+                    <button className='btn btn-outline-success main-boton'>Compra Ahora</button>
                 </div>
-                <p className="main-info">
-                    A new era in eco friendly furniture with Avelon, the French luxury retail brand
-                    <br />
-                    with nice fonts, tasteful colors and a beautiful way to display things digitally <br />
-                    using modern web technologies.
+                <p className="main-info mt-5 ">
+                    <strong>El fútbol es la cosa más importante de las cosas menos importantes.</strong>
+                    <br /><br/>
+                    Equípate como un campeón y vive el espíritu del fútbol en cada partida. 
+                    Descubre nuestra colección de productos de primera calidad para los amantes del deporte.
                 </p>
                 </div>
-                <div className="main-right"/>
+                <div className="main-right rounded"/>
             </div>
         </>
     )
