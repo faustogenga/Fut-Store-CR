@@ -1,36 +1,44 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';  // Import Bootstrap CSS
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';  // Import Bootstrap JavaScript
 
 export const Navbar = () => {
   return (
-    <div className="dropdown">
-      <button
-        className="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Dropdown button
-      </button>
-      <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li>
-          <a className="dropdown-item" href="#">
-            Action
-          </a>
-        </li>
-        <li>
-          <a className="dropdown-item" href="#">
-            Another action
-          </a>
-        </li>
-        <li>
-          <a className="dropdown-item" href="#">
-            Something else here
-          </a>
-        </li>
-      </ul>
-    </div>
+    <div>
+      <div className='.container-fluid'>
+        <img src="/assets/Banner.png" className="img-fluid rounded mt-1" alt="Banner" />
+      </div>
+      <nav class="navbar navbar-expand-sm rounded-2 navbar" data-bs-theme="dark">
+        <div class="container-fluid">
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" 
+                  style={{ color: 'whitesmoke', fontSize: 'large' }} 
+                  href="#"
+                  onMouseOver={(e) => (e.target.style.color = 'yellow')}
+                  onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}>
+                    FutStore
+                  <span class="visually-hidden">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Inicia Sesion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Vende Con Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contactanos</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>     
+      </div>
   );
-};
+} 
