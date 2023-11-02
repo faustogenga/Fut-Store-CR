@@ -1,3 +1,7 @@
+h1, h2, h3, h4, h5 {
+    font-family: 'Poppins', sans-serif;
+}
+
 .navbar {
     margin-top: 1px;
     background-color: #245501;
@@ -12,7 +16,8 @@
 .main-box{
     background-color: #538D22;
     height: 550px;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
+    position: relative;
   }
 
 .main-left {
@@ -52,6 +57,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 200%;
+    position: inherit;
   }
 
 
@@ -63,12 +69,40 @@
 
   .right-image {
     background-image: url(/public/assets/Main1.png);
-    height: 500px;
-    flex-direction: column;
-    flex: auto;
     position: relative;
-    width: 500px;
+  }
+
+  .product {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    color: #000;
+  }
+
+  .product img {
+    width: 100%;
+    height: 80%;
+    position:relative;
+  }
+
+  .product .descripcion {
+    position: relative;
   }
   
+  /*SMALLER SCREEN*/
+  @media (max-width: 768px) {
+    .main-box {
+        height: auto; /* Adjust height as needed for smaller screens */
+        margin-bottom: 20px; /* Adjust margin for spacing */
+    }
+
+    .main-left{
+        width: 100%; /* Make both sides occupy the full width */
+    }
+
+    .main-right {
+        background-size: contain; /* Adjust background size */
+        background-position: center; /* Center the background */
+    }
+  }
   
   
