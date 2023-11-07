@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { onInsert } from '../CRUD/app'
 import swal from 'sweetalert';
 import { collectionAssignation } from '../CRUD/app'
-
 import '../CSS/Add_Products.css'
-
 import imagenAP from "../images/agregar_producto_formcomplement-v5.png";
 
+
 const collectionDB_Name= 'Products';
+
 
 const Add_Products = () => {
     const initialValues = {
@@ -18,6 +18,14 @@ const Add_Products = () => {
         description : ""
     }
 
+
+/*	Notas	-------------------------------------------------------------
+
+	- Se debe de agregar el ID del usuario vendedor al producto
+	- Pulir interfaz gráfica
+	- Mejorar filtros para antes de ingresar el producto a la BD
+
+*/
 
 // UseSatate
 const [values, setValues] = useState(initialValues);
