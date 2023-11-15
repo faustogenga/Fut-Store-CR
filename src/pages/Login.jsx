@@ -52,11 +52,9 @@ export const Login = (props) => {
                 <div>Inicia sesi
                 <SportsSoccerIcon  sx={{ fontSize: 45}}/>
                 n</div>
-                
             </div>
-            <br />
             <TextField
-                className="m-2 col-11 mx-auto"
+                className="m-3 col-11"
                 required
                 id="outlined-required"
                 label="Correo"
@@ -65,7 +63,7 @@ export const Login = (props) => {
             />
             <br />
             <TextField
-                className="m-2 col-11 mx-auto"
+                className="m-3 col-11"
                 id="outlined-password-input"
                 label="Contraseña"
                 type="password"
