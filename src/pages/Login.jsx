@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 //MUI
 import TextField from '@mui/material/TextField';
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 
 export const Login = (props) => {
     const [email, setEmail] = useState("");
@@ -46,9 +47,12 @@ export const Login = (props) => {
     };
 
     return <div className="mainContainerlogin">
-        <form className="loginform col-6 text-center">
+        <form className="loginform text-center col-4">
             <div className="titleContainer">
-                <div>Login</div>
+                <div>Inicia sesi
+                <SportsSoccerIcon  sx={{ fontSize: 45}}/>
+                n</div>
+                
             </div>
             <br />
             <TextField

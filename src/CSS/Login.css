@@ -1,24 +1,26 @@
+.container-fluid{
+    padding: 0 !important;
+}
+
 .mainContainerlogin {
     background-image: url(https://i.pinimg.com/originals/a1/44/52/a14452c7bf1df8d906c4d8e8103d633d.jpg);
-    background-size: cover;
-    width: 100%;
-    flex-direction: column;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    background-size: cover;
     height: 100vh;
   }
 
   .loginform {
-    background-color: rgba(255, 255, 255, 0.816);
-    border-radius: 5%;
+    background-color: rgba(255, 255, 255, 0.89);
+    border-radius: 3%;
   }
   
   .titleContainer {
     display: flex;
-    flex-direction: column;
-    font-size: 64px;
-    font-weight: bolder;
+    font-size: 60px;
+    color: rgba(0, 0, 0, 0.758);
+    font-family: 'Poppins', sans-serif;
     align-items: center;
     justify-content: center;
   }
