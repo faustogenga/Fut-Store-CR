@@ -1,0 +1,77 @@
+html{
+    height: 100%;
+}
+
+.page_head {
+    height: 120px;
+    background-color: rgb(17, 126, 53);
+}
+
+
+.container{
+    
+    margin-top: 50px;
+    margin-bottom: 70px;
+}
+
+
+.col-4 {
+    background-color: rgb(224, 224, 224);
+    padding-right: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 5px;
+    margin-right: 100px;
+}
+
+
+.title {
+    text-align: center;
+    font-size: 25px;
+}
+
+.form_product_options {
+    padding: 10px;
+    padding-right: 345px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+}
+
+
+.form_product_options_description {
+    column-gap: 10px;
+}
+
+
+.form_product_options_text{
+    margin-bottom: 5px;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+
+.btn_save_product {
+    background-color: darkorange;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 43%;
+    padding-left: 43%;
+    margin-left: 20px;
+}
+
+
+
+
+/* -- HOVER SECTION -- */
+
+.btn_save_product:hover{
+    background-color: rgb(224, 124, 2);
+    color: white;
+}
