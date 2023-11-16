@@ -4,15 +4,13 @@ import { Main } from '../components/Main'
 import { Products } from '../components/Products'
 import { Banner } from '../components/Banner'
 import { Footer } from '../components/Footer'
-import { useNavigate } from 'react-router'
 
 export const Home = (props) => {
     const {email} = props
     const loggedIn = false;
-    const navigate = useNavigate();
 
   return (
-    <div>
+    <div className='mx-1'>
         <Navbar 
         loggedIn = {loggedIn}
         email = {email}/>

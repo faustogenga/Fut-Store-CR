@@ -1,11 +1,14 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 export const Navbar = ({loggedIn, email}) => {
 
+  const navigate = useNavigate();
 
   const HandleSession = () => {
+    navigate("/login")
   }
-
 
   return (
     <div>
@@ -22,7 +25,7 @@ export const Navbar = ({loggedIn, email}) => {
               <li className="nav-item">
                 <a className="nav-link active"
                   style={{ color: 'whitesmoke', fontSize: 'large' }}
-                  href="#"
+                  //href="#"
                   onMouseOver={(e) => (e.target.style.color = 'yellow')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}>
                   FutStore
@@ -40,7 +43,7 @@ export const Navbar = ({loggedIn, email}) => {
               </li>
             </ul>
             <div className="d-flex">
-            {(loggedIn ? <a>Bienvenido {email}</a> : <a></a>)}
+            {(loggedIn ? <a>Bienvenido {email}</a> : '')}
               <i className="bi bi-person-circle mx-2 text-success"></i>
               <a className="nav-link" onClick={HandleSession}>{loggedIn ? "Cerrar Sesion" : "Iniciar Sesion"}</a>
               <i className="bi  bi-person-add mx-2 text-success"></i>

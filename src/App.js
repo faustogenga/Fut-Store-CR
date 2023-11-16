@@ -6,29 +6,29 @@ import './CSS/Login.css' //Login CSS
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 
-/**Components */
-import { Navbar } from './components/Navbar.jsx';
-import { Main } from './components/Main.jsx';
-import { Products } from './components/Products';
-import { Footer } from './components/Footer';
-import { Banner } from './components/Banner';
-
 /**Routing */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
+import { useState } from 'react';
+
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+
   return (
-   <>
-    <div className='container-fluid'>
-    <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login/>} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-   </>
+    <>
+      <div className='container-fluid'>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+            <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} email={email}/>} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </>
   );
 }
 
