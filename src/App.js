@@ -15,16 +15,13 @@ import { useState } from 'react';
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [email, setEmail] = useState("");
-
   return (
     <>
       <div className='container-fluid'>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-            <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} email={email}/>} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>
       </div>

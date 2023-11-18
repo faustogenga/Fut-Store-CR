@@ -4,16 +4,17 @@ import Swal from "sweetalert2";
 
 //MUI
 import TextField from '@mui/material/TextField';
-import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import {SportsSoccer, EmojiEmotions} from '@mui/icons-material';
 import { useAuth } from "../hooks/useAuth";
+import { auth } from "../CRUD/firebase_conection";
 
-export const Login = ({ email, setEmail, setLoggedIn }) => {
+export const Login = () => {
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errormessage, setErrorMessage] = useState("none");
 
     const navigate = useNavigate();
-
-    const {llego} = useAuth();
+    const login = useAuth();
 
     useEffect(() => {
         if (errormessage !== "none") {
@@ -22,7 +23,20 @@ export const Login = ({ email, setEmail, setLoggedIn }) => {
     }, [errormessage]);
 
 
-    const onSucess = () => {
+    const SignInSucess = () => {
+        Swal.fire({
+            title: "¡Hola de nuevo Campeón/a!" + <EmojiEmotions/>,
+            text: "Descubre los mejores productos",
+            imageUrl: "https://i.pinimg.com/564x/51/5d/12/515d125d04d97be394f81684eab0bb47.jpg",
+            imageWidth: 300,
+            imageHeight: 300,
+            imageAlt: "Custom image"
+          }).then(() => {
+            navigate("/");
+          })
+    }
+
+    const ExitLogin = () => {
         navigate("/");
     }
 
@@ -52,7 +66,10 @@ export const Login = ({ email, setEmail, setLoggedIn }) => {
     }
     const onButtonClickLogin = () => {
         if(InputValidation()) {
-            llego();
+            login.signIn(email,password)
+            .then(()=> {
+                SignInSucess();
+            })
         }
     };
 
@@ -71,12 +88,12 @@ export const Login = ({ email, setEmail, setLoggedIn }) => {
                 <input
                     className="btn btn-close bg-black m-1"
                     type="button"
-                    onClick={onSucess}
+                    onClick={ExitLogin}
                 />
             </div>
             <div className="titleContainer">
                 <div>Inicia sesi
-                    <SportsSoccerIcon sx={{ fontSize: 45 }} />
+                    <SportsSoccer sx={{ fontSize: 45 }} />
                     n</div>
             </div>
             <TextField
