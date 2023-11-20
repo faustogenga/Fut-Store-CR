@@ -1,77 +1,69 @@
-h1, h2, h3, h4, h5 {
+.container-fluid{
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5{
     font-family: 'Poppins', sans-serif;
 }
 
 .navbar {
     margin-top: 1px;
-    background-color: #245501;
+    background-color: #000000;
     height: 40px;
 }
 
 
-.nav-link {
+.nav-link, i{
     color: #F4F5F6;
 }
 
 .main-box{
-    background-color: #538D22;
-    height: 550px;
-    margin-bottom: 3%;
     position: relative;
+    background-image: url(/public/assets/Main1.png);
+    background-size: cover;
+    height: 90vh;
+    margin-bottom: 3%;
   }
 
 .main-left {
-    margin: 1%;
+    position: relative;
+    margin: 2%;
     width: 50%;
-    height: 100%;
-}
-
-.main-right {
-    background-image: url(/public/assets/Main1.png);
-    background-repeat: no-repeat;
-    background-size: 80%;
-    background-position: right;
-    display: flex;
-    width: 50%;
-    height: 100%;
 }
 
 
 .main-boton {
     font-family: 'Poppins', sans-serif;
     color:#F4F5F6;
-    background-color: #245501;
-    border-color: #538D22;
-    margin-top: 10%;
+    background-color: #3498DB;
+    border-color: #000000;
+    margin-top: 1%;
     padding: 2% 15% 2% 15%;
     border-radius: 0;
 }
 
 .main-boton:hover {
-    background-color: #AAD576;
-    border-color: #538D22;
+    background-color: #8fbedd;
+    border-color: #000000;
 }
 
   
 .top-content {
+    position: absolute;
     color: #F4F5F6;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 200%;
-    position: inherit;
   }
 
 
-  .main-box .main-info {
+  .main-info {
+    position: absolute;
     font-family: 'Poppins', sans-serif;
     color: #F4F5F6;
     
   }
 
-  .right-image {
-    background-image: url(/public/assets/Main1.png);
-    position: relative;
-  }
 
   .product {
     height: 100%;

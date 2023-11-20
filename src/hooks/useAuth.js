@@ -1,5 +1,4 @@
-import React from 'react'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from '@firebase/auth'
 import {auth} from '../CRUD/firebase_conection'
 
 export const useAuth = () => {
@@ -9,6 +8,7 @@ export const useAuth = () => {
             await createUserWithEmailAndPassword(auth, email, password);
         } catch (error) {
             console.error('Error signing up:', error.message);
+            throw error;
         }
     };
 
@@ -21,8 +21,14 @@ export const useAuth = () => {
         }
     };
 
+    const logOut = async () => {
+        console.log("logout");
+        signOut(auth);
+    }
+
     return {
         signIn,
-        signUp
+        signUp,
+        logOut
     }
 }
