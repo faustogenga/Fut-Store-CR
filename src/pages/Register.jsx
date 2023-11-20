@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import { useAuth } from "../hooks/useAuth";
 import { auth } from "../CRUD/firebase_conection";
-import { onAuthStateChanged } from "firebase/auth";
 
 
 export const Register = ({ setUser, setLoggedIn }) => {

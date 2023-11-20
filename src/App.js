@@ -15,6 +15,7 @@ import {useAuth} from './hooks/useAuth'
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './CRUD/firebase_conection';
 import { Register } from './pages/Register';
+import { AddProducts } from './components/AddProducts';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
             <Route path="/" element={<Home user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} />} />
             <Route path="/login" element={<Login setUser={setUser} setLoggedIn={setLoggedIn}/>} />
             <Route path="/Register" element={<Register setUser={setUser} setLoggedIn={setLoggedIn}/>} />
+            <Route path='/Vendor' element={<AddProducts/>}/>
           </Routes>
         </BrowserRouter>
       </div>

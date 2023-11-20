@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { onInsert } from '../CRUD/app'
-import swal from 'sweetalert';
 import { collectionAssignation } from '../CRUD/app'
-import '../CSS/Add_Products.css'
+import '../CSS/AddProducts.css'
 import imagenAP from "../images/agregar_producto_formcomplement-v5.png";
+import Swal from "sweetalert2";
 
 
 const collectionDB_Name= 'Products';
 
 
-const Add_Products = () => {
+export const AddProducts = () => {
+
+
     const initialValues = {
         name : "",
         category : "",
@@ -17,6 +19,8 @@ const Add_Products = () => {
         stock : "",
         description : ""
     }
+
+    const [values, setValues] = useState(initialValues);
 
 
 /*	Notas	-------------------------------------------------------------
@@ -28,7 +32,6 @@ const Add_Products = () => {
 */
 
 // UseSatate
-const [values, setValues] = useState(initialValues);
 
 
 // UseEffect
@@ -47,27 +50,23 @@ const handleInputChange = ( { target } )=>{
 const onSubmit = async ev =>{
     ev.preventDefault();
     if (values.name === "" || values.category === "" || values.category === "valor_nulo" || values.price === "" || values.stock === "" || values.description === ""){
-        console.log("No se puede Sapo");
-        swal("Error", "All fields must be completed.", "error");   
+        console.log("No se puede");
+        Swal("Error", "All fields must be completed.", "error");   
     }
     else{
         try {
             collectionAssignation(collectionDB_Name);
             await onInsert(values);
-            swal("Good job!", "Registro ingresado correctamente.", "success");    
+            Swal("Good job!", "Registro ingresado correctamente.", "success");    
         } catch (error) {
-            swal("Error", "Error: " + error, "error");    
+            Swal("Error", "Error: " + error, "error");    
         }
     }
 }
 
-
-
   return (
     <>
         <div className='page_head'></div>
-
-
         <div className="container" style={{display:'grid', gridTemplateColumns:'1fr 1fr'}}>
             <div className="rightsite-image" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src={imagenAP} alt='No im' />
@@ -158,5 +157,3 @@ const onSubmit = async ev =>{
     </>
   )
 }
-
-export default Add_Products
