@@ -2,13 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 
 
-export const Navbar = ({loggedIn, email}) => {
-
-  const navigate = useNavigate();
-
-  const HandleSession = () => {
-    navigate("/login")
-  }
+export const Navbar = ({ loggedIn, user, logOut}) => {
 
   return (
     <div>
@@ -43,11 +37,36 @@ export const Navbar = ({loggedIn, email}) => {
               </li>
             </ul>
             <div className="d-flex">
-            {(loggedIn ? <a>Bienvenido {email}</a> : '')}
-              <i className="bi bi-person-circle mx-2 text-success"></i>
-              <a className="nav-link" onClick={HandleSession}>{loggedIn ? "Cerrar Sesion" : "Iniciar Sesion"}</a>
-              <i className="bi  bi-person-add mx-2 text-success"></i>
-              <a className="nav-link me-3 -2" href="#">Registrate</a>
+              {loggedIn ? (
+                <>
+                  <i className="bi bi-person-circle mx-2 text-success"></i>
+                  <i className='text-white'>Bienvenido  {user?.email}</i>
+                  <a className="nav-link mx-3"
+                    href="/"
+                    onClick={(e) => {
+                      logOut();
+                    }}
+                  >
+                    <i className="bi bi-box-arrow-right mx-2 text-success"></i>
+                    Cerrar Session
+                  </a>
+                </>
+              ) : (
+                <>
+                  <a className="nav-link"
+                    href="/login"
+                    onClick={(e) => {
+                      console.log("login");
+                    }}
+                  >
+                    <i className="bi bi-box-arrow-right mx-2 text-success"></i>
+                    Inicia Sesion
+                  </a>
+                  <i className="bi  bi-person-add mx-2 text-success"></i>
+                  <a className="nav-link me-3 -2" href="/Register">Registrate</a>
+                </>
+
+              )}
             </div>
           </div>
         </div>
