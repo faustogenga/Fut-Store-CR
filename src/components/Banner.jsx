@@ -9,7 +9,7 @@ export const Banner = () => {
                     <blockquote className="blockquote">
                         <p className="mb-0">Tus productos en nuestra pagina a solo un click</p>
                     </blockquote>
-                    <button type="button" className="btn btn-secondary">Inscribete</button>
+                    <button type="button" className="btn btn-info">Inscribete</button>
                 </figure>
             </div>
         </div>

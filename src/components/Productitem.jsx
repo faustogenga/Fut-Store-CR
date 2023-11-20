@@ -7,7 +7,7 @@ export const Productitem = () => {
       <div className='descripcion m-2'>
         <h5>Tacos Puma ULTRA ULTIMATE</h5>
         <p className='m-0'><strong>$220</strong></p>
-        <button type="button" className="btn btn-link m-0 p-0">Comprar</button>
+        <button type="button" className="btn btn-link m-0 p-0 text-info">Comprar</button>
       </div>
     </div>
   )

@@ -39,6 +39,10 @@ export const Login = ({setUser, setLoggedIn}) => {
           })
     }
 
+    const RegisterNavigate = () => {
+        navigate("/Register")
+    }
+
     const ExitLogin = () => {
         navigate("/");
     }
@@ -131,7 +135,7 @@ export const Login = ({setUser, setLoggedIn}) => {
                 <input
                     className="btn btn-info col-5 m-3 mx-auto"
                     type="button"
-                    //onClick={}
+                    onClick={RegisterNavigate}
                     value={"Registrarte"}
                 />
             </div>
