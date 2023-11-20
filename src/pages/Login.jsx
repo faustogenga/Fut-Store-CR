@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { useAuth } from "../hooks/useAuth";
 import { auth } from "../CRUD/firebase_conection";
-import { onAuthStateChanged } from "firebase/auth";
 
 
 export const Login = ({setUser, setLoggedIn}) => {

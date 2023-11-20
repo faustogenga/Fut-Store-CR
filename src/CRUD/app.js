@@ -3,7 +3,7 @@ import { db } from "./firebase_conection";
 
 
 /* 1. CREAR LA CONSTANTE DE LA COLECCION */
-let collectionStr = '';
+let collectionStr = 'Products';
 
 export const collectionAssignation = (assignedCollection)=> {
     collectionStr = assignedCollection;
@@ -11,11 +11,10 @@ export const collectionAssignation = (assignedCollection)=> {
 
 
 /* 2. CREAR & EXPORTAR TODOS LOS METODOS DEL CRUD */
-export const onFindAll = async ()=>{
-    const result = await getDocs(query(collection( db, collectionStr )));
+export const onFindAll = async () =>{
+    const result = await getDocs((collection(db, collectionStr )));
     return result;
 };
-
 
 /* 3. EXTRAER OBJETO */
 export const onFindById = async paramId => {
