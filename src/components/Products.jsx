@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Productitem } from './Productitem'
-import { onFindAll } from '../CRUD/app'
-import { doc } from 'firebase/firestore';
+import { collectionAssignation, onFindAll } from '../CRUD/app'
 
 export const Products = () => {
 
@@ -10,16 +9,18 @@ export const Products = () => {
     useEffect(() => {
 
         const fetchdata = async () => {
-        
+            collectionAssignation('Products');
             const docsSnapshot = await onFindAll();
-            const filterData = docsSnapshot.docs.map((doc) => (
+            const filterData = docsSnapshot.docs.map((doc, index) => (
                 {
+                    key: index,
+                    id: doc.id,
                     ...doc.data(),
-                    
+
                 }
             ));
             setproducts(filterData);
-            console.log(filterData);
+            console.log(products);
         }
 
         fetchdata();
@@ -27,23 +28,21 @@ export const Products = () => {
 
     return (
         <section id='products'>
-        <div className="container mt-5 mb-5">
-            <div className="row main-products">
-                
-                <div className="col-lg-3 col-md-4 col-sm-6">
-                    <Productitem />
-                </div>
-                <div className="col-lg-3 col-md-4 col-sm-6">
-                    <Productitem />
-                </div>
-                <div className="col-lg-3 col-md-4 col-sm-6">
-                    <Productitem />
-                </div>
-                <div className="col-lg-3 col-md-4 col-sm-6">
-                    <Productitem />
+            <div className="container mt-5 mb-5">
+                <div className="row main-products">
+
+                    {products.map((product, index) => {
+                        return (
+                            <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
+                                 <Productitem product={product}/>
+                            </div>
+
+                        )
+                    })
+
+                    }
                 </div>
             </div>
-        </div>
         </section>
     )
 }

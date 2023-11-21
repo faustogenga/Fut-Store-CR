@@ -4,6 +4,7 @@ import { collectionAssignation } from '../CRUD/app'
 import '../CSS/AddProducts.css'
 import imagenAP from "../images/agregar_producto_formcomplement-v5.png";
 import Swal from "sweetalert2";
+import {BasicTable} from "./Table";
 
 
 const collectionDB_Name= 'Products';
@@ -67,6 +68,7 @@ const onSubmit = async ev =>{
   return (
     <>
         <div className='page_head'></div>
+        <BasicTable/>
         <div className="container" style={{display:'grid', gridTemplateColumns:'1fr 1fr'}}>
             <div className="rightsite-image" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src={imagenAP} alt='No im' />

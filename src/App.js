@@ -17,24 +17,44 @@ import { auth } from './CRUD/firebase_conection';
 import { Register } from './pages/Register';
 import { AddProducts } from './components/AddProducts';
 
+/*Firebase */
+import { collectionAssignation, onFindById } from './CRUD/app'
+import { AdminVendor } from './pages/AdminVendor';
+
 
 function App() {
 
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isVendor, setIsVendor] = useState(false);
 
   const authfunctions = useAuth();
 
   useEffect(() => {
-    onAuthStateChanged(auth,(currentuser) => {
-      setUser(currentuser);
-      if(user !== null) {
-        setLoggedIn(true);
-      } else {
-        setLoggedIn(false);
-      }
-    })
-  })
+    const fetchData = async () => {
+      onAuthStateChanged(auth, async (currentuser) => {
+        setUser(currentuser);
+  
+        if (currentuser !== null) {
+          setLoggedIn(true);
+
+          collectionAssignation('Vendors');
+          const docsSnapshot = await onFindById(currentuser.email);
+          console.log(docsSnapshot);
+          if(docsSnapshot !== undefined && docsSnapshot !== null) {
+            setIsVendor(true);
+          } else {
+            setIsVendor(false);
+          }
+        } else {
+          setLoggedIn(false);
+        }
+      });
+    };
+  
+    fetchData();
+  }, []); 
+  
 
 
   return (
@@ -42,10 +62,10 @@ function App() {
       <div className='container-fluid'>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} />} />
+            <Route path="/" element={<Home user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor}/>} />
             <Route path="/login" element={<Login setUser={setUser} setLoggedIn={setLoggedIn}/>} />
             <Route path="/Register" element={<Register setUser={setUser} setLoggedIn={setLoggedIn}/>} />
-            <Route path='/Vendor' element={<AddProducts/>}/>
+            <Route path='/AdminVendor' element={<AdminVendor user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
           </Routes>
         </BrowserRouter>
       </div>

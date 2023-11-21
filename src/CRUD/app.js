@@ -3,7 +3,7 @@ import { db } from "./firebase_conection";
 
 
 /* 1. CREAR LA CONSTANTE DE LA COLECCION */
-let collectionStr = 'Products';
+let collectionStr = '';
 
 export const collectionAssignation = (assignedCollection)=> {
     collectionStr = assignedCollection;
@@ -17,7 +17,7 @@ export const onFindAll = async () =>{
 };
 
 /* 3. EXTRAER OBJETO */
-export const onFindById = async paramId => {
+export const onFindById = async (paramId) => {
     const result = await getDoc(doc(db, collectionStr, paramId));
     return result.data();
 };
