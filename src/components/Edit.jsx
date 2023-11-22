@@ -1,39 +1,20 @@
-import { TextFields } from '@mui/icons-material';
-import React from 'react'
-import Swal from "sweetalert2";
+import React, { useState } from 'react';
+import Modal from './Modal'
+import "../CSS/Modal.css";
 
-export const Edit = ({ item }) => {
+export const Edit = ({ item, currentId }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: "btn btn-success",
-            cancelButton: "btn btn-danger"
-        },
-        buttonsStyling: false
-    });
+  const onClose = () => {
+    setIsOpen(false);
+  }
 
-    const editRun = async () => {
-        const { value: formValues } = await Swal.fire({
-            title: "Multiple inputs",
-            html: `
-              <input id="swal-input1" class="swal2-input">
-              <input id="swal-input2" class="swal2-input">
-            `,
-            focusConfirm: false,
-            showCancelButton: true,
-            preConfirm: () => {
-              return [
-                document.getElementById("swal-input1").value,
-                document.getElementById("swal-input2").value,
-              ];
-            }
-          });
-          if (formValues) {
-            Swal.fire(JSON.stringify(formValues));
-          }
-    }
-
-    return (
-        <button className='btn btn-info' onClick={editRun}>Editar</button>
-    )
-}
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)} type="button" className={"btn btn-info"}>
+        Editar
+      </button>
+      <Modal item={item} currentId={currentId} isOpen={isOpen} onClose={onClose}/>
+    </>
+  );
+};

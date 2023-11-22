@@ -7,7 +7,6 @@ export const Products = () => {
     const [products, setproducts] = useState([]);
 
     useEffect(() => {
-
         const fetchdata = async () => {
             collectionAssignation('Products');
             const docsSnapshot = await onFindAll();

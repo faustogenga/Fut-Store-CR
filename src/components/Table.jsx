@@ -33,21 +33,23 @@ export const BasicTable = () => {
             console.log(products);
         }
         fetchdata();
-    }, []);
+    }, [products]);
 
 
     return (
-        <div className='container-fluid justify-content-center d-flex'>
+        <div className='container-fluid justify-content-center d-flex'
+        style={{backgroundImage:"url(https://i.pinimg.com/originals/cb/e8/23/cbe8230004b895b545b61337f8d0ff99.jpg)"}}
+        >
             <TableContainer component={Paper} style={{width: '80%'}} className='m-5 ' >
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Producto</TableCell>
-                            <TableCell align="right">Categoria</TableCell>
-                            <TableCell align="right">Descripcion</TableCell>
-                            <TableCell align="right">Precio</TableCell>
-                            <TableCell align="right">Talla</TableCell>
-                            <TableCell align="right">Cantidad</TableCell>
+                            <TableCell style={{fontWeight:"bolder"}} >Producto</TableCell>
+                            <TableCell align="right" style={{fontWeight:"bolder"}}>Categoria</TableCell>
+                            <TableCell align="right" style={{fontWeight:"bolder"}}>Descripcion</TableCell>
+                            <TableCell align="right" style={{fontWeight:"bolder"}}>Precio</TableCell>
+                            <TableCell align="right" style={{fontWeight:"bolder"}}>Talla</TableCell>
+                            <TableCell align="right" style={{fontWeight:"bolder"}}>Cantidad</TableCell>
                             <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
@@ -60,12 +62,12 @@ export const BasicTable = () => {
                                 <TableCell component="th" scope="row">
                                     {row.name}
                                 </TableCell>
-                                <TableCell align="right">{row.category}</TableCell>
+                                <TableCell className="p-0" align="left">{row.category}</TableCell>
                                 <TableCell align="right">{row.description}</TableCell>
                                 <TableCell align="right">$ {row.price}</TableCell>
                                 <TableCell align="right">{row.size}</TableCell>
                                 <TableCell align="right">{row.stock}</TableCell>
-                                <TableCell align="right"><Edit item={row}/></TableCell>
+                                <TableCell align="right"><Edit item={row} currentId={row.id}/></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

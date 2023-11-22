@@ -25,10 +25,10 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#products">Productos</a>
+              <a className="nav-link" href="/#products">Productos</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#footer">Contactanos</a>
+              <a className="nav-link" href="/#footer">Contactanos</a>
             </li>
             {isVendor ? (
               <li className="nav-item bg-warning">
