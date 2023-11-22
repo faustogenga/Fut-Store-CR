@@ -1,9 +1,8 @@
-import React, { useReducer, useState } from "react";
 import "../CSS/Modal.css";
 import { RiCloseLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import { collectionAssignation, onUpdate } from "../CRUD/app";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Modal = ({item, currentId, isOpen, onClose }) => {
 
@@ -13,6 +12,7 @@ const Modal = ({item, currentId, isOpen, onClose }) => {
     name : item.name,
     price : item.price,
     size : item.size,
+    img : item.img,
     stock : item.stock,
     vendor : item.vendor
   }
@@ -65,22 +65,18 @@ const Update = async ev =>{
         <h3>Modifica tu producto</h3>
         <div className="text-start m-0">Categoria </div>
         <input required="required" className='form-control ' type="text" name="category" value={values.category} onChange={onChangeValues} placeholder='Categoria' />
-        <br/>
         <div className="text-start" >Producto </div> 
         <input required="required" className='form-control ' type="text" name="name" value={values.name} onChange={onChangeValues} placeholder='Producto' />
-        <br/>
         <div className="text-start m-0">Descripcion </div>
         <textarea className="form-control p-4" type="text" name="description" value={values.description} onChange={onChangeValues} placeholder='Descripcion' />
-        <br />
+        <div className="text-start" >Imagen </div>
+        <input required="required" className='form-control ' type="text" name="img" value={values.img} onChange={onChangeValues} placeholder='Imagen' />
         <div className="text-start m-0">Precio </div>
         <input required="required" className='form-control  ' type="text" name="price" value={values.price} onChange={onChangeValues} placeholder='Precio' />
-        <br />
         <div className="text-start m-0">Talla </div>
         <input required="required" className='form-control  ' type="text" name="size" value={values.size} onChange={onChangeValues} placeholder='Talla' />
-        <br />
         <div className="text-start m-0">Cantidad </div>
         <input required="required" className='form-control  ' type="text" name="stock" value={values.stock} onChange={onChangeValues} placeholder='Cantidad' />
-        <br />
         <div className="container-fluid text-center">
         <button className="btn btn-info m-2" onClick={Update}>Actualizar</button>
         <button className="btn btn-danger m-2" onClick={onClose}>Cerrar</button>

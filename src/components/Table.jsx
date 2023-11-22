@@ -10,6 +10,8 @@ import { useEffect } from 'react';
 import { collectionAssignation, onFindAll } from '../CRUD/app';
 import { useState } from 'react';
 import { Edit } from './Edit';
+import { Delete } from './Delete'
+import { Agregar } from './Agregar';
 
 
 
@@ -31,9 +33,10 @@ export const BasicTable = () => {
             ));
             setproducts(filterData);
             console.log(products);
+            console.log("aqui")
         }
         fetchdata();
-    }, [products]);
+    }, []);
 
 
     return (
@@ -51,6 +54,7 @@ export const BasicTable = () => {
                             <TableCell align="right" style={{fontWeight:"bolder"}}>Talla</TableCell>
                             <TableCell align="right" style={{fontWeight:"bolder"}}>Cantidad</TableCell>
                             <TableCell align="right"></TableCell>
+                            <TableCell align="center" className='bg-light'><Agregar/></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -68,6 +72,7 @@ export const BasicTable = () => {
                                 <TableCell align="right">{row.size}</TableCell>
                                 <TableCell align="right">{row.stock}</TableCell>
                                 <TableCell align="right"><Edit item={row} currentId={row.id}/></TableCell>
+                                <TableCell align="right"><Delete currentId={row.id}/></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
