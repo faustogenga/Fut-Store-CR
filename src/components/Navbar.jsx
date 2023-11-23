@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export const Navbar = ({ loggedIn, user, logOut }) => {
+export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
 
   return (
     <div>
@@ -25,23 +25,30 @@ export const Navbar = ({ loggedIn, user, logOut }) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#products">Productos</a>
+              <a className="nav-link" href="/#products">Productos</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Vendor">Vende Con Nosotros</a>
+              <a className="nav-link" href="/#footer">Contactanos</a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#footer">Contactanos</a>
-            </li>
+            {isVendor ? (
+              <li className="nav-item bg-warning">
+                <a className="nav-link" href="/AdminVendor">Tus Productos</a>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <a className="nav-link" href="/NewVendor">Vende tus productos</a>
+              </li>
+            )
+            }
           </ul>
           <div className="d-flex">
             {loggedIn ? (
               <>
                 <i className="bi bi-person-circle mx-2 text-info"></i>
                 <i className='text-white'>Bienvenido  {user?.email}</i>
-                <a className="nav-link mx-3" 
-                onMouseOver={(e) => (e.target.style.color = 'red')}
-                onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
+                <a className="nav-link mx-3"
+                  onMouseOver={(e) => (e.target.style.color = 'red')}
+                  onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
                   href="/"
                   onClick={(e) => {
                     logOut();
@@ -66,8 +73,8 @@ export const Navbar = ({ loggedIn, user, logOut }) => {
                 </a>
                 <i className="bi  bi-person-add mx-2 text-info"></i>
                 <a className="nav-link me-3 -2" href="/Register"
-                onMouseOver={(e) => (e.target.style.color = '#3498DB')}
-                onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
+                  onMouseOver={(e) => (e.target.style.color = '#3498DB')}
+                  onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
                 >Registrate</a>
               </>
 

@@ -1,159 +1,108 @@
-import { useState } from 'react';
-import { onInsert } from '../CRUD/app'
-import { collectionAssignation } from '../CRUD/app'
-import '../CSS/AddProducts.css'
-import imagenAP from "../images/agregar_producto_formcomplement-v5.png";
+import "../CSS/Modal.css";
+import { RiCloseLine } from "react-icons/ri";
 import Swal from "sweetalert2";
+import { collectionAssignation, onInsert } from "../CRUD/app";
+import { useState } from "react";
 
 
-const collectionDB_Name= 'Products';
 
-
-export const AddProducts = () => {
-
+export const AddProducts = ({ isOpen, onClose }) => {
 
     const initialValues = {
-        name : "",
-        category : "",
-        price : "",
-        stock : "",
-        description : ""
+        category: '',
+        description: '',
+        name: '',
+        price: '',
+        size: '',
+        img: '',
+        stock: '',
+        vendor: 'j'
     }
 
     const [values, setValues] = useState(initialValues);
 
-
-/*	Notas	-------------------------------------------------------------
-
-	- Se debe de agregar el ID del usuario vendedor al producto
-	- Pulir interfaz gráfica
-	- Mejorar filtros para antes de ingresar el producto a la BD
-
-*/
-
-// UseSatate
-
-
-// UseEffect
-
-
-// Métodos
-const handleInputChange = ( { target } )=>{
-    const { name, value } = target;
-    //console.log(name, value);
-    setValues({...values, [name]:value});
-    console.log(values);
-}
-
-
-// CRUD
-const onSubmit = async ev =>{
-    ev.preventDefault();
-    if (values.name === "" || values.category === "" || values.category === "valor_nulo" || values.price === "" || values.stock === "" || values.description === ""){
-        console.log("No se puede");
-        Swal("Error", "All fields must be completed.", "error");   
+    const onChangeValues = ({ target }) => {
+        const { name, value } = target;
+        setValues({ ...values, [name]: value });
+        console.log(values);
     }
-    else{
-        try {
-            collectionAssignation(collectionDB_Name);
-            await onInsert(values);
-            Swal("Good job!", "Registro ingresado correctamente.", "success");    
-        } catch (error) {
-            Swal("Error", "Error: " + error, "error");    
+
+
+    const addProduct = async ev => {
+        ev.preventDefault();
+        console.log(values);
+
+        if (Object.values(values).some(value => value.trim() === '')) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Por favor, completa todos los campos.',
+                icon: 'error'
+            });
+            return;
         }
+
+        console.log(values);
+        Swal.fire({
+            title: "¿Estas Seguro?",
+            text: "Estas seguro que quieres agregar producto",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Agregar"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                collectionAssignation('Products');
+                await onInsert(values);
+                onClose()
+                Swal.fire({
+                    title: "Producto Agregado",
+                    text: "Gracias por agregar tu producto",
+                    icon: "success"
+                })
+            }
+        });
     }
-}
 
-  return (
-    <>
-        <div className='page_head'></div>
-        <div className="container" style={{display:'grid', gridTemplateColumns:'1fr 1fr'}}>
-            <div className="rightsite-image" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <img src={imagenAP} alt='No im' />
+
+    if (!isOpen) return null
+    return (
+        <>
+            <div className="overlay" />
+            <div className="modalbox m-2">
+                <button className={"closeBtn"} onClick={onClose}>
+                    <RiCloseLine style={{ marginBottom: "-3px" }} />
+                </button>
+                <h3>Agrega tu producto</h3>
+                <form>
+                    <div className="text-start m-0">Categoria </div>
+                    <input required="required" className='form-control ' type="text" name="category" value={values.category} onChange={onChangeValues} placeholder='Categoria' />
+                    <div className="text-start" >Producto </div>
+                    <input required="required" className='form-control ' type="text" name="name" value={values.name} onChange={onChangeValues} placeholder='Producto' />
+
+                    <div className="text-start" >Imagen </div>
+                    <input required="required" className='form-control ' type="text" name="img" value={values.img} onChange={onChangeValues} placeholder='Imagen' />
+
+                    <div className="text-start m-0">Descripcion </div>
+                    <textarea className="form-control p-4" type="text" name="description" value={values.description} onChange={onChangeValues} placeholder='Descripcion' />
+
+                    <div className="text-start m-0">Precio </div>
+                    <input required="required" className='form-control  ' type="text" name="price" value={values.price} onChange={onChangeValues} placeholder='Precio' />
+
+                    <div className="text-start m-0">Talla </div>
+                    <input required="required" className='form-control  ' type="text" name="size" value={values.size} onChange={onChangeValues} placeholder='Talla' />
+
+                    <div className="text-start m-0">Cantidad </div>
+                    <input required="required" className='form-control  ' type="text" name="stock" value={values.stock} onChange={onChangeValues} placeholder='Cantidad' />
+
+                    <div className="container-fluid text-center">
+                        <button className="btn btn-info m-2" type="sumbit" onClick={addProduct}>Agregar</button>
+                        <button className="btn btn-danger m-2" onClick={onClose}>Cerrar</button>
+                    </div>
+                </form>
             </div>
-            <div className="row">
-                {/* DETALLE */}
-                <div >
-                    <form className="col-4" onSubmit={ onSubmit /* DETERMINA EL MÉTODO A EJECUTAR */ }>
-                        
-                        <p className='title' style={{fontFamily:'Century Gothic'}}> Agregar Producto </p>
-                        
-                        <p className='form_product_options_text' style={{fontFamily:'Century Gothic'}}>Producto</p>
-                        <div>
-                            <input
-                                type="text"
-                                name="name" 
-                                value={ values.name } 
-                                onChange={ handleInputChange } 
-                                placeholder='' 
-                                className='form_product_options'
-                            />
-                        </div>
+        </>
+    );
+};
 
-                        <p className='form_product_options_text' style={{fontFamily:'Century Gothic'}}>Categoría</p>
-                        <div>
-                            <select 
-                                name="category"
-                                value={ values.category } 
-                                onChange={ handleInputChange }
-                                placeholder=''
-                                className='form_product_options'
-                            >
-                                <option value="valor_nulo"> - - - Seleccionar - - -</option>
-                                <option value="Camisetas"> Camisetas </option>
-                                <option value="Tenis"> Tenis </option>
-                                <option value="Gorras"> Gorras </option>
-                                <option value="Accesorios"> Accesorios </option>
-                            </select>
-                        </div>
-
-                        <p className='form_product_options_text' style={{fontFamily:'Century Gothic'}}>Precio</p>
-                        <div className="form-group">
-                            <input 
-                                type="number"
-                                min="0"
-                                name="price" 
-                                value={ values.price } 
-                                onChange={ handleInputChange } 
-                                placeholder='' 
-                                className='form_product_options' 
-                            />
-                        </div>
-
-                        <p className='form_product_options_text' style={{fontFamily:'Century Gothic'}}>Cantidad de stock</p>
-                        <div className="form-group">
-                            <input 
-                                type="number" 
-                                name="stock" 
-                                value={ values.stock } 
-                                onChange={ handleInputChange } 
-                                placeholder='' 
-                                className='form_product_options' 
-                            />
-                        </div>
-
-                        <p className='form_product_options_text' style={{fontFamily:'Century Gothic'}}>Descripción</p>
-                        <div className="form-group">
-                            <input 
-                                type="text"
-                                maxLength="300"
-                                name="description" 
-                                value={ values.description } 
-                                onChange={ handleInputChange } 
-                                placeholder=''
-                                style={{paddingBottom: 100}}
-                                
-                                className='form_product_options' 
-                            />
-                        </div>   
-
-                        <button className='btn_save_product'>Guardar</button>
-                    
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    </>
-  )
-}
+export default AddProducts;
