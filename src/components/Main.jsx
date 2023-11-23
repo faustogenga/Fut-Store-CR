@@ -1,24 +1,21 @@
-import { Button } from 'bootstrap'
+
 import React from 'react'
 
 export const Main = () => {
     return (
         <>
-            <div className="container main-box mx-auto mt-4 p-0 rounded d-flex">
-                <div className='main-left container-fluid p-5'>
+            <div className="container-fluid main-box mx-auto p-0 d-flex">
+                <div className='main-left container-fluid'>
                     <div className="top-content">
                         <p> FUTSTORE </p>
                         <p>¡Marca la diferencia en el campo con estilo!</p>
-                        <button className='btn btn-outline-success main-boton'>Compra Ahora</button>
+                        <button className='btn btn-outline-info main-boton'>Compra Ahora</button>
                     </div>
-                    <p className="main-info mt-5 ">
+                    <p className="main-info fixed-bottom">
                         <strong>El fútbol es la cosa más importante de las cosas menos importantes.</strong>
-                        <br /><br />
-                        Equípate como un campeón y vive el espíritu del fútbol en cada partida.
-                        Descubre nuestra colección de productos de primera calidad para los amantes del deporte.
+                        <br />
                     </p>
                 </div>
-                <div className="main-right rounded" />
             </div>
         </>
     )

@@ -9,20 +9,10 @@ html{
 
 
 .container{
-    
     margin-top: 50px;
     margin-bottom: 70px;
 }
 
-
-.col-4 {
-    background-color: rgb(224, 224, 224);
-    padding-right: 15px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    border-radius: 5px;
-    margin-right: 100px;
-}
 
 
 .title {

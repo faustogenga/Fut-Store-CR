@@ -11,14 +11,13 @@ export const collectionAssignation = (assignedCollection)=> {
 
 
 /* 2. CREAR & EXPORTAR TODOS LOS METODOS DEL CRUD */
-export const onFindAll = async ()=>{
-    const result = await getDocs(query(collection( db, collectionStr )));
+export const onFindAll = async () =>{
+    const result = await getDocs((collection(db, collectionStr )));
     return result;
 };
 
-
 /* 3. EXTRAER OBJETO */
-export const onFindById = async paramId => {
+export const onFindById = async (paramId) => {
     const result = await getDoc(doc(db, collectionStr, paramId));
     return result.data();
 };
