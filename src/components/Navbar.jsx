@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
 
   return (
@@ -28,6 +27,9 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
               <a className="nav-link" href="/#products">Productos</a>
             </li>
             <li className="nav-item">
+                <a className='nav-link' href="/Cart">Carrito</a>
+            </li>
+            <li className="nav-item">
               <a className="nav-link" href="/#footer">Contáctanos</a>
             </li>
             {isVendor ? (
@@ -39,13 +41,14 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                 <a className="nav-link" href="/NewVendor">Vende tus productos</a>
               </li>
             )
+
             }
           </ul>
           <div className="d-flex">
             {loggedIn ? (
               <>
                 <i className="bi bi-person-circle mx-2 text-info"></i>
-                <i className='text-white'>Bienvenido  {user?.email}</i>
+                <i className='text-white'>Bienvenido{user?.email}</i>
                 <a className="nav-link mx-3"
                   onMouseOver={(e) => (e.target.style.color = 'red')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
@@ -55,7 +58,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                   }}
                 >
                   <i className="bi bi-box-arrow-right mx-2 text-info"></i>
-                  Cerrar Session
+                  Cerrar Sesión
                 </a>
               </>
             ) : (
@@ -69,7 +72,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
                 >
                   <i className="bi bi-box-arrow-right mx-2 text-info"></i>
-                  Inicia Sesión
+                  Iniciar Sesión
                 </a>
                 <i className="bi  bi-person-add mx-2 text-info"></i>
                 <a className="nav-link me-3 -2" href="/Register"
@@ -77,7 +80,6 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
                 >Regístrate</a>
               </>
-
             )}
           </div>
         </div>
