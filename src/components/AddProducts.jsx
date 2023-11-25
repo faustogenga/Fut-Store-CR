@@ -1,12 +1,9 @@
 import "../CSS/Modal.css";
 import { RiCloseLine } from "react-icons/ri";
 import Swal from "sweetalert2";
-import { collectionAssignation, onInsert } from "../CRUD/app";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-
-
-export const AddProducts = ({ isOpen, onClose }) => {
+export const AddProducts = ({ isOpen, onClose, handleAdd, user}) => {
 
     const initialValues = {
         category: '',
@@ -16,22 +13,31 @@ export const AddProducts = ({ isOpen, onClose }) => {
         size: '',
         img: '',
         stock: '',
-        vendor: 'j'
+        vendor: ''
     }
 
     const [values, setValues] = useState(initialValues);
+
+    useEffect(() => {
+        if (!user) {
+            return;
+        } else {
+            setValues({ ...values, vendor: user.email });
+        }
+
+    },[user]);
+    
 
     const onChangeValues = ({ target }) => {
         const { name, value } = target;
         setValues({ ...values, [name]: value });
         console.log(values);
-    }
 
+    }
 
     const addProduct = async ev => {
         ev.preventDefault();
         console.log(values);
-
         if (Object.values(values).some(value => value.trim() === '')) {
             Swal.fire({
                 title: 'Error',
@@ -41,7 +47,6 @@ export const AddProducts = ({ isOpen, onClose }) => {
             return;
         }
 
-        console.log(values);
         Swal.fire({
             title: "¿Estas Seguro?",
             text: "Estas seguro que quieres agregar producto",
@@ -50,18 +55,19 @@ export const AddProducts = ({ isOpen, onClose }) => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Agregar"
-        }).then(async (result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                collectionAssignation('Products');
-                await onInsert(values);
-                onClose()
+                handleAdd(values);
+                onClose();
+                setValues({...initialValues, vendor: user.email });
                 Swal.fire({
                     title: "Producto Agregado",
                     text: "Gracias por agregar tu producto",
                     icon: "success"
                 })
             }
-        });
+        }
+        );
     }
 
 
@@ -97,7 +103,7 @@ export const AddProducts = ({ isOpen, onClose }) => {
 
                     <div className="container-fluid text-center">
                         <button className="btn btn-info m-2" type="sumbit" onClick={addProduct}>Agregar</button>
-                        <button className="btn btn-danger m-2" onClick={onClose}>Cerrar</button>
+                        <button className="btn btn-danger m-2" onClick={() => { onClose(); setValues({...initialValues, vendor: user.email });}}>Cerrar</button>
                     </div>
                 </form>
             </div>

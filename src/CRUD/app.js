@@ -1,4 +1,4 @@
-import { collection, getDocs, query, doc, getDoc, addDoc, deleteDoc, updateDoc } from "firebase/firestore"
+import { collection, getDocs, doc, getDoc, addDoc, deleteDoc, updateDoc, where } from "firebase/firestore"
 import { db } from "./firebase_conection";
 
 
@@ -19,6 +19,11 @@ export const onFindAll = async () =>{
 /* 3. EXTRAER OBJETO */
 export const onFindById = async (paramId) => {
     const result = await getDoc(doc(db, collectionStr, paramId));
+    return result.data();
+};
+
+export const onFindByVendor = async (email) => {
+    const result = await getDoc(doc(db, collectionStr), where("email", "==", email));
     return result.data();
 };
 

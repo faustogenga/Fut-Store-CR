@@ -1,10 +1,9 @@
 import "../CSS/Modal.css";
 import { RiCloseLine } from "react-icons/ri";
 import Swal from "sweetalert2";
-import { collectionAssignation, onUpdate } from "../CRUD/app";
 import { useState } from "react";
 
-const Modal = ({item, currentId, isOpen, onClose }) => {
+const Modal = ({item,currentId,isOpen,onClose,handleEdit}) => {
 
   const initialValues = {
     category : item.category,
@@ -19,6 +18,7 @@ const Modal = ({item, currentId, isOpen, onClose }) => {
 
   const [values, setValues] = useState(initialValues);
 
+
   const onChangeValues = ({ target }) => {
     const { name, value } = target;
     setValues({ ...values, [name]: value });
@@ -29,8 +29,6 @@ const Modal = ({item, currentId, isOpen, onClose }) => {
 
 const Update = async ev =>{
   ev.preventDefault();
-  console.log(currentId);
-  console.log(values);
   Swal.fire({
     title: "¿Estas Seguro?",
     text: "Estas seguro que quieres modificar producto",
@@ -41,9 +39,10 @@ const Update = async ev =>{
     confirmButtonText: "Modificar"
   }).then( async (result) => {
     if (result.isConfirmed) {
-      collectionAssignation('Products');
-      await onUpdate(currentId, values);
-      onClose()
+      handleEdit(currentId, values);
+
+      onClose();
+      console.log("Producto Actualizado");
       Swal.fire({
         title: "Producto Modificado",
         text: "Gracias por actualizar tu producto",

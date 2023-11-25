@@ -1,26 +1,32 @@
 import React from 'react'
 import Swal from "sweetalert2";
-import { collectionAssignation, onDelete } from '../CRUD/app';
 
-export const Delete = ({ currentId }) => {
+export const Delete = ({ currentId, handleDelete}) => {
 
   const onDeleteItem = () => {
-    console.log(currentId)
     Swal.fire({
       title: "¿Seguro que quieres eliminar?",
       text: "Eliminar producto",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
       confirmButtonText: "Eliminar"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        collectionAssignation('Products');
-        await onDelete(currentId);
-        Swal.fire("Producto Eliminado", {
-          icon: "success",
+        handleDelete(currentId);
+        console.log("Borrado");
+
+        Swal.fire({
+          title: "Producto Eliminado :(",
+          imageUrl: "https://i.pinimg.com/564x/a6/ea/cb/a6eacbb1e92c055a4e77059d960da8fd.jpg",
+          imageWidth: 300,
+          imageHeight: 300,
+          imageAlt: "Custom image"
         })
+
+
+
       }
     });
   }

@@ -8,13 +8,13 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
       <div>
         <img src="/assets/Banner.png" className="img-fluid" width={'100%'} alt="Banner" />
       </div>
-      <nav className="container-fluid navbar-expand-sm navbar" data-bs-theme="dark">
+      <nav className="navbar navbar-expand-lg" data-bs-theme="dark">
         <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="navbar-collapse collapse">
+        <div className="navbar-collapse collapse" id="navbarColor01">
           <ul className="navbar-nav me-auto">
-            <li className="nav-item">
+            <li className="nav-item active">
               <a className="nav-link active"
                 style={{ color: 'whitesmoke', fontSize: 'large' }}
                 href="/"
@@ -31,7 +31,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
               <a className="nav-link" href="/#footer">Contactanos</a>
             </li>
             {isVendor ? (
-              <li className="nav-item bg-warning">
+              <li className="nav-item bg-warning p-0 size=10">
                 <a className="nav-link" href="/AdminVendor">Tus Productos</a>
               </li>
             ) : (

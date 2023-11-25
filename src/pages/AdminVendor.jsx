@@ -12,7 +12,7 @@ export const AdminVendor = ({user, loggedIn, logOut, isVendor}) => {
         logOut = {logOut}
         isVendor = {isVendor}
         />
-    <BasicTable/>
+    <BasicTable user={user}/>
     <Footer/>
     </>
   )

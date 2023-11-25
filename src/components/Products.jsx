@@ -19,23 +19,21 @@ export const Products = () => {
                 }
             ));
             setproducts(filterData);
-            console.log(products);
         }
 
         fetchdata();
-    }, []);
+    });
 
     return (
-        <section id='products'>
-            <div className="container mt-5 mb-5">
+        <section id='products' className='mt-5 mb-5'>
+            <div className="container">
+            <h4>Destacado</h4>
                 <div className="row main-products">
-
-                    {products.map((product, index) => {
+                    {products.slice(0,4).map((product, index,) => {
                         return (
-                            <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
+                            <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
                                  <Productitem product={product}/>
                             </div>
-
                         )
                     })
 

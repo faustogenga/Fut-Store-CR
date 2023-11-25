@@ -5,7 +5,7 @@ export const Main = () => {
     return (
         <>
             <div className="container-fluid main-box mx-auto p-0 d-flex">
-                <div className='main-left container-fluid'>
+                <div className='main-left container-fluid '>
                     <div className="top-content">
                         <p> FUTSTORE </p>
                         <p>¡Marca la diferencia en el campo con estilo!</p>
