@@ -6,6 +6,7 @@ import './CSS/Login.css' //Login CSS
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 
+
 /**Routing */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
@@ -16,6 +17,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './CRUD/firebase_conection';
 import { Register } from './pages/Register';
 import { AddProducts } from './components/AddProducts';
+import {Cart} from "./components/Cart"
 
 /*Firebase */
 import { collectionAssignation, onFindById } from './CRUD/app'
@@ -66,6 +68,7 @@ function App() {
             <Route path="/login" element={<Login setUser={setUser} setLoggedIn={setLoggedIn}/>} />
             <Route path="/Register" element={<Register setUser={setUser} setLoggedIn={setLoggedIn}/>} />
             <Route path='/AdminVendor' element={<AdminVendor user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
+            <Route path='/cart' element={<Cart user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor}/>}/>
           </Routes>
         </BrowserRouter>
       </div>
