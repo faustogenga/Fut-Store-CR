@@ -23,7 +23,7 @@ export const onFindById = async (paramId) => {
 };
 
 export const onFindByVendor = async (email) => {
-    const result = await getDoc(doc(db, collectionStr), where("email", "==", email));
+    const result = await getDocs(collection(db, collectionStr), where("email", "==", email));
     return result.data();
 };
 
