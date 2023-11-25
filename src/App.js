@@ -15,11 +15,11 @@ import {useAuth} from './hooks/useAuth'
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './CRUD/firebase_conection';
 import { Register } from './pages/Register';
-import { AddProducts } from './components/AddProducts';
 
 /*Firebase */
-import { collectionAssignation, onFindById } from './CRUD/app'
+import { collectionAssignation, onFindByVendor } from './CRUD/app'
 import { AdminVendor } from './pages/AdminVendor';
+import { AddVendor } from './pages/AddVendor';
 
 
 function App() {
@@ -34,13 +34,12 @@ function App() {
     const fetchData = async () => {
       onAuthStateChanged(auth, async (currentuser) => {
         setUser(currentuser);
-  
+        
         if (currentuser !== null) {
           setLoggedIn(true);
 
           collectionAssignation('Vendors');
-          const docsSnapshot = await onFindById(currentuser.email);
-          console.log(docsSnapshot);
+          const docsSnapshot = await onFindByVendor(user.email);
           if(docsSnapshot !== undefined && docsSnapshot !== null) {
             setIsVendor(true);
           } else {
@@ -64,8 +63,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor}/>} />
             <Route path="/login" element={<Login setUser={setUser} setLoggedIn={setLoggedIn}/>} />
-            <Route path="/Register" element={<Register setUser={setUser} setLoggedIn={setLoggedIn}/>} />
+            <Route path="/Register" element={<Register setLoggedIn={setLoggedIn}/>} />
             <Route path='/AdminVendor' element={<AdminVendor user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
+            <Route path="/NewVendor" element={<AddVendor setLoggedIn={setLoggedIn}/>} />
           </Routes>
         </BrowserRouter>
       </div>

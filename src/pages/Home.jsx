@@ -8,7 +8,7 @@ export const Home = ({user, loggedIn, logOut, isVendor}) => {
 
 
   return (
-    <div>
+    <div style={{ position: 'relative' }} >
         <Navbar 
         loggedIn = {loggedIn}
         user = {user}
