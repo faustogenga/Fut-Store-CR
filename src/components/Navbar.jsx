@@ -43,6 +43,9 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
             )
 
             }
+            <li className='nav-item'>
+              <a className='nav-link' href="/Cart">🛒</a>
+            </li> 
           </ul>
           <div className="d-flex">
             {loggedIn ? (

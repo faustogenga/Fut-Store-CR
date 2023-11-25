@@ -22,6 +22,7 @@ import {Cart} from "./components/Cart"
 /*Firebase */
 import { collectionAssignation, onFindById } from './CRUD/app'
 import { AdminVendor } from './pages/AdminVendor';
+import { Cart } from './pages/Cart';
 
 
 function App() {
