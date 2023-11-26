@@ -1,4 +1,6 @@
 import React from 'react'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import IconButton from '@mui/material/IconButton';
 
 export const Productitem = ({product}) => {
   return (
@@ -7,7 +9,9 @@ export const Productitem = ({product}) => {
       <div className='descripcion m-2'>
         <h5>{product.name}</h5>
         <p className='m-0'><strong>{product.price}</strong></p>
-        <button type="button" className="btn btn-link m-0 p-0 text-info">Comprar</button>
+        <IconButton color="primary" aria-label="add to shopping cart">
+        <AddShoppingCartIcon />
+        </IconButton>
       </div>
     </div>
   )
