@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Col, Row, Table} from 'react-bootstrap';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
-import { onFindAll, collectionAssignation, onFindinCart } from '../CRUD/app';
+import { collectionAssignation, onFindinCart } from '../CRUD/app';
 import { auth } from '../CRUD/firebase_conection';
-
+import Swal from 'sweetalert2';
+ 
 export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
 
   const [products, setProducts] = useState([]);
@@ -21,22 +22,30 @@ export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
 
   }
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-        collectionAssignation('CustomerCart');  
+  
+    const fetchProducts = async () => {  
       try {
-        const result = await onFindinCart(auth.currentUser.email); 
-        if (result.docs.length > 0) {
-          const productsData = result.docs.map((doc) => doc.data());
-          setProducts(productsData);
+        const result = await onFindinCart(user.email);
+        if (result) {
+            const productsData = result.map((doc) => doc.data());
+            setProducts(productsData);  
+        } else {
+            console.log("Error")
         }
+        
       } catch (error) {
-        console.error('Error al obtener los productos del carrito', error);
+        Swal.fire({
+            title: "Error al mostrar los productos en tu carrito.",
+            text: error.message,
+            icon: "error"
+          });
       }
     };
 
-    fetchProducts();
-  }, [products]); 
+    useEffect(() => {
+        collectionAssignation('CustomerCart');
+        fetchProducts();
+  }, [user.email]); 
 
     
   return (
@@ -53,7 +62,7 @@ export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
                                         <div style={{ background: 'white', height: '8rem', overflow: 'hidden', display: 'flex',
                                         justifyContent: 'center', alignItems: 'center' }}>
                                             <div style={{ padding: '.5rem'}}>
-                                                <img src={item.image} style={{ width: '4rem'}} alt={item.title} />
+                                                <img src={item.image} style={{ width: '4rem'}} alt={item.name} />
                                             </div>
                                         </div>
                                     </td>

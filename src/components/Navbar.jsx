@@ -48,7 +48,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
             {loggedIn ? (
               <>
                 <i className="bi bi-person-circle mx-2 text-info"></i>
-                <i className='text-white'>Bienvenido{user?.email}</i>
+                <i className='text-white'>Bienvenido {user?.email}</i>
                 <a className="nav-link mx-3"
                   onMouseOver={(e) => (e.target.style.color = 'red')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
