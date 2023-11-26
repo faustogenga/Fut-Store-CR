@@ -4,26 +4,11 @@ import { BsCartCheck, BsCartX} from 'react-icons/bs';
 import { collectionAssignation, onFindinCart } from '../CRUD/app';
 import Swal from 'sweetalert2';
  
-export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
-
+export const Cart = ({ user }) => {
   const [products, setProducts] = useState([]);
-  let cartTotal = 0;
 
-  const updateItemQuantity = () =>  {
-
-  }
-
-  const removeItem = () =>  {
-
-  }
-
-  const emptyCart = () =>  {
-
-  }
-
-  
-    const fetchProducts = async () => {  
-      try {
+  const fetchProducts = async () => {  
+        try {
         const result = await onFindinCart(user.email);
         if (result) {
             const productsData = result.map((doc) => doc.data());
@@ -32,25 +17,60 @@ export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
             console.log("Error")
         }
         
-      } catch (error) {
+        } catch (error) {
         Swal.fire({
             title: "Error al mostrar los productos en tu carrito.",
             text: error.message,
             icon: "error"
-          });
-      }
-    };
+            });
+        }
+  };
 
     useEffect(() => {
         collectionAssignation('CustomerCart');
         fetchProducts();
-  }, [user.email]); 
+    }, [user.email]); 
 
-    
+
+    let cartTotal = 0;
+    products.forEach((item) =>{
+        const uPrice = parseInt(item.price);
+        cartTotal += uPrice;
+    });
+
+    const quantityIncrease = (index) =>  {
+        const updatedQuantity = [...products];
+        updatedQuantity[index].quantity++;
+        updatedQuantity[index].price = updatedQuantity[index].price * updatedQuantity[index].quantity / (updatedQuantity[index].quantity - 1);
+        setProducts(updatedQuantity);
+
+        let total = 0;
+        updatedQuantity.forEach((item) =>{
+            total += item.price * item.quantity;
+        });
+        cartTotal = total;
+    }
+
+    const quantityDecrease = (index) => {
+        const updatedQuantity = [...products];
+        if (updatedQuantity[index].quantity > 1) {
+            updatedQuantity[index].quantity--;
+            updatedQuantity[index].price = updatedQuantity[index].price * updatedQuantity[index].quantity / (updatedQuantity[index].quantity + 1);
+            setProducts(updatedQuantity);
+        
+            let total = 0;
+            updatedQuantity.forEach((item) => {
+                total += item.price * item.quantity; 
+            });
+            cartTotal = total;
+        }
+    };
+
   return (
     <>
-    <h1>Cart</h1>
     <Container className="py-4 mt-5">
+        <div style={{textAlign:'center', fontWeight:'bold', fontSize:'2rem', paddingBottom:'5px'}}>Mi Carrito</div>
+        <br /><br />
             <Row className="justify-content-center">
                 <Table responsive="sm"  className="mb-5">
                     <tbody>
@@ -73,9 +93,9 @@ export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
                                     <td>₡ {item.price}</td>
                                     <td>Quantity ({item.quantity})</td>
                                     <td>
-                                        <Button onClick={()=> updateItemQuantity(item.id, item.quantity - 1)} className="ms-2">-</Button>
-                                        <Button onClick={()=> updateItemQuantity(item.id, item.quantity + 1)} className="ms-2">+</Button>
-                                        <Button variant="danger" onClick={()=> removeItem(item.id)} className="ms-2">Remove Item</Button>
+                                        <Button className="ms-2" onClick={() => quantityDecrease(index)}>-</Button>
+                                        <Button className="ms-2" onClick={() => quantityIncrease(index)}>+</Button>
+                                        <Button className="ms-2">Remove Item</Button>
                                     </td>
                                 </tr>
                             )
@@ -84,7 +104,7 @@ export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
                 </Table>
                 
                     <Row 
-                        style={{ position: 'fixed', bottom: 0}}
+                        style={{ position: 'inherit', bottom: 0}}
                         className={`justify-content-center w-100`}
                     >
                         <Col className="py-2">
@@ -93,7 +113,7 @@ export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
                         <Col className="p-0" md={4}>
                             <Button variant="danger"
                                 className="m-2"
-                                onClick={()=> emptyCart()}
+                                
                             >
                                 <BsCartX size="1.7rem" />
                                 Clear Cart

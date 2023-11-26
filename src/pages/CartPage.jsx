@@ -1,9 +1,9 @@
 import React from 'react'
 import {Navbar} from '../components/Navbar'
 import { Footer } from '../components/Footer'
-import { MyCart } from '../components/MyCart'
+import { Cart } from '../components/Cart'
 
-export const Cart = ({user, loggedIn, logOut, isVendor}) => {
+export const CartPage = ({user, loggedIn, logOut, isVendor}) => {
     return (
       <>
       <Navbar 
@@ -12,7 +12,7 @@ export const Cart = ({user, loggedIn, logOut, isVendor}) => {
           logOut = {logOut}
           isVendor = {isVendor}
           />
-      <MyCart/>
+      <Cart  user={user}/>
       <Footer/>
       </>
     )
