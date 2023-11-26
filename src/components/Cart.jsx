@@ -19,6 +19,7 @@ export const Cart = ({user, loggedIn, logOut, isVendor}) => {
   return (
     <>
     <h1>Cart</h1>
+<<<<<<< HEAD
     <Container className="py-4 mt-5">
             <h1 className={`${theme? 'text-light': 'text-light-primary'} my-5 text-center`}>
                 {isEmpty? 'Your Cart is Empty' : 'The Cart'}
@@ -80,6 +81,9 @@ export const Cart = ({user, loggedIn, logOut, isVendor}) => {
                     </Row>}
             </Row>
         </Container>
+=======
+
+>>>>>>> 4bdc16b5cf3307084437e95aef7593a668069bc7
     </>
   )
 }

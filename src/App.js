@@ -6,6 +6,7 @@ import './CSS/Login.css' //Login CSS
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 
+
 /**Routing */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
@@ -71,6 +72,7 @@ function App() {
             <Route path="/NewVendor" element={<AddVendor setLoggedIn={setLoggedIn}/>} />
             <Route path="/products" element={<AddProducts setLoggedIn={setLoggedIn}/>} />
             <Route path='/cart' element={<Cart user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
+
           </Routes>
         </BrowserRouter>
       </div>
