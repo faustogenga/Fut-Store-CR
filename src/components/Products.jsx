@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Productitem } from './Productitem'
 import { collectionAssignation, onFindAll } from '../CRUD/app'
 
-export const Products = () => {
+export const Products = (user) => {
 
     const [products, setproducts] = useState([]);
 
@@ -32,7 +32,7 @@ export const Products = () => {
                     {products.slice(0,4).map((product, index,) => {
                         return (
                             <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
-                                 <Productitem product={product}/>
+                                 <Productitem product={product} user={user.email}/>
                             </div>
                         )
                     })

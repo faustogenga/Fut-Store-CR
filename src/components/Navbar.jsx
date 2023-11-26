@@ -25,13 +25,13 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/#products">Productos</a>
+              <a className="nav-link" href="/AdminVendor">Productos</a>
             </li>
             <li className='nav-item'>
               <a className='nav-link' href="/cart">🛒</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/#footer">Contactanos</a>
+              <a className="nav-link" href="/#footer">Contáctanos</a>
             </li>
             {isVendor ? (
               <li className="nav-item bg-warning p-0 size=10">
@@ -58,7 +58,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                   }}
                 >
                   <i className="bi bi-box-arrow-right mx-2 text-info"></i>
-                  Cerrar Session
+                  Cerrar Sesión
                 </a>
               </>
             ) : (
@@ -72,13 +72,13 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
                 >
                   <i className="bi bi-box-arrow-right mx-2 text-info"></i>
-                  Inicia Sesion
+                  Inicia Sesión
                 </a>
                 <i className="bi  bi-person-add mx-2 text-info"></i>
                 <a className="nav-link me-3 -2" href="/Register"
                   onMouseOver={(e) => (e.target.style.color = '#3498DB')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
-                >Registrate</a>
+                >Regístrate</a>
               </>
 
             )}
