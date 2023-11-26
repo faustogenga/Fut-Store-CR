@@ -48,5 +48,5 @@ export const onDelete = async paramId => {
 /* 7. ENCONTRAR PRODUCTO EN CARRITO */
 export const onFindinCart = async (email) => {
     const result = await getDocs(collection(db, collectionStr), where("customer_email", "==", email));
-    return result.data;
+    return result.docs;
 };
