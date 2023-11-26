@@ -20,8 +20,8 @@ import { Register } from './pages/Register';
 import { collectionAssignation, onFindByVendor } from './CRUD/app'
 import { AdminVendor } from './pages/AdminVendor';
 import { AddVendor } from './pages/AddVendor';
-import { Cart } from './components/Cart';
 import AddProducts from './components/AddProducts';
+import { CartPage } from './pages/CartPage';
 
 
 function App() {
@@ -68,6 +68,9 @@ function App() {
             <Route path="/Register" element={<Register setLoggedIn={setLoggedIn}/>} />
             <Route path='/AdminVendor' element={<AdminVendor user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
             <Route path="/NewVendor" element={<AddVendor setLoggedIn={setLoggedIn}/>} />
+            <Route path="/products" element={<AddProducts setLoggedIn={setLoggedIn}/>} />
+            <Route path='/cart' element={<CartPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
+
           </Routes>
         </BrowserRouter>
       </div>

@@ -4,10 +4,9 @@ import { BsCartCheck, BsCartX} from 'react-icons/bs';
 import { collectionAssignation, onFindinCart } from '../CRUD/app';
 import Swal from 'sweetalert2';
  
-export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
-
+export const Cart = ({ user }) => {
   const [products, setProducts] = useState([]);
-  
+
   const fetchProducts = async () => {  
         try {
         const result = await onFindinCart(user.email);
@@ -51,11 +50,27 @@ export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
         });
         cartTotal = total;
     }
-    
+
+    const quantityDecrease = (index) => {
+        const updatedQuantity = [...products];
+        if (updatedQuantity[index].quantity > 1) {
+            updatedQuantity[index].quantity--;
+            updatedQuantity[index].price = updatedQuantity[index].price * updatedQuantity[index].quantity / (updatedQuantity[index].quantity + 1);
+            setProducts(updatedQuantity);
+        
+            let total = 0;
+            updatedQuantity.forEach((item) => {
+                total += item.price * item.quantity; 
+            });
+            cartTotal = total;
+        }
+    };
+
   return (
     <>
-    <h1>Cart</h1>
     <Container className="py-4 mt-5">
+        <div style={{textAlign:'center', fontWeight:'bold', fontSize:'2rem', paddingBottom:'5px'}}>Mi Carrito</div>
+        <br /><br />
             <Row className="justify-content-center">
                 <Table responsive="sm"  className="mb-5">
                     <tbody>
@@ -78,8 +93,8 @@ export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
                                     <td>₡ {item.price}</td>
                                     <td>Quantity ({item.quantity})</td>
                                     <td>
-                                        <Button className="ms-2">-</Button>
-                                        <Button className="ms-2" onClick={quantityIncrease}>+</Button>
+                                        <Button className="ms-2" onClick={() => quantityDecrease(index)}>-</Button>
+                                        <Button className="ms-2" onClick={() => quantityIncrease(index)}>+</Button>
                                         <Button className="ms-2">Remove Item</Button>
                                     </td>
                                 </tr>
@@ -89,7 +104,7 @@ export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
                 </Table>
                 
                     <Row 
-                        style={{ position: 'fixed', bottom: 0}}
+                        style={{ position: 'inherit', bottom: 0}}
                         className={`justify-content-center w-100`}
                     >
                         <Col className="py-2">
