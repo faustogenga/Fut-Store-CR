@@ -20,6 +20,8 @@ import { Register } from './pages/Register';
 import { collectionAssignation, onFindByVendor } from './CRUD/app'
 import { AdminVendor } from './pages/AdminVendor';
 import { AddVendor } from './pages/AddVendor';
+import { Cart } from './components/Cart';
+import AddProducts from './components/AddProducts';
 
 
 function App() {
