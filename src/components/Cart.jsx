@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button, Container, Col, Row, Table} from 'react-bootstrap';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
 import { collectionAssignation, onFindinCart } from '../CRUD/app';
-import { auth } from '../CRUD/firebase_conection';
 import Swal from 'sweetalert2';
  
 export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
