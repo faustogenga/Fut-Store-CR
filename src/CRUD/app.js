@@ -44,3 +44,9 @@ export const onUpdate = async (paramId, newObj) => {
 export const onDelete = async paramId => {
     await deleteDoc(doc(db, collectionStr, paramId));
 }
+
+/* 7. ENCONTRAR PRODUCTO EN CARRITO */
+export const onFindinCart = async (email) => {
+    const result = await getDocs(collection(db, collectionStr), where("customer_email", "==", email));
+    return result.data;
+};

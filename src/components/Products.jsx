@@ -32,7 +32,7 @@ export const Products = (user) => {
                     {products.slice(0,4).map((product, index,) => {
                         return (
                             <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
-                                 <Productitem product={product} user={user.email}/>
+                                 <Productitem product={product}/>
                             </div>
                         )
                     })

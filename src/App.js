@@ -22,7 +22,6 @@ import { collectionAssignation, onFindByVendor } from './CRUD/app'
 import { AdminVendor } from './pages/AdminVendor';
 import { AddVendor } from './pages/AddVendor';
 import { Cart } from './components/Cart';
-import { Products } from './components/Products';
 import AddProducts from './components/AddProducts';
 
 

@@ -1,33 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Container, Col, Row, Table} from 'react-bootstrap';
-import { useCart } from 'react-use-cart';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
+import { onFindAll, collectionAssignation, onFindinCart } from '../CRUD/app';
+import { auth } from '../CRUD/firebase_conection';
 
+export const Cart = ({ user, loggedIn, logOut, isVendor }) => {
 
-export const Cart = ({user, loggedIn, logOut, isVendor}) => {
+  const [products, setProducts] = useState([]);
+  let cartTotal = 0;
 
-  const [theme] = 'black';
-    const {
-        isEmpty,
-        items,
-        cartTotal,
-        updateItemQuantity,
-        removeItem,
-        emptyCart,
-    } = useCart();
+  const updateItemQuantity = () =>  {
+
+  }
+
+  const removeItem = () =>  {
+
+  }
+
+  const emptyCart = () =>  {
+
+  }
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+        collectionAssignation('CustomerCart');  
+      try {
+        const result = await onFindinCart(auth.currentUser.email); 
+        if (result.docs.length > 0) {
+          const productsData = result.docs.map((doc) => doc.data());
+          setProducts(productsData);
+        }
+      } catch (error) {
+        console.error('Error al obtener los productos del carrito', error);
+      }
+    };
+
+    fetchProducts();
+  }, [products]); 
+
     
   return (
     <>
     <h1>Cart</h1>
-<<<<<<< HEAD
     <Container className="py-4 mt-5">
-            <h1 className={`${theme? 'text-light': 'text-light-primary'} my-5 text-center`}>
-                {isEmpty? 'Your Cart is Empty' : 'The Cart'}
-            </h1>
             <Row className="justify-content-center">
-                <Table responsive="sm" striped bordered hover variant={theme? 'dark': 'light'} className="mb-5">
+                <Table responsive="sm"  className="mb-5">
                     <tbody>
-                        {items.map((item, index)=>{
+                        {products.map((item, index)=>{
                             return(
                                 <tr key={index}>
                                     <td>
@@ -40,10 +59,10 @@ export const Cart = ({user, loggedIn, logOut, isVendor}) => {
                                     </td>
                                     <td>
                                         <h6 style={{ whiteSpace: 'nowrap', width: '14rem', overflow: 'hidden', textOverFlow: 'ellipsis'}}>
-                                            {item.title}
+                                            {item.name}
                                         </h6>
                                     </td>
-                                    <td>Rs. {item.price}</td>
+                                    <td>₡ {item.price}</td>
                                     <td>Quantity ({item.quantity})</td>
                                     <td>
                                         <Button onClick={()=> updateItemQuantity(item.id, item.quantity - 1)} className="ms-2">-</Button>
@@ -55,13 +74,13 @@ export const Cart = ({user, loggedIn, logOut, isVendor}) => {
                         })}
                     </tbody>
                 </Table>
-                {!isEmpty &&
+                
                     <Row 
                         style={{ position: 'fixed', bottom: 0}}
-                        className={`${theme? 'bg-light-black text-light' : 'bg-light text-balck'} justify-content-center w-100`}
+                        className={`justify-content-center w-100`}
                     >
                         <Col className="py-2">
-                            <h4>Total Price: Rs. {cartTotal}</h4>
+                            <h4>Total Price: ₡ {cartTotal}</h4>
                         </Col>
                         <Col className="p-0" md={4}>
                             <Button variant="danger"
@@ -78,12 +97,9 @@ export const Cart = ({user, loggedIn, logOut, isVendor}) => {
                                 Clear Cart
                             </Button>
                         </Col>
-                    </Row>}
+                    </Row>
             </Row>
         </Container>
-=======
-
->>>>>>> 4bdc16b5cf3307084437e95aef7593a668069bc7
     </>
   )
 }
