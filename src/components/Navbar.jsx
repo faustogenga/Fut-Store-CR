@@ -36,7 +36,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
             ) : (
               loggedIn ? (
                 <li className="nav-item">
-                  <a className="nav-link" href="/cart">🛒</a>
+                  <a className="nav-link" href="/cart">Carrito 🛒</a>
                 </li>
               ) : (
                 <li className="nav-item">

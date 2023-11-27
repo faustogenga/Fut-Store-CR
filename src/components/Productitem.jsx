@@ -6,27 +6,27 @@ import Swal from 'sweetalert2';
 import { collectionAssignation, onInsert } from '../CRUD/app'
 import { auth } from "../CRUD/firebase_conection";
 
-export const Productitem = ({product}) => {
-  
+export const Productitem = ({ product }) => {
+
   const [cart, setCart] = useState([]);
-  
+
   const addToCart = () => {
     setCart([...cart, product.data]);
     addToFirebaseCart(product);
   }
 
   const addToFirebaseCart = async (product) => {
+    
     collectionAssignation('CustomerCart');
-  }
 
-  const cartItem = {
-    image: product.img,
-    name: product.name,
-    price: product.price,
-    quantity: 1,
-    customer_email: auth.currentUser.email,
-    cart: false
-  };
+    const cartItem = {
+      image: product.img,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      customer_email: auth.currentUser.email,
+      cart: false
+    }
 
     try {
       await onInsert(cartItem);
@@ -53,7 +53,7 @@ export const Productitem = ({product}) => {
         <h5>{product.name}</h5>
         <p className='m-0'><strong>{product.price}</strong></p>
         <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
-        <AddShoppingCartIcon />
+          <AddShoppingCartIcon />
         </IconButton>
       </div>
     </div>
