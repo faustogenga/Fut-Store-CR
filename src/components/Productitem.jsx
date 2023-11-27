@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import Swal from 'sweetalert2';
-import { collectionAssignation, onInsert } from '../CRUD/app'
+import { collectionAssignation, onInsert } from '../CRUD/app';
 import { auth } from "../CRUD/firebase_conection";
 
-export const Productitem = ({product}) => {
+export const Productitem = ({ product }) => {
   
   const [cart, setCart] = useState([]);
-  
+
   const addToCart = () => {
     setCart([...cart, product.data]);
     addToFirebaseCart(product);
@@ -17,14 +17,15 @@ export const Productitem = ({product}) => {
   const addToFirebaseCart = async (product) => {
     collectionAssignation('CustomerCart');
 
-  const cartItem = {
-    image: product.img,
-    name: product.name,
-    price: product.price,
-    quantity: 1,
-    customer_email: auth.currentUser.email,
-    cart: false
-  };
+    const cartItem = {
+      image: product.img,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      customer_email: auth.currentUser.email,
+      cart: false, 
+      product_id: product.id
+    };
 
     try {
       await onInsert(cartItem);
@@ -41,7 +42,6 @@ export const Productitem = ({product}) => {
         icon: "Error"
       });
     }
-
   };
 
   return (
