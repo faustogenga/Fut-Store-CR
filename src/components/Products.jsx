@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Productitem } from './Productitem'
 import { collectionAssignation, onFindAll } from '../CRUD/app'
 
-export const Products = () => {
+export const Products = (user) => {
 
     const [products, setproducts] = useState([]);
 

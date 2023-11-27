@@ -89,7 +89,7 @@ export const AddProducts = ({ isOpen, onClose, handleAdd, user}) => {
                     <div className="text-start" >Imagen </div>
                     <input required="required" className='form-control ' type="text" name="img" value={values.img} onChange={onChangeValues} placeholder='Imagen' />
 
-                    <div className="text-start m-0">Descripcion </div>
+                    <div className="text-start m-0">Descripción </div>
                     <textarea className="form-control p-4" type="text" name="description" value={values.description} onChange={onChangeValues} placeholder='Descripcion' />
 
                     <div className="text-start m-0">Precio </div>

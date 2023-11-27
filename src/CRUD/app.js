@@ -19,7 +19,7 @@ export const onFindAll = async () => {
 /* 3. EXTRAER OBJETO */
 export const onFindById = async (paramId) => {
     const result = await getDoc(doc(db, collectionStr, paramId));
-    return result.data();
+    return result.data;
 };
 
 export const onFindByVendor = async (email) => {
