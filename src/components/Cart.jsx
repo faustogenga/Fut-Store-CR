@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Col, Row, Table} from 'react-bootstrap';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
-import { collectionAssignation, onDelete, onFindinCart } from '../CRUD/app';
+import { collectionAssignation, onFindinCart } from '../CRUD/app';
 import Swal from 'sweetalert2';
  
 export const Cart = ({ user }) => {
@@ -72,6 +72,14 @@ export const Cart = ({ user }) => {
         setProducts(updatedCart);
     }; 
 
+    const clearCart = async () => {
+
+    }
+
+    const proceedToPayment = async () =>{
+        await clearCart();
+    }
+
   return (
     <>
     <Container className="py-4 mt-5">
@@ -119,13 +127,15 @@ export const Cart = ({ user }) => {
                         <Col className="p-0" md={4}>
                             <Button variant="warning"
                                 className="m-2"
-                                
+                                onClick={clearCart}
                             >
                                 <BsCartX size="1.7rem" />
                                 Limpiar Carrito
                             </Button>
                             <Button variant="success"
                                 className="m-2"
+                                href='/Checkout'
+                                onClick={proceedToPayment}
                             >
                                 <BsCartCheck size="1.7rem" />
                                 Proceder al Pago
