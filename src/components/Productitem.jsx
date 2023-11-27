@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import Swal from 'sweetalert2';
@@ -17,6 +17,7 @@ export const Productitem = ({product}) => {
 
   const addToFirebaseCart = async (product) => {
     collectionAssignation('CustomerCart');
+  }
 
   const cartItem = {
     image: product.img,
