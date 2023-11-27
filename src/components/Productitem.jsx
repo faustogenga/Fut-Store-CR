@@ -16,9 +16,8 @@ export const Productitem = ({ product }) => {
   }
 
   const addToFirebaseCart = async (product) => {
-    
-    collectionAssignation('CustomerCart');
 
+    collectionAssignation('CustomerCart');
     const cartItem = {
       image: product.img,
       name: product.name,
@@ -51,10 +50,10 @@ export const Productitem = ({ product }) => {
       <img alt='Produt_Image' src={product.img}></img>
       <div className='descripcion m-2'>
         <h5>{product.name}</h5>
-        <p className='m-0'><strong>{product.price}</strong></p>
-        <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
-          <AddShoppingCartIcon />
-        </IconButton>
+          <p className='m-0'><strong>${product.price}</strong></p>
+          <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
+            <AddShoppingCartIcon />
+          </IconButton>
       </div>
     </div>
   )

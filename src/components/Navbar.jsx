@@ -1,6 +1,13 @@
 import React from 'react';
+import { Tooltip } from 'react-tooltip'
 
 export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
+
+  const fechaDeCreacion = user.metadata.creationTime;
+  const simplifiedFecha = fechaDeCreacion.substring(5, 16);
+
+  const email = user.email;
+  const username = email.split("@")[0];
 
   return (
     <div>
@@ -31,7 +38,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
             </li>
             {isVendor ? (
               <li className="nav-item bg-warning p-0 size=10">
-                <a className="nav-link" href="/AdminVendor">Tus Productos</a>
+                <a className="nav-link" href="/AdminVendor">Gestionar Productos</a>
               </li>
             ) : (
               loggedIn ? (
@@ -49,7 +56,17 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
             {loggedIn ? (
               <>
                 <i className="bi bi-person-circle mx-2 text-info"></i>
-                <i className='text-white'>Bienvenido {user?.email}</i>
+
+                <i className='text-white' id="my-anchor-element">
+                  Bienvenido {username}
+                </i>
+                <Tooltip anchorSelect="#my-anchor-element" place='bottom'>
+                  <div>
+                    email : {email}
+                    <br/>
+                    Fecha de creacion : {simplifiedFecha}
+                  </div>
+                </Tooltip>
                 <a className="nav-link mx-3"
                   onMouseOver={(e) => (e.target.style.color = 'red')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}

@@ -99,24 +99,4 @@ h1, h2, h3, h4, h5, button{
     position: relative;
   }
   
-  /*SMALLER SCREEN*/
-
-  /** 
- @media (max-width: 768px) {
-    .main-box {
-        height: auto; 
-        margin-bottom: 20px; 
-    }
-
-    .main-left{
-        width: 100%; 
-    }
-
-    .main-right {
-        background-size: contain;
-        background-position: center; 
-    }
-  }
-  */
-  
   

@@ -4,7 +4,7 @@ import 'bootswatch/dist/flatly/bootstrap.min.css'; // Import Bootswatch theme
 import './CSS/ComStyle.css'; // Import the ComponentCSS file
 import './CSS/Login.css' //Login CSS 
 import "bootstrap-icons/font/bootstrap-icons.css";
-
+import 'react-tooltip/dist/react-tooltip.css'
 
 
 /**Routing */
