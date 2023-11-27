@@ -34,16 +34,16 @@ function App() {
     const fetchData = async () => {
       onAuthStateChanged(auth, async (currentuser) => {
         setUser(currentuser);
-        
+  
         if (currentuser !== null) {
           setLoggedIn(true);
 
           collectionAssignation('Vendors');
-          const docsSnapshot = await onFindByVendor(user.email);
-          if(docsSnapshot !== undefined && docsSnapshot !== null) {
-            setIsVendor(true);
-          } else {
+          const ResultEmpty = await onFindByVendor(currentuser.email);
+          if(ResultEmpty) {
             setIsVendor(false);
+          } else {
+            setIsVendor(true);
           }
         } else {
           setLoggedIn(false);

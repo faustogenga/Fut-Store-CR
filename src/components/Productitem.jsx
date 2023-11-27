@@ -1,6 +1,8 @@
 import React from 'react'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import IconButton from '@mui/material/IconButton';
 
-export const Productitem = ({product}) => {
+export const Productitem = ({ product }) => {
   return (
     <div className='product'>
       <img alt='Produt_Image' src={product.img}></img>
@@ -8,6 +10,10 @@ export const Productitem = ({product}) => {
         <h5>{product.name}</h5>
         <p className='m-0'><strong>{product.price}</strong></p>
         <button type="button" className="btn btn-link m-0 p-0 text-info">Comprar</button>
+        <IconButton color="primary" aria-label="add to shopping cart">
+          <AddShoppingCartIcon />
+        </IconButton>
+        <button type="button" className="btn btn-link m-0 p-0 text-info">Comprar ahora</button>
       </div>
     </div>
   )
