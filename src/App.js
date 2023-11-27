@@ -27,6 +27,8 @@ import { CheckoutPage } from './pages/CheckoutPage';
 
 function App() {
 
+  //main APP control center
+
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [isVendor, setIsVendor] = useState(false);
