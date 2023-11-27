@@ -1,18 +1,18 @@
-import { collection, getDocs, doc, getDoc, addDoc, deleteDoc, updateDoc, where } from "firebase/firestore"
+import { collection, getDocs, doc, getDoc, addDoc, deleteDoc, updateDoc, where, query } from "firebase/firestore"
 import { db } from "./firebase_conection";
 
 
 /* 1. CREAR LA CONSTANTE DE LA COLECCION */
 let collectionStr = '';
 
-export const collectionAssignation = (assignedCollection)=> {
+export const collectionAssignation = (assignedCollection) => {
     collectionStr = assignedCollection;
 }
 
 
 /* 2. CREAR & EXPORTAR TODOS LOS METODOS DEL CRUD */
-export const onFindAll = async () =>{
-    const result = await getDocs((collection(db, collectionStr )));
+export const onFindAll = async () => {
+    const result = await getDocs((collection(db, collectionStr)));
     return result;
 };
 
@@ -23,13 +23,13 @@ export const onFindById = async (paramId) => {
 };
 
 export const onFindByVendor = async (email) => {
-    const result = await getDocs(collection(db, collectionStr), where("email", "==", email));
-    return result.data;
+    const result = await getDocs(query(collection(db, collectionStr), where("email", "==", email)));
+    return result.empty
 };
 
 
 /* 4. INSERTAR OBJETO */
-export const onInsert =  async obj => {
+export const onInsert = async obj => {
     await addDoc(collection(db, collectionStr), obj);
 }
 

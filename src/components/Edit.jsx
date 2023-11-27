@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from './Modal'
 import "../CSS/Modal.css";
 
-export const Edit = ({item,currentId,handleEdit}) => {
+export const Edit = ({user,item,currentId,handleEdit}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onClose = () => {
@@ -14,7 +14,7 @@ export const Edit = ({item,currentId,handleEdit}) => {
       <button onClick={() => setIsOpen(true)} type="button" className={"btn btn-info"}>
         Editar
       </button>
-      <Modal item={item} currentId={currentId} isOpen={isOpen} onClose={onClose} handleEdit={handleEdit}/>
+      <Modal user={user} item={item} currentId={currentId} isOpen={isOpen} onClose={onClose} handleEdit={handleEdit}/>
     </>
   );
 };

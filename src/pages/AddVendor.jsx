@@ -50,7 +50,7 @@ export const AddVendor = ({ setLoggedIn }) => {
     };
 
 
-    const SignInSucess = () => {
+    const addVendorSucess = () => {
         //alerta de sweetalert para un login exitoso
         Swal.fire({
             title: "¡Bienvenido al mejor equipo!",
@@ -114,7 +114,7 @@ export const AddVendor = ({ setLoggedIn }) => {
             AddVendor();
             authfunctions.signUp(email, password)
                 .then(() => {
-                    SignInSucess();
+                    addVendorSucess();
                 })
                 .catch(() => {
                     onError();
@@ -124,10 +124,6 @@ export const AddVendor = ({ setLoggedIn }) => {
 
     const AddVendor = async () => {
         collectionAssignation('Vendors');
-        console.log(nombre);
-        console.log(apellido);
-        console.log(telefono);
-        console.log(email);
         let Vendor = {
             'nombre' : nombre,
             'apellido' : apellido,
