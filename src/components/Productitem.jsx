@@ -17,13 +17,14 @@ export const Productitem = ({product}) => {
   const addToFirebaseCart = async (product) => {
     collectionAssignation('CustomerCart');
 
-    const cartItem = {
-      image: product.img,
-      name: product.name,
-      price: product.price,
-      quantity: 1,
-      customer_email: auth.currentUser.email
-    };
+  const cartItem = {
+    image: product.img,
+    name: product.name,
+    price: product.price,
+    quantity: 1,
+    customer_email: auth.currentUser.email,
+    cart: false
+  };
 
     try {
       await onInsert(cartItem);
