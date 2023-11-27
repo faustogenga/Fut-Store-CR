@@ -6,7 +6,6 @@ import { Footer } from '../components/Footer'
 
 export const Home = ({user, loggedIn, logOut, isVendor}) => {
 
-
   return (
     <div style={{ position: 'relative' }} >
         <Navbar 
