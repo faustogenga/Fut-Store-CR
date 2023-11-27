@@ -25,7 +25,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/AdminVendor">Productos</a>
+              <a className="nav-link" href="/#products">Productos</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/#footer">Contáctanos</a>
