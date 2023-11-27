@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
 
   return (
@@ -50,7 +49,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
             {loggedIn ? (
               <>
                 <i className="bi bi-person-circle mx-2 text-info"></i>
-                <i className='text-white'>Bienvenido  {user?.email}</i>
+                <i className='text-white'>Bienvenido {user?.email}</i>
                 <a className="nav-link mx-3"
                   onMouseOver={(e) => (e.target.style.color = 'red')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
@@ -60,7 +59,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                   }}
                 >
                   <i className="bi bi-box-arrow-right mx-2 text-info"></i>
-                  Cerrar Session
+                  Cerrar Sesión
                 </a>
               </>
             ) : (
@@ -80,9 +79,8 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                 <a className="nav-link me-3 -2" href="/Register"
                   onMouseOver={(e) => (e.target.style.color = '#3498DB')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
-                >Registrate</a>
+                >Regístrate</a>
               </>
-
             )}
           </div>
         </div>

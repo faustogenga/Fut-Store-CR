@@ -6,6 +6,7 @@ import './CSS/Login.css' //Login CSS
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 
+
 /**Routing */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
