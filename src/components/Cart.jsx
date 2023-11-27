@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Col, Row, Table} from 'react-bootstrap';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
-import { collectionAssignation, onFindinCart } from '../CRUD/app';
+import { collectionAssignation, onDelete, onFindinCart } from '../CRUD/app';
 import Swal from 'sweetalert2';
  
 export const Cart = ({ user }) => {
@@ -24,7 +24,7 @@ export const Cart = ({ user }) => {
             icon: "error"
             });
         }
-  };
+   };
 
     useEffect(() => {
         collectionAssignation('CustomerCart');
@@ -66,6 +66,12 @@ export const Cart = ({ user }) => {
         }
     };
 
+     const removeItem = (index) => {
+        const updatedCart = [...products];
+        updatedCart.splice(index,1);
+        setProducts(updatedCart);
+    }; 
+
   return (
     <>
     <Container className="py-4 mt-5">
@@ -91,11 +97,11 @@ export const Cart = ({ user }) => {
                                         </h6>
                                     </td>
                                     <td>₡ {item.price}</td>
-                                    <td>Quantity ({item.quantity})</td>
+                                    <td>Cantidad ({item.quantity})</td>
                                     <td>
                                         <Button className="ms-2" onClick={() => quantityDecrease(index)}>-</Button>
                                         <Button className="ms-2" onClick={() => quantityIncrease(index)}>+</Button>
-                                        <Button className="ms-2">Remove Item</Button>
+                                        <Button variant="danger" className="ms-2" onClick={() => removeItem(item)}>Eliminar Producto</Button>
                                     </td>
                                 </tr>
                             )
@@ -108,21 +114,21 @@ export const Cart = ({ user }) => {
                         className={`justify-content-center w-100`}
                     >
                         <Col className="py-2">
-                            <h4>Total Price: ₡ {cartTotal}</h4>
+                            <h4>Total: ₡ {cartTotal}</h4>
                         </Col>
                         <Col className="p-0" md={4}>
-                            <Button variant="danger"
+                            <Button variant="warning"
                                 className="m-2"
                                 
                             >
                                 <BsCartX size="1.7rem" />
-                                Clear Cart
+                                Limpiar Carrito
                             </Button>
                             <Button variant="success"
                                 className="m-2"
                             >
                                 <BsCartCheck size="1.7rem" />
-                                Clear Cart
+                                Proceder al Pago
                             </Button>
                         </Col>
                     </Row>
