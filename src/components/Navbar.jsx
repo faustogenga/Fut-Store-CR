@@ -1,13 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip'
 
-export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
+export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
 
-  const fechaDeCreacion = user.metadata.creationTime;
-  const simplifiedFecha = fechaDeCreacion.substring(5, 16);
-
-  const email = user.email;
-  const username = email.split("@")[0];
 
   return (
     <div>
@@ -58,13 +53,13 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                 <i className="bi bi-person-circle mx-2 text-info"></i>
 
                 <i className='text-white' id="my-anchor-element">
-                  Bienvenido {username}
+                  Bienvenido {user.email.split("@")[0]}
                 </i>
                 <Tooltip anchorSelect="#my-anchor-element" place='bottom'>
                   <div>
-                    email : {email}
+                    email : {user.email}
                     <br/>
-                    Fecha de creacion : {simplifiedFecha}
+                    Fecha de creacion : {user.metadata.creationTime.substring(5, 16)}
                   </div>
                 </Tooltip>
                 <a className="nav-link mx-3"
