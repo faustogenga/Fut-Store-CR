@@ -22,6 +22,7 @@ import { AdminVendor } from './pages/AdminVendor';
 import { AddVendor } from './pages/AddVendor';
 import AddProducts from './components/AddProducts';
 import { CartPage } from './pages/CartPage';
+import { CheckoutPage } from './pages/CheckoutPage';
 
 
 function App() {
@@ -70,7 +71,7 @@ function App() {
             <Route path="/NewVendor" element={<AddVendor setLoggedIn={setLoggedIn}/>} />
             <Route path="/products" element={<AddProducts setLoggedIn={setLoggedIn}/>} />
             <Route path='/cart' element={<CartPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
-
+            <Route path='/Checkout' element={<CheckoutPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
           </Routes>
         </BrowserRouter>
       </div>
