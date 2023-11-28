@@ -22,7 +22,7 @@ export const Products = (user) => {
         }
 
         fetchdata();
-    });
+    }, []);
 
     return (
         <section id='products' className='mt-5 mb-5'>

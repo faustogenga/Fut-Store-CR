@@ -1,46 +1,99 @@
-/* General styles */
-body {
-    font-family: sans-serif;
+.MainCheckout{
+    height: 800px;
+    background-image: url('../images/stadiumIage.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+
 }
 
+.divForms{
+    display: inline-flex;
+    padding: 50px;    
+}
+
+/* Checkout Form */
+
 .containerCheckout {
-    max-width: 800px;
-    margin: 0 auto;
+    background-color: #f0f0f0; 
+	width: 630px;
+    margin-left: 250px;
     padding: 20px;
     border: 1px solid #ccc;
+    opacity: 93%;
+
+    border-width: 2px;
+    border-color: black;
+    border-radius: 2%;
+    border-style: groove;
 }
 
 h1 {
+    color: #007bff; 
     text-align: center;
-    margin-bottom: 20px;
 }
 
-/* Form styles */
 .checkout-form {
+    background-color: white;
+    border: 1px solid #ccc;
     padding: 20px;
-    border: 1px solid #ccc;
+
+    border-radius: 8px;
 }
 
-.form-group {
-    margin-bottom: 10px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input, select {
+input,
+select {
     width: 100%;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
 }
 
 button {
-    background-color: #007bff;
+    background-color: #28a745; 
     color: white;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: none;
     cursor: pointer;
     margin-top: 30px;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #218838; 
+}
+
+.paypal-box img {
+    max-width: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+body {
+    font-family: 'Arial', sans-serif; 
+}
+
+
+/* Checkout Summ */
+
+.checkoutSummary{
+    background-color: #f0f0f0; 
+	width: 470px;
+    height: 250px;
+    margin-left: 250px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    opacity: 93%;
+
+    border-width: 2px;
+    border-color: black;
+    border-radius: 2%;
+    border-style: groove;
+}
+
+.summaryCont{
+    background-color: white;
+    border: 1px solid black;
+    padding: 30px;
 }
