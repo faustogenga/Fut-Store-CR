@@ -139,6 +139,7 @@ export const Cart = ({ user }) => {
                         <Col className="p-0" md={4}>
                             <Button variant="warning"
                                 className="m-2"
+                                onClick={clearCart}
                             >
                                 <BsCartX size="1.7rem" />
                                 Limpiar Carrito

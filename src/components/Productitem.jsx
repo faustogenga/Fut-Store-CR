@@ -17,7 +17,6 @@ export const Productitem = ({ product }) => {
   const addToFirebaseCart = async (product) => {
     collectionAssignation('CustomerCart');
   
-
     const cartItem = {
       image: product.img,
       name: product.name,
@@ -31,6 +30,7 @@ export const Productitem = ({ product }) => {
     try {
         await onInsert(cartItem);
         Swal.fire({
+
         title: "¡Buena elección!",
         text: "Producto agregado correctamente a tu carrito.",
         icon: "success"
@@ -42,8 +42,8 @@ export const Productitem = ({ product }) => {
         text: error.message,
         icon: "Error"
       });
-    }
-  };
+    }; 
+  }
 
 
   return (
