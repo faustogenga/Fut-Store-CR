@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
  
 export const Cart = ({ user }) => {
   const [products, setProducts] = useState([]);
-
   const fetchProducts = async () => {  
         try {
         const result = await onFindinCart(user.email);
@@ -66,10 +65,21 @@ export const Cart = ({ user }) => {
         }
     };
 
-     const removeItem = (index) => {
-        const updatedCart = [...products];
-        updatedCart.splice(index,1);
-        setProducts(updatedCart);
+     const removeItem  = async (index, product_id) => {
+        try {
+            console.log(product_id)
+            await onDelete(product_id);   
+            const updatedCart = [...products];
+            updatedCart.splice(index, 1);
+            setProducts(updatedCart);
+           
+        } catch(error) {
+            Swal.fire({
+                title: "Error al eliminar el producto del carrito.",
+                text: error.message,
+                icon: "error"
+            });
+        }
     }; 
 
     const clearCart = async () => {
@@ -109,7 +119,7 @@ export const Cart = ({ user }) => {
                                     <td>
                                         <Button className="ms-2" onClick={() => quantityDecrease(index)}>-</Button>
                                         <Button className="ms-2" onClick={() => quantityIncrease(index)}>+</Button>
-                                        <Button variant="danger" className="ms-2" onClick={() => removeItem(item)}>Eliminar Producto</Button>
+                                        <Button variant="danger" className="ms-2" onClick={() => removeItem(index, item.product_id)}>Eliminar Producto</Button>
                                     </td>
                                 </tr>
                             )
@@ -127,7 +137,10 @@ export const Cart = ({ user }) => {
                         <Col className="p-0" md={4}>
                             <Button variant="warning"
                                 className="m-2"
+<<<<<<< HEAD
+=======
                                 onClick={clearCart}
+>>>>>>> d1aef1a0e3d0c33421ed2fc5bb969e6fa58b12b6
                             >
                                 <BsCartX size="1.7rem" />
                                 Limpiar Carrito

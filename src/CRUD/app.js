@@ -9,7 +9,6 @@ export const collectionAssignation = (assignedCollection) => {
     collectionStr = assignedCollection;
 }
 
-
 /* 2. CREAR & EXPORTAR TODOS LOS METODOS DEL CRUD */
 export const onFindAll = async () => {
     const result = await getDocs((collection(db, collectionStr)));
@@ -27,23 +26,21 @@ export const onFindByVendor = async (email) => {
     return result.empty
 };
 
-
 /* 4. INSERTAR OBJETO */
 export const onInsert = async obj => {
     await addDoc(collection(db, collectionStr), obj);
 }
 
-
 /* 5. MODIFICAR OBJETO */
 export const onUpdate = async (paramId, newObj) => {
     await updateDoc(doc(db, collectionStr, paramId), newObj);
-}
-
+};
 
 /* 6. ELIMINAR OBJETO */
 export const onDelete = async paramId => {
-    await deleteDoc(doc(db, collectionStr, paramId));
-}
+    const docRef = doc(db, collectionStr, paramId);
+    await deleteDoc(docRef);
+};
 
 /* 7. ENCONTRAR PRODUCTO EN CARRITO */
 export const onFindinCart = async (email) => {
