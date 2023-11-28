@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Col, Row, Table} from 'react-bootstrap';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
-import { collectionAssignation, onFindinCart } from '../CRUD/app';
+import { collectionAssignation, onFindinCart, onDelete } from '../CRUD/app';
 import Swal from 'sweetalert2';
+import { auth } from '../CRUD/firebase_conection';
  
 export const Cart = ({ user }) => {
   const [products, setProducts] = useState([]);
+  
   const fetchProducts = async () => {  
         try {
-        const result = await onFindinCart(user.email);
+        const result = await onFindinCart(auth.currentUser ? auth.currentUser.email : '');
         if (result) {
             const productsData = result.map((doc) => doc.data());
             setProducts(productsData);  
@@ -137,10 +139,6 @@ export const Cart = ({ user }) => {
                         <Col className="p-0" md={4}>
                             <Button variant="warning"
                                 className="m-2"
-<<<<<<< HEAD
-=======
-                                onClick={clearCart}
->>>>>>> d1aef1a0e3d0c33421ed2fc5bb969e6fa58b12b6
                             >
                                 <BsCartX size="1.7rem" />
                                 Limpiar Carrito
