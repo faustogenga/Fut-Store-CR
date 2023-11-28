@@ -1,14 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../CSS/Checkout.css';
 import { auth } from '../CRUD/firebase_conection';
+import { collectionAssignation, onInsert, onFindinCart } from '../CRUD/app';
+import Swal from 'sweetalert2';
 
 export const Checkout = ({ user }) => {
 
+    const initialValues = {shippingAddress:''}
+    const [cart, setCart] = useState([])
     const [paymentMethod, setPaymentMethod] = useState('Choose');
+    const [value, setValue] = useState(initialValues);
+    const [order, setOrder] = useState([]);  
+
+    useEffect(() => {
+        const fetchdata = async () => {
+            collectionAssignation('CustomerCart');
+            const result = await onFindinCart(auth.currentUser ? auth.currentUser.email : '');
+            console.log(result);
+            const productsData = result.map((doc) => doc.data());
+            setCart(productsData);
+        }
+    fetchdata();
+    }, []);
 
     const handlePaymentChange = (event) => {
         setPaymentMethod(event.target.value);
     };
+
+    const addToOrder = () => {
+        console.log(cart.length);
+        if (cart.length > 0) {
+            setOrder(cart[0]);
+            addToFirebaseOrder(cart[0]);
+        } else {
+            Swal.fire({
+                title: "Aviso",
+                text: "El carrito está vacío.",
+                icon: "warning"
+              });
+        }
+        
+      }
+    
+      const addToFirebaseOrder = async (cartItem) => {
+        collectionAssignation('PlacedOrder');
+
+            const orderItem = {
+                userEmail: auth.currentUser.email,
+                shippingAddress: value.shippingAddress,
+                paymentMethod: paymentMethod,
+                price: cartItem.price,
+                name: cartItem.name,
+               quantity: cartItem.quantity
+          }
+          try {
+            await onInsert(orderItem);
+            Swal.fire({
+              title: "Compra Realizada",
+              text: "Tu orden se ha completado",
+              icon: "success"
+            });
+      
+          } catch (error) {
+            console.log(error.message);
+            Swal.fire({
+              title: "ERROR",
+              text: error.message,
+              icon: "Error"
+            });
+          }
+    };
+
+    const onChangeValues = ({ target }) => {
+        const { name, value } = target;
+        setValue({ ...value, [name]: value });
+    }
 
   return (
     <>

@@ -28,8 +28,9 @@ export const Productitem = ({ product }) => {
     };
 
     try {
-      onInsert(cartItem);
-      Swal.fire({
+        await onInsert(cartItem);
+        Swal.fire({
+
         title: "¡Buena elección!",
         text: "Producto agregado correctamente a tu carrito.",
         icon: "success"
@@ -43,6 +44,7 @@ export const Productitem = ({ product }) => {
       });
     }; 
   }
+
 
   return (
     <div className='product user'>
