@@ -42,11 +42,10 @@ function App() {
         setUser(currentuser);
   
         if (currentuser !== null) {
-          setLoggedIn(true);
-
+          setLoggedIn(true); 
           collectionAssignation('Vendors');
-          const ResultEmpty = await onFindByVendor(currentuser.email);
-          if(ResultEmpty) {
+          const Result = await onFindByVendor(currentuser.email);
+          if(Result.empty) {
             setIsVendor(false);
           } else {
             setIsVendor(true);

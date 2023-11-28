@@ -108,8 +108,8 @@ export const AddVendor = ({ setLoggedIn }) => {
     }
 
 
-    //boton register
-    const onButtonClickRegister = () => {
+    //boton add vendor
+    const onButtonClickAddVendor = () => {
         if (InputValidation() && !error) {
             AddVendor();
             authfunctions.signUp(email, password)
@@ -128,7 +128,8 @@ export const AddVendor = ({ setLoggedIn }) => {
             'nombre' : nombre,
             'apellido' : apellido,
             'telefono' : telefono,
-            'email' : email
+            'email' : email,
+            'estatus' : 'false'
         };
         console.log(Vendor);
         await onInsert(Vendor);
@@ -214,7 +215,7 @@ export const AddVendor = ({ setLoggedIn }) => {
                 <input
                     className="btn btn-info col-5 m-3 mx-auto"
                     type="button"
-                    onClick={onButtonClickRegister}
+                    onClick={onButtonClickAddVendor}
                     value={"Afiliate"}
                 />
             </div>

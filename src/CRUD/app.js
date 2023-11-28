@@ -27,8 +27,9 @@ export const onFindById = async (paramId) => {
 export const onFindByVendor = async (email) => {
     console.log("Query FindbyVendor");
     const result = await getDocs(query(collection(db, collectionStr), where("email", "==", email)));
-    return result.empty
+    return result
 };
+
 
 
 /* 4. INSERTAR OBJETO */
