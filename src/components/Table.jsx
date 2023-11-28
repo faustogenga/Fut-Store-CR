@@ -100,7 +100,7 @@ export const BasicTable = ({user}) => {
                                 <TableCell align="right">{row.size}</TableCell>
                                 <TableCell align="right">{row.stock}</TableCell>
                                 <TableCell align="right">
-                                    <Edit item={row} currentId={row.id} handleEdit={handleEdit}/>
+                                    <Edit user={user} item={row} currentId={row.id} handleEdit={handleEdit}/>
                                 </TableCell>
                                 <TableCell align="right">
                                     <Delete currentId={row.id} handleDelete={handleDelete} />

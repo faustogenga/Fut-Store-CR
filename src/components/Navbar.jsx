@@ -34,15 +34,16 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                 <a className="nav-link" href="/AdminVendor">Tus Productos</a>
               </li>
             ) : (
-              <li className="nav-item">
-                <a className="nav-link" href="/NewVendor">Vende tus productos</a>
-              </li>
-            )
-
-            }
-            <li className='nav-item'>
-              <a className='nav-link' href="/cart">🛒</a>
-            </li> 
+              loggedIn ? (
+                <li className="nav-item">
+                  <a className="nav-link" href="/cart">🛒</a>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <a className="nav-link" href="/NewVendor">Vende tus productos</a>
+                </li>
+              )
+            )}
           </ul>
           <div className="d-flex">
             {loggedIn ? (
