@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Tooltip } from 'react-tooltip'
 
-export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
+export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
+
 
   return (
     <div>
@@ -24,19 +26,19 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/AdminVendor">Productos</a>
+              <a className="nav-link" href="/#products">Productos</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/#footer">Contáctanos</a>
             </li>
             {isVendor ? (
               <li className="nav-item bg-warning p-0 size=10">
-                <a className="nav-link" href="/AdminVendor">Tus Productos</a>
+                <a className="nav-link" href="/AdminVendor">Gestionar Productos</a>
               </li>
             ) : (
               loggedIn ? (
                 <li className="nav-item">
-                  <a className="nav-link" href="/cart">🛒</a>
+                  <a className="nav-link" href="/cart">Carrito 🛒</a>
                 </li>
               ) : (
                 <li className="nav-item">
@@ -49,7 +51,17 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
             {loggedIn ? (
               <>
                 <i className="bi bi-person-circle mx-2 text-info"></i>
-                <i className='text-white'>Bienvenido {user?.email}</i>
+
+                <i className='text-white' id="my-anchor-element">
+                  Bienvenido {user.email.split("@")[0]}
+                </i>
+                <Tooltip anchorSelect="#my-anchor-element" place='bottom'>
+                  <div>
+                    email : {user.email}
+                    <br/>
+                    Fecha de creacion : {user.metadata.creationTime.substring(5, 16)}
+                  </div>
+                </Tooltip>
                 <a className="nav-link mx-3"
                   onMouseOver={(e) => (e.target.style.color = 'red')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}

@@ -67,8 +67,11 @@ export const BasicTable = ({user}) => {
 
     return (
         <div className='container-fluid justify-content-center d-flex'
-            style={{ backgroundImage: "url(https://i.pinimg.com/originals/cb/e8/23/cbe8230004b895b545b61337f8d0ff99.jpg)" }}
-        >
+            style={{ 
+                backgroundImage: "url(https://i.pinimg.com/originals/cb/e8/23/cbe8230004b895b545b61337f8d0ff99.jpg)",
+                backgroundSize : "cover"
+            }}>
+                
             <TableContainer component={Paper} style={{ width: '80%' }} className='m-5 ' >
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
