@@ -6,8 +6,6 @@ import { collectionAssignation, onInsert } from '../CRUD/app';
 import { auth } from "../CRUD/firebase_conection";
 
 export const Productitem = ({ product }) => {
-  
-  const [cart, setCart] = useState([]);
 
   const addToCart = () => {
     setCart([...cart, product.data]);
@@ -23,6 +21,8 @@ export const Productitem = ({ product }) => {
       price: product.price,
       quantity: 1,
       customer_email: auth.currentUser.email,
+      cart: false
+    }
       cart: false, 
       product_id: product.id
     };
@@ -44,17 +44,15 @@ export const Productitem = ({ product }) => {
       });
     }; 
   }
-
-
   return (
     <div className='product user'>
       <img alt='Produt_Image' src={product.img}></img>
       <div className='descripcion m-2'>
         <h5>{product.name}</h5>
-        <p className='m-0'><strong>{product.price}</strong></p>
-        <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
-        <AddShoppingCartIcon />
-        </IconButton>
+          <p className='m-0'><strong>${product.price}</strong></p>
+          <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
+            <AddShoppingCartIcon />
+          </IconButton>
       </div>
     </div>
   )
