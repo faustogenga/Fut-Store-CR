@@ -1,14 +1,11 @@
-
 import React, { useState } from 'react'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import Swal from 'sweetalert2';
-import { collectionAssignation, onInsert } from '../CRUD/app'
+import { collectionAssignation, onInsert } from '../CRUD/app';
 import { auth } from "../CRUD/firebase_conection";
 
 export const Productitem = ({ product }) => {
-
-  const [cart, setCart] = useState([]);
 
   const addToCart = () => {
     setCart([...cart, product.data]);
@@ -16,8 +13,8 @@ export const Productitem = ({ product }) => {
   }
 
   const addToFirebaseCart = async (product) => {
-
     collectionAssignation('CustomerCart');
+  
     const cartItem = {
       image: product.img,
       name: product.name,
@@ -26,10 +23,14 @@ export const Productitem = ({ product }) => {
       customer_email: auth.currentUser.email,
       cart: false
     }
+      cart: false, 
+      product_id: product.id
+    };
 
     try {
-      await onInsert(cartItem);
-      Swal.fire({
+        await onInsert(cartItem);
+        Swal.fire({
+
         title: "¡Buena elección!",
         text: "Producto agregado correctamente a tu carrito.",
         icon: "success"
@@ -41,10 +42,8 @@ export const Productitem = ({ product }) => {
         text: error.message,
         icon: "Error"
       });
-    }
-
-  };
-
+    }; 
+  }
   return (
     <div className='product user'>
       <img alt='Produt_Image' src={product.img}></img>

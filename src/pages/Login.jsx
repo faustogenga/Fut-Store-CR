@@ -129,13 +129,13 @@ export const Login = ({setUser, setLoggedIn}) => {
                     className="btn btn-info col-5 m-3 mx-auto"
                     type="button"
                     onClick={onButtonClickLogin}
-                    value={"Inicia Sesion"}
+                    value={"Inicia Sesión"}
                 />
                 <input
                     className="btn btn-info col-5 m-3 mx-auto"
                     type="button"
                     onClick={RegisterNavigate}
-                    value={"Registrarte"}
+                    value={"Crea tu cuenta"}
                 />
             </div>
         </form>
