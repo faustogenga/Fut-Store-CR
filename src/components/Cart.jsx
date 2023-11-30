@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Col, Row, Table} from 'react-bootstrap';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
-import { collectionAssignation, onFindinCart } from '../CRUD/app';
+import { collectionAssignation, onFindinCart, onDelete } from '../CRUD/app';
 import Swal from 'sweetalert2';
+import { auth } from '../CRUD/firebase_conection';
  
 export const Cart = ({ user }) => {
   const [products, setProducts] = useState([]);
-
+  
   const fetchProducts = async () => {  
         try {
-        const result = await onFindinCart(user.email);
+        const result = await onFindinCart(auth.currentUser ? auth.currentUser.email : '');
         if (result) {
             const productsData = result.map((doc) => doc.data());
             setProducts(productsData);  
@@ -66,10 +67,21 @@ export const Cart = ({ user }) => {
         }
     };
 
-     const removeItem = (index) => {
-        const updatedCart = [...products];
-        updatedCart.splice(index,1);
-        setProducts(updatedCart);
+     const removeItem  = async (index, product_id) => {
+        try {
+            console.log(product_id)
+            await onDelete(product_id);   
+            const updatedCart = [...products];
+            updatedCart.splice(index, 1);
+            setProducts(updatedCart);
+           
+        } catch(error) {
+            Swal.fire({
+                title: "Error al eliminar el producto del carrito.",
+                text: error.message,
+                icon: "error"
+            });
+        }
     }; 
 
     const clearCart = async () => {
@@ -109,7 +121,7 @@ export const Cart = ({ user }) => {
                                     <td>
                                         <Button className="ms-2" onClick={() => quantityDecrease(index)}>-</Button>
                                         <Button className="ms-2" onClick={() => quantityIncrease(index)}>+</Button>
-                                        <Button variant="danger" className="ms-2" onClick={() => removeItem(item)}>Eliminar Producto</Button>
+                                        <Button variant="danger" className="ms-2" onClick={() => removeItem(index, item.product_id)}>Eliminar Producto</Button>
                                     </td>
                                 </tr>
                             )

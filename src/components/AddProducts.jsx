@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export const AddProducts = ({ isOpen, onClose, handleAdd, user}) => {
 
     const initialValues = {
+        id: '',
         category: '',
         description: '',
         name: '',
@@ -77,10 +78,12 @@ export const AddProducts = ({ isOpen, onClose, handleAdd, user}) => {
             <div className="overlay" />
             <div className="modalbox m-2">
                 <button className={"closeBtn"} onClick={onClose}>
-                    <RiCloseLine style={{ marginBottom: "-3px" }} />
+                    <RiCloseLine style={{ marginBottom: "-3px"}} />
                 </button>
                 <h3>Agrega tu producto</h3>
                 <form>
+                    <div className="text-start m-0">ID</div>
+                    <input required="required" className='form-control ' type="text" name="id" value={values.id} onChange={onChangeValues} placeholder='Identificador único' />
                     <div className="text-start m-0">Categoria </div>
                     <input required="required" className='form-control ' type="text" name="category" value={values.category} onChange={onChangeValues} placeholder='Categoria' />
                     <div className="text-start" >Producto </div>
@@ -103,7 +106,7 @@ export const AddProducts = ({ isOpen, onClose, handleAdd, user}) => {
 
                     <div className="container-fluid text-center">
                         <button className="btn btn-info m-2" type="sumbit" onClick={addProduct}>Agregar</button>
-                        <button className="btn btn-danger m-2" onClick={() => { onClose(); setValues({...initialValues, vendor: user.email });}}>Cerrar</button>
+                        <button className="btn btn-danger m-2" onClick={() => { onClose(); setValues({...initialValues, vendor: user.email }); }}>Cerrar</button>
                     </div>
                 </form>
             </div>

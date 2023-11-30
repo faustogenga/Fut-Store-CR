@@ -4,10 +4,10 @@ export const Footer = () => {
     return (
         <section id='footer'>
             <div className='container-fluid bg-black'>
-                <h4 className='text-center text-light p-5'>
-                    FutStore CR <i className="bi bi-shop m-2"></i>
-                </h4>
                 <div className='container-fluid row text-info'>
+                    <h4 className='text-center text-light p-4'>
+                        FutStore CR <i className="bi bi-shop m-2"></i>
+                    </h4>
                     <div className=' col-4 text-center'>
                         <h4>Contact <i className="bi bi-person-rolodex m-2"></i> </h4>
                         <div className=' mb-2' href="#">
