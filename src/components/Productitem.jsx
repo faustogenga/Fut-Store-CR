@@ -7,6 +7,8 @@ import { auth } from "../CRUD/firebase_conection";
 
 export const Productitem = ({ product }) => {
 
+  const [cart, setCart] = useState([]);
+
   const addToCart = () => {
     setCart([...cart, product.data]);
     addToFirebaseCart(product);
@@ -21,12 +23,9 @@ export const Productitem = ({ product }) => {
       price: product.price,
       quantity: 1,
       customer_email: auth.currentUser.email,
-      cart: false
-    }
-      cart: false, 
+      cart: false,
       product_id: product.id
-    };
-
+    } 
     try {
         await onInsert(cartItem);
         Swal.fire({
