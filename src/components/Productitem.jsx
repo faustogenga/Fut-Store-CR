@@ -6,6 +6,7 @@ import { collectionAssignation, onInsert } from '../CRUD/app';
 import { auth } from "../CRUD/firebase_conection";
 
 export const Productitem = ({ product }) => {
+  const [cart, setCart] = useState([]);
 
   const addToCart = () => {
     setCart([...cart, product.data]);
