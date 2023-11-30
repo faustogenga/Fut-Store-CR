@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip'
 
 export const Navbar = ({loggedIn, user, logOut, isVendor }) => {

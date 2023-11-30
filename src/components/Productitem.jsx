@@ -50,7 +50,8 @@ export const Productitem = ({ product }) => {
         <h5>{product.name}</h5>
           <p className='m-0'><strong>${product.price}</strong></p>
           <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
-            <AddShoppingCartIcon />
+            <AddShoppingCartIcon /> 
+            <div className='' style={{fontSize:"20px"}}>Comprar</div>
           </IconButton>
       </div>
     </div>

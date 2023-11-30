@@ -26,8 +26,9 @@ export const onFindById = async (paramId) => {
 export const onFindByVendor = async (email) => {
     console.log("Query FindbyVendor");
     const result = await getDocs(query(collection(db, collectionStr), where("email", "==", email)));
-    return result.empty
+    return result
 };
+
 
 /* 4. INSERTAR OBJETO */
 export const onInsert = async obj => {
@@ -47,8 +48,8 @@ export const onDelete = async paramId => {
     await deleteDoc(doc(db, collectionStr, paramId));
 }
 
-/* 7. ENCONTRAR PRODUCTO EN CARRITO */
 export const onFindinCart = async (email) => {
+    console.log("Query FindinCart");
     const result = await getDocs(query(collection(db, collectionStr), where("customer_email", "==", email)));
     return result.docs;
 };
