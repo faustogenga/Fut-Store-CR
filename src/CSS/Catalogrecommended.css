@@ -1,0 +1,24 @@
+.recommended-flex {
+    display: flex;
+    justify-content: space-between; /* Para separar los botones */
+    margin-left: 3rem; /* Ajusta este valor según sea necesario */
+    position: inherit;
+}
+
+.recommended-title {
+    margin-left: 4rem;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+/* Nueva clase para los botones */
+.recommended-button {
+    border: 1.8px solid black; /* Borde negro */
+    background-color: #3498DB; /* Fondo celeste */
+    color: white; /* Letras blancas */
+    padding: 10px 20px; /* Espacio interno */
+    border-radius: 10px; /* Esquinas redondas */
+    margin-right: 10px; /* Espacio entre botones */
+    text-decoration: none; /* Remover subrayado */
+} 

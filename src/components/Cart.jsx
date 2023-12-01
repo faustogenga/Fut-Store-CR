@@ -4,11 +4,12 @@ import { BsCartCheck, BsCartX} from 'react-icons/bs';
 import { collectionAssignation, onFindinCart, onDelete } from '../CRUD/app';
 import Swal from 'sweetalert2';
 import { auth } from '../CRUD/firebase_conection';
- 
+
 export const Cart = ({ user }) => {
-  const [products, setProducts] = useState([]);
-  
-  const fetchProducts = async () => {  
+
+    const [products, setProducts] = useState([]);
+
+    const fetchProducts = async () => {  
         try {
         const result = await onFindinCart(auth.currentUser ? auth.currentUser.email : '');
         if (result) {
@@ -25,7 +26,7 @@ export const Cart = ({ user }) => {
             icon: "error"
             });
         }
-   };
+    };
 
     useEffect(() => {
         collectionAssignation('CustomerCart');
@@ -67,14 +68,14 @@ export const Cart = ({ user }) => {
         }
     };
 
-     const removeItem  = async (index, product_id) => {
+    const removeItem  = async (index, product_id) => {
         try {
             console.log(product_id)
             await onDelete(product_id);   
             const updatedCart = [...products];
             updatedCart.splice(index, 1);
             setProducts(updatedCart);
-           
+
         } catch(error) {
             Swal.fire({
                 title: "Error al eliminar el producto del carrito.",
@@ -92,7 +93,7 @@ export const Cart = ({ user }) => {
         await clearCart();
     }
 
-  return (
+    return (
     <>
     <Container className="py-4 mt-5">
         <div style={{textAlign:'center', fontWeight:'bold', fontSize:'2rem', paddingBottom:'5px'}}>Mi Carrito</div>
@@ -157,5 +158,5 @@ export const Cart = ({ user }) => {
             </Row>
         </Container>
     </>
-  )
+    )
 }

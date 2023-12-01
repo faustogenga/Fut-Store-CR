@@ -45,18 +45,37 @@ export const onUpdate = async (paramId, newObj) => {
 export const onDelete = async paramId => {
     console.log("Query onDelete");
     await deleteDoc(doc(db, collectionStr, paramId));
-}
+};
 
 /* 7. ENCONTRAR PRODUCTO EN CARRITO */
+/*
 export const onFindinCart = async (email) => {
     console.log("Query FindinCart");
     const result = await getDocs(collection(db, collectionStr), where("customer_email", "==", email));
     const docRef = doc(db, collectionStr, paramId);
     await deleteDoc(docRef);
-};
+}; */
 
 /* 7. ENCONTRAR PRODUCTO EN CARRITO */
 export const onFindinCart = async (email) => {
     const result = await getDocs(query(collection(db, collectionStr), where("customer_email", "==", email)));
+    return result.docs;
+};
+
+/* 8. ENCONTRAR PRODUCTO POR NOMBRE */
+export const onFindByName = async (productName) => {
+    const result = await getDocs(query(collection(db, collectionStr), where("name", "==", productName)));
+    return result.docs;
+};
+
+/* 9.ENCONTRAR PRODUCTO POR CATEGORIA */
+export const onFindByCategory = async (productCategory) => {
+    const result = await getDocs(query(collection(db, collectionStr), where("category", "==", productCategory)));
+    return result.docs;
+};
+
+/* 9.ENCONTRAR PRODUCTO POR PRECIO */
+export const onFindByPrice = async (productPrice) => {
+    const result = await getDocs(query(collection(db, collectionStr), where("price", "==", productPrice)));
     return result.docs;
 };

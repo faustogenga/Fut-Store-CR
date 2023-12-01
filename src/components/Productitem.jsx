@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import Swal from 'sweetalert2';
+import StarRateIcon from '@mui/icons-material/StarRate';
 import { collectionAssignation, onInsert } from '../CRUD/app';
 import { auth } from "../CRUD/firebase_conection";
 
 export const Productitem = ({ product }) => {
+  const [cart, setCart] = useState([]);
 
   const addToCart = () => {
     setCart([...cart, product.data]);
@@ -23,9 +25,7 @@ export const Productitem = ({ product }) => {
       customer_email: auth.currentUser.email,
       cart: false
     }
-      cart: false, 
-      product_id: product.id
-    };
+    
 
     try {
         await onInsert(cartItem);
@@ -49,10 +49,11 @@ export const Productitem = ({ product }) => {
       <img alt='Produt_Image' src={product.img}></img>
       <div className='descripcion m-2'>
         <h5>{product.name}</h5>
-          <p className='m-0'><strong>${product.price}</strong></p>
+          <p className='m-0'><strong>${product.price}</strong></p> <StarRateIcon/><StarRateIcon/><StarRateIcon/><StarRateIcon/><StarRateIcon/>
           <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
             <AddShoppingCartIcon />
           </IconButton>
+          <br />
       </div>
     </div>
   )

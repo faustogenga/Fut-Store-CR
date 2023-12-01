@@ -4,12 +4,12 @@ import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC-Aa-blH9dsUfJ9cZMKQeU4DXyNbAUvT0",
-  authDomain: "dw---base-de-datos.firebaseapp.com",
-  projectId: "dw---base-de-datos",
-  storageBucket: "dw---base-de-datos.appspot.com",
-  messagingSenderId: "692244881069",
-  appId: "1:692244881069:web:123bc7b8ac6fe45d98f024"
+  apiKey: "AIzaSyBaBkhZE_7crOYIqlDH91kgQAsFznhHrLU",
+  authDomain: "reactcrud-40423.firebaseapp.com",
+  projectId: "reactcrud-40423",
+  storageBucket: "reactcrud-40423.appspot.com",
+  messagingSenderId: "288695004510",
+  appId: "1:288695004510:web:7eeb951f49ba7399b873cf"
 };
 
 // Initialize Firebase
