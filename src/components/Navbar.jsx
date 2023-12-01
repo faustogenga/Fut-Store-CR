@@ -3,7 +3,6 @@ import { Tooltip } from 'react-tooltip'
 
 export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
 
-
   return (
     <div>
       <div>
@@ -59,7 +58,7 @@ export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
                   <div>
                     email : {user.email}
                     <br/>
-                    Fecha de creacion : {user.metadata.creationTime.substring(5, 16)}
+                    Fecha de creación : {user.metadata.creationTime.substring(5, 16)}
                   </div>
                 </Tooltip>
                 <a className="nav-link mx-3"

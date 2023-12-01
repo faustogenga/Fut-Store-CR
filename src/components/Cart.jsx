@@ -7,7 +7,6 @@ import { auth } from '../CRUD/firebase_conection';
  
 export const Cart = ({ user }) => {
   const [products, setProducts] = useState([]);
-  
   const fetchProducts = async () => {  
         try {
         const result = await onFindinCart(auth.currentUser ? auth.currentUser.email : '');
@@ -26,7 +25,7 @@ export const Cart = ({ user }) => {
             });
         }
    };
-
+   
     useEffect(() => {
         collectionAssignation('CustomerCart');
         fetchProducts();

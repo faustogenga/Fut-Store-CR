@@ -7,6 +7,8 @@ import { auth } from "../CRUD/firebase_conection";
 
 export const Productitem = ({ product }) => {
 
+  const [cart, setCart] = useState([]);
+  
   const addToCart = () => {
     setCart([...cart, product.data]);
     addToFirebaseCart(product);
@@ -14,18 +16,15 @@ export const Productitem = ({ product }) => {
 
   const addToFirebaseCart = async (product) => {
     collectionAssignation('CustomerCart');
-  
     const cartItem = {
       image: product.img,
       name: product.name,
       price: product.price,
       quantity: 1,
       customer_email: auth.currentUser.email,
-      cart: false
-    }
-      cart: false, 
+      cart: false,
       product_id: product.id
-    };
+    }
 
     try {
         await onInsert(cartItem);

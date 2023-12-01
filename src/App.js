@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap
 import 'bootswatch/dist/flatly/bootstrap.min.css'; // Import Bootswatch theme
 import './CSS/ComStyle.css'; // Import the ComponentCSS file
 import './CSS/Login.css' //Login CSS 
-import "bootstrap-icons/font/bootstrap-icons
+import "bootstrap-icons/font/bootstrap-icons"
 import 'react-tooltip/dist/react-tooltip.css'
 
 /**Routing */
@@ -74,7 +74,7 @@ function App() {
             <Route path="/NewVendor" element={<AddVendor setLoggedIn={setLoggedIn}/>} />
             <Route path="/products" element={<AddProducts setLoggedIn={setLoggedIn}/>} />
             <Route path='/cart' element={<CartPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
-            <Route path='/Checkout' element={<CheckoutPage user={user} cart={Productitem.cart} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
+            <Route path='/Checkout' element={<CheckoutPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
           </Routes>
         </BrowserRouter>
       </div>

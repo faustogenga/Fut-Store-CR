@@ -1,5 +1,5 @@
 import { collection, getDocs, doc, getDoc, addDoc, deleteDoc, updateDoc, where, query } from "firebase/firestore"
-import { db } from "./firebase_conection";
+import { auth, db } from "./firebase_conection";
 
 
 /* 1. CREAR LA CONSTANTE DE LA COLECCION */
@@ -31,8 +31,8 @@ export const onFindByVendor = async (email) => {
 
 /* 4. INSERTAR OBJETO */
 export const onInsert = async obj => {
-    console.log("Query Insert");
     await addDoc(collection(db, collectionStr), obj);
+    console.log("Query Insert");
 }
 
 /* 5. MODIFICAR OBJETO */
@@ -50,13 +50,26 @@ export const onDelete = async paramId => {
 /* 7. ENCONTRAR PRODUCTO EN CARRITO */
 export const onFindinCart = async (email) => {
     console.log("Query FindinCart");
-    const result = await getDocs(collection(db, collectionStr), where("customer_email", "==", email));
-    const docRef = doc(db, collectionStr, paramId);
-    await deleteDoc(docRef);
-};
-
-/* 7. ENCONTRAR PRODUCTO EN CARRITO */
-export const onFindinCart = async (email) => {
     const result = await getDocs(query(collection(db, collectionStr), where("customer_email", "==", email)));
     return result.docs;
 };
+
+/* 8. ELIMINAR PRODUCTO DEL CARRITO */
+export const onDeleteFromCart = async (collection, paramId, email) => {
+    if(auth.currentUser !== null) {
+        const userEmail = auth.currentUser.email;
+        if(userEmail === email) {
+            const docRef = doc(db, collection, paramId);
+            console.log("Query Delete from cart");
+            await deleteDoc(doc(docRef));
+        } else {
+            console.log("No se puede eliminar el producto");
+        }
+    }
+}
+
+/* 9. INSERTAR ORDEN  */
+export const onInsertOrder = async (obj) => {
+    await addDoc(collection(db, 'OrderPlaced'), obj);
+    console.log("Query Insert Order");
+}
