@@ -21,7 +21,7 @@ export const Productitem = ({ product }) => {
       name: product.name,
       price: product.price,
       quantity: 1,
-      customer_email: auth.currentUser.email,
+      userEmail: auth.currentUser.email,
       cart: false,
       product_id: product.id
     }

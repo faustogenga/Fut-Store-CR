@@ -15,7 +15,6 @@ import {useAuth} from './hooks/useAuth'
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './CRUD/firebase_conection';
 import { Register } from './pages/Register';
-import { Productitem } from './components/Productitem'
 
 /*Firebase */
 import { collectionAssignation, onFindByVendor } from './CRUD/app'
@@ -24,6 +23,7 @@ import { AddVendor } from './pages/AddVendor';
 import AddProducts from './components/AddProducts';
 import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
+import { OrdersPage } from './pages/OrdersPage';
 
 
 function App() {
@@ -75,6 +75,7 @@ function App() {
             <Route path="/products" element={<AddProducts setLoggedIn={setLoggedIn}/>} />
             <Route path='/cart' element={<CartPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
             <Route path='/Checkout' element={<CheckoutPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
+            <Route path='/orders' element={<OrdersPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
           </Routes>
         </BrowserRouter>
       </div>

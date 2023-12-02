@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../CSS/Checkout.css';
 import { auth } from '../CRUD/firebase_conection';
-import { collectionAssignation, onClearCart, onFindinCart, onInsertOrder } from '../CRUD/app';
+import { collectionAssignation, onClearCart, onFindbyEmail, onInsertOrder } from '../CRUD/app';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
-
 
 export const Checkout = ({ user }) => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ export const Checkout = ({ user }) => {
 
   const fetchCartData = async () => {
       try {
-        const result = await onFindinCart(userEmail);
+        const result = await onFindbyEmail(userEmail);
         if (result) {
             const productsData = result.map((doc) => doc.data());
             setCart(productsData);  
@@ -81,6 +80,7 @@ export const Checkout = ({ user }) => {
       randomId = randomId.toString();
       return randomId;
   }
+
   const handlePaymentChange = (event) => {
     setPaymentMethod(event.target.value);
   };
@@ -88,7 +88,7 @@ export const Checkout = ({ user }) => {
   const addToOrder = async (event) => {
     event.preventDefault();
     if (inputValidation()) {
-     const orderId = generateOrderId();
+      const orderId = generateOrderId();
       const orderItems = cart.map((cartItem) => ({
         orderId: orderId,
         userEmail: userEmail,
@@ -121,9 +121,9 @@ export const Checkout = ({ user }) => {
       });
       console.log(error.message)
     }
-    navigate('/');
+    navigate('/orders');
   }    
-  }; 
+}; 
 
   return (
     <>

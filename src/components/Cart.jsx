@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Col, Row, Table} from 'react-bootstrap';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
-import { collectionAssignation, onFindinCart, onDeleteFromCart, onClearCart } from '../CRUD/app';
+import { collectionAssignation, onFindbyEmail, onDeleteFromCart, onClearCart } from '../CRUD/app';
 import Swal from 'sweetalert2';
 import { auth } from '../CRUD/firebase_conection';
  
 export const Cart = ({ user }) => {
   const [products, setProducts] = useState([]);
   const userEmail = auth.currentUser ? auth.currentUser.email : '';
-
   
   const fetchProducts = async () => {  
-        try {
-        const result = await onFindinCart(auth.currentUser ? auth.currentUser.email : '');
+    try {
+        const result = await onFindbyEmail(userEmail);
         if (result) {
             const productsData = result.map((doc) => doc.data());
             setProducts(productsData);  
@@ -110,26 +109,35 @@ export const Cart = ({ user }) => {
         <br /><br />
             <Row className="justify-content-center">
                 <Table responsive="sm"  className="mb-5">
+                    <thead>
+                        <tr>
+                            <th className='text-center'>Imagen</th>
+                            <th>Nombre del Producto</th>
+                            <th className='text-center'>Precio</th>
+                            <th className='text-center'>Cantidad</th>
+                            <th className='text-center'>Acciones</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {products.map((item, index)=>{
                             return(
                                 <tr key={index}>
                                     <td>
-                                        <div style={{ background: 'white', height: '8rem', overflow: 'hidden', display: 'flex',
+                                        <div style={{ background: 'white', height: '10rem', overflow: 'hidden', display: 'flex',
                                         justifyContent: 'center', alignItems: 'center' }}>
                                             <div style={{ padding: '.5rem'}}>
-                                                <img src={item.image} style={{ width: '4rem'}} alt={item.name} />
+                                                <img src={item.image} style={{ width: '10rem'}} alt={item.name} />
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <h6 style={{ whiteSpace: 'nowrap', width: '14rem', overflow: 'hidden', textOverFlow: 'ellipsis'}}>
+                                        <h6 style={{ whiteSpace: 'nowrap', width: '10rem', overflow: 'hidden', textOverFlow: 'ellipsis'}}>
                                             {item.name}
                                         </h6>
                                     </td>
-                                    <td>₡ {item.price}</td>
-                                    <td>Cantidad ({item.quantity})</td>
-                                    <td>
+                                    <td className='text-center'>₡ {item.price}</td>
+                                    <td className='text-center'>{item.quantity}</td>
+                                    <td className='text-center'>
                                         <Button className="ms-2" onClick={() => quantityDecrease(index)}>-</Button>
                                         <Button className="ms-2" onClick={() => quantityIncrease(index)}>+</Button>
                                         <Button variant="danger" className="ms-2" onClick={() => removeItem(index, item.product_id)}>Eliminar Producto</Button>

@@ -50,10 +50,10 @@ export const onDelete = async paramId => {
 
 /* ***************************** CART METHODS ***************************** */
 
-/* 7. ENCONTRAR PRODUCTO EN CARRITO */
-export const onFindinCart = async (email) => {
-    console.log("Query FindinCart");
-    const result = await getDocs(query(collection(db, collectionStr), where("customer_email", "==", email)));
+/* 7. ENCONTRAR PRODUCTO EN COLECCIÓN POR EMAIL */
+export const onFindbyEmail = async (email) => {
+    console.log("Query FindbyEmail");
+    const result = await getDocs(query(collection(db, collectionStr), where("userEmail", "==", email)));
     return result.docs;
 };
 
@@ -61,7 +61,7 @@ export const onFindinCart = async (email) => {
 export const onDeleteFromCart = async (cartCollectionName, paramId, email) => {
     const cartRef = collection(db, cartCollectionName);
     try {
-        const querySnapshot = await getDocs(query(cartRef, where('product_id', '==', paramId), where('customer_email', '==', email)));
+        const querySnapshot = await getDocs(query(cartRef, where('product_id', '==', paramId), where('userEmail', '==', email)));
 
         if (querySnapshot.size > 0) {
             const docToDelete = querySnapshot.docs[0];
@@ -81,7 +81,7 @@ export const onDeleteFromCart = async (cartCollectionName, paramId, email) => {
 export const onClearCart = async (cartCollectionName, email) => {
     const cartRef = collection(db, cartCollectionName);
     try {
-        const querySnapshot = await getDocs(query(cartRef, where('customer_email', '==', email)));
+        const querySnapshot = await getDocs(query(cartRef, where('userEmail', '==', email)));
 
         querySnapshot.forEach(async (doc) => {
             await deleteDoc(doc.ref);
@@ -104,3 +104,4 @@ export const onInsertOrder = async (obj) => {
     await addDoc(collection(db, 'OrderPlaced'), obj);
     console.log("Query Insert Order");
 }
+
