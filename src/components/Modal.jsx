@@ -66,7 +66,7 @@ const Modal = ({ user, item, currentId, isOpen, onClose, handleEdit }) => {
     <>
     {/*DISPLAY DE MODAL*/}
       <div className="overlay" />
-      <div className="modalbox m-2">
+      <div className="modalbox">
         <button className={"closeBtn"} onClick={onClose}>
           <RiCloseLine style={{ marginBottom: "-3px" }} />
         </button>

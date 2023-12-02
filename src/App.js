@@ -45,6 +45,7 @@ function App() {
         if (currentuser !== null) {
           setLoggedIn(true); 
           collectionAssignation('Vendors');
+          console.log("here");
           const Result = await onFindByVendor(currentuser.email);
           if(Result.empty) {
             setIsVendor(false);

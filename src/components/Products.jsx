@@ -29,7 +29,7 @@ export const Products = (user) => {
             <div className="container">
             <h4>Destacado</h4>
                 <div className="row main-products">
-                    {products.slice(0,4).map((product, index,) => {
+                    {products.filter(product => product.category === "Soccer Cleats").slice(0,4).map((product, index,) => {
                         return (
                             <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
                                  <Productitem product={product}/>

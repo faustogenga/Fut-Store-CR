@@ -32,7 +32,7 @@ export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
             </li>
             {isVendor ? (
               <li className="nav-item bg-warning p-0 size=10">
-                <a className="nav-link" href="/AdminVendor">Gestionar Productos</a>
+                <a className="nav-link" href="/AdminVendor">Gestionar</a>
               </li>
             ) : (
               loggedIn ? (

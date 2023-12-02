@@ -42,15 +42,29 @@ export const onUpdate = async (paramId, newObj) => {
     await updateDoc(doc(db, collectionStr, paramId), newObj);
 };
 
-/* 6. ELIMINAR OBJETO */
+/* 6. Modificar todos los vendors */
+
+export const onUpdateAllVendors = async (vendors) => {
+    console.log("Query Update Vendors");
+    try {
+        vendors.forEach(async (vendor) => {
+            await updateDoc(doc(db, collectionStr, vendor.id), vendor);
+        });
+    } catch (error) {
+        console.error('Error updating documents:', error);
+        throw error;
+    }
+};
+
+
+/* 7. ELIMINAR OBJETO */
 export const onDelete = async paramId => {
     console.log("Query onDelete");
     await deleteDoc(doc(db, collectionStr, paramId));
 }
 
-/* 7. ENCONTRAR PRODUCTO EN CARRITO *
 
-/* 7. ENCONTRAR PRODUCTO EN CARRITO */
+/* 8. ENCONTRAR PRODUCTO EN CARRITO */
 export const onFindinCart = async (email) => {
     console.log("Query FindinCart");
     const result = await getDocs(query(collection(db, collectionStr), where("customer_email", "==", email)));

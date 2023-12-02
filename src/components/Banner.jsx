@@ -13,7 +13,7 @@ export const Banner = ({isVendor}) => {
                     <blockquote className="blockquote">
                         <p className="mb-0">Tus productos en nuestra pagina a solo un click</p>
                     </blockquote>
-                    <button type="button"  disabled={isVendor ? 'true' : ''} className="btn btn-info m-4" onClick={()=> (navigate('/NewVendor'))}>Inscribete</button>
+                    <button type="button"  disabled={isVendor ? true : false} className="btn btn-info m-4" onClick={()=> (navigate('/NewVendor'))}>Inscribete</button>
                 </figure>
             </div>
         </div>
