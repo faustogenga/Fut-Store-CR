@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import '../CSS/Checkout.css';
 import { auth } from '../CRUD/firebase_conection';
-import { collectionAssignation, onDeleteFromCart, onFindinCart, onInsertOrder } from '../CRUD/app';
+import { collectionAssignation, onClearCart, onFindinCart, onInsertOrder } from '../CRUD/app';
 import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 
 
 export const Checkout = ({ user }) => {
+  const navigate = useNavigate();
   const userEmail =  auth.currentUser ? auth.currentUser.email : '';
   const [cart, setCart] = useState([]);
   const [shippingAddress, setShippingAddress] = useState('');
@@ -103,7 +105,7 @@ export const Checkout = ({ user }) => {
 
     try {
       await Promise.all(orderItems.map(onInsertOrder));
-      await Promise.all(cart.map((cartItem) => onDeleteFromCart('CustomerCart', cartItem.product_id)));
+      await onClearCart('CustomerCart', userEmail);
       Swal.fire({
         title: '¡Compra Realizada!',
         text: 'Tu orden se ha completado con éxito',
@@ -119,6 +121,7 @@ export const Checkout = ({ user }) => {
       });
       console.log(error.message)
     }
+    navigate('/');
   }    
   }; 
 

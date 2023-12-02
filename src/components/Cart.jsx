@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Col, Row, Table} from 'react-bootstrap';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
-import { collectionAssignation, onFindinCart, onDelete } from '../CRUD/app';
+import { collectionAssignation, onFindinCart, onDeleteFromCart, onClearCart } from '../CRUD/app';
 import Swal from 'sweetalert2';
 import { auth } from '../CRUD/firebase_conection';
  
 export const Cart = ({ user }) => {
   const [products, setProducts] = useState([]);
+  const userEmail = auth.currentUser ? auth.currentUser.email : '';
+
+  
   const fetchProducts = async () => {  
         try {
         const result = await onFindinCart(auth.currentUser ? auth.currentUser.email : '');
@@ -16,7 +19,6 @@ export const Cart = ({ user }) => {
         } else {
             console.log("Error")
         }
-        
         } catch (error) {
         Swal.fire({
             title: "Error al mostrar los productos en tu carrito.",
@@ -68,12 +70,10 @@ export const Cart = ({ user }) => {
 
      const removeItem  = async (index, product_id) => {
         try {
-            console.log(product_id)
-            await onDelete(product_id);   
+            await onDeleteFromCart('CustomerCart', product_id, userEmail);   
             const updatedCart = [...products];
             updatedCart.splice(index, 1);
             setProducts(updatedCart);
-           
         } catch(error) {
             Swal.fire({
                 title: "Error al eliminar el producto del carrito.",
@@ -84,9 +84,21 @@ export const Cart = ({ user }) => {
     }; 
 
     const clearCart = async () => {
-
+        try {
+            await onClearCart('CustomerCart', userEmail);
+            setProducts([]);   
+            Swal.fire({
+                title: "Su carrito se encuentra vacío.",
+                icon: "success"
+            });
+        } catch(error) {
+            Swal.fire({
+                title: "Error al limpiar el carrito.",
+                text: error.message,
+                icon: "error"
+            });
+        }
     }
-
     const proceedToPayment = async () =>{
         await clearCart();
     }
@@ -127,7 +139,6 @@ export const Cart = ({ user }) => {
                         })}
                     </tbody>
                 </Table>
-                
                     <Row 
                         style={{ position: 'inherit', bottom: 0}}
                         className={`justify-content-center w-100`}

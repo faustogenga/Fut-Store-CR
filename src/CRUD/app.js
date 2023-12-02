@@ -1,6 +1,7 @@
 import { collection, getDocs, doc, getDoc, addDoc, deleteDoc, updateDoc, where, query } from "firebase/firestore"
 import { auth, db } from "./firebase_conection";
 
+/* ***************************** GENERAL METHODS ***************************** */
 
 /* 1. CREAR LA CONSTANTE DE LA COLECCION */
 let collectionStr = '';
@@ -47,6 +48,8 @@ export const onDelete = async paramId => {
     await deleteDoc(doc(db, collectionStr, paramId));
 }
 
+/* ***************************** CART METHODS ***************************** */
+
 /* 7. ENCONTRAR PRODUCTO EN CARRITO */
 export const onFindinCart = async (email) => {
     console.log("Query FindinCart");
@@ -55,21 +58,49 @@ export const onFindinCart = async (email) => {
 };
 
 /* 8. ELIMINAR PRODUCTO DEL CARRITO */
-export const onDeleteFromCart = async (collection, paramId, email) => {
-    if(auth.currentUser !== null) {
-        const userEmail = auth.currentUser.email;
-        if(userEmail === email) {
-            const docRef = doc(db, collection, paramId);
-            console.log("Query Delete from cart");
-            await deleteDoc(doc(docRef));
-        } else {
-            console.log("No se puede eliminar el producto");
-        }
-    }
-}
+export const onDeleteFromCart = async (cartCollectionName, paramId, email) => {
+    const cartRef = collection(db, cartCollectionName);
+    try {
+        const querySnapshot = await getDocs(query(cartRef, where('product_id', '==', paramId), where('customer_email', '==', email)));
 
-/* 9. INSERTAR ORDEN  */
+        if (querySnapshot.size > 0) {
+            const docToDelete = querySnapshot.docs[0];
+            await deleteDoc(docToDelete.ref);
+            console.log('Producto eliminado del carrito');
+        } else {
+            console.log('No se encontró el producto en el carrito del usuario');
+        }
+    } catch (error) {
+        console.error('Error al eliminar el producto del carrito:', error);
+        throw error;
+    }
+    console.log("Query Delete From Cart");
+};
+
+/* 9. LIMPIAR CARRITO */
+export const onClearCart = async (cartCollectionName, email) => {
+    const cartRef = collection(db, cartCollectionName);
+    try {
+        const querySnapshot = await getDocs(query(cartRef, where('customer_email', '==', email)));
+
+        querySnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+            console.log('Producto eliminado del carrito.');
+        });
+
+    } catch (error) {
+        console.error('Error al limpiar el carrito:', error);
+        throw error;
+    }
+    
+    console.log("Query Clear Cart");
+};
+
+/* ***************************** ORDER METHODS ***************************** */
+
+/* 10. INSERTAR ORDEN  */
 export const onInsertOrder = async (obj) => {
+    console.log(obj)
     await addDoc(collection(db, 'OrderPlaced'), obj);
     console.log("Query Insert Order");
 }
