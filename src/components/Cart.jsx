@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../CSS/Cart.css';
 import { Button, Container, Col, Row, Table} from 'react-bootstrap';
 import { BsCartCheck, BsCartX} from 'react-icons/bs';
 import { collectionAssignation, onFindbyEmail, onDeleteFromCart, onClearCart } from '../CRUD/app';
@@ -103,16 +104,17 @@ export const Cart = ({ user }) => {
     }
 
   return (
-    <>
-    <Container className="py-4 mt-5">
-        <div style={{textAlign:'center', fontWeight:'bold', fontSize:'2rem', paddingBottom:'5px'}}>Mi Carrito</div>
-        <br /><br />
+    <div className='mainCart'>
+    <Container className="py-4">
+        <div className='container-Div'> 
+            <h1 className='titleCart'>Mi Carrito</h1>
+        </div>
             <Row className="justify-content-center">
-                <Table responsive="sm"  className="mb-5">
-                    <thead>
-                        <tr>
+                <Table responsive="sm" className='table table-bordered border-primary align-middle table-success table-sm'>
+                    <thead style={{position:'sticky', top:'0'}}>
+                        <tr style={{fontSize: '22px', fontFamily:'Times New Roman'}}>
                             <th className='text-center'>Imagen</th>
-                            <th>Nombre del Producto</th>
+                            <th className='text-center'>Nombre del Producto</th>
                             <th className='text-center'>Precio</th>
                             <th className='text-center'>Cantidad</th>
                             <th className='text-center'>Acciones</th>
@@ -121,7 +123,7 @@ export const Cart = ({ user }) => {
                     <tbody>
                         {products.map((item, index)=>{
                             return(
-                                <tr key={index}>
+                                <tr key={index} style={{fontFamily:'Times New Roman'}}>
                                     <td>
                                         <div style={{ background: 'white', height: '10rem', overflow: 'hidden', display: 'flex',
                                         justifyContent: 'center', alignItems: 'center' }}>
@@ -130,13 +132,13 @@ export const Cart = ({ user }) => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <h6 style={{ whiteSpace: 'nowrap', width: '10rem', overflow: 'hidden', textOverFlow: 'ellipsis'}}>
+                                    <td className='text-center'>
+                                        <h6 style={{ width: '12rem', marginLeft:'150px', fontSize:'20px'}}>
                                             {item.name}
                                         </h6>
                                     </td>
-                                    <td className='text-center'>₡ {item.price}</td>
-                                    <td className='text-center'>{item.quantity}</td>
+                                    <td className='text-center'style={{fontSize:'18px'}}>₡ {item.price}</td>
+                                    <td className='text-center'style={{fontSize:'18px'}}>{item.quantity}</td>
                                     <td className='text-center'>
                                         <Button className="ms-2" onClick={() => quantityDecrease(index)}>-</Button>
                                         <Button className="ms-2" onClick={() => quantityIncrease(index)}>+</Button>
@@ -152,11 +154,14 @@ export const Cart = ({ user }) => {
                         className={`justify-content-center w-100`}
                     >
                         <Col className="py-2">
-                            <h4>Total: ₡ {cartTotal}</h4>
+                            <div style={{backgroundColor:'rgba(13,96,76,0.5)', width:'180px'}}>
+                            <h4 style={{fontWeight:'bold'}}>Total: ₡ {cartTotal}</h4>
+                            </div>
                         </Col>
                         <Col className="p-0" md={4}>
                             <Button variant="warning"
                                 className="m-2"
+                                style={{fontFamily:'Times New Roman'}}
                                 onClick={clearCart}
                             >
                                 <BsCartX size="1.7rem" />
@@ -164,6 +169,7 @@ export const Cart = ({ user }) => {
                             </Button>
                             <Button variant="success"
                                 className="m-2"
+                                style={{fontFamily:'Times New Roman'}}
                                 href='/Checkout'
                                 onClick={proceedToPayment}
                             >
@@ -174,6 +180,6 @@ export const Cart = ({ user }) => {
                     </Row>
             </Row>
         </Container>
-    </>
+    </div>
   )
 }

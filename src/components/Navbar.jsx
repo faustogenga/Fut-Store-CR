@@ -66,7 +66,7 @@ export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
                      onMouseOver={(e) => (e.target.style.color = '#3498DB')}
                      onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
                   >
-                      Tus Pedidos
+                      Pedidos
                   </a>
                   <a className="nav-link mx-3"
                     onMouseOver={(e) => (e.target.style.color = 'red')}

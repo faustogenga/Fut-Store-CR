@@ -50,7 +50,7 @@ export const onDelete = async paramId => {
 
 /* ***************************** CART METHODS ***************************** */
 
-/* 7. ENCONTRAR PRODUCTO EN COLECCIÓN POR EMAIL */
+/* 7. ENCONTRAR OBJETO EN COLECCIÓN POR EMAIL */
 export const onFindbyEmail = async (email) => {
     console.log("Query FindbyEmail");
     const result = await getDocs(query(collection(db, collectionStr), where("userEmail", "==", email)));
@@ -104,4 +104,28 @@ export const onInsertOrder = async (obj) => {
     await addDoc(collection(db, 'OrderPlaced'), obj);
     console.log("Query Insert Order");
 }
+/* 11. OBTENER ORDEN POR ID CON MÚLTIPLES PRODUCTOS */
+export const onFindOrderById = async (orderId) => {
+    try {
+        const orderCollectionRef = collection(db, collectionStr);
+        const querySnapshot = await getDocs(query(orderCollectionRef, where('orderId', '==', orderId)));
 
+        const orderDetails = {
+            order: [],
+            products: []
+        };
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.product_id) {
+                console.log(data.product_id);
+                orderDetails.products.push(data);
+            } else {
+                orderDetails.order = data;
+            }
+        });
+        return orderDetails;
+    } catch (error) {
+        console.error("Error al obtener la orden por ID:", error);
+        throw error;
+    }
+};
