@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { collectionAssignation, onInsert } from '../CRUD/app';
 import { auth } from "../CRUD/firebase_conection";
 
-export const Productitem = ({ product, isCatalog, isVendor }) => {
+export const Productitem = ({user, product, isCatalog, isVendor }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = () => {
@@ -15,21 +15,20 @@ export const Productitem = ({ product, isCatalog, isVendor }) => {
 
   const addToFirebaseCart = async (product) => {
     collectionAssignation('CustomerCart');
-
     const cartItem = {
       image: product.img,
       name: product.name,
       price: product.price,
       quantity: 1,
-      customer_email: auth.currentUser.email,
+      userEmail: user.email,
       cart: false,
+      stock: product.stock,
       product_id: product.id
     };
 
     try {
       await onInsert(cartItem);
       Swal.fire({
-
         title: "¡Buena elección!",
         text: "Producto agregado correctamente a tu carrito.",
         icon: "success"

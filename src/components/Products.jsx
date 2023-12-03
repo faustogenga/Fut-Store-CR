@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Productitem } from './Productitem'
 import { collectionAssignation, onFindAll } from '../CRUD/app'
 
-export const Products = ({isCatalog, isVendor}) => {
+export const Products = ({user,isCatalog, isVendor}) => {
 
     const [products, setproducts] = useState([]);
 
@@ -32,7 +32,7 @@ export const Products = ({isCatalog, isVendor}) => {
                     {products.filter(product => product.category === "Soccer Cleats").slice(0,4).map((product, index) => {
                         return (
                             <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
-                                 <Productitem product={product} isCatalog={isCatalog} isVendor={isVendor}/>
+                                 <Productitem user={user} product={product} isCatalog={isCatalog} isVendor={isVendor}/>
                             </div>
                         )
                     })

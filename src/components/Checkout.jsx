@@ -1,110 +1,166 @@
 import React, { useState, useEffect } from 'react';
 import '../CSS/Checkout.css';
 import { auth } from '../CRUD/firebase_conection';
-import { collectionAssignation, onInsert, onFindinCart } from '../CRUD/app';
+import { collectionAssignation, onClearCart, onFindbyEmail, onInsertOrder } from '../CRUD/app';
 import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 
 export const Checkout = ({ user }) => {
+  const navigate = useNavigate();
+  const userEmail =  auth.currentUser ? auth.currentUser.email : '';
+  const [cart, setCart] = useState([]);
+  const [shippingAddress, setShippingAddress] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('Choose');
+  const [cardNumber, setCardNumber] = useState('');
+  const [expirationDate, setExpirationDate] = useState('');
+  const [cvv, setCvv] = useState('');
+  const currentDate = new Date().toLocaleDateString();
+  const currentTime = new Date().toLocaleTimeString();
 
-    const initialValues = {shippingAddress:''}
-    const [cart, setCart] = useState([])
-    const [paymentMethod, setPaymentMethod] = useState('Choose');
-    const [value, setValue] = useState(initialValues);
-    const [order, setOrder] = useState([]);  
-
-    useEffect(() => {
-        const fetchdata = async () => {
-            collectionAssignation('CustomerCart');
-            const result = await onFindinCart(auth.currentUser ? auth.currentUser.email : '');
-            console.log(result);
+  const fetchCartData = async () => {
+      try {
+        const result = await onFindbyEmail(userEmail);
+        if (result) {
             const productsData = result.map((doc) => doc.data());
-            setCart(productsData);
-        }
-    fetchdata();
-    }, []);
-
-    const handlePaymentChange = (event) => {
-        setPaymentMethod(event.target.value);
-    };
-
-    const addToOrder = () => {
-        console.log(cart.length);
-        if (cart.length > 0) {
-            setOrder(cart[0]);
-            addToFirebaseOrder(cart[0]);
+            setCart(productsData);  
         } else {
-            Swal.fire({
-                title: "Aviso",
-                text: "El carrito está vacío.",
-                icon: "warning"
-              });
+            console.log("Error")
         }
         
-      }
-    
-      const addToFirebaseOrder = async (cartItem) => {
-        collectionAssignation('PlacedOrder');
-
-            const orderItem = {
-                userEmail: auth.currentUser.email,
-                shippingAddress: value.shippingAddress,
-                paymentMethod: paymentMethod,
-                price: cartItem.price,
-                name: cartItem.name,
-               quantity: cartItem.quantity
-          }
-          try {
-            await onInsert(orderItem);
-            Swal.fire({
-              title: "Compra Realizada",
-              text: "Tu orden se ha completado",
-              icon: "success"
+        } catch (error) {
+        Swal.fire({
+            title: "Error al mostrar los productos en tu carrito.",
+            text: error.message,
+            icon: "error"
             });
-      
-          } catch (error) {
-            console.log(error.message);
-            Swal.fire({
-              title: "ERROR",
-              text: error.message,
-              icon: "Error"
-            });
-          }
-    };
+        }
+   };
 
-    const onChangeValues = ({ target }) => {
-        const { name, value } = target;
-        setValue({ ...value, [name]: value });
+    useEffect(() => {
+      collectionAssignation('CustomerCart');
+      fetchCartData();
+    }, [userEmail]); 
+
+  function sendErrorMessage(txt, icon) {
+    Swal.fire({
+      title: '¡ERROR!',
+      text: txt,
+      icon: icon,
+    });
+  }
+  const inputValidation = () => {
+    if(shippingAddress.trim() === '') {
+        sendErrorMessage('Dirección de entrega vacía', 'error');
+        return false;
+    } else if (cardNumber.trim() === '') {
+        sendErrorMessage('Número de tarjeta vacío', 'error');
+        return false;
+    } else if (cardNumber.length !== 16) {
+        sendErrorMessage("Número de tarjeta inválido", "error");
+        return false;
+    } else if(expirationDate.trim() === '') {
+        sendErrorMessage('Fecha de vencimiento vacía', 'error');
+        return false;
+    } else if (expirationDate.length !== 5) {
+        sendErrorMessage("Fecha de vencimiento inválida", "error");
+        return false;
+    } else if (cvv.trim() === '') {
+        sendErrorMessage('CVV vacío', 'error');
+        return false;
+    } else if (cvv.length > 4 || cvv.length < 3)  {
+        sendErrorMessage("CVV inválido", "error");
+        return false;
+    } else {
+        return true;
     }
+  } 
+
+  const generateOrderId = () => {
+      let randomId = Math.floor(Math.random() * 1000000000);
+      randomId = randomId.toString();
+      return randomId;
+  }
+
+  const handlePaymentChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
+
+  const addToOrder = async (event) => {
+    event.preventDefault();
+    if (inputValidation()) {
+      const orderId = generateOrderId();
+      const orderItems = cart.map((cartItem) => ({
+        orderId: orderId,
+        userEmail: userEmail,
+        shippingAddress: shippingAddress,
+        paymentMethod: paymentMethod,
+        product_id: cartItem.product_id,
+        name: cartItem.name,
+        price: cartItem.price,
+        quantity: cartItem.quantity,
+        product_img: cartItem.image,
+        orderDate: currentDate,
+        orderTime: currentTime,
+      }));
+
+    try {
+      await Promise.all(orderItems.map(onInsertOrder));
+      await onClearCart('CustomerCart', userEmail);
+      Swal.fire({
+        title: '¡Compra Realizada!',
+        text: 'Tu orden se ha completado con éxito',
+        icon: 'success',
+      });
+      setCart([]);
+
+    } catch (error) {
+      Swal.fire({
+        title: 'ERROR',
+        text: error.message,
+        icon: 'error',
+      });
+      console.log(error.message)
+    }
+    navigate('/orders');
+  }    
+}; 
 
   return (
     <>
     <div className='MainCheckout'>
         <div className="divForms">
-            <div class="containerCheckout">
+            <div className="containerCheckout">
                 <h1>Finaliza tu compra</h1>
-                <div class="checkout-form">
+                <div className="checkout-form">
                         <form action="">
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label >Correo del usuario</label>
                                 <input type="text" name="Email" placeholder="" value={auth.currentUser ? auth.currentUser.email : ''} disabled />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label>Dirección de entrega</label>
-                                <input type="text" name="shippingAddress" placeholder="Ingresa tu dirección" required />
+                                <input
+                                value={shippingAddress} 
+                                type="text" 
+                                name="shippingAddress" 
+                                placeholder="Ingresa tu dirección" 
+                                onChange={({target}) => setShippingAddress(target.value)} required />
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label>Método de pago</label>
                                 <select name="paymentMethod" value={paymentMethod} onChange={handlePaymentChange} required>
                                     <option value="Choose">Selecciona un método de pago</option>
-                                    <option value="creditCard">Tarjeta de Crédito</option>
-                                    <option value="paypal">PayPal</option>
+                                    <option value="CreditCard">Tarjeta de Crédito</option>
+                                    <option value="PayPal">PayPal</option>
                                 </select>
                             </div>
-                            {paymentMethod === 'creditCard' && (
+                            {paymentMethod === 'CreditCard' && (
                                 <>
                                     <div className="form-group">
                                         <label>Numero de tarjeta</label>
-                                        <input
+                                        <input 
+                                            value={cardNumber}
+                                            onChange={({ target }) => setCardNumber(target.value)}
                                             type="text"
                                             name="cardNumber"
                                             placeholder="Ingresa tu número de tarjeta"
@@ -114,6 +170,8 @@ export const Checkout = ({ user }) => {
                                     <div className="form-group">
                                         <label>Fecha de vencimiento</label>
                                         <input
+                                            value={expirationDate}
+                                            onChange={({ target }) => setExpirationDate(target.value)}
                                             type="text"
                                             name="expirationDate"
                                             placeholder="MM/YY"
@@ -122,7 +180,12 @@ export const Checkout = ({ user }) => {
                                     </div>
                                     <div className="form-group">
                                         <label>CVV</label>
-                                        <input type="password" name="cvv" required />
+                                        <input
+                                        value={cvv}
+                                        onChange={({ target }) => setCvv(target.value)}
+                                        type="password" 
+                                        name="cvv" 
+                                        required />
                                     </div>
                                 </>
                             )}
@@ -136,7 +199,7 @@ export const Checkout = ({ user }) => {
                                     </a>
                                 </div>
                             )}
-                            <button type="submit">Realizar Compra</button>
+                            <button type="submit" onClick={addToOrder}>Realizar Compra</button>
                         </form>
                 </div>
             </div>

@@ -50,6 +50,12 @@ export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
             )}
           </ul>
           <div className="d-flex">
+          <a className="nav-link mx-3" href="/orders"
+                     onMouseOver={(e) => (e.target.style.color = '#3498DB')}
+                     onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
+                  >
+                    Pedidos
+                  </a>
             {loggedIn ? (
               <>
                 <i className="bi bi-person-circle mx-2 text-info"></i>
