@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Productitem } from './Productitem'
 import { collectionAssignation, onFindAll } from '../CRUD/app'
 
-export const Products = (user) => {
+export const Products = ({isCatalog}) => {
 
     const [products, setproducts] = useState([]);
 
@@ -25,14 +25,14 @@ export const Products = (user) => {
     }, []);
 
     return (
-        <section id='products' className='mt-5 mb-5'>
+        <section id='products' className='mt-1 mb-1'>
             <div className="container">
             <h4>Destacado</h4>
-                <div className="row main-products">
-                    {products.filter(product => product.category === "Soccer Cleats").slice(0,4).map((product, index,) => {
+                <div className="row">
+                    {products.filter(product => product.category === "Soccer Cleats").slice(0,4).map((product, index) => {
                         return (
                             <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
-                                 <Productitem product={product}/>
+                                 <Productitem product={product} isCatalog={isCatalog}/>
                             </div>
                         )
                     })

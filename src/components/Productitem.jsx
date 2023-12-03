@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { collectionAssignation, onInsert } from '../CRUD/app';
 import { auth } from "../CRUD/firebase_conection";
 
-export const Productitem = ({ product }) => {
+export const Productitem = ({ product, isCatalog }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = () => {
@@ -15,7 +15,7 @@ export const Productitem = ({ product }) => {
 
   const addToFirebaseCart = async (product) => {
     collectionAssignation('CustomerCart');
-  
+
     const cartItem = {
       image: product.img,
       name: product.name,
@@ -27,8 +27,8 @@ export const Productitem = ({ product }) => {
     };
 
     try {
-        await onInsert(cartItem);
-        Swal.fire({
+      await onInsert(cartItem);
+      Swal.fire({
 
         title: "¡Buena elección!",
         text: "Producto agregado correctamente a tu carrito.",
@@ -41,18 +41,25 @@ export const Productitem = ({ product }) => {
         text: error.message,
         icon: "Error"
       });
-    }; 
+    };
   }
+
   return (
-    <div className='product user'>
-      <img alt='Produt_Image' src={product.img}></img>
-      <div className='descripcion m-2'>
+    <div className='product'>
+      <img alt='Produt_Image'
+        src={product.img}
+        style={isCatalog
+          ? { height: "280px", width: "280px", position: "relative"}
+          : { height:"300px", width: "250px", position: "relative" }}
+        >
+      </img>
+      <div className='descripcion m-1'>
         <h5>{product.name}</h5>
-          <p className='m-0'><strong>${product.price}</strong></p>
-          <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
-            <AddShoppingCartIcon /> 
-            <div className='' style={{fontSize:"20px"}}>Comprar</div>
-          </IconButton>
+        <p className='m-0'><strong>${product.price}</strong></p>
+        <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
+          <AddShoppingCartIcon />
+          <div className='' style={{ fontSize: "20px" }}>Comprar</div>
+        </IconButton>
       </div>
     </div>
   )
