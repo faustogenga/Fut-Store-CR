@@ -40,34 +40,45 @@ export const Cart = ({ user }) => {
         cartTotal += uPrice;
     });
 
-    const quantityIncrease = (index) =>  {
+    const updateCartItemQuantity = (index, increase) => {
         const updatedQuantity = [...products];
-        updatedQuantity[index].quantity++;
-        updatedQuantity[index].price = updatedQuantity[index].price * updatedQuantity[index].quantity / (updatedQuantity[index].quantity - 1);
+        const productStock = parseInt(products[index].stock);
+        if ((updatedQuantity[index].quantity === 1 && !increase) || (updatedQuantity[index].quantity === productStock && increase)) {
+            return;
+        }
+        if (increase) {
+            updatedQuantity[index].quantity++;
+        } else if (updatedQuantity[index].quantity > 1) {
+            updatedQuantity[index].quantity--;
+        }
+        updatedQuantity[index].price =
+            (updatedQuantity[index].price * updatedQuantity[index].quantity) /
+            (updatedQuantity[index].quantity + (increase ? -1 : 1));
+    
         setProducts(updatedQuantity);
-
+    
         let total = 0;
-        updatedQuantity.forEach((item) =>{
+        updatedQuantity.forEach((item) => {
             total += item.price * item.quantity;
         });
         cartTotal = total;
-    }
-
-    const quantityDecrease = (index) => {
-        const updatedQuantity = [...products];
-        if (updatedQuantity[index].quantity > 1) {
-            updatedQuantity[index].quantity--;
-            updatedQuantity[index].price = updatedQuantity[index].price * updatedQuantity[index].quantity / (updatedQuantity[index].quantity + 1);
-            setProducts(updatedQuantity);
-        
-            let total = 0;
-            updatedQuantity.forEach((item) => {
-                total += item.price * item.quantity; 
-            });
-            cartTotal = total;
+        if(cartTotal < 0){
+            cartTotal = 0;
         }
+        return cartTotal;
     };
 
+/*    ***MÉTODO EN DESARROLLO***  
+    const getCartQuantity = () => {
+        let total = 0;
+        products.forEach((item) => {
+            total += item.price * item.quantity;
+        });
+        cartTotal = total;
+        return cartTotal;
+    }
+    */
+    
      const removeItem  = async (index, product_id) => {
         try {
             await onDeleteFromCart('CustomerCart', product_id, userEmail);   
@@ -99,8 +110,34 @@ export const Cart = ({ user }) => {
             });
         }
     }
+/*          ***MÉTODO EN DESARROLLO*** 
+
+    const updateCartInfo = async () => {
+        try {
+            const updatedQuantity = [...products];
+
+        } catch(error) {
+            Swal.fire({
+                title: "Error al actualizar la información del carrito.",
+                text: error.message,
+                icon: "error"
+            });
+        }
+    }
+    
+    */
+ /*    ***MÉTODO EN DESARROLLO***  */
     const proceedToPayment = async () =>{
-        await clearCart();
+       try {
+        const updatedQuantity = [...products];
+        console.log(updatedQuantity);
+       } catch(error) {
+        Swal.fire({
+            title: "Error al proceder al pago.",
+            text: error.message,
+            icon: "error"
+        });
+       }
     }
 
   return (
@@ -140,8 +177,8 @@ export const Cart = ({ user }) => {
                                     <td className='text-center'style={{fontSize:'18px'}}>₡ {item.price}</td>
                                     <td className='text-center'style={{fontSize:'18px'}}>{item.quantity}</td>
                                     <td className='text-center'>
-                                        <Button className="ms-2" onClick={() => quantityDecrease(index)}>-</Button>
-                                        <Button className="ms-2" onClick={() => quantityIncrease(index)}>+</Button>
+                                        <Button className="ms-2" onClick={() => updateCartItemQuantity(index, false)}>-</Button>
+                                        <Button className="ms-2" onClick={() => updateCartItemQuantity(index, true)}>+</Button>
                                         <Button variant="danger" className="ms-2" onClick={() => removeItem(index, item.product_id)}>Eliminar Producto</Button>
                                     </td>
                                 </tr>
@@ -154,7 +191,7 @@ export const Cart = ({ user }) => {
                         className={`justify-content-center w-100`}
                     >
                         <Col className="py-2">
-                            <div style={{backgroundColor:'rgba(13,96,76,0.5)', width:'180px'}}>
+                            <div style={{backgroundColor:'rgba(13,96,76,0.5)', width:'200px'}}>
                             <h4 style={{fontWeight:'bold'}}>Total: ₡ {cartTotal}</h4>
                             </div>
                         </Col>

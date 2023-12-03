@@ -23,6 +23,7 @@ export const Productitem = ({ product }) => {
       quantity: 1,
       userEmail: auth.currentUser.email,
       cart: false,
+      stock: product.stock,
       product_id: product.id
     }
 
