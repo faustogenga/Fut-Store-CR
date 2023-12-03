@@ -1,7 +1,7 @@
 import React from 'react'
 import { Productitem } from './Productitem'
 
-export const Catalog = ({products, isCatalog}) => {
+export const Catalog = ({products, isCatalog, isVendor}) => {
 
     return (
             <div className="">
@@ -10,7 +10,7 @@ export const Catalog = ({products, isCatalog}) => {
                     {products.map((product, index) => {
                         return (
                             <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
-                                <Productitem product={product} isCatalog={isCatalog}/>
+                                <Productitem product={product} isCatalog={isCatalog} isVendor={isVendor}/>
                                 <br/><br/><br/>
                             </div>
                         )

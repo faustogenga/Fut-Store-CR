@@ -18,7 +18,7 @@ export const Home = ({user, loggedIn, logOut, isVendor, isCatalog, setIsCatalog}
         isVendor = {isVendor}
         />
         <Main/>
-        <Products isCatalog = {isCatalog}/>
+        <Products isCatalog = {isCatalog} isVendor = {isVendor}/>
         <Banner isVendor = {isVendor}/>
         <Footer/>
     </div>

@@ -16,7 +16,7 @@ export const AproveVendorBtn = ({user}) => {
         id: doc.id,
         ...doc.data(),
       }));
-      setVendors(filterData.sort((a, b) => a.estatus.localeCompare(b.estatus)));
+      setVendors(filterData.sort((a, b) => a.email.localeCompare(b.email)));
     };
 
     handleAprove();
@@ -30,7 +30,7 @@ export const AproveVendorBtn = ({user}) => {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)} type="button" className={"btn btn-success"}>
+      <button onClick={() => setIsOpen(true)} type="button" className={"btn btn-success mt-2"}>
         Aprovar Nuevos Vendedores
       </button>
       <AproveVendors isOpen={isOpen} onClose={onClose} vendors={vendors} setVendors={setVendors} user={user}/>

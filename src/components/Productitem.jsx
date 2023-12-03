@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { collectionAssignation, onInsert } from '../CRUD/app';
 import { auth } from "../CRUD/firebase_conection";
 
-export const Productitem = ({ product, isCatalog }) => {
+export const Productitem = ({ product, isCatalog, isVendor }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = () => {
@@ -56,7 +56,7 @@ export const Productitem = ({ product, isCatalog }) => {
       <div className='descripcion m-1'>
         <h5>{product.name}</h5>
         <p className='m-0'><strong>${product.price}</strong></p>
-        <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
+        <IconButton disabled={isVendor ? true : false} color="primary" aria-label="add to shopping cart" onClick={addToCart}>
           <AddShoppingCartIcon />
           <div className='' style={{ fontSize: "20px" }}>Comprar</div>
         </IconButton>
