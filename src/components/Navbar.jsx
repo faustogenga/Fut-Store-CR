@@ -1,7 +1,6 @@
 import { Tooltip } from 'react-tooltip'
 
-export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
-
+export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
 
   return (
     <div>
@@ -31,7 +30,7 @@ export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
               <a className="nav-link" href="/#footer">Contáctanos</a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="/productscatalog">Catálogo de Productos</a>
+              <a className="nav-link" href="/productscatalog">Catálogo de Productos</a>
             </li>
             {isVendor ? (
               <li className="nav-item bg-warning p-0 size=10">
@@ -50,14 +49,14 @@ export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
             )}
           </ul>
           <div className="d-flex">
-          <a className="nav-link mx-3" href="/orders"
-                     onMouseOver={(e) => (e.target.style.color = '#3498DB')}
-                     onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
-                  >
-                    Pedidos
-                  </a>
             {loggedIn ? (
               <>
+                <a className="nav-link mx-3" href="/orders"
+                  onMouseOver={(e) => (e.target.style.color = '#3498DB')}
+                  onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
+                >
+                  Pedidos
+                </a>
                 <i className="bi bi-person-circle mx-2 text-info"></i>
 
                 <i className='text-white' id="my-anchor-element">
@@ -66,7 +65,7 @@ export const Navbar = ({loggedIn, user, logOut, isVendor }) => {
                 <Tooltip anchorSelect="#my-anchor-element" place='bottom'>
                   <div>
                     email : {user.email}
-                    <br/>
+                    <br />
                     Fecha de creacion : {user.metadata.creationTime.substring(5, 16)}
                   </div>
                 </Tooltip>

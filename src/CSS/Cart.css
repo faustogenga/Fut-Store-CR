@@ -7,15 +7,11 @@
 
 .container-Div {
     text-align:'center';
-     font-weight:'bold';
     font-size:'2rem';
     padding-bottom:'5px';
-    background-color:rgba(13,96,76,0.6);
-    border: 10px solid rgba(13,96,76,0.6);
+    background-color:white;
 }
 
 .titleCart {
-    color: white;
-    font-weight: bold;
-    font-family: 'Times New Roman', Times, serif;
+    color: black;
 }
