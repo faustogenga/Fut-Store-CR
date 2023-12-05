@@ -8,7 +8,7 @@ import { auth } from "../CRUD/firebase_conection";
 export const Productitem = ({ product }) => {
 
   const [cart, setCart] = useState([]);
-  
+
   const addToCart = () => {
     setCart([...cart, product.data]);
     addToFirebaseCart(product);
@@ -51,7 +51,8 @@ export const Productitem = ({ product }) => {
         <h5>{product.name}</h5>
           <p className='m-0'><strong>${product.price}</strong></p>
           <IconButton color="primary" aria-label="add to shopping cart" onClick={addToCart}>
-            <AddShoppingCartIcon />
+            <AddShoppingCartIcon /> 
+            <div className='' style={{fontSize:"20px"}}>Comprar</div>
           </IconButton>
       </div>
     </div>

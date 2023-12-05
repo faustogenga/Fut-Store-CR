@@ -16,7 +16,7 @@ export const Home = ({user, loggedIn, logOut, isVendor}) => {
         />
         <Main/>
         <Products/>
-        <Banner/>
+        <Banner isVendor = {isVendor}/>
         <Footer/>
     </div>
   )
