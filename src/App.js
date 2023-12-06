@@ -78,7 +78,7 @@ function App() {
             <Route path='/Checkout' element={<CheckoutPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
             <Route path='/orders' element={<OrdersPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
             <Route path='/productscatalog' element={<ProductsCatalog user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} isCatalog={isCatalog} setIsCatalog={setIsCatalog}/>}/>
-            <Route path="/ViewProductItem" element={<ViewProductItem />} />          
+            <Route path="/ViewProductItem" element={<ViewProductItem user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} isCatalog={isCatalog} setIsCatalog={setIsCatalog}/>} />          
           </Routes>
         </BrowserRouter>
       </div>

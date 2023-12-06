@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import '../CSS/Checkout.css';
-import { collectionAssignation, onClearCart, onFindbyEmail, onInsertOrder } from '../CRUD/app';
+import { collectionAssignation, onClearCart, onFindbyEmail, onInsertOrder, onUpdate } from '../CRUD/app';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
+import {cart} from './Cart'
+
 
 export const Checkout = ({ user }) => {
     const navigate = useNavigate();
 
-    const [cart, setCart] = useState([]);
-
     //shipping//
     const [shippingCountry, setshippingCountry] = useState('Costa Rica');
-    const [shippingProvience, setshippingProvience] = useState('');
+    const [shippingEstate, setshippingEstate] = useState('San Jose');
     const [shippingTown, setshippingTown] = useState('');
     const [shippingDireccion, setshippingDireccion] = useState('');
 
@@ -23,38 +23,10 @@ export const Checkout = ({ user }) => {
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
 
-    useEffect(() => {
-        if (user && user.email) {
-            console.log(user.email);
-            collectionAssignation('CustomerCart');
-            fetchCartData();
-        }
-    }, [user]);
-
-    const fetchCartData = async () => {
-        try {
-            const result = await onFindbyEmail(user.email);
-            if (result) {
-                const productsData = result.map((doc) => doc.data());
-                setCart(productsData);
-            } else {
-                console.log("Error")
-            }
-
-        } catch (error) {
-            Swal.fire({
-                title: "Error al mostrar los productos en tu carrito.",
-                text: error.message,
-                icon: "error"
-            });
-        }
-    };
-
     const fetchTotal = () => {
         let total = 0;
-
         cart.forEach((item) => {
-            total += item.price * item.quantity;
+            total += item.price;
         });
 
         return total;
@@ -104,6 +76,10 @@ export const Checkout = ({ user }) => {
         setPaymentMethod(event.target.value);
     };
 
+    const handleProvienceChange = (event) => {
+        setshippingEstate(event.target.value);
+    };
+
     const addToOrder = async (event) => {
         event.preventDefault();
         if (true) {
@@ -112,7 +88,7 @@ export const Checkout = ({ user }) => {
                 orderId: orderId,
                 userEmail: user.email,
                 shippingCountry: shippingCountry,
-                shippingProvience : shippingProvience,
+                shippingEstate : shippingEstate,
                 shippingTown : shippingTown,
                 shippingDireccion : shippingDireccion,
                 paymentMethod: paymentMethod,
@@ -120,20 +96,37 @@ export const Checkout = ({ user }) => {
                 name: cartItem.name,
                 price: cartItem.price,
                 quantity: cartItem.quantity,
+                stock : cartItem.stock,
                 product_img: cartItem.image,
                 orderDate: currentDate,
                 orderTime: currentTime,
             }));
 
             try {
+                console.log(orderItems);
                 await Promise.all(orderItems.map(onInsertOrder));
+                await Promise.all(
+                    orderItems.map(async (orderItem) => {
+                        const productId = orderItem.product_id;
+                        const productStock = parseInt(orderItem.stock);
+                        const orderedQuantity = parseInt(orderItem.quantity);
+        
+                        if (productStock >= orderedQuantity) {
+                            // Calculate the new stock after placing the order
+                            const newStock = productStock - orderedQuantity;
+                            // Update the product in the database
+                            collectionAssignation("Products");
+                            await onUpdate(productId, { stock: newStock.toString() });
+                        } else {
+                            console.error(`Not enough stock for product with ID ${productId}`);
+                        }
+                    }));
                 await onClearCart('CustomerCart', user.email);
                 Swal.fire({
                     title: '¡Compra Realizada!',
                     text: 'Tu orden se ha completado con éxito',
                     icon: 'success',
                 });
-                setCart([]);
 
             } catch (error) {
                 Swal.fire({
@@ -178,9 +171,9 @@ export const Checkout = ({ user }) => {
                         <div className="form-group m-2">
                             <label>Provincia</label>
                             <select
-                                name="shippingProvience"
-                                value={shippingProvience}
-                                onChange={({ target }) => setshippingProvience(target.value)}
+                                name="shippingEstate"
+                                value={shippingEstate}
+                                onChange={handleProvienceChange}
                                 required
                                 className="form-control"
                             >
@@ -261,7 +254,7 @@ export const Checkout = ({ user }) => {
                     <label>Productos :</label>
                     <div>
                         {cart.map((product) => {
-                            return <label> - {product.price} : {product.name} </label>
+                            return <label>&#10090;{product.quantity}&#10091; - ${product.price} : {product.name} </label>
                         })}
                     </div>
                     <hr/>
@@ -269,7 +262,7 @@ export const Checkout = ({ user }) => {
                         <label htmlFor="Impuestos">Impuestos: ...........................................</label>
                     </div>
                     <div> 
-                        <label htmlFor="Total">Total a pagar:............................ ${fetchTotal()}</label>
+                        <label htmlFor="Total">Total a pagar: ${fetchTotal()}</label>
                     </div>
                 </div>
             </div>

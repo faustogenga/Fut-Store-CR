@@ -6,6 +6,8 @@ import { collectionAssignation, onFindbyEmail, onDeleteFromCart, onClearCart } f
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
+export let cart;
+
 export const Cart = ({ user }) => {
 
     const navigate = useNavigate();
@@ -73,20 +75,9 @@ export const Cart = ({ user }) => {
         if (cartTotal < 0) {
             cartTotal = 0;
         }
-        console.log(updatedQuantity);
         return cartTotal;
     };
 
-    /*    ***MÉTODO EN DESARROLLO***  
-    const getCartQuantity = () => {
-        let total = 0;
-        products.forEach((item) => {
-            total += item.price * item.quantity;
-        });
-        cartTotal = total;
-        return cartTotal;
-    }
-    */
 
     const removeItem = async (index, product_id) => {
         try {
@@ -122,27 +113,12 @@ export const Cart = ({ user }) => {
         }
     };
 
-    /*          ***MÉTODO EN DESARROLLO*** 
-    const updateCartInfo = async () => {
-        try {
-            const updatedQuantity = [...products];
-        } catch(error) {
-            Swal.fire({
-                title: "Error al actualizar la información del carrito.",
-                text: error.message,
-                icon: "error"
-            });
-        }
-    }
-    
-    */
-    /*    ***MÉTODO EN DESARROLLO***  */
-
     const proceedToPayment = async () => {
         try {
-            const updatedQuantity = [...products];
-            console.log(updatedQuantity);
-            if(updatedQuantity.length > 0) {
+            console.log(products);
+            if(products.length > 0) {
+                cart = [...products];
+                console.log(cart);
                 navigate('/Checkout');
             } else {
                 Swal.fire({
