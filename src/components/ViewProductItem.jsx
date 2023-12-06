@@ -70,8 +70,10 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
       })
     }
   }
-
-
+  console.log(productInformation);
+  if(!productInformation) {
+    return navigate("/")
+  } else 
   return (
     <>
       <Navbar
@@ -100,7 +102,7 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
           <div style={{ marginTop: "30px" }}>
             <p style={{ marginTop: "30px", fontSize: '33px' }}><strong>{productInformation.name}</strong></p>
             <p style={{ marginTop: "30px" }}>Descripción: {productInformation.description}</p>
-            <p style={{ marginTop: "30px" }}>Precio ₡{productInformation.price}</p>
+            <p style={{ marginTop: "30px" }}>Precio ${productInformation.price}</p>
             <p style={{ marginTop: "30px" }}>Talla {productInformation.size}</p>
             <p style={{ marginTop: "30px" }}>Correo registrado del vendedor: {productInformation.vendor}</p>
             <p style={{ marginTop: "30px" }}>Estado: {Availability}</p>

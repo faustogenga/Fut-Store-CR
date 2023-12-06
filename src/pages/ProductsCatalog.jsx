@@ -101,7 +101,7 @@ export const ProductsCatalog = ({ user, loggedIn, logOut, isCatalog, setIsCatalo
                     <div>
                         <Catalognavigation handleSearchInput={handleSearchInput} />
                     </div>
-                    <Catalog user={user} products={filteredProducts} isCatalog={isCatalog} isVendor={isVendor} />
+                    <Catalog loggedIn={loggedIn} user={user} products={filteredProducts} isCatalog={isCatalog} isVendor={isVendor} />
                 </div>
             </div>
             <Footer />
