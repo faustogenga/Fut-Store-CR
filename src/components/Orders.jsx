@@ -98,7 +98,7 @@ export const Orders = ({ user }) => {
         <div className='mainOrders'>
             <Container className="py-4">
                 <div className='container-div'>
-                    <div>
+                    <div className='text-center'>
                         <h1 className='titleOrders'>Mis Pedidos</h1>
                     </div>
                 </div>
