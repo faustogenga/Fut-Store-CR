@@ -6,19 +6,17 @@ import { collectionAssignation, onFindOrderById, onFindbyEmail } from '../CRUD/a
 
 export const Orders = ({ user }) => {
     const [orders, setOrders] = useState([]);
-    const [userEmail, setUserEmail] = useState('')
 
     useEffect(() => {
-        if (!user) {
-            return;
-        } else {
-            setUserEmail(user.email);
+        if (user) {
+            collectionAssignation('OrderPlaced');
+            fetchOrders();
         }
     }, [user]);
 
     const fetchOrders = async () => {
         try {
-            const result = await onFindbyEmail(userEmail);
+            const result = await onFindbyEmail(user.email);
             if (result) {
                 const orderData = result.map((doc) => doc.data());
                 setOrders(orderData);
@@ -33,11 +31,6 @@ export const Orders = ({ user }) => {
             });
         }
     }
-    useEffect(() => {
-        collectionAssignation('OrderPlaced');
-        fetchOrders();
-    }, [userEmail]);
-
     const showOrderDetails = async (orderId) => {
         try {
             collectionAssignation('OrderPlaced');
@@ -67,8 +60,14 @@ export const Orders = ({ user }) => {
                                 <div>${orderDetails[0].orderId}</div> <br />
                                 <div style="font-weight: bold;">Pedido realizado el:</div>
                                 <div>${orderDetails[0].orderDate} ${orderDetails[0].orderTime}</div> <br />
-                                <div style="font-weight: bold;">Dirección de entrega:</div> 
-                                <div>${orderDetails[0].shippingAddress}</div> <br />
+                                <div style="font-weight: bold;">Pais:</div> 
+                                <div>${orderDetails[0].shippingCountry}</div> <br />
+                                <div style="font-weight: bold;">Provincia:</div> 
+                                <div>${orderDetails[0].shippingProvience}</div> <br />
+                                <div style="font-weight: bold;">Ciudad:</div> 
+                                <div>${orderDetails[0].shippingTown}</div> <br />
+                                <div style="font-weight: bold;">Direccion:</div> 
+                                <div>${orderDetails[0].shippingDireccion}</div> <br />
                                 <div style="font-weight: bold;">Método de pago:</div>
                                 <div>${orderDetails[0].paymentMethod}</div> <br />
                             </div>    
@@ -118,14 +117,14 @@ export const Orders = ({ user }) => {
                         <tbody>
                             {orders.map((item, index) => {
                                 return (
-                                    <tr key={index} style={{ fontSize: '18px', fontFamily: 'Times New Roman' }}>
+                                    <tr key={index} style={{ fontSize: '18px'}}>
                                         <td className='text-center'>
                                             <div style={{
                                                 background: 'white', height: '8rem', overflow: 'hidden', display: 'flex',
                                                 justifyContent: 'center', alignItems: 'center'
                                             }}>
                                                 <div style={{ padding: '.5rem' }}>
-                                                    <img src={item.product_img} style={{ width: '10rem' }} alt={item.product_img} />
+                                                    <img src={item.product_img} style={{ width: '7rem' }} alt={item.product_img} />
                                                 </div>
                                             </div>
                                         </td>
@@ -139,7 +138,7 @@ export const Orders = ({ user }) => {
                                                 {item.name}
                                             </h6>
                                         </td>
-                                        <td className='text-center'>₡ {item.price}</td>
+                                        <td className='text-center'>$ {item.price}</td>
                                         <td className='text-center'> {item.orderDate} {item.orderTime}</td>
                                         <td className='text-center'>
                                             <Button className="btn btn-info" onClick={() => showOrderDetails(item.orderId)}>Ver más detalles</Button>

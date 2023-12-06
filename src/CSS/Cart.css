@@ -1,8 +1,7 @@
 .mainCart {
     background-image: url('../images/cart_cover.png');
-    background-size: auto;
+    background-size: cover;
     background-position: center;
-    background-attachment: fixed;
 }
 
 .container-Div {
@@ -12,6 +11,3 @@
     background-color:white;
 }
 
-.titleCart {
-    color: black;
-}

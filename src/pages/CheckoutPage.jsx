@@ -3,18 +3,18 @@ import { Navbar } from '../components/Navbar'
 import { Footer } from '../components/Footer'
 import { Checkout } from '../components/Checkout'
 
-export const CheckoutPage = ({user, loggedIn, logOut, isVendor}) => {
+export const CheckoutPage = ({ user, loggedIn, logOut, isVendor }) => {
 
     return (
         <>
-        <Navbar 
-            loggedIn = {loggedIn}
-            user = {user}
-            logOut = {logOut}
-            isVendor = {isVendor}
+            <Navbar
+                loggedIn={loggedIn}
+                user={user}
+                logOut={logOut}
+                isVendor={isVendor}
             />
-        <Checkout/>
-        <Footer/>
+            <Checkout user={user}/>
+            <Footer />
         </>
     )
 }

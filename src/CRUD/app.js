@@ -114,7 +114,6 @@ export const onClearCart = async (cartCollectionName, email) => {
 
 /* 12. INSERTAR ORDEN  */
 export const onInsertOrder = async (obj) => {
-    console.log(obj)
     await addDoc(collection(db, 'OrderPlaced'), obj);
     console.log("Query Insert Order");
 }

@@ -3,9 +3,13 @@ import '../CSS/Cart.css';
 import { Button, Container, Col, Row, Table } from 'react-bootstrap';
 import { BsCartCheck, BsCartX } from 'react-icons/bs';
 import { collectionAssignation, onFindbyEmail, onDeleteFromCart, onClearCart } from '../CRUD/app';
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 export const Cart = ({ user }) => {
+
+    const navigate = useNavigate();
+
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -18,7 +22,6 @@ export const Cart = ({ user }) => {
 
     const fetchProducts = async () => {
         try {
-            console.log("corre");
             collectionAssignation('CustomerCart');
             const result = await onFindbyEmail(user.email);
             if (result) {
@@ -139,6 +142,15 @@ export const Cart = ({ user }) => {
         try {
             const updatedQuantity = [...products];
             console.log(updatedQuantity);
+            if(updatedQuantity.length > 0) {
+                navigate('/Checkout');
+            } else {
+                Swal.fire({
+                    title: "Carrito Vacio",
+                    text: "Porfavor agrega productos al carrito",
+                    icon: "error"
+                })
+            }
         } catch (error) {
             Swal.fire({
                 title: "Error al proceder al pago.",
@@ -151,13 +163,12 @@ export const Cart = ({ user }) => {
     return (
         <div className='mainCart'>
             <Container className="py-4">
-                <div className='container-Div'>
-                    <h4 className='titleCart justify-content-center d-flex'>Mi Carrito</h4>
+                <div className='col-12 d-flex justify-content-center'>
+                    <h4 className='col-2 text-center bg-white rounded-2 p-1'>Mi Carrito 🛒</h4>
                 </div>
-                <Row className="justify-content-center">
                     <Table responsive="sm" className='table align-middle opacity-80'>
                         <thead>
-                            <tr style={{ fontSize: '22px'}}>
+                            <tr style={{ fontSize: '20px' }}>
                                 <th className='text-center'>Imagen</th>
                                 <th className='text-center'>Nombre del Producto</th>
                                 <th className='text-center'>Precio</th>
@@ -171,11 +182,11 @@ export const Cart = ({ user }) => {
                                     <tr key={index} >
                                         <td>
                                             <div style={{
-                                                background: 'white', height: '10rem', overflow: 'hidden', display: 'flex',
+                                                background: 'white', height: '7rem', overflow: 'hidden', display: 'flex',
                                                 justifyContent: 'center', alignItems: 'center'
                                             }}>
                                                 <div style={{ padding: '.5rem' }}>
-                                                    <img src={item.image} style={{ width: '10rem' }} alt={item.name} />
+                                                    <img src={item.image} style={{ width: '7rem' }} alt={item.name} />
                                                 </div>
                                             </div>
                                         </td>
@@ -187,8 +198,8 @@ export const Cart = ({ user }) => {
                                         <td className='text-center' style={{ fontSize: '18px' }}>$ {item.price}</td>
                                         <td className='text-center' style={{ fontSize: '18px' }}>{item.quantity}</td>
                                         <td className='text-center'>
-                                            <Button className="ms-2" onClick={() => updateCartItemQuantity(index, false)}>-</Button>
-                                            <Button className="ms-2" onClick={() => updateCartItemQuantity(index, true)}>+</Button>
+                                            <Button className="btn-info ms-2" onClick={() => updateCartItemQuantity(index, false)}>-</Button>
+                                            <Button className="btn-success ms-2" onClick={() => updateCartItemQuantity(index, true)}>+</Button>
                                             <Button variant="danger" className="ms-2" onClick={() => removeItem(index, item.product_id)}>Eliminar Producto</Button>
                                         </td>
                                     </tr>
@@ -203,13 +214,12 @@ export const Cart = ({ user }) => {
                     >
                         <Col className="py-2">
                             <div style={{ width: '200px' }}>
-                                <h4 style={{ fontWeight: 'bold' }}>Total: $ {cartTotal}</h4>
+                                <h4 className='bg-white p-1 rounded-2 text-black'>Total: $ {cartTotal}</h4>
                             </div>
                         </Col>
                         <Col className="p-0" md={4}>
                             <Button variant="warning"
                                 className="m-2"
-                                style={{ fontFamily: 'Times New Roman' }}
                                 onClick={clearCart}
                             >
                                 <BsCartX size="1.7rem" />
@@ -217,8 +227,6 @@ export const Cart = ({ user }) => {
                             </Button>
                             <Button variant="success"
                                 className="m-2"
-                                style={{ fontFamily: 'Times New Roman' }}
-                                href='/Checkout'
                                 onClick={proceedToPayment}
                             >
                                 <BsCartCheck size="1.7rem" />
@@ -226,7 +234,6 @@ export const Cart = ({ user }) => {
                             </Button>
                         </Col>
                     </Row>
-                </Row>
             </Container>
         </div>
     )
