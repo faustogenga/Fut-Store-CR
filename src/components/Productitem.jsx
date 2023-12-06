@@ -2,41 +2,24 @@ import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
-import Swal from 'sweetalert2';
-import { collectionAssignation, onInsert } from '../CRUD/app';
 //import { auth } from "../CRUD/firebase_conection";
 
 export let productInformation;
-export let userInformation;
-export let productAvailability;
 
-export const Productitem = ({user, product, isCatalog, isVendor }) => {
+export const Productitem = ({product, isCatalog, isVendor }) => {
 
   const navigate = useNavigate();
 
-  const availabilityCheck = ()=> {
-    if (product.stock > 0){
-        productAvailability = "Disponible";
-    }
-    else{
-      productAvailability = "No Disponible";
-    }
-}
-  
   const onButtonClickViewProduct = () => {
     productInformation = product;
-    userInformation = user;
-    availabilityCheck();
-    navigate('./ViewProductItem');
+    navigate('/ViewProductItem');
   }
 
   return (
     <div className='product'>
       <img alt='Produt_Image'
         src={product.img}
-        style={isCatalog
-          ? { height: "280px", width: "280px", position: "relative"}
-          : { height:"300px", width: "250px", position: "relative" }}
+        style={{ height: "280px", width: "270px", position: "relative"}}
         >
       </img>
       <div className='descripcion m-1'>

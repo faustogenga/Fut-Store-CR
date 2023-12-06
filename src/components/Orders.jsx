@@ -8,7 +8,7 @@ export const Orders = ({ user }) => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        if (user) {
+        if (user && user.email) {
             collectionAssignation('OrderPlaced');
             fetchOrders();
         }
@@ -49,8 +49,9 @@ export const Orders = ({ user }) => {
                                     <div>
                                         <div style="font-weight: bold;">Nombre del producto:</div>
                                         <div>${product.name}</div>
-                                        <div style="font-weight: bold;">Precio:</div>
-                                        <div>₡ ${product.price}</div>
+                                        <div style="font-weight: bold;">Cantidad: ${product.quantity}</div>
+                                        <div style="font-weight: bold;">Precio: $${product.price}</div>
+                                        
                                     </div>
                                 </div> <br />
                             `).join('')}
@@ -63,7 +64,7 @@ export const Orders = ({ user }) => {
                                 <div style="font-weight: bold;">Pais:</div> 
                                 <div>${orderDetails[0].shippingCountry}</div> <br />
                                 <div style="font-weight: bold;">Provincia:</div> 
-                                <div>${orderDetails[0].shippingProvience}</div> <br />
+                                <div>${orderDetails[0].shippingEstate}</div> <br />
                                 <div style="font-weight: bold;">Ciudad:</div> 
                                 <div>${orderDetails[0].shippingTown}</div> <br />
                                 <div style="font-weight: bold;">Direccion:</div> 
@@ -98,7 +99,7 @@ export const Orders = ({ user }) => {
         <div className='mainOrders'>
             <Container className="py-4">
                 <div className='container-div'>
-                    <div>
+                    <div className='text-center'>
                         <h1 className='titleOrders'>Mis Pedidos</h1>
                     </div>
                 </div>
@@ -108,6 +109,7 @@ export const Orders = ({ user }) => {
                             <tr style={{ fontSize: '22px', fontFamily: 'Times New Roman' }}>
                                 <th className='text-center'>Imagen</th>
                                 <th className='text-center'>Número de Pedido</th>
+                                <th className='text-center'>Cantidad</th>
                                 <th className='text-center'>Nombre del Producto</th>
                                 <th className='text-center'>Precio</th>
                                 <th className='text-center'>Fecha y Hora del Pedido</th>
@@ -129,8 +131,13 @@ export const Orders = ({ user }) => {
                                             </div>
                                         </td>
                                         <td className='text-center'>
-                                            <h6 style={{ whiteSpace: 'nowrap', width: '15rem', overflow: 'hidden', textOverFlow: 'ellipsis', fontSize: '18px' }}>
+                                            <h6 style={{ whiteSpace: 'nowrap', width: '10rem', overflow: 'hidden', textOverFlow: 'ellipsis', fontSize: '18px' }}>
                                                 {item.orderId}
+                                            </h6>
+                                        </td>
+                                        <td className='text-center'>
+                                            <h6 style={{ whiteSpace: 'nowrap', width: '10rem', overflow: 'hidden', textOverFlow: 'ellipsis', fontSize: '18px' }}>
+                                                {item.quantity}
                                             </h6>
                                         </td>
                                         <td>
