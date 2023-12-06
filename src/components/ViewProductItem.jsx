@@ -70,8 +70,10 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
       })
     }
   }
-
-
+  console.log(productInformation);
+  if(!productInformation) {
+    return navigate("/")
+  } else 
   return (
     <>
       <Navbar

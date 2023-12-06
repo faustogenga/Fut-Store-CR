@@ -25,7 +25,8 @@ export const Productitem = ({product, isCatalog, isVendor }) => {
       <div className='descripcion m-1'>
         <h5>{product.name}</h5>
         <p className='m-0'><strong>${product.price}</strong></p>
-        <IconButton disabled={isVendor ? true : false} color="primary" aria-label="add to shopping cart" onClick={onButtonClickViewProduct}>
+        <IconButton disabled={isVendor ? true : false} color="primary" aria-label="add to shopping cart" 
+        onClick={onButtonClickViewProduct}>
           <AddShoppingCartIcon />
           <div className='' style={{ fontSize: "20px" }}>Comprar</div>
         </IconButton>
