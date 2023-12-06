@@ -8,7 +8,7 @@ export const Catalognavigation = ({handleSearchInput}) => {
                 <div className="nav-container">
                     <SearchIcon />
                     <input
-                        className="search-input m-2"
+                        className="search-input m-2 p-2"
                         type="text"
                         onChange={handleSearchInput}
                         placeholder="Buscar por nombre"
