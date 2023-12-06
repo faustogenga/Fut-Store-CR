@@ -1,6 +1,41 @@
 import { Tooltip } from 'react-tooltip'
+import { collectionAssignation, onFindbyEmail } from '../CRUD/app';
+import Swal from 'sweetalert2';
+import { useEffect, useState } from 'react';
 
 export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
+
+  const [number, setNumber] = useState(0);
+
+  useEffect(() => {
+    if (user && user.email) {
+      console.log(user.email);
+      getCartNumber();
+    }
+  }, [user]);
+
+
+  const getCartNumber = async () => {
+    try {
+      collectionAssignation('CustomerCart');
+      const result = await onFindbyEmail(user.email);
+      if (result) {
+        let total = 0;
+        result.map((doc) =>
+          total += doc.data().quantity
+        );
+        setNumber(total);
+      } else {
+        console.log("Error")
+      }
+    } catch (error) {
+      Swal.fire({
+        title: "Error al mostrar los productos en tu carrito.",
+        text: error.message,
+        icon: "error"
+      });
+    }
+  };
 
   return (
     <div>
@@ -39,7 +74,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
             ) : (
               loggedIn ? (
                 <li className="nav-item">
-                  <a className="nav-link" href="/cart">Carrito 🛒</a>
+                  <a className="nav-link" href="/cart">Carrito 🛒 {number}</a>
                 </li>
               ) : (
                 <li className="nav-item">
