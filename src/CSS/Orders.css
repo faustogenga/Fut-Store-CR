@@ -1,0 +1,21 @@
+.mainOrders {
+    background-image: url('../images/orders_cover.jpeg');
+    background-size: auto;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container-div {
+    text-align:'center';
+     font-weight:'bold';
+    font-size:'2rem';
+    padding-bottom:'5px'; 
+    background-color:rgb(24,45,83, 0.5);
+    border: 10px solid rgb(24,45,83, 0.5);
+}
+
+.titleOrders {
+    color: white;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}

@@ -7,9 +7,10 @@ import TextField from '@mui/material/TextField';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { useAuth } from "../hooks/useAuth";
 import { auth } from "../CRUD/firebase_conection";
+import { collectionAssignation, onFindByVendor } from "../CRUD/app";
 
 
-export const Login = ({setUser, setLoggedIn}) => {
+export const Login = ({ setUser, setLoggedIn }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errormessage, setErrorMessage] = useState("none");
@@ -31,11 +32,11 @@ export const Login = ({setUser, setLoggedIn}) => {
             imageWidth: 300,
             imageHeight: 250,
             imageAlt: "Custom image"
-          }).then(() => {
+        }).then(() => {
             console.log(auth.currentUser);
             setLoggedIn(true);
             navigate('/');
-          })
+        })
     }
 
     const RegisterNavigate = () => {
@@ -66,19 +67,38 @@ export const Login = ({setUser, setLoggedIn}) => {
         } else if (password.length < 7) {
             setErrorMessage("Contraseña muy corta");
             return false;
-        } else {
+        }
+        else {
             return true;
         }
     }
 
+    const VendorStatus = async () => {
+        collectionAssignation('Vendors');
+        const vendor = await onFindByVendor(email);
+        if (!vendor.empty) {
+            console.log(vendor.docs[0].data().estatus);
+            if (vendor.docs[0].data().estatus === "false") {
+                return true
+            } else return false
+        } else return false
+    }
+
     const onButtonClickLogin = () => {
-        if(InputValidation()) {
-            authfunctions.signIn(email,password)
-            .then(()=> {
-                SignInSucess();
-            })
-            .catch(() => {
-                onError();
+        if (InputValidation()) {
+            VendorStatus().then((status) => {
+                if (status) {
+                    setErrorMessage("Vendedor aun no fue aprovado");
+                    return false
+                } else {
+                    authfunctions.signIn(email, password)
+                        .then(() => {
+                            SignInSucess();
+                        })
+                        .catch(() => {
+                            onError();
+                        })
+                }
             })
         }
     };
@@ -129,13 +149,13 @@ export const Login = ({setUser, setLoggedIn}) => {
                     className="btn btn-info col-5 m-3 mx-auto"
                     type="button"
                     onClick={onButtonClickLogin}
-                    value={"Inicia Sesion"}
+                    value={"Inicia Sesión"}
                 />
                 <input
                     className="btn btn-info col-5 m-3 mx-auto"
                     type="button"
                     onClick={RegisterNavigate}
-                    value={"Registrarte"}
+                    value={"Crea tu cuenta"}
                 />
             </div>
         </form>

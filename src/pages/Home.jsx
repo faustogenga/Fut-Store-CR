@@ -3,9 +3,11 @@ import { Main } from '../components/Main'
 import { Products } from '../components/Products'
 import { Banner } from '../components/Banner'
 import { Footer } from '../components/Footer'
+import { useEffect } from 'react'
 
-export const Home = ({user, loggedIn, logOut, isVendor}) => {
-
+export const Home = ({user, loggedIn, logOut, isVendor, isCatalog, setIsCatalog}) => {
+  
+  useEffect(() => {  setIsCatalog(false); }, []);
 
   return (
     <div style={{ position: 'relative' }} >
@@ -16,8 +18,8 @@ export const Home = ({user, loggedIn, logOut, isVendor}) => {
         isVendor = {isVendor}
         />
         <Main/>
-        <Products/>
-        <Banner/>
+        <Products isCatalog = {isCatalog} isVendor = {isVendor}  user={user}/>
+        <Banner isVendor = {isVendor}/>
         <Footer/>
     </div>
   )

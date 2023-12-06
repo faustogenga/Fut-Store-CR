@@ -84,39 +84,13 @@ h1, h2, h3, h4, h5, button{
 
 
   .product {
-    height: 100%;
     font-family: 'Poppins', sans-serif;
     color: #000;
   }
 
-  .product img {
-    width: 90%;
-    height: 75%;
-    position:relative;
-  }
 
   .product .descripcion {
     position: relative;
   }
-  
-  /*SMALLER SCREEN*/
-
-  /** 
- @media (max-width: 768px) {
-    .main-box {
-        height: auto; 
-        margin-bottom: 20px; 
-    }
-
-    .main-left{
-        width: 100%; 
-    }
-
-    .main-right {
-        background-size: contain;
-        background-position: center; 
-    }
-  }
-  */
   
   

@@ -1,0 +1,23 @@
+import React from 'react'
+import { Productitem } from './Productitem'
+
+export const Catalog = ({user, products, isCatalog, isVendor}) => {
+
+    return (
+            <div className="">
+            <h4 className='m-3'>Catálogo de Productos</h4>
+                <div className="row" style={{height:"1%"}}>
+                    {products.map((product, index) => {
+                        return (
+                            <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
+                                <Productitem user={user} product={product} isCatalog={isCatalog} isVendor={isVendor}/>
+                                <br/><br/><br/>
+                            </div>
+                        )
+                    })
+                    }
+                </div>
+            </div>
+    )
+}
+export default Catalog;

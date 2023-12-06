@@ -3,7 +3,7 @@ import { RiCloseLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 
-export const AddProducts = ({ isOpen, onClose, handleAdd, user}) => {
+export const AddProducts = ({ isOpen, onClose, handleAdd, user }) => {
 
     const initialValues = {
         category: '',
@@ -25,8 +25,8 @@ export const AddProducts = ({ isOpen, onClose, handleAdd, user}) => {
             setValues({ ...values, vendor: user.email });
         }
 
-    },[user]);
-    
+    }, [user]);
+
 
     const onChangeValues = ({ target }) => {
         const { name, value } = target;
@@ -59,7 +59,7 @@ export const AddProducts = ({ isOpen, onClose, handleAdd, user}) => {
             if (result.isConfirmed) {
                 handleAdd(values);
                 onClose();
-                setValues({...initialValues, vendor: user.email });
+                setValues({ ...initialValues, vendor: user.email });
                 Swal.fire({
                     title: "Producto Agregado",
                     text: "Gracias por agregar tu producto",
@@ -89,7 +89,7 @@ export const AddProducts = ({ isOpen, onClose, handleAdd, user}) => {
                     <div className="text-start" >Imagen </div>
                     <input required="required" className='form-control ' type="text" name="img" value={values.img} onChange={onChangeValues} placeholder='Imagen' />
 
-                    <div className="text-start m-0">Descripcion </div>
+                    <div className="text-start m-0">Descripción </div>
                     <textarea className="form-control p-4" type="text" name="description" value={values.description} onChange={onChangeValues} placeholder='Descripcion' />
 
                     <div className="text-start m-0">Precio </div>
@@ -101,9 +101,17 @@ export const AddProducts = ({ isOpen, onClose, handleAdd, user}) => {
                     <div className="text-start m-0">Cantidad </div>
                     <input required="required" className='form-control  ' type="text" name="stock" value={values.stock} onChange={onChangeValues} placeholder='Cantidad' />
 
+                    {/* Condicion para ver si uno es ADMIN y poder editar el vendor del producto*/}
+                    {user.email === "admin@gmail.com" && (
+                        <>
+                            <div className="text-start m-0">Vendedor </div>
+                            <input required="required" className='form-control  ' type="text" name="vendor" value={values.vendor} onChange={onChangeValues} placeholder='Vendor' />
+                        </>
+                    )}
+
                     <div className="container-fluid text-center">
                         <button className="btn btn-info m-2" type="sumbit" onClick={addProduct}>Agregar</button>
-                        <button className="btn btn-danger m-2" onClick={() => { onClose(); setValues({...initialValues, vendor: user.email });}}>Cerrar</button>
+                        <button className="btn btn-danger m-2" onClick={() => { onClose(); setValues({ ...initialValues, vendor: user.email }); }}>Cerrar</button>
                     </div>
                 </form>
             </div>

@@ -1,0 +1,34 @@
+.MainCheckout{
+    background-image: url('../images/stadiumIage.jpg');
+    background-size: cover;
+}
+
+.containerCheckout, .checkoutSummary{
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc;
+    opacity: 93%;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 2%;
+    border-style: groove;
+}
+
+
+.checkout-form, .summaryCont{
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+input, select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}

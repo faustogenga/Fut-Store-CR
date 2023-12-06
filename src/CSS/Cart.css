@@ -1,0 +1,13 @@
+.mainCart {
+    background-image: url('../images/cart_cover.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.container-Div {
+    text-align:'center';
+    font-size:'2rem';
+    padding-bottom:'5px';
+    background-color:white;
+}
+

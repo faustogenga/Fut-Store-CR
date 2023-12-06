@@ -9,7 +9,7 @@ import { useAuth } from "../hooks/useAuth";
 import { auth } from "../CRUD/firebase_conection";
 
 
-export const Register = ({ setUser, setLoggedIn }) => {
+export const Register = ({setLoggedIn }) => {
     //variables para register
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');

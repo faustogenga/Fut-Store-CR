@@ -1,10 +1,22 @@
 .modalbox {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: azure;
-    padding: 4vh 7vw;
+    padding: 3vh 6vw;
+    border-radius: 10%;
+    z-index: 1000;
+    text-align: left;
+}
+
+.vendorBox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: azure;
+    padding: 3vh 5vw;
     border-radius: 10%;
     z-index: 1000;
     text-align: left;

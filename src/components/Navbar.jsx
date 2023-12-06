@@ -1,5 +1,4 @@
-import React from 'react';
-
+import { Tooltip } from 'react-tooltip'
 
 export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
 
@@ -28,24 +27,48 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
               <a className="nav-link" href="/#products">Productos</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/#footer">Contactanos</a>
+              <a className="nav-link" href="/#footer">Contáctanos</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/productscatalog">Catálogo de Productos</a>
             </li>
             {isVendor ? (
               <li className="nav-item bg-warning p-0 size=10">
-                <a className="nav-link" href="/AdminVendor">Tus Productos</a>
+                <a className="nav-link" href="/AdminVendor">Gestionar</a>
               </li>
             ) : (
-              <li className="nav-item">
-                <a className="nav-link" href="/NewVendor">Vende tus productos</a>
-              </li>
-            )
-            }
+              loggedIn ? (
+                <li className="nav-item">
+                  <a className="nav-link" href="/cart">Carrito 🛒</a>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <a className="nav-link" href="/NewVendor">Vende tus productos</a>
+                </li>
+              )
+            )}
           </ul>
           <div className="d-flex">
             {loggedIn ? (
               <>
+                <a className="nav-link mx-3" href="/orders"
+                  onMouseOver={(e) => (e.target.style.color = '#3498DB')}
+                  onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
+                >
+                  Pedidos
+                </a>
                 <i className="bi bi-person-circle mx-2 text-info"></i>
-                <i className='text-white'>Bienvenido  {user?.email}</i>
+
+                <i className='text-white' id="my-anchor-element">
+                  Bienvenido {user.email.split("@")[0]}
+                </i>
+                <Tooltip anchorSelect="#my-anchor-element" place='bottom'>
+                  <div>
+                    email : {user.email}
+                    <br />
+                    Fecha de creacion : {user.metadata.creationTime.substring(5, 16)}
+                  </div>
+                </Tooltip>
                 <a className="nav-link mx-3"
                   onMouseOver={(e) => (e.target.style.color = 'red')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
@@ -55,7 +78,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                   }}
                 >
                   <i className="bi bi-box-arrow-right mx-2 text-info"></i>
-                  Cerrar Session
+                  Cerrar Sesión
                 </a>
               </>
             ) : (
@@ -69,15 +92,14 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
                 >
                   <i className="bi bi-box-arrow-right mx-2 text-info"></i>
-                  Inicia Sesion
+                  Inicia Sesión
                 </a>
                 <i className="bi  bi-person-add mx-2 text-info"></i>
                 <a className="nav-link me-3 -2" href="/Register"
                   onMouseOver={(e) => (e.target.style.color = '#3498DB')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
-                >Registrate</a>
+                >Regístrate</a>
               </>
-
             )}
           </div>
         </div>
