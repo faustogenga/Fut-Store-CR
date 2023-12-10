@@ -59,6 +59,8 @@ export const Orders = ({ user }) => {
                             <h4 style="font-weight: bold;">Información general de tu pedido:</h4>
                                 <div style="font-weight: bold;">Número de pedido:</div> 
                                 <div>${orderDetails[0].orderId}</div> <br />
+                                <div style="font-weight: bold;">Vendedor:</div> 
+                                <div>${orderDetails[0].vendor}</div> <br />
                                 <div style="font-weight: bold;">Pedido realizado el:</div>
                                 <div>${orderDetails[0].orderDate} ${orderDetails[0].orderTime}</div> <br />
                                 <div style="font-weight: bold;">Pais:</div> 

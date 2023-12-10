@@ -35,9 +35,9 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
       name: productInformation.name,
       price: productInformation.price,
       quantity: 1,
+      vendor: productInformation.vendor,
       userEmail: user.email,
       stock: productInformation.stock,
-      product_id: productInformation.id
     };
 
     try {
@@ -81,7 +81,7 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
       })
     }
   }
-  
+
   if (!productInformation) {
     return navigate("/")
   } else

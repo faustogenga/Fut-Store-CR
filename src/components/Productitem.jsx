@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import Reac from 'react'
 import { useNavigate } from "react-router-dom";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
@@ -6,12 +6,13 @@ import Swal from 'sweetalert2';
 
 export let productInformation;
 
-export const Productitem = ({ loggedIn, product, isCatalog, isVendor }) => {
+export const Productitem = ({ loggedIn, product, isVendor }) => {
 
   const navigate = useNavigate();
 
   const onButtonClickViewProduct = () => {
     productInformation = product;
+    console.log(productInformation);
     navigate('/ViewProductItem');
   }
 

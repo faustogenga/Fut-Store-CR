@@ -9,7 +9,6 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
 
   useEffect(() => {
     if (user && user.email) {
-      console.log(user.email);
       getCartNumber();
     }
   }, [user]);

@@ -72,23 +72,13 @@ export const onFindbyEmail = async (email) => {
 };
 
 /* 10. ELIMINAR PRODUCTO DEL CARRITO */
-export const onDeleteFromCart = async (cartCollectionName, paramId, email) => {
-    const cartRef = collection(db, cartCollectionName);
+export const onDeleteFromCart = async (cartCollectionName, paramId) => {
     try {
-        const querySnapshot = await getDocs(query(cartRef, where('product_id', '==', paramId), where('userEmail', '==', email)));
-
-        if (querySnapshot.size > 0) {
-            const docToDelete = querySnapshot.docs[0];
-            await deleteDoc(docToDelete.ref);
-            console.log('Producto eliminado del carrito');
-        } else {
-            console.log('No se encontró el producto en el carrito del usuario');
-        }
+        await deleteDoc(doc(db, cartCollectionName, paramId));
+        console.log('Producto eliminado del carrito');
     } catch (error) {
-        console.error('Error al eliminar el producto del carrito:', error);
-        throw error;
+        console.error('Error al eliminar producto del carrito:', error);
     }
-    console.log("Query Delete From Cart");
 };
 
 /* 11. LIMPIAR CARRITO */
@@ -96,9 +86,9 @@ export const onClearCart = async (cartCollectionName, email) => {
     const cartRef = collection(db, cartCollectionName);
     try {
         const querySnapshot = await getDocs(query(cartRef, where('userEmail', '==', email)));
-
-        querySnapshot.forEach(async (doc) => {
-            await deleteDoc(doc.ref);
+        console.log(querySnapshot.docs);
+        querySnapshot.docs.map(async (product) => {
+            await deleteDoc(doc(db, cartCollectionName, product.id));
             console.log('Producto eliminado del carrito.');
         });
 
@@ -106,8 +96,6 @@ export const onClearCart = async (cartCollectionName, email) => {
         console.error('Error al limpiar el carrito:', error);
         throw error;
     }
-
-    console.log("Query Clear Cart");
 };
 
 /* ***************************** ORDER METHODS ***************************** */

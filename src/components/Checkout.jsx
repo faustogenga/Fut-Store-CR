@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../CSS/Checkout.css';
-import { collectionAssignation, onClearCart, onFindbyEmail, onInsertOrder, onUpdate } from '../CRUD/app';
+import { collectionAssignation, onClearCart, onInsertOrder, onUpdate } from '../CRUD/app';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 import {cart} from './Cart'
@@ -25,8 +25,8 @@ export const Checkout = ({ user }) => {
 
     const fetchTotal = () => {
         let total = 0;
-        cart.forEach((item) => {
-            total += item.price;
+        cart?.forEach((item) => {
+            total += parseInt(item.price);
         });
 
         return total;
@@ -82,21 +82,23 @@ export const Checkout = ({ user }) => {
 
     const addToOrder = async (event) => {
         event.preventDefault();
+        //faltan cambios
         if (true) {
             const orderId = generateOrderId();
             const orderItems = cart.map((cartItem) => ({
                 orderId: orderId,
                 userEmail: user.email,
+                vendor: cartItem.vendor,
                 shippingCountry: shippingCountry,
                 shippingEstate : shippingEstate,
                 shippingTown : shippingTown,
                 shippingDireccion : shippingDireccion,
                 paymentMethod: paymentMethod,
-                product_id: cartItem.product_id,
                 name: cartItem.name,
                 price: cartItem.price,
                 quantity: cartItem.quantity,
                 stock : cartItem.stock,
+                status : "pendiente",
                 product_img: cartItem.image,
                 orderDate: currentDate,
                 orderTime: currentTime,
@@ -112,7 +114,7 @@ export const Checkout = ({ user }) => {
                         const orderedQuantity = parseInt(orderItem.quantity);
         
                         if (productStock >= orderedQuantity) {
-                            // Calculate the new stock after placing the order
+                            // nuevo stock despues del order
                             const newStock = productStock - orderedQuantity;
                             // Update the product in the database
                             collectionAssignation("Products");
@@ -253,7 +255,7 @@ export const Checkout = ({ user }) => {
                 <div className='summaryCont p-3'>
                     <label>Productos :</label>
                     <div>
-                        {cart.map((product) => {
+                        {cart?.map((product) => {
                             return <label>&#10090;{product.quantity}&#10091; - ${product.price} : {product.name} </label>
                         })}
                     </div>
