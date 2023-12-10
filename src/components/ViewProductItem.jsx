@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Swal from "sweetalert2";
 import { Navbar } from '../components/Navbar'
-import { collectionAssignation, onInsert } from '../CRUD/app';
+import { collectionAssignation, onFindAll, onInsert } from '../CRUD/app';
 import { productInformation } from './Productitem'
 import { useNavigate } from "react-router-dom";
 import { Footer } from './Footer';
@@ -20,7 +20,7 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
 
 
   const availabilityCheck = () => {
-    if (productInformation.stock > 0) {
+    if (productInformation?.stock > 0) {
       setAvailability("Disponible");
     }
     else {
@@ -41,13 +41,24 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
     };
 
     try {
-      await onInsert(product);
-      Swal.fire({
-        title: "¡Buena elección!",
-        text: "Producto agregado correctamente a tu carrito.",
-        icon: "success"
-      });
-      navigate("/productscatalog");
+      const productsCart = await onFindAll();
+      const productsArray = Object.values(productsCart.docs);
+      console.log(productsArray);
+      if (productsArray.some(doc => doc.data().product_id === product.product_id)) {
+        Swal.fire({
+          title: "¡Producto ya esta en el carrito!",
+          text: "Producto ya esta agregado correctamente a tu carrito.",
+          icon: "success"
+        });
+      } else {
+        await onInsert(product);
+        Swal.fire({
+          title: "¡Buena elección!",
+          text: "Producto agregado correctamente a tu carrito.",
+          icon: "success"
+        });
+        navigate("/productscatalog");
+      }
 
     } catch (error) {
       Swal.fire({
@@ -70,51 +81,51 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
       })
     }
   }
-  console.log(productInformation);
-  if(!productInformation) {
+  
+  if (!productInformation) {
     return navigate("/")
-  } else 
-  return (
-    <>
-      <Navbar
-        loggedIn={loggedIn}
-        user={user}
-        logOut={logOut}
-        isVendor={isVendor}
-      />
-      <div style={{
-        display: "flex",
-        backgroundImage: "url(https://c1.wallpaperflare.com/path/56/434/430/background-photos-grass-green-33d94cf5f7ef88102f0d4710b4b2c840.jpg)",
-        backgroundSize: "cover"
-      }}>
-        <div className='container bg-white mt-5 mb-5' style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-          <div className='position-relative'>
-            <button
-              type='button'
-              style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
-              className='btn btn-warning m-1'
-              onClick={(() => navigate("/productscatalog"))}
-            >
-              Volver
-            </button>
-            <img alt='Produt_Image' style={{ width: '90%', height: '100%' }} src={productInformation.img}></img>
-          </div>
-          <div style={{ marginTop: "30px" }}>
-            <p style={{ marginTop: "30px", fontSize: '33px' }}><strong>{productInformation.name}</strong></p>
-            <p style={{ marginTop: "30px" }}>Descripción: {productInformation.description}</p>
-            <p style={{ marginTop: "30px" }}>Precio ${productInformation.price}</p>
-            <p style={{ marginTop: "30px" }}>Talla {productInformation.size}</p>
-            <p style={{ marginTop: "30px" }}>Correo registrado del vendedor: {productInformation.vendor}</p>
-            <p style={{ marginTop: "30px" }}>Estado: {Availability}</p>
-            <p style={{ marginTop: "30px" }}>Cantidad: {productInformation.stock}</p>
-            <button type='button' style={{ marginTop: "30px" }} className='btn btn-info'
-              onClick={onClickAddShoppingCart}>Agregar al carrito</button>
+  } else
+    return (
+      <>
+        <Navbar
+          loggedIn={loggedIn}
+          user={user}
+          logOut={logOut}
+          isVendor={isVendor}
+        />
+        <div style={{
+          display: "flex",
+          backgroundImage: "url(https://c1.wallpaperflare.com/path/56/434/430/background-photos-grass-green-33d94cf5f7ef88102f0d4710b4b2c840.jpg)",
+          backgroundSize: "cover"
+        }}>
+          <div className='container bg-white mt-5 mb-5' style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+            <div className='position-relative'>
+              <button
+                type='button'
+                style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
+                className='btn btn-warning m-1'
+                onClick={(() => navigate("/productscatalog"))}
+              >
+                Volver
+              </button>
+              <img alt='Produt_Image' style={{ width: '90%', height: '100%' }} src={productInformation.img}></img>
+            </div>
+            <div style={{ marginTop: "30px" }}>
+              <p style={{ marginTop: "30px", fontSize: '33px' }}><strong>{productInformation.name}</strong></p>
+              <p style={{ marginTop: "30px" }}>Descripción: {productInformation.description}</p>
+              <p style={{ marginTop: "30px" }}>Precio ${productInformation.price}</p>
+              <p style={{ marginTop: "30px" }}>Talla {productInformation.size}</p>
+              <p style={{ marginTop: "30px" }}>Correo registrado del vendedor: {productInformation.vendor}</p>
+              <p style={{ marginTop: "30px" }}>Estado: {Availability}</p>
+              <p style={{ marginTop: "30px" }}>Cantidad: {productInformation.stock}</p>
+              <button type='button' style={{ marginTop: "30px" }} className='btn btn-info'
+                onClick={onClickAddShoppingCart}>Agregar al carrito</button>
+            </div>
           </div>
         </div>
-      </div>
-      <Footer />
-    </>
-  )
+        <Footer />
+      </>
+    )
 }
 
 export default ViewProductItem

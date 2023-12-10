@@ -49,7 +49,6 @@ export const Cart = ({ user }) => {
 
     const updateCartItemQuantity = (index, increase) => {
         const updatedQuantity = [...products];
-
         const productStock = parseInt(products[index].stock);
 
         if ((updatedQuantity[index].quantity === 1 && !increase) || (updatedQuantity[index].quantity === productStock && increase)) {
