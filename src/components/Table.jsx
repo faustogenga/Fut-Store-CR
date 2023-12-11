@@ -304,9 +304,9 @@ export const BasicTable = ({ user }) => {
                     <BarChart
                         xAxis={[{
                             scaleType: 'band',
-                            data: orders.map(order => [order.orderId])
+                            data: orders?.map(order => [order.orderId])
                         }]}
-                        series={[{ data: orders.map(order => [order.price]), color: '#fdb462' }]}
+                        series={[{ data: orders?.map(order => [order.price]), color: '#fdb462' }]}
                         width={500}
                         height={300}
                     />
