@@ -9,13 +9,13 @@ export const Orders = ({ user }) => {
 
     useEffect(() => {
         if (user && user.email) {
-            collectionAssignation('OrderPlaced');
             fetchOrders();
         }
     }, [user]);
 
     const fetchOrders = async () => {
         try {
+            collectionAssignation('OrderPlaced');
             const result = await onFindbyEmail(user.email);
             if (result) {
                 const orderData = result.map((doc) => doc.data());
@@ -34,45 +34,40 @@ export const Orders = ({ user }) => {
     const showOrderDetails = async (orderId) => {
         try {
             collectionAssignation('OrderPlaced');
+            console.log(orderId);
             const result = await onFindOrderById(orderId);
-
-            if (result && result.products && Array.isArray(result.products)) {
-                const orderDetails = result.products;
-
+            if (!result.empty) {
+                console.log(result);
+                const orderDetails = result
                 const swalContent = `
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <h4 style="font-weight: bold;">Tu pedido incluye:</h4> 
-                            ${result.products.map((product, index) => `
+                            ${orderDetails.map((product, index) => `
                                 <div key=${index} style="display: flex; align-items: center;">
-                                    <img src="${product.product_img}" style="width: 12rem; height: 12rem; margin-right: 2rem; margin-left: 2rem;"/>
+                                    <img src="${product.data().product_img}" style="width: 12rem; height: 12rem; margin-right: 2rem; margin-left: 2rem;"/>
                                     <div>
                                         <div style="font-weight: bold;">Nombre del producto:</div>
-                                        <div>${product.name}</div>
-                                        <div style="font-weight: bold;">Cantidad: ${product.quantity}</div>
-                                        <div style="font-weight: bold;">Precio: $${product.price}</div>
+                                        <div>${product.data().name}</div>
+                                        <div style="font-weight: bold;">Cantidad: ${product.data().quantity}</div>
+                                        <div style="font-weight: bold;">Precio: $${product.data().price}</div>
                                         
                                     </div>
                                 </div> <br />
                             `).join('')}
                             <div style="align-items: center;" >
                             <h4 style="font-weight: bold;">Información general de tu pedido:</h4>
-                                <div style="font-weight: bold;">Número de pedido:</div> 
-                                <div>${orderDetails[0].orderId}</div> <br />
-                                <div style="font-weight: bold;">Vendedor:</div> 
-                                <div>${orderDetails[0].vendor}</div> <br />
-                                <div style="font-weight: bold;">Pedido realizado el:</div>
-                                <div>${orderDetails[0].orderDate} ${orderDetails[0].orderTime}</div> <br />
-                                <div style="font-weight: bold;">Pais:</div> 
-                                <div>${orderDetails[0].shippingCountry}</div> <br />
-                                <div style="font-weight: bold;">Provincia:</div> 
-                                <div>${orderDetails[0].shippingEstate}</div> <br />
-                                <div style="font-weight: bold;">Ciudad:</div> 
-                                <div>${orderDetails[0].shippingTown}</div> <br />
-                                <div style="font-weight: bold;">Direccion:</div> 
-                                <div>${orderDetails[0].shippingDireccion}</div> <br />
-                                <div style="font-weight: bold;">Método de pago:</div>
-                                <div>${orderDetails[0].paymentMethod}</div> <br />
+                                <div>Número de pedido: ${orderDetails[0].data().orderId}</div> <br />
+                                <div>Estado: ${orderDetails[0].data().status}</div> <br />
+                                <div>Informacion de Envio:</div>
+                                <div>${orderDetails[0].data().shippingInfo}</div> <br />
+                                <div>Vendedor: ${orderDetails[0].data().vendor}</div> <br />
+                                <div>Pedido realizado el: ${orderDetails[0].data().orderDate} ${orderDetails[0].data().orderTime}</div> <br />
+                                <div>Pais: ${orderDetails[0].data().shippingCountry}</div> <br />
+                                <div>Provincia: ${orderDetails[0].data().shippingEstate} / Ciudad: ${orderDetails[0].data().shippingTown}</div> <br />
+                                <div>Direccion:</div> 
+                                <div>${orderDetails[0].data().shippingDireccion}</div> <br />
+                                <div>Método de pago: ${orderDetails[0].data().paymentMethod}</div> <br />
                             </div>    
                         </div>
                     </div>

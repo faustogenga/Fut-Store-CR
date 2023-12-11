@@ -82,10 +82,12 @@ export const Checkout = ({ user }) => {
 
     const addToOrder = async (event) => {
         event.preventDefault();
-        //faltan cambios
+        //faltan cambios de EMERSON
         if (true) {
             const orderId = generateOrderId();
             const orderItems = cart.map((cartItem) => ({
+                id : cartItem.id,
+                product_id : cartItem.product_id,
                 orderId: orderId,
                 userEmail: user.email,
                 vendor: cartItem.vendor,
@@ -98,7 +100,8 @@ export const Checkout = ({ user }) => {
                 price: cartItem.price,
                 quantity: cartItem.quantity,
                 stock : cartItem.stock,
-                status : "pendiente",
+                status : "Pendiente",
+                shippingInfo : "Ordenado",
                 product_img: cartItem.image,
                 orderDate: currentDate,
                 orderTime: currentTime,
@@ -109,7 +112,7 @@ export const Checkout = ({ user }) => {
                 await Promise.all(orderItems.map(onInsertOrder));
                 await Promise.all(
                     orderItems.map(async (orderItem) => {
-                        const productId = orderItem.product_id;
+                        console.log(orderItem);
                         const productStock = parseInt(orderItem.stock);
                         const orderedQuantity = parseInt(orderItem.quantity);
         
@@ -118,9 +121,9 @@ export const Checkout = ({ user }) => {
                             const newStock = productStock - orderedQuantity;
                             // Update the product in the database
                             collectionAssignation("Products");
-                            await onUpdate(productId, { stock: newStock.toString() });
+                            await onUpdate(orderItem.product_id, { stock: newStock.toString() });
                         } else {
-                            console.error(`Not enough stock for product with ID ${productId}`);
+                            console.error(`Not enough stock for product with ID ${orderItem.id}`);
                         }
                     }));
                 await onClearCart('CustomerCart', user.email);

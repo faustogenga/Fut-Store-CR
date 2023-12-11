@@ -29,8 +29,8 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
   }
 
   const addToFirebaseCart = async () => {
-    collectionAssignation('CustomerCart');
     const product = {
+      product_id : productInformation.id,
       image: productInformation.img,
       name: productInformation.name,
       price: productInformation.price,
@@ -41,9 +41,11 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
     };
 
     try {
+      collectionAssignation('CustomerCart');
       const productsCart = await onFindAll();
       const productsArray = Object.values(productsCart.docs);
       console.log(productsArray);
+      console.log(product.id);
       if (productsArray.some(doc => doc.data().product_id === product.product_id)) {
         Swal.fire({
           title: "¡Producto ya esta en el carrito!",
