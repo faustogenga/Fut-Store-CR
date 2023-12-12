@@ -86,7 +86,7 @@ export const Checkout = ({ user }) => {
         if (true) {
             const orderId = generateOrderId();
             const orderItems = cart.map((cartItem) => ({
-                id : cartItem.id,
+                cart_id : cartItem.id,
                 product_id : cartItem.product_id,
                 orderId: orderId,
                 userEmail: user.email,

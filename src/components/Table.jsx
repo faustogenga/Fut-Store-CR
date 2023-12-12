@@ -164,6 +164,8 @@ export const BasicTable = ({ user }) => {
         setRowsPerPage(+event.target.value);
         setPage(0); // Reset page to 0 when changing rowsPerPage
     };
+
+    console.log(orders);
     return (
         <div style={{
             backgroundImage: "url(https://i.pinimg.com/originals/cb/e8/23/cbe8230004b895b545b61337f8d0ff99.jpg)",
@@ -194,8 +196,7 @@ export const BasicTable = ({ user }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {products
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            {products?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row) => (
                                     <TableRow
                                         key={row.id}  // Assuming each product id
@@ -222,7 +223,7 @@ export const BasicTable = ({ user }) => {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={products.length} // Use the actual total count of orders
+                        count={products?.length} // Use the actual total count of orders
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
@@ -251,8 +252,7 @@ export const BasicTable = ({ user }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {orders
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            {orders?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row) => (
                                     <TableRow
                                         key={row.id}
@@ -290,7 +290,7 @@ export const BasicTable = ({ user }) => {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={orders.length} // Use the actual total count of orders
+                        count={orders?.length} // Use the actual total count of orders
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
@@ -302,11 +302,26 @@ export const BasicTable = ({ user }) => {
                 <div className='bg-white rounded m-3'>
                     <h5 className='text-center'>Ventas</h5>
                     <BarChart
-                        xAxis={[{
-                            scaleType: 'band',
-                            data: orders?.map(order => [order.orderId])
-                        }]}
-                        series={[{ data: orders?.map(order => [order.price]), color: '#fdb462' }]}
+                        xAxis={[
+                            {
+                                label: 'Ordenes',
+                                data: orders.length > 0 ? orders.map(order => order.orderId) : [0],
+                                scaleType: 'band',
+                            },
+                        ]}
+                        yAxis={[
+                            {
+                                label: 'USD',
+                            },
+                        ]}
+                        series={[
+                            {
+                                data: orders.length > 0 ? orders.map(order =>
+                                    orders.filter(o => o.orderId === order.orderId).reduce((sum, o) => sum + parseInt(o.price), 0)
+                                ) : [0],
+                                color: '#34d5eb',
+                            },
+                        ]}
                         width={500}
                         height={300}
                     />

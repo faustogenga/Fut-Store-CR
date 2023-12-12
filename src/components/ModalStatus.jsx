@@ -14,7 +14,7 @@ const ModalStatus = ({ item, currentId, isOpen, onClose, handleEdit }) => {
 
   //Estado que queremos cambiar
   const [estado, setEstado] = useState(item.status);
-  const [infoEnvio, setInfoEnvio] = useState(item.infoEnvio);
+  const [infoEnvio, setInfoEnvio] = useState(item.shippingInfo);
 
   //onchange para editar estado / editando informacion
 
