@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../CSS/Orders.css';
 import { Button, Container, Row, Table } from 'react-bootstrap';
 import Swal from 'sweetalert2';
-import { collectionAssignation, onFindOrderById, onFindbyEmail } from '../CRUD/app';
+import { collectionAssignation, onFindOrderById, onFindbyEmail, onUpdate } from '../CRUD/app';
+import { Chat } from './Chat';
 
 export const Orders = ({ user }) => {
     const [orders, setOrders] = useState([]);
@@ -44,11 +45,14 @@ export const Orders = ({ user }) => {
                         <div>
                             <h4 style="font-weight: bold;">Tu pedido incluye:</h4> 
                             ${orderDetails.map((product, index) => `
-                                <div key=${index} style="display: flex; align-items: center;">
+                                <div key=${index} style="display: flex; justify-contents: left">
                                     <img src="${product.data().product_img}" style="width: 12rem; height: 12rem; margin-right: 2rem; margin-left: 2rem;"/>
-                                    <div>
+                                    <div style="align-items: left;">
                                         <div style="font-weight: bold;">Nombre del producto:</div>
                                         <div>${product.data().name}</div>
+                                        <br/>
+                                        <div>Vendor: ${product.data().vendor}</div>
+                                        <br/>
                                         <div style="font-weight: bold;">Cantidad: ${product.data().quantity}</div>
                                         <div style="font-weight: bold;">Precio: $${product.data().price}</div>
                                         
@@ -61,7 +65,6 @@ export const Orders = ({ user }) => {
                                 <div>Estado: ${orderDetails[0].data().status}</div> <br />
                                 <div>Informacion de Envio:</div>
                                 <div>${orderDetails[0].data().shippingInfo}</div> <br />
-                                <div>Vendedor: ${orderDetails[0].data().vendor}</div> <br />
                                 <div>Pedido realizado el: ${orderDetails[0].data().orderDate} ${orderDetails[0].data().orderTime}</div> <br />
                                 <div>Pais: ${orderDetails[0].data().shippingCountry}</div> <br />
                                 <div>Provincia: ${orderDetails[0].data().shippingEstate} / Ciudad: ${orderDetails[0].data().shippingTown}</div> <br />
@@ -113,6 +116,15 @@ export const Orders = ({ user }) => {
         });
     }
 
+    const handleChat = async (currentId, estado, infoEnvio) => {
+        collectionAssignation('Chat');
+        await onUpdate(currentId,
+            {   
+                status: estado,
+                shippingInfo: infoEnvio,
+            });
+    };
+
     return (
         <div className='mainOrders'>
             <Container className="py-4">
@@ -133,6 +145,7 @@ export const Orders = ({ user }) => {
                                 <th className='text-center'>Precio</th>
                                 <th className='text-center'>Fecha y Hora del Pedido</th>
                                 <th className='text-center'>Acciones</th>
+                                <th className='text-center'>Chat</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -177,6 +190,9 @@ export const Orders = ({ user }) => {
                                         <td className='text-center'> {item.orderDate} {item.orderTime}</td>
                                         <td className='text-center'>
                                             <Button className="btn btn-info" onClick={() => showOrderDetails(item.orderId)}>Ver más detalles</Button>
+                                        </td>
+                                        <td className='text-center'>
+                                            <Chat user={user} item={item} currentId={item.orderId} handleChat={handleChat} />   
                                         </td>
                                     </tr>
                                 )
