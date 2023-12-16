@@ -101,8 +101,7 @@ export const Checkout = ({ user }) => {
                 name: cartItem.name,
                 price: cartItem.price,
                 quantity: cartItem.quantity,
-                stock : cartItem.stock,
-                status : "Pendiente",
+                status : "Pendiente de Preparación",
                 shippingInfo : "Ordenado",
                 product_img: cartItem.image,
                 orderDate: currentDate,
@@ -110,40 +109,49 @@ export const Checkout = ({ user }) => {
             }));
 
             try {
-                //mostrar la orden.
-                console.log(orderItems);
-                //agregar la orden a la base de datos.
-                await Promise.all(orderItems.map(onInsertOrder));
-                //Actualizar la base de datos con los nuevos stocks.
-                await Promise.all(
-                    orderItems.map(async (orderItem) => {
-                        //calcular los nuevos stocks despues de la venta
-                        const productStock = parseInt(orderItem.stock);
-                        const orderedQuantity = parseInt(orderItem.quantity);
-                        if (productStock >= orderedQuantity) {
-                            // calcular nuevo stock
-                            const newStock = productStock - orderedQuantity;
-                            // actualizar el stock en la bd
-                            collectionAssignation("Products");
-                            await onUpdate(orderItem.product_id, { stock: newStock.toString() });
-                        } else {
-                            //error catch
-                            console.error(`Not enough stock for product with ID ${orderItem.id}`);
-                        }
-                    }));
-                //limpiar carrito
-                await onClearCart('CustomerCart', user.email);
-                //mandar correo
-                console.log(user.email);
-                console.log(orderItems[0].orderId);
-                await sendEmail(user.email, orderItems[0].orderId);
-                //mensaje
-                Swal.fire({
-                    title: '¡Compra Realizada!',
-                    text: 'Tu orden se ha completado con éxito',
-                    icon: 'success',
-                });
-
+                if (inputValidation()) {
+                    //mostrar la orden.
+                    console.log(orderItems);
+                    //agregar la orden a la base de datos.
+                    await Promise.all(orderItems.map(onInsertOrder));
+                    //Actualizar la base de datos con los nuevos stocks.
+                    await Promise.all(
+                        orderItems.map(async (orderItem) => {
+                            //calcular los nuevos stocks despues de la venta
+                            const productStock = parseInt(orderItem.stock);
+                            const orderedQuantity = parseInt(orderItem.quantity);
+                            if (productStock >= orderedQuantity) {
+                                // calcular nuevo stock
+                                const newStock = productStock - orderedQuantity;
+                                // actualizar el stock en la bd
+                                collectionAssignation("Products");
+                                await onUpdate(orderItem.product_id, { stock: newStock.toString() });
+                            } else {
+                                //error catch
+                                console.error(`Not enough stock for product with ID ${orderItem.id}`);
+                            }
+                        }));
+                    //limpiar carrito
+                    await onClearCart('CustomerCart', user.email);
+                    //mandar correo
+                    console.log(user.email);
+                    console.log(orderItems[0].orderId);
+                    await sendEmail(user.email, orderItems[0].orderId);
+                    //mensaje
+                    Swal.fire({
+                        title: '¡Compra Realizada!',
+                        text: 'Tu orden se ha completado con éxito',
+                        icon: 'success',
+                    });
+                    navigate('/orders');
+                } else {
+                    Swal.fire({
+                        title: '¡ERROR!',
+                        text: 'Algo salió mal, por favor agrega todos los datos necesarios',
+                        icon: 'error',
+                    });
+                    navigate('/checkout');
+                }
             } catch (error) {
                 Swal.fire({
                     title: 'ERROR',
@@ -152,7 +160,6 @@ export const Checkout = ({ user }) => {
                 });
                 console.log(error.message)
             }
-            navigate('/orders');
         }
     };
 
@@ -242,8 +249,41 @@ export const Checkout = ({ user }) => {
                         </div>
                         {paymentMethod === 'CreditCard' && (
                             <>
-                                {/* Credit card details input fields */}
-                            </>
+                            <div className="form-group m-2">
+                                <label>Numero de tarjeta</label>
+                                <input 
+                                    value={cardNumber}
+                                    onChange={({ target }) => setCardNumber(target.value)}
+                                    type="text"
+                                    name="cardNumber"
+                                    placeholder="Ingresa tu número de tarjeta"
+                                    className="form-control"
+                                    required
+                                />
+                            </div>
+                            <div className="form-group m-2">
+                                <label>Fecha de vencimiento</label>
+                                <input
+                                    value={expirationDate}
+                                    onChange={({ target }) => setExpirationDate(target.value)}
+                                    type="text"
+                                    name="expirationDate"
+                                    placeholder="MM/YY"
+                                    className="form-control"
+                                    required
+                                />
+                            </div>
+                            <div className="form-group m-2">
+                                <label>CVV</label>
+                                <input
+                                value={cvv}
+                                onChange={({ target }) => setCvv(target.value)}
+                                type="password" 
+                                name="cvv" 
+                                className="form-control"
+                                required />
+                            </div>
+                        </>
                         )}
                         {paymentMethod === 'PayPal' && (
                             <div className="form-group">
