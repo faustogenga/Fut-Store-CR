@@ -92,6 +92,27 @@ export const Orders = ({ user }) => {
             });
         }
     }
+
+    const openShippingStatus = (obj) => {
+        const swalContent =
+            ` 
+        <div style="font-weight: bold;">Orden :</div> 
+        <div>${obj.orderId}</div>
+        <div>${obj.name}</div> <br />
+        <div style="font-weight: bold;">Estado : ${obj.status}</div> <br/>
+        <div style="font-weight: bold;">Informacion :</div> 
+        <div>${obj.shippingInfo}</div> <br />
+        `;
+        Swal.fire({
+            title: 'Estado de Envio',
+            html: swalContent,
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Listo',
+            showCloseButton: true,
+        });
+    }
+
     return (
         <div className='mainOrders'>
             <Container className="py-4">
@@ -103,9 +124,10 @@ export const Orders = ({ user }) => {
                 <Row className="justify-content-center">
                     <Table responsive="sm" className='table table-bordered border-primary align-middle table-info table-sm'>
                         <thead style={{ position: 'sticky', top: '0' }}>
-                            <tr style={{ fontSize: '22px', fontFamily: 'Times New Roman' }}>
+                            <tr style={{ fontSize: '18px', fontFamily: 'Times New Roman' }}>
                                 <th className='text-center'>Imagen</th>
                                 <th className='text-center'>Número de Pedido</th>
+                                <th className='text-center'>Estado</th>
                                 <th className='text-center'>Cantidad</th>
                                 <th className='text-center'>Nombre del Producto</th>
                                 <th className='text-center'>Precio</th>
@@ -116,7 +138,7 @@ export const Orders = ({ user }) => {
                         <tbody>
                             {orders.map((item, index) => {
                                 return (
-                                    <tr key={index} style={{ fontSize: '18px'}}>
+                                    <tr key={index} style={{ fontSize: '16px'}}>
                                         <td className='text-center'>
                                             <div style={{
                                                 background: 'white', height: '8rem', overflow: 'hidden', display: 'flex',
@@ -134,6 +156,11 @@ export const Orders = ({ user }) => {
                                         </td>
                                         <td className='text-center'>
                                             <h6 style={{ whiteSpace: 'nowrap', width: '10rem', overflow: 'hidden', textOverFlow: 'ellipsis', fontSize: '18px' }}>
+                                            <button type="button" className="btn btn-success p-1" onClick={() => openShippingStatus(item)}>{item.status}</button>
+                                            </h6>
+                                        </td>
+                                        <td className='text-center'>
+                                            <h6 style={{ whiteSpace: 'nowrap', width: '5rem', overflow: 'hidden', textOverFlow: 'ellipsis', fontSize: '18px' }}>
                                                 {item.quantity}
                                             </h6>
                                         </td>
@@ -142,7 +169,11 @@ export const Orders = ({ user }) => {
                                                 {item.name}
                                             </h6>
                                         </td>
-                                        <td className='text-center'>$ {item.price}</td>
+                                        <td className='text-center'>
+                                            <h6 style={{ whiteSpace: 'nowrap', width: '5rem', overflow: 'hidden', textOverFlow: 'ellipsis', fontSize: '18px' }}>
+                                                ${item.price}
+                                            </h6>
+                                        </td>
                                         <td className='text-center'> {item.orderDate} {item.orderTime}</td>
                                         <td className='text-center'>
                                             <Button className="btn btn-info" onClick={() => showOrderDetails(item.orderId)}>Ver más detalles</Button>
