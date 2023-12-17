@@ -25,14 +25,24 @@ export const Checkout = ({ user }) => {
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
 
-    const fetchTotal = () => {
-        let total = 0;
-        cart?.forEach((item) => {
-            total += parseInt(item.price);
-        });
+    const [shippingFee, setShippingFee] = useState(0)
 
-        return total;
+    const salesTax = 0.13;
+
+    const fetchTotals = () => {
+        let subtotal = 0;
+        cart?.forEach((item) => {
+            subtotal += parseInt(item.price);
+        });
+    
+        let total = subtotal;
+        total += total * salesTax;
+        total += shippingFee;
+    
+        return { subtotal, total };
     }
+
+    const {subtotal, total} = fetchTotals();
 
     function sendErrorMessage(txt, icon) {
         Swal.fire({
@@ -80,6 +90,37 @@ export const Checkout = ({ user }) => {
 
     const handleProvienceChange = (event) => {
         setshippingEstate(event.target.value);
+        const selectedProvince = event.target.value;
+        let fee;
+
+        switch (selectedProvince) {
+            case 'San Jose':
+                fee = 10;
+                break;
+            case 'Alajuela':
+                fee = 15;
+                break;
+            case 'Heredia':
+                fee = 20;
+                break;
+            case 'Cartago':
+                fee = 25;
+                break;
+            case 'Puntarenas':
+                fee = 30;
+                break;
+            case 'Guanacaste':
+                fee = 35;
+                break;
+            case 'Limon':
+                fee = 40;
+                break;
+            default:
+                fee = 0;
+                break;  
+        }
+
+        setShippingFee(fee);
     };
 
     const addToOrder = async (event) => {
@@ -162,6 +203,7 @@ export const Checkout = ({ user }) => {
             }
         }
     };
+
 
     return (
         <div className='MainCheckout d-flex justify-content-center align-items-center'>
@@ -315,10 +357,17 @@ export const Checkout = ({ user }) => {
                     </div>
                     <hr/>
                     <div>
-                        <label htmlFor="Impuestos">Impuestos: ...........................................</label>
+                        <label htmlFor='Impuestos'>Impuesto (I.V.A):..................................... 13%</label> 
                     </div>
+                    <div>
+                        <label htmlFor="Impuestos">Costo de envío:....................................... ${shippingFee}</label>
+                    </div>
+                    <div>
+                        <label htmlFor="Subtotal">Subtotal:.................................................... ${subtotal}</label>
+                    </div>
+                    <br />
                     <div> 
-                        <label htmlFor="Total">Total a pagar: ${fetchTotal()}</label>
+                        <label htmlFor="Total"> <b>Total a pagar:........................................ ${total}</b></label>
                     </div>
                 </div>
             </div>
