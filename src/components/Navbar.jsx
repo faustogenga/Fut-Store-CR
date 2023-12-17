@@ -86,12 +86,20 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
             {loggedIn ? (
               <>
                 {!isVendor && (
-                  <a className="nav-link mx-3" href="/orders"
-                    onMouseOver={(e) => (e.target.style.color = '#3498DB')}
-                    onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
-                  >
-                    Pedidos
-                  </a>
+                  <>
+                   <a className="nav-link mx-3" href="/inbox"
+                      onMouseOver={(e) => (e.target.style.color = '#3498DB')}
+                      onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
+                    >
+                      Inbox 📩
+                    </a>
+                    <a className="nav-link mx-3" href="/orders"
+                      onMouseOver={(e) => (e.target.style.color = '#3498DB')}
+                      onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
+                    >
+                      Pedidos 🛍️
+                    </a>
+                  </>
                 )}
                 <i className="bi bi-person-circle mx-2 text-info"></i>
                 <i className='text-white' id="my-anchor-element">

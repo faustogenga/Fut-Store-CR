@@ -3,7 +3,6 @@ import '../CSS/Orders.css';
 import { Button, Container, Row, Table } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { collectionAssignation, onFindOrderById, onFindbyEmail, onUpdate } from '../CRUD/app';
-import { Chat } from './Chat';
 
 export const Orders = ({ user }) => {
     const [orders, setOrders] = useState([]);
@@ -145,7 +144,6 @@ export const Orders = ({ user }) => {
                                 <th className='text-center'>Precio</th>
                                 <th className='text-center'>Fecha y Hora del Pedido</th>
                                 <th className='text-center'>Acciones</th>
-                                <th className='text-center'>Chat</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -190,9 +188,6 @@ export const Orders = ({ user }) => {
                                         <td className='text-center'> {item.orderDate} {item.orderTime}</td>
                                         <td className='text-center'>
                                             <Button className="btn btn-info" onClick={() => showOrderDetails(item.orderId)}>Ver más detalles</Button>
-                                        </td>
-                                        <td className='text-center'>
-                                            <Chat user={user} item={item} currentId={item.orderId} handleChat={handleChat} />   
                                         </td>
                                     </tr>
                                 )

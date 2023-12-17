@@ -27,6 +27,7 @@ import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { ProductsCatalog } from './pages/ProductsCatalog';
 import { OrdersPage } from './pages/OrdersPage';
+import { InboxPage } from './pages/InboxPage.jsx';
 
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
             <Route path="/NewVendor" element={<AddVendor setLoggedIn={setLoggedIn}/>} />
             <Route path="/products" element={<AddProducts setLoggedIn={setLoggedIn} />} />
             <Route path='/cart' element={<CartPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
+            <Route path='/inbox' element={<InboxPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
             <Route path='/Checkout' element={<CheckoutPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
             <Route path='/orders' element={<OrdersPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
             <Route path='/productscatalog' element={<ProductsCatalog user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} isCatalog={isCatalog} setIsCatalog={setIsCatalog}/>}/>
