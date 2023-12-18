@@ -50,25 +50,25 @@ export const Orders = ({ user }) => {
                                     <div>
                                         <div style="font-weight: bold;">Nombre del producto:</div>
                                         <div>${product.data().name}</div>
-                                        <div style="font-weight: bold;">Cantidad: ${product.data().quantity}</div>
-                                        <div style="font-weight: bold;">Precio: $${product.data().price}</div>
+                                        <div> <strong> Cantidad: </strong> ${product.data().quantity}</div>
+                                        <div> <strong> Precio: </strong> $ ${product.data().price}</div>
                                     </div>
                                 </div> <br />
                             `).join('')}
                             <div style="align-items: center;" >
                             <h4 style="font-weight: bold;">Información general de tu pedido:</h4>
-                                <div> Número de pedido: ${orderDetails[0].data().orderId}</div> <br />
-                                <div>Estado: ${orderDetails[0].data().status}</div> <br />
-                                <div>Información de Envío:</div>
+                                <div> <strong> Número de pedido: </strong> ${orderDetails[0].data().orderId}</div> <br />
+                                <div> <strong> Estado: </strong> ${orderDetails[0].data().status}</div> <br />
+                                <div> <strong> Información de Envío: </strong> </div>
                                 <div>${orderDetails[0].data().shippingInfo}</div> <br />
-                                <div>Vendedor: ${orderDetails[0].data().vendor}</div> <br />
-                                <div>Pedido realizado el: ${orderDetails[0].data().orderDate} ${orderDetails[0].data().orderTime}</div> <br />
-                                <div>País: ${orderDetails[0].data().shippingCountry}</div> <br />
-                                <div>Provincia: ${orderDetails[0].data().shippingEstate} / Ciudad: ${orderDetails[0].data().shippingTown}</div> <br />
-                                <div>Dirección:</div> 
+                                <div> <strong> Vendedor: </strong> ${orderDetails[0].data().vendor}</div> <br />
+                                <div> <strong> Pedido realizado el: </strong> ${orderDetails[0].data().orderDate} ${orderDetails[0].data().orderTime}</div> <br />
+                                <div> <strong> País: </strong> ${orderDetails[0].data().shippingCountry}</div> <br />
+                                <div> <strong> Provincia: </strong> ${orderDetails[0].data().shippingEstate} / Ciudad: ${orderDetails[0].data().shippingTown}</div> <br />
+                                <div> <strong> Dirección: </strong> </div> 
                                 <div>${orderDetails[0].data().shippingDireccion}</div> <br />
-                                <div>Método de pago: ${orderDetails[0].data().cardType}</div> <br />
-                                <div>Costo total del pedido: $ ${orderDetails[0].data().orderTotal}</div> <br />
+                                <div> <strong> Método de pago: </strong> ${orderDetails[0].data().cardType}</div> <br />
+                                <div> <strong> Costo total del pedido: </strong> $ ${orderDetails[0].data().orderTotal}</div> <br />
                             </div>    
                         </div>
                     </div>

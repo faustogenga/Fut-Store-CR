@@ -29,7 +29,7 @@ export const Productitem = ({ loggedIn, product, isVendor }) => {
         <IconButton disabled={isVendor ? true : false} color="primary" aria-label="add to shopping cart"
           onClick={() => (loggedIn ? onButtonClickViewProduct() : Swal.fire({
             title: 'Ingresa para poder comprar',
-            text: 'Inscribete / Registrate en la mejor pagina',
+            text: 'Inscríbete / Regístrate en la mejor página',
             icon: 'warning',
           }))}>
         <AddShoppingCartIcon />

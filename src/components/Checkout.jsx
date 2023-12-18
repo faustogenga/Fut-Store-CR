@@ -151,7 +151,7 @@ export const Checkout = ({ user }) => {
                 name : cartItem.name,
                 price : cartItem.price,
                 quantity : cartItem.quantity,
-                status : "Pendiente de Preparación",
+                status : "Pendiente",
                 shippingInfo : "Ordenado",
                 product_img : cartItem.image,
                 orderTotal : total,
