@@ -162,7 +162,7 @@ export const BasicTable = ({ user }) => {
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
-        setPage(0); // Reset page to 0 when changing rowsPerPage
+        setPage(0); 
     };
 
     console.log(orders);
