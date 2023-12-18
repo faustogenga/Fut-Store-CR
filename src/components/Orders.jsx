@@ -31,6 +31,7 @@ export const Orders = ({ user }) => {
             });
         }
     }
+
     const showOrderDetails = async (orderId) => {
         try {
             collectionAssignation('OrderPlaced');
@@ -51,23 +52,23 @@ export const Orders = ({ user }) => {
                                         <div>${product.data().name}</div>
                                         <div style="font-weight: bold;">Cantidad: ${product.data().quantity}</div>
                                         <div style="font-weight: bold;">Precio: $${product.data().price}</div>
-                                        
                                     </div>
                                 </div> <br />
                             `).join('')}
                             <div style="align-items: center;" >
                             <h4 style="font-weight: bold;">Información general de tu pedido:</h4>
-                                <div>Número de pedido: ${orderDetails[0].data().orderId}</div> <br />
+                                <div> Número de pedido: ${orderDetails[0].data().orderId}</div> <br />
                                 <div>Estado: ${orderDetails[0].data().status}</div> <br />
-                                <div>Informacion de Envio:</div>
+                                <div>Información de Envío:</div>
                                 <div>${orderDetails[0].data().shippingInfo}</div> <br />
                                 <div>Vendedor: ${orderDetails[0].data().vendor}</div> <br />
                                 <div>Pedido realizado el: ${orderDetails[0].data().orderDate} ${orderDetails[0].data().orderTime}</div> <br />
-                                <div>Pais: ${orderDetails[0].data().shippingCountry}</div> <br />
+                                <div>País: ${orderDetails[0].data().shippingCountry}</div> <br />
                                 <div>Provincia: ${orderDetails[0].data().shippingEstate} / Ciudad: ${orderDetails[0].data().shippingTown}</div> <br />
-                                <div>Direccion:</div> 
+                                <div>Dirección:</div> 
                                 <div>${orderDetails[0].data().shippingDireccion}</div> <br />
-                                <div>Método de pago: ${orderDetails[0].data().paymentMethod}</div> <br />
+                                <div>Método de pago: ${orderDetails[0].data().cardType}</div> <br />
+                                <div>Costo total del pedido: $ ${orderDetails[0].data().orderTotal}</div> <br />
                             </div>    
                         </div>
                     </div>
@@ -110,6 +111,7 @@ export const Orders = ({ user }) => {
                                 <th className='text-center'>Nombre del Producto</th>
                                 <th className='text-center'>Precio</th>
                                 <th className='text-center'>Fecha y Hora del Pedido</th>
+                                <th className='text-center'>Estado del Pedido</th>
                                 <th className='text-center'>Acciones</th>
                             </tr>
                         </thead>
@@ -138,13 +140,14 @@ export const Orders = ({ user }) => {
                                             </h6>
                                         </td>
                                         <td>
-                                            <h6 style={{ width: '15rem', fontSize: '18px', marginLeft: '35px' }} className='text-center'>
+                                            <h6 style={{ width: '15rem', fontSize: '18px' }} className='text-center'>
                                                 {item.name}
                                             </h6>
                                         </td>
-                                        <td className='text-center'>$ {item.price}</td>
-                                        <td className='text-center'> {item.orderDate} {item.orderTime}</td>
-                                        <td className='text-center'>
+                                        <td className='text-center' style={{width: '10rem'}}>$ {item.price}</td>
+                                        <td className='text-center' style={{width: '10rem'}}> {item.orderDate} {item.orderTime}</td>
+                                        <td className='text-center' style={{width: '10rem'}}> {item.status} </td>
+                                        <td className='text-center' style={{width: '15rem'}}>
                                             <Button className="btn btn-info" onClick={() => showOrderDetails(item.orderId)}>Ver más detalles</Button>
                                         </td>
                                     </tr>

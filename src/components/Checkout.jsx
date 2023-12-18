@@ -19,6 +19,8 @@ export const Checkout = ({ user }) => {
 
 
     const [paymentMethod, setPaymentMethod] = useState('Choose');
+    const [cardType, setCardType] = useState('Choose');
+    const [cardName, setCardName] = useState('');
     const [cardNumber, setCardNumber] = useState('');
     const [expirationDate, setExpirationDate] = useState('');
     const [cvv, setCvv] = useState('');
@@ -51,6 +53,7 @@ export const Checkout = ({ user }) => {
             icon: icon,
         });
     }
+
     const inputValidation = () => {
         if (shippingCountry.trim() === '') {
             sendErrorMessage('Dirección de entrega vacía', 'error');
@@ -86,6 +89,10 @@ export const Checkout = ({ user }) => {
 
     const handlePaymentChange = (event) => {
         setPaymentMethod(event.target.value);
+    };
+
+    const handleCardType = (event) => {
+        setCardType(event.target.value);
     };
 
     const handleProvienceChange = (event) => {
@@ -131,22 +138,25 @@ export const Checkout = ({ user }) => {
             const orderItems = cart.map((cartItem) => ({
                 cart_id : cartItem.id,
                 product_id : cartItem.product_id,
-                orderId: orderId,
-                userEmail: user.email,
-                vendor: cartItem.vendor,
-                shippingCountry: shippingCountry,
+                orderId : orderId,
+                userEmail  : user.email,
+                vendor : cartItem.vendor,
+                shippingCountry : shippingCountry,
                 shippingEstate : shippingEstate,
                 shippingTown : shippingTown,
                 shippingDireccion : shippingDireccion,
-                paymentMethod: paymentMethod,
-                name: cartItem.name,
-                price: cartItem.price,
-                quantity: cartItem.quantity,
+                paymentMethod : paymentMethod,
+                cardType : cardType,
+                cardholderName : cardName,
+                name : cartItem.name,
+                price : cartItem.price,
+                quantity : cartItem.quantity,
                 status : "Pendiente de Preparación",
                 shippingInfo : "Ordenado",
-                product_img: cartItem.image,
-                orderDate: currentDate,
-                orderTime: currentTime,
+                product_img : cartItem.image,
+                orderTotal : total,
+                orderDate : currentDate,
+                orderTime : currentTime,
             }));
 
             try {
@@ -291,6 +301,33 @@ export const Checkout = ({ user }) => {
                         </div>
                         {paymentMethod === 'CreditCard' && (
                             <>
+                            <div className="form-group m-2">
+                                <label>Nombre del titular de la tarjeta</label>
+                                <input 
+                                    value={cardName}
+                                    onChange={({ target }) => setCardName(target.value)}
+                                    type="text"
+                                    name="cardName"
+                                    placeholder="Ingresa el nombre del titular de la tarjeta"
+                                    className="form-control"
+                                    required
+                                />
+                            </div>
+                            <div className="form-group m-2">
+                            <label>Tipo de tarjeta</label>
+                            <select
+                                name="cardType"
+                                value={cardType}
+                                onChange={handleCardType}
+                                required
+                                className="form-control"
+                            >
+                                <option value="Choose">Selecciona un método de pago</option>
+                                <option value="VISA">VISA</option>
+                                <option value="MasterCard">MasterCard</option>
+                                <option value="AMEX">American Express</option>
+                            </select>
+                            </div>
                             <div className="form-group m-2">
                                 <label>Numero de tarjeta</label>
                                 <input 
