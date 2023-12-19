@@ -37,6 +37,35 @@ export const onInsert = async obj => {
     await addDoc(collection(db, collectionStr), obj);
 }
 
+/* 4.2 Insertar nuevo Chat y su subcolleccion con mensaje  */
+export const onInsertNewChat = async(chat,message) => {
+    const newChatCollection = await addDoc(collection(db,"Chat"),chat);
+    console.log(newChatCollection);
+    const subCollectionMessage = collection(newChatCollection,"Messages");
+    await addDoc(subCollectionMessage,message);
+}
+
+//*4.3 Insertar en un chat existente *//
+/* Inserta objecto en colleccion dentro de doc */
+export const onInsertMessageDoc = async(refChatId, obj) => {
+    const chatDoc =  doc(db,"Chat",refChatId);
+    const subCollection = collection(chatDoc,'Messages');
+    const messagesData = await getDocs(subCollection);
+    const messagesLength = messagesData.docs.length;
+    obj.order = messagesLength + 1;
+    await addDoc(subCollection, obj);
+}
+
+/**4.4 Get Messages del Chat */
+
+export const onGetMessages = async(refChatId) => {
+    const chatDoc =  doc(db,"Chat",refChatId);
+    const subCollection = collection(chatDoc,'Messages');
+    const messages = await getDocs(subCollection);
+    return messages;
+}
+
+
 /* 5. MODIFICAR OBJETO */
 export const onUpdate = async (paramId, newObj) => {
     console.log("Query Update");

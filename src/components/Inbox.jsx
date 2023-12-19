@@ -1,22 +1,41 @@
 import React, { useEffect, useState } from 'react'
-import { collectionAssignation, onFindAll, onInsert, onUpdate } from '../CRUD/app';
+import { collectionAssignation, onFindAll, onInsert, onInsertMessageDoc, onInsertNewChat, onUpdate } from '../CRUD/app';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Swal from 'sweetalert2';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import { BarChart } from '@mui/x-charts/BarChart';
+import TablePagination from '@mui/material/TablePagination';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import ModalMessages from './ModalMessages';
+import { ChatMessages } from './ChatMessages';
 
 
 export const Inbox = ({ user }) => {
   const [uniqueVendors, setUniqueVendors] = useState([]);
+  const [chats, setChats] = useState([]);
+  const [inbox, setInbox] = useState([]);
   const [isOpen, setIsOpen] = useState(true);
   const [vendor, setVendor] = useState('');
   const [message, setMessage] = useState('');
-  const [chatId, setChatId] = useState('');
+
+  //inbox navigation
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
 
   useEffect(() => {
     if (user) {
       fetchDataOrders();
+      fetchDataChat();
     }
   }, [user]);
 
@@ -40,11 +59,9 @@ export const Inbox = ({ user }) => {
     }
   };
 
-  //validaciones para ver si los campos estan vacios
-  const messageValidation = () => message.length > 0 && vendor.length > 0;
-
-  //validaciones para ver si ya existe el chat
-  const newMessageValidation = async () => {
+  const fetchDataChat = async () => {
+    //collection name
+    collectionAssignation('Chat');
     //fetch todos los chats
     const dataFetchChat = await onFindAll();
     //filtrar la data en un array
@@ -55,15 +72,35 @@ export const Inbox = ({ user }) => {
         ...doc.data()
       }
     ));
-    console.log(filterData);
+    setChats(filterData);
+  }
+
+  const refresh = async () => {
+    await fetchDataChat();
+  }
+
+
+  const inboxLoad = async () => {
+    console.log("inbox loaded");
+    refresh();
+    const userChat = chats.filter((userChat) => (userChat.sender === user.email));
+    console.log(userChat);
+    setInbox(Array.from(userChat));
+    setVendor('');
+  }
+
+  //validaciones para ver si los campos estan vacios
+  const messageValidation = () => message.length > 0 && vendor.length > 0;
+
+  //validaciones para ver si ya existe el chat
+  const newMessageValidation = async () => {
+    //ver chats
+    console.log(chats);
     //chequear si ya hay un chat de este usuario
-    console.log(user.email);
-    console.log(vendor);
-    const userChat = filterData.find((userChat) => (userChat.sender === user.email && userChat.vendor === vendor));
+    const userChat = chats.find((userChat) => (userChat.sender === user.email && userChat.vendor === vendor));
     if (userChat) {
       console.log("existe");
-      setChatId(userChat.id);
-      sendMessageToChat();
+      sendMessageToChat(userChat.id);
     }
     else {
       console.log("no existe");
@@ -71,28 +108,35 @@ export const Inbox = ({ user }) => {
     }
   }
 
-  //Mandar Nuevo mensaje / Nuevo Chat
+  //Mandar Nuevo mensaje y Nuevo Chat
   const sendNewMessage = async () => {
     try {
-      await onInsert({
+      await onInsertNewChat({
         sender: user.email,
         vendor: vendor,
-        msmSender: message,
-        msmVendor: ''
+      }, {
+        msm: message,
+        sender: user.email,
+        order: 1
       });
       Swal.fire({
         title: "Mensaje Enviado",
         text: "Revisa tu inbox pronto con la respuesta de tu vendor",
         icon: "success"
       });
+      await refresh();
     } catch (error) {
       console.log(error);
     }
   }
 
-  const sendMessageToChat = async () => {
+  const sendMessageToChat = async (chatId) => {
     try {
-      await onUpdate(chatId, { msmSender: message });
+      await onInsertMessageDoc(chatId, {
+        msm: message,
+        msmSender: user.email,
+        order: 0
+      });
       Swal.fire({
         title: "Mensaje Enviado",
         text: "Revisa tu inbox pronto con la respuesta de tu vendor",
@@ -105,7 +149,6 @@ export const Inbox = ({ user }) => {
 
   const sendMessage = async () => {
     if (messageValidation()) {
-      collectionAssignation('Chat');
       newMessageValidation();
       setMessage('');
       setVendor('');
@@ -118,6 +161,7 @@ export const Inbox = ({ user }) => {
     }
   }
 
+  //Handle Changes
   const handleChangeVendor = ({ target }) => {
     setVendor(target.value);
   }
@@ -125,7 +169,14 @@ export const Inbox = ({ user }) => {
     setMessage(target.value);
   }
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   return (
     <div style={{
       backgroundImage: "url(https://i.pinimg.com/originals/cb/e8/23/cbe8230004b895b545b61337f8d0ff99.jpg)",
@@ -136,7 +187,7 @@ export const Inbox = ({ user }) => {
         <h3 className='text-center mt-3 bg-white rounded-pill opacity-75'>Mensajes</h3>
         <div className='text-center'>
           <button className='btn btn-info m-3' onClick={() => setIsOpen(true)}>Nuevo</button>
-          <button className='btn btn-success m-3' onClick={() => setIsOpen(false)}>Inbox</button>
+          <button className='btn btn-success m-3' onClick={() => { setIsOpen(false); inboxLoad() }}>Inbox</button>
         </div>
         <div className='p-5 bg-white rounded'>
           {isOpen ? (
@@ -176,7 +227,41 @@ export const Inbox = ({ user }) => {
             </>
           ) : (
             <div className='text-center'>
-              is closed
+              <>
+                <TableContainer component={Paper} className='' >
+                  <Table aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell style={{ fontWeight: "bolder" }}>Vendor</TableCell>
+                        <TableCell style={{ fontWeight: "bolder" }}>Chat</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {inbox?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                        <TableRow
+                          key={row.id}
+                          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                          <TableCell className="p-4" align="left">{row.vendor}</TableCell>
+                          <TableCell>
+                            <ChatMessages user={user} item={row} currentId={row.id}/>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                      }
+                    </TableBody>
+                  </Table>
+                  <TablePagination
+                    rowsPerPageOptions={[5, 10, 25]}
+                    component="div"
+                    count={inbox?.length} // Use the actual total count of orders
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                  />
+                </TableContainer>
+              </>
             </div>
           )}
         </div>
