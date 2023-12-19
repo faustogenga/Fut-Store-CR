@@ -12,7 +12,7 @@ export const OrdersPage = ({user, loggedIn, logOut, isVendor}) => {
           logOut = {logOut}
           isVendor = {isVendor}
           />
-      <Orders  user={user}/>
+      <Orders  user={user} />
       <Footer/>
       </>
     )

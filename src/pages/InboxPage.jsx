@@ -13,7 +13,7 @@ export const InboxPage = ({ user, loggedIn, logOut, isVendor }) => {
         logOut={logOut}
         isVendor={isVendor}
       />
-      <Inbox user={user}/>
+      <Inbox user={user} isVendor={isVendor}/>
       <Footer />
     </>
   )

@@ -18,7 +18,7 @@ import ModalMessages from './ModalMessages';
 import { ChatMessages } from './ChatMessages';
 
 
-export const Inbox = ({ user }) => {
+export const Inbox = ({ user, isVendor }) => {
   const [uniqueVendors, setUniqueVendors] = useState([]);
   const [chats, setChats] = useState([]);
   const [inbox, setInbox] = useState([]);
@@ -37,7 +37,7 @@ export const Inbox = ({ user }) => {
       fetchDataOrders();
       fetchDataChat();
     }
-  }, [user]);
+  }, [user, isVendor]);
 
   const fetchDataOrders = async (email) => {
     collectionAssignation('OrderPlaced');
@@ -50,9 +50,19 @@ export const Inbox = ({ user }) => {
           ...doc.data(),
         }
       ));
-      filterData = filterData.filter(item => item.userEmail === user.email);
-      let uniquevendors = Array.from(new Set(filterData.map((order) => order.vendor)));
-      setUniqueVendors(uniquevendors);
+      console.log(isVendor);
+      if (isVendor) {
+        console.log(filterData);
+        filterData = filterData.filter(item => item.vendor === user.email);
+        console.log(filterData);
+        let uniquevendors = Array.from(new Set(filterData.map((order) => order.userEmail)));
+        console.log(uniquevendors);
+        setUniqueVendors(uniquevendors);
+      } else {
+        filterData = filterData.filter(item => item.userEmail === user.email);
+        let uniquevendors = Array.from(new Set(filterData.map((order) => order.vendor)));
+        setUniqueVendors(uniquevendors);
+     }
       console.log(filterData);
     } catch (error) {
       console.log(error)
@@ -83,21 +93,32 @@ export const Inbox = ({ user }) => {
   const inboxLoad = async () => {
     console.log("inbox loaded");
     refresh();
-    const userChat = chats.filter((userChat) => (userChat.sender === user.email));
-    console.log(userChat);
-    setInbox(Array.from(userChat));
+    if(isVendor) {
+      const userChat = chats.filter((userChat) => (userChat.vendor === user.email));
+      console.log(userChat);
+      setInbox(Array.from(userChat));
+    } else {
+      const userChat = chats.filter((userChat) => (userChat.sender === user.email));
+      console.log(userChat);
+      setInbox(Array.from(userChat));
+    }
     setVendor('');
   }
 
   //validaciones para ver si los campos estan vacios
-  const messageValidation = () => 400 > message.length && message.leght > 0 && vendor.length > 0;
+  const messageValidation = () => 400 > message.length && message.length > 0 && vendor.length > 0;
 
   //validaciones para ver si ya existe el chat
   const newMessageValidation = async () => {
     //ver chats
     console.log(chats);
     //chequear si ya hay un chat de este usuario
-    const userChat = chats.find((userChat) => (userChat.sender === user.email && userChat.vendor === vendor));
+    let userChat = '';
+    if(isVendor){
+      userChat = chats.find((userChat) => (userChat.vendor === user.email && userChat.sender === vendor));
+    } else {
+        userChat = chats.find((userChat) => (userChat.sender === user.email && userChat.vendor === vendor));
+    }
     if (userChat) {
       console.log("existe");
       sendMessageToChat(userChat.id);
@@ -148,6 +169,8 @@ export const Inbox = ({ user }) => {
   }
 
   const sendMessage = async () => {
+    console.log(message);
+    console.log(vendor);
     if (messageValidation()) {
       newMessageValidation();
       setMessage('');
@@ -195,7 +218,7 @@ export const Inbox = ({ user }) => {
               <div className='d-flex'>
                 <div className='align-self-center'>Mensaje para : </div>
                 <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-                  <InputLabel id="demo-simple-select-standard-label">Vendedor</InputLabel>
+                  <InputLabel id="demo-simple-select-standard-label">{isVendor?  "Usuario" : "Vendedor"}</InputLabel>
                   <Select className='mx-1'
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -218,7 +241,7 @@ export const Inbox = ({ user }) => {
                   name="infoEnvio"
                   value={message}
                   onChange={handleChangeMessage}
-                  placeholder='Mensaje para el vendedor de tu orden...' />
+                  placeholder='Escribe tu mensaje aqui' />
               </div>
               <div className='d-flex justify-content-end'>
                 <button className='btn btn-info m-2' onClick={sendMessage}>Enviar</button>
@@ -232,7 +255,7 @@ export const Inbox = ({ user }) => {
                   <Table aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell style={{ fontWeight: "bolder" }}>Vendor</TableCell>
+                        <TableCell style={{ fontWeight: "bolder" }}>{isVendor?  "Usuario" : "Vendedor"}</TableCell>
                         <TableCell style={{ fontWeight: "bolder" }}>Chat</TableCell>
                       </TableRow>
                     </TableHead>
@@ -242,9 +265,9 @@ export const Inbox = ({ user }) => {
                           key={row.id}
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                          <TableCell className="p-4" align="left">{row.vendor}</TableCell>
+                          <TableCell className="p-4" align="left">{isVendor?  row.sender : row.vendor}</TableCell>
                           <TableCell>
-                            <ChatMessages user={user} item={row} currentId={row.id}/>
+                            <ChatMessages user={user} item={row} currentId={row.id} isVendor={isVendor} />
                           </TableCell>
                         </TableRow>
                       ))

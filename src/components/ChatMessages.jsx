@@ -3,7 +3,7 @@ import "../CSS/Modal.css";
 import ModalMessages from './ModalMessages';
 import { onGetMessages } from '../CRUD/app';
 
-export const ChatMessages = ({user,item,currentId}) => {
+export const ChatMessages = ({user,item,currentId,isVendor}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([])
 
@@ -27,7 +27,7 @@ export const ChatMessages = ({user,item,currentId}) => {
   return (
     <>
       <button className='btn btn-info' onClick={() => {setIsOpen(true); fetchMessages()}}>Abrir Chat 💬</button>
-      <ModalMessages user={user} item={item} messages={messages} isOpen={isOpen} onClose={onClose}/>
+      <ModalMessages user={user} item={item} messages={messages} isOpen={isOpen} onClose={onClose} isVendor={isVendor}/>
     </>
   );
 };
