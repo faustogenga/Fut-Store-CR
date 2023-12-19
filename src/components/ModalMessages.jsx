@@ -13,32 +13,41 @@ const ModalMessages = ({ item, messages, currentId, isOpen, onClose }) => {
   if (!isOpen) return null
   return (
     <>
-      {/*DISPLAY DE MODAL*/}
+      {/* DISPLAY DE MODAL */}
       <div className="overlay" />
-      <div className="modalbox">
+      <div className="modalbox" style={{ backgroundColor: "white", width: "40vw", height: "70vh"}}>
         <button className={"closeBtn"} onClick={onClose}>
           <RiCloseLine style={{ marginBottom: "-3px" }} />
         </button>
         <div>
-          <h5 className="bg-white rounded p-2 m-1">{item.vendor}</h5>
+          <h5 className="rounded p-2 m-1" style={{ backgroundColor: "azure" }}>{item.vendor} 💬</h5>
+        </div>
+        <div className="rounded p-2" style={{height:"80%" ,maxHeight: "500px", overflowY: "auto", backgroundColor:"#ebf8fa"}}>
+          {messages.map((msm, index) => (
+            msm.sender === item.sender ? (
+              <span
+                key={index}
+                style={{ backgroundColor: "#d4ffff", width: "50%", overflow: "auto", whiteSpace: "break-spaces" }}
+                className="rounded m-2 p-1 d-flex justify-content-end float-end">
+                {msm.msm}
+              </span>
+            ) : (
+              <div>
+                <div
+                  key={index}
+                  style={{ backgroundColor: "#c4ffce", width: "50%",  overflow: "auto", whiteSpace: "break-spaces" }}
+                  className="rounded m-2 p-1 d-flex justify-content-start float-start">
+                  {msm.msm}
+                </div>
+                <br />
+              </div>
+            )))}
         </div>
         <div>
-
+          <h5 className="rounded p-2 m-1 text-center" style={{ backgroundColor: "azure" }}>Mensajes 👋</h5>
         </div>
-        <div>{messages.map((msm) => (
-          msm.msmSender === item.sender ? (
-            <>
-              <div className="bg-white rounded m-2 d-flex justify-content-end">{msm.msm}</div>
-            </>
-          ) : (
-            <div>
-              <div className="bg-white">{msm.msm}</div>
-              <br />
-            </div>
-
-          )))}</div>
-        <div>{currentId}</div>
       </div>
+
     </>
   );
 };

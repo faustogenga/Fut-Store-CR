@@ -16,8 +16,8 @@ export const ChatMessages = ({user,item,currentId}) => {
         ...doc.data()
       }
     ))
-    setMessages(filterMessages);
-    console.log(filterMessages);
+    setMessages(filterMessages.sort((a, b) => a.order - b.order));
+    console.log(filterMessages.sort((a, b) => a.order - b.order));
   }
 
   const onClose = () => {

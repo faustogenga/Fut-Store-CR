@@ -90,7 +90,7 @@ export const Inbox = ({ user }) => {
   }
 
   //validaciones para ver si los campos estan vacios
-  const messageValidation = () => message.length > 0 && vendor.length > 0;
+  const messageValidation = () => 400 > message.length && message.leght > 0 && vendor.length > 0;
 
   //validaciones para ver si ya existe el chat
   const newMessageValidation = async () => {
@@ -134,7 +134,7 @@ export const Inbox = ({ user }) => {
     try {
       await onInsertMessageDoc(chatId, {
         msm: message,
-        msmSender: user.email,
+        sender: user.email,
         order: 0
       });
       Swal.fire({
@@ -155,8 +155,8 @@ export const Inbox = ({ user }) => {
     } else {
       Swal.fire({
         icon: "error",
-        title: "Campos vacios",
-        text: "Porfavor elige un vendedor y escribe un mensaje",
+        title: 'Campos vacios o \n Mensaje mayor 400 caracteres',
+        text: "Porfavor elige un vendedor y escribe un mensaje nuevamente",
       });
     }
   }
