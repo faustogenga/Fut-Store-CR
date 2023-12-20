@@ -90,8 +90,35 @@ export const Checkout = ({ user }) => {
         setCardType(event.target.value);
     };
 
+    const handleCardNumberChange = ({ target }) => {
+        // solo numeros
+        const sanitizedValue = target.value.replace(/\D/g, '');
+    
+        // espacio cada 4 numeros
+        const formattedValue = sanitizedValue.replace(/(\d{4})/g, '$1 ').trim();
+    
+        // Set the state with the formatted value
+        setCardNumber(formattedValue);
+      };
+
+      const handleExpirationDate = ({ target }) => {
+        // solo numeros
+        const sanitizedValue = target.value.replace(/\D/g, '');
+        // "/ cada 2 numeros
+        const formattedValue = sanitizedValue.replace(/(\d{2})/, '$1/').trim();
+        // Set the state with the formatted value
+        setExpirationDate(formattedValue.length <  6 ? formattedValue : '');
+      };
+
+      const handleCvv = ({target}) => {
+        // solo numeros
+        const sanitizedValue = target.value.replace(/\D/g, '');
+
+        setCvv(sanitizedValue.length < 4 ? sanitizedValue : '')
+      }
     const handleProvienceChange = (event) => {
-        setshippingEstate(event.target.value); const selectedProvince = event.target.value;
+        setshippingEstate(event.target.value); 
+        const selectedProvince = event.target.value;
         let fee;
 
         switch (selectedProvince) {
@@ -141,6 +168,7 @@ export const Checkout = ({ user }) => {
                 paymentMethod: paymentMethod,
                 cardType: cardType,
                 cardholderName: cardName,
+                cardNumber : cardNumber,
                 name: cartItem.name,
                 price: cartItem.price,
                 quantity: cartItem.quantity,
@@ -327,7 +355,7 @@ export const Checkout = ({ user }) => {
                                     <label>Numero de tarjeta</label>
                                     <input
                                         value={cardNumber}
-                                        onChange={({ target }) => setCardNumber(target.value)}
+                                        onChange={handleCardNumberChange}
                                         type="text"
                                         name="cardNumber"
                                         placeholder="Ingresa tu número de tarjeta"
@@ -339,7 +367,7 @@ export const Checkout = ({ user }) => {
                                     <label>Fecha de vencimiento</label>
                                     <input
                                         value={expirationDate}
-                                        onChange={({ target }) => setExpirationDate(target.value)}
+                                        onChange={handleExpirationDate}
                                         type="text"
                                         name="expirationDate"
                                         placeholder="MM/YY"
@@ -351,7 +379,7 @@ export const Checkout = ({ user }) => {
                                     <label>CVV</label>
                                     <input
                                         value={cvv}
-                                        onChange={({ target }) => setCvv(target.value)}
+                                        onChange={handleCvv}
                                         type="password"
                                         name="cvv"
                                         className="form-control"
