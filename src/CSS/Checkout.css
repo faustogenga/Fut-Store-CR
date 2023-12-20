@@ -13,26 +13,11 @@
     border-style: groove;
 }
 
-.checkoutSummary{
-    margin-top: 2%;
-    margin-bottom: 18%;
-    height: 360px;
-    width: 400px;
-    margin-left: 15%;
-}
-
 
 .checkout-form, .summaryCont{
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 8px;
-}
-
-.summaryCont{
-    margin-top: 2%;
-    margin-bottom: 2%;
-    height: 295px;
-    width: 350px;
 }
 
 input, select {

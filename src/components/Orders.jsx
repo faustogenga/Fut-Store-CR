@@ -31,7 +31,6 @@ export const Orders = ({ user }) => {
             });
         }
     }
-
     const showOrderDetails = async (orderId) => {
         try {
             collectionAssignation('OrderPlaced');
@@ -145,7 +144,6 @@ export const Orders = ({ user }) => {
                                 <th className='text-center'>Nombre del Producto</th>
                                 <th className='text-center'>Precio</th>
                                 <th className='text-center'>Fecha y Hora del Pedido</th>
-                                <th className='text-center'>Estado del Pedido</th>
                                 <th className='text-center'>Acciones</th>
                             </tr>
                         </thead>
@@ -179,7 +177,7 @@ export const Orders = ({ user }) => {
                                             </h6>
                                         </td>
                                         <td>
-                                            <h6 style={{ width: '15rem', fontSize: '18px' }} className='text-center'>
+                                            <h6 style={{ width: '15rem', fontSize: '18px', marginLeft: '35px' }} className='text-center'>
                                                 {item.name}
                                             </h6>
                                         </td>

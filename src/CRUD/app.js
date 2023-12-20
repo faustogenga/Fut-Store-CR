@@ -137,7 +137,7 @@ export const onInsertOrder = async (obj) => {
 }
 
 
-/* 13. OBTENER ORDEN POR ID - ORDEN CON MÚLTIPLES PRODUCTOS */
+/* 11. OBTENER ORDEN POR ID CON MÚLTIPLES PRODUCTOS */
 export const onFindOrderById = async (orderId) => {
     try {
         const orderCollectionRef = collection(db, collectionStr);
@@ -149,4 +149,3 @@ export const onFindOrderById = async (orderId) => {
         throw error;
     }
 };
-

@@ -5,7 +5,6 @@ import { collectionAssignation, onFindAll, onInsert } from '../CRUD/app';
 import { productInformation } from './Productitem'
 import { useNavigate } from "react-router-dom";
 import { Footer } from './Footer';
-import { AvatarGroup } from '@mui/material';
 
 
 const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
@@ -137,7 +136,6 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
               <p><strong>Cantidad:</strong> {productInformation.stock}</p>
               <button type='button' style={{ marginTop: "10px" }} className='btn btn-info' onClick={onClickAddShoppingCart}>Agregar al carrito</button>
             </div>
-            <br />
           </div>
         </div>
         <Footer />
