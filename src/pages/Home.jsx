@@ -4,6 +4,7 @@ import { Products } from '../components/Products'
 import { Banner } from '../components/Banner'
 import { Footer } from '../components/Footer'
 import { useEffect } from 'react'
+import { Video } from '../components/Video'
 
 export const Home = ({user, loggedIn, logOut, isVendor, isCatalog, setIsCatalog}) => {
   
@@ -20,6 +21,7 @@ export const Home = ({user, loggedIn, logOut, isVendor, isCatalog, setIsCatalog}
         <Main/>
         <Products isCatalog = {isCatalog} isVendor = {isVendor} loggedIn={loggedIn}  user={user}/>
         <Banner isVendor = {isVendor}/>
+        <Video/>
         <Footer/>
     </div>
   )
