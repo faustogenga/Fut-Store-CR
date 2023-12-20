@@ -3,14 +3,12 @@ import '../CSS/Checkout.css';
 import { collectionAssignation, onClearCart, onInsertOrder, onUpdate } from '../CRUD/app';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
-import {cart} from './Cart';
+import { cart } from './Cart';
 import { sendEmail } from '../hooks/sendEmail';
 
 export const Checkout = ({ user }) => {
     const navigate = useNavigate();
-
     //const sendEmailToUser = sendEmail();
-
     //shipping//
     const [shippingCountry, setshippingCountry] = useState('Costa Rica');
     const [shippingEstate, setshippingEstate] = useState('San Jose');
@@ -19,20 +17,30 @@ export const Checkout = ({ user }) => {
 
 
     const [paymentMethod, setPaymentMethod] = useState('Choose');
+    const [cardType, setCardType] = useState('Choose');
+    const [cardName, setCardName] = useState('');
     const [cardNumber, setCardNumber] = useState('');
     const [expirationDate, setExpirationDate] = useState('');
     const [cvv, setCvv] = useState('');
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
+    const [shippingFee, setShippingFee] = useState(0)
+    const salesTax = 0.13;
 
-    const fetchTotal = () => {
-        let total = 0;
+    const fetchTotals = () => {
+        let subtotal = 0;
         cart?.forEach((item) => {
-            total += parseInt(item.price);
+            subtotal += parseInt(item.price);
         });
 
-        return total;
+        let total = subtotal;
+        total += total * salesTax;
+        total += shippingFee;
+
+        return { subtotal, total };
     }
+
+    const { subtotal, total } = fetchTotals();
 
     function sendErrorMessage(txt, icon) {
         Swal.fire({
@@ -78,8 +86,41 @@ export const Checkout = ({ user }) => {
         setPaymentMethod(event.target.value);
     };
 
+    const handleCardType = (event) => {
+        setCardType(event.target.value);
+    };
+
     const handleProvienceChange = (event) => {
-        setshippingEstate(event.target.value);
+        setshippingEstate(event.target.value); const selectedProvince = event.target.value;
+        let fee;
+
+        switch (selectedProvince) {
+            case 'San Jose':
+                fee = 10;
+                break;
+            case 'Alajuela':
+                fee = 15;
+                break;
+            case 'Heredia':
+                fee = 20;
+                break;
+            case 'Cartago':
+                fee = 25;
+                break;
+            case 'Puntarenas':
+                fee = 30;
+                break;
+            case 'Guanacaste':
+                fee = 35;
+                break;
+            case 'Limon':
+                fee = 40;
+                break;
+            default:
+                fee = 0;
+                break;
+        }
+        setShippingFee(fee);
     };
 
     const addToOrder = async (event) => {
@@ -88,62 +129,74 @@ export const Checkout = ({ user }) => {
         if (true) {
             const orderId = generateOrderId();
             const orderItems = cart.map((cartItem) => ({
-                cart_id : cartItem.id,
-                product_id : cartItem.product_id,
+                cart_id: cartItem.id,
+                product_id: cartItem.product_id,
                 orderId: orderId,
                 userEmail: user.email,
                 vendor: cartItem.vendor,
                 shippingCountry: shippingCountry,
-                shippingEstate : shippingEstate,
-                shippingTown : shippingTown,
-                shippingDireccion : shippingDireccion,
+                shippingEstate: shippingEstate,
+                shippingTown: shippingTown,
+                shippingDireccion: shippingDireccion,
                 paymentMethod: paymentMethod,
+                cardType: cardType,
+                cardholderName: cardName,
                 name: cartItem.name,
                 price: cartItem.price,
                 quantity: cartItem.quantity,
-                stock : cartItem.stock,
-                status : "Pendiente",
-                shippingInfo : "Ordenado",
+                stock: cartItem.stock,
+                status: "Pendiente",
+                shippingInfo: "Ordenado",
                 product_img: cartItem.image,
                 orderDate: currentDate,
                 orderTime: currentTime,
+                orderTotal : total
             }));
 
             try {
-                //mostrar la orden.
-                console.log(orderItems);
-                //agregar la orden a la base de datos.
-                await Promise.all(orderItems.map(onInsertOrder));
-                //Actualizar la base de datos con los nuevos stocks.
-                await Promise.all(
-                    orderItems.map(async (orderItem) => {
-                        //calcular los nuevos stocks despues de la venta
-                        const productStock = parseInt(orderItem.stock);
-                        const orderedQuantity = parseInt(orderItem.quantity);
-                        if (productStock >= orderedQuantity) {
-                            // calcular nuevo stock
-                            const newStock = productStock - orderedQuantity;
-                            // actualizar el stock en la bd
-                            collectionAssignation("Products");
-                            await onUpdate(orderItem.product_id, { stock: newStock.toString() });
-                        } else {
-                            //error catch
-                            console.error(`Not enough stock for product with ID ${orderItem.id}`);
-                        }
-                    }));
-                //limpiar carrito
-                await onClearCart('CustomerCart', user.email);
-                //mandar correo
-                console.log(user.email);
-                console.log(orderItems[0].orderId);
-                await sendEmail(user.email, orderItems[0].orderId);
-                //mensaje
-                Swal.fire({
-                    title: '¡Compra Realizada!',
-                    text: 'Tu orden se ha completado con éxito',
-                    icon: 'success',
-                });
-
+                if (inputValidation) {
+                    //mostrar la orden.
+                    console.log(orderItems);
+                    //agregar la orden a la base de datos.
+                    await Promise.all(orderItems.map(onInsertOrder));
+                    //Actualizar la base de datos con los nuevos stocks.
+                    await Promise.all(
+                        orderItems.map(async (orderItem) => {
+                            //calcular los nuevos stocks despues de la venta
+                            const productStock = parseInt(orderItem.stock);
+                            const orderedQuantity = parseInt(orderItem.quantity);
+                            if (productStock >= orderedQuantity) {
+                                // calcular nuevo stock
+                                const newStock = productStock - orderedQuantity;
+                                // actualizar el stock en la bd
+                                collectionAssignation("Products");
+                                await onUpdate(orderItem.product_id, { stock: newStock.toString() });
+                            } else {
+                                //error catch
+                                console.error(`Not enough stock for product with ID ${orderItem.id}`);
+                            }
+                        }));
+                    //limpiar carrito
+                    await onClearCart('CustomerCart', user.email);
+                    //mandar correo
+                    console.log(user.email);
+                    console.log(orderItems[0].orderId);
+                    await sendEmail(user.email, orderItems[0].orderId);
+                    //mensaje
+                    Swal.fire({
+                        title: '¡Compra Realizada!',
+                        text: 'Tu orden se ha completado con éxito',
+                        icon: 'success',
+                    });
+                    navigate('/orders');
+                } else {
+                    Swal.fire({
+                        title: '¡ERROR!',
+                        text: 'Algo salió mal, por favor agrega todos los datos necesarios',
+                        icon: 'error',
+                    });
+                    navigate('/checkout');
+                }
             } catch (error) {
                 Swal.fire({
                     title: 'ERROR',
@@ -152,7 +205,8 @@ export const Checkout = ({ user }) => {
                 });
                 console.log(error.message)
             }
-            navigate('/orders');
+
+
         }
     };
 
@@ -242,7 +296,67 @@ export const Checkout = ({ user }) => {
                         </div>
                         {paymentMethod === 'CreditCard' && (
                             <>
-                                {/* Credit card details input fields */}
+                                <div className="form-group m-2">
+                                    <label>Nombre del titular de la tarjeta</label>
+                                    <input
+                                        value={cardName}
+                                        onChange={({ target }) => setCardName(target.value)}
+                                        type="text"
+                                        name="cardName"
+                                        placeholder="Ingresa el nombre del titular de la tarjeta"
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group m-2">
+                                    <label>Tipo de tarjeta</label>
+                                    <select
+                                        name="cardType"
+                                        value={cardType}
+                                        onChange={handleCardType}
+                                        required
+                                        className="form-control"
+                                    >
+                                        <option value="Choose">Selecciona un método de pago</option>
+                                        <option value="VISA">VISA</option>
+                                        <option value="MasterCard">MasterCard</option>
+                                        <option value="AMEX">American Express</option>
+                                    </select>
+                                </div>
+                                <div className="form-group m-2">
+                                    <label>Numero de tarjeta</label>
+                                    <input
+                                        value={cardNumber}
+                                        onChange={({ target }) => setCardNumber(target.value)}
+                                        type="text"
+                                        name="cardNumber"
+                                        placeholder="Ingresa tu número de tarjeta"
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group m-2">
+                                    <label>Fecha de vencimiento</label>
+                                    <input
+                                        value={expirationDate}
+                                        onChange={({ target }) => setExpirationDate(target.value)}
+                                        type="text"
+                                        name="expirationDate"
+                                        placeholder="MM/YY"
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group m-2">
+                                    <label>CVV</label>
+                                    <input
+                                        value={cvv}
+                                        onChange={({ target }) => setCvv(target.value)}
+                                        type="password"
+                                        name="cvv"
+                                        className="form-control"
+                                        required />
+                                </div>
                             </>
                         )}
                         {paymentMethod === 'PayPal' && (
@@ -273,12 +387,19 @@ export const Checkout = ({ user }) => {
                             return <label>&#10090;{product.quantity}&#10091; - ${product.price} : {product.name} </label>
                         })}
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
-                        <label htmlFor="Impuestos">Impuestos: ...........................................</label>
+                        <label htmlFor="Subtotal">Subtotal:.................................................... ${subtotal}</label>
                     </div>
-                    <div> 
-                        <label htmlFor="Total">Total a pagar: ${fetchTotal()}</label>
+                    <div>
+                        <label htmlFor='Impuestos'>Impuesto (I.V.A):..................................... 13%</label>
+                    </div>
+                    <div>
+                        <label htmlFor="Impuestos">Costo de envío:....................................... ${shippingFee}</label>
+                    </div>
+                    <br />
+                    <div>
+                        <label htmlFor="Total"> <b>Total a pagar:........................................ ${total}</b></label>
                     </div>
                 </div>
             </div>

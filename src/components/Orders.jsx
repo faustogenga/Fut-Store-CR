@@ -62,14 +62,15 @@ export const Orders = ({ user }) => {
                             <h4 style="font-weight: bold;">Información general de tu pedido:</h4>
                                 <div>Número de pedido: ${orderDetails[0].data().orderId}</div> <br />
                                 <div>Estado: ${orderDetails[0].data().status}</div> <br />
-                                <div>Informacion de Envio:</div>
+                                <div>Información de Envío: </div>
                                 <div>${orderDetails[0].data().shippingInfo}</div> <br />
                                 <div>Pedido realizado el: ${orderDetails[0].data().orderDate} ${orderDetails[0].data().orderTime}</div> <br />
-                                <div>Pais: ${orderDetails[0].data().shippingCountry}</div> <br />
+                                <div>País: ${orderDetails[0].data().shippingCountry}</div> <br />
                                 <div>Provincia: ${orderDetails[0].data().shippingEstate} / Ciudad: ${orderDetails[0].data().shippingTown}</div> <br />
-                                <div>Direccion:</div> 
+                                <div>Dirección:</div> 
                                 <div>${orderDetails[0].data().shippingDireccion}</div> <br />
-                                <div>Método de pago: ${orderDetails[0].data().paymentMethod}</div> <br />
+                                <div>Método de pago: </div>
+                                <div>${orderDetails[0].data().paymentMethod + " / " + orderDetails[0].data().cardType}</div> <br />
                             </div>    
                         </div>
                     </div>
