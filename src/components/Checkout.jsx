@@ -27,6 +27,8 @@ export const Checkout = ({ user }) => {
     const [shippingFee, setShippingFee] = useState(0)
     const salesTax = 0.13;
 
+    const [errorMessage, setErrorMessage] = useState('Algo salió mal, por favor agrega todos los datos necesarios')
+
     const fetchTotals = () => {
         let subtotal = 0;
         cart?.forEach((item) => {
@@ -42,34 +44,21 @@ export const Checkout = ({ user }) => {
 
     const { subtotal, total } = fetchTotals();
 
-    function sendErrorMessage(txt, icon) {
-        Swal.fire({
-            title: '¡ERROR!',
-            text: txt,
-            icon: icon,
-        });
-    }
     const inputValidation = () => {
         if (shippingCountry.trim() === '') {
-            sendErrorMessage('Dirección de entrega vacía', 'error');
+            setErrorMessage('Dirección de entrega vacía', 'error');
             return false;
         } else if (cardNumber.trim() === '') {
-            sendErrorMessage('Número de tarjeta vacío', 'error');
-            return false;
-        } else if (cardNumber.length !== 16) {
-            sendErrorMessage("Número de tarjeta inválido", "error");
+            setErrorMessage('Número de tarjeta vacío', 'error');
             return false;
         } else if (expirationDate.trim() === '') {
-            sendErrorMessage('Fecha de vencimiento vacía', 'error');
-            return false;
-        } else if (expirationDate.length !== 5) {
-            sendErrorMessage("Fecha de vencimiento inválida", "error");
+            setErrorMessage('Fecha de vencimiento vacía', 'error');
             return false;
         } else if (cvv.trim() === '') {
-            sendErrorMessage('CVV vacío', 'error');
+            setErrorMessage('CVV vacío', 'error');
             return false;
         } else if (cvv.length > 4 || cvv.length < 3) {
-            sendErrorMessage("CVV inválido", "error");
+            setErrorMessage("CVV inválido", "error");
             return false;
         } else {
             return true;
@@ -182,7 +171,7 @@ export const Checkout = ({ user }) => {
             }));
 
             try {
-                if (inputValidation) {
+                if (inputValidation()) {
                     //mostrar la orden.
                     console.log(orderItems);
                     //agregar la orden a la base de datos.
@@ -220,7 +209,7 @@ export const Checkout = ({ user }) => {
                 } else {
                     Swal.fire({
                         title: '¡ERROR!',
-                        text: 'Algo salió mal, por favor agrega todos los datos necesarios',
+                        text: errorMessage,
                         icon: 'error',
                     });
                     navigate('/checkout');
