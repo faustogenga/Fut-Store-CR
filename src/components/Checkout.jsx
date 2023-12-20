@@ -223,9 +223,9 @@ export const Checkout = ({ user }) => {
                 console.log(error.message)
             }
 
-
         }
     };
+
 
     return (
         <div className='MainCheckout d-flex justify-content-center align-items-center'>
