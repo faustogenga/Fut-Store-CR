@@ -6,7 +6,6 @@ import { useState } from "react";
 const Modal = ({ user, item, currentId, isOpen, onClose, handleEdit }) => {
 
   //incio de modal par editar productos,
-
   //definimos las casillas con la info del producto
   const initialValues = {
     category: item.category,

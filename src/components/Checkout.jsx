@@ -3,14 +3,12 @@ import '../CSS/Checkout.css';
 import { collectionAssignation, onClearCart, onInsertOrder, onUpdate } from '../CRUD/app';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
-import {cart} from './Cart';
+import { cart } from './Cart';
 import { sendEmail } from '../hooks/sendEmail';
 
 export const Checkout = ({ user }) => {
     const navigate = useNavigate();
-
     //const sendEmailToUser = sendEmail();
-
     //shipping//
     const [shippingCountry, setshippingCountry] = useState('Costa Rica');
     const [shippingEstate, setshippingEstate] = useState('San Jose');
@@ -26,55 +24,41 @@ export const Checkout = ({ user }) => {
     const [cvv, setCvv] = useState('');
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
-
     const [shippingFee, setShippingFee] = useState(0)
-
     const salesTax = 0.13;
+
+    const [errorMessage, setErrorMessage] = useState('Algo salió mal, por favor agrega todos los datos necesarios')
 
     const fetchTotals = () => {
         let subtotal = 0;
         cart?.forEach((item) => {
             subtotal += parseInt(item.price);
         });
-    
+
         let total = subtotal;
         total += total * salesTax;
         total += shippingFee;
-    
+
         return { subtotal, total };
     }
 
-    const {subtotal, total} = fetchTotals();
-
-    function sendErrorMessage(txt, icon) {
-        Swal.fire({
-            title: '¡ERROR!',
-            text: txt,
-            icon: icon,
-        });
-    }
+    const { subtotal, total } = fetchTotals();
 
     const inputValidation = () => {
         if (shippingCountry.trim() === '') {
-            sendErrorMessage('Dirección de entrega vacía', 'error');
+            setErrorMessage('Dirección de entrega vacía', 'error');
             return false;
         } else if (cardNumber.trim() === '') {
-            sendErrorMessage('Número de tarjeta vacío', 'error');
-            return false;
-        } else if (cardNumber.length !== 16) {
-            sendErrorMessage("Número de tarjeta inválido", "error");
+            setErrorMessage('Número de tarjeta vacío', 'error');
             return false;
         } else if (expirationDate.trim() === '') {
-            sendErrorMessage('Fecha de vencimiento vacía', 'error');
-            return false;
-        } else if (expirationDate.length !== 5) {
-            sendErrorMessage("Fecha de vencimiento inválida", "error");
+            setErrorMessage('Fecha de vencimiento vacía', 'error');
             return false;
         } else if (cvv.trim() === '') {
-            sendErrorMessage('CVV vacío', 'error');
+            setErrorMessage('CVV vacío', 'error');
             return false;
         } else if (cvv.length > 4 || cvv.length < 3) {
-            sendErrorMessage("CVV inválido", "error");
+            setErrorMessage("CVV inválido", "error");
             return false;
         } else {
             return true;
@@ -95,8 +79,34 @@ export const Checkout = ({ user }) => {
         setCardType(event.target.value);
     };
 
+    const handleCardNumberChange = ({ target }) => {
+        // solo numeros
+        const sanitizedValue = target.value.replace(/\D/g, '');
+    
+        // espacio cada 4 numeros
+        const formattedValue = sanitizedValue.replace(/(\d{4})/g, '$1 ').trim();
+    
+        // Set the state with the formatted value
+        setCardNumber(formattedValue);
+      };
+
+      const handleExpirationDate = ({ target }) => {
+        // solo numeros
+        const sanitizedValue = target.value.replace(/\D/g, '');
+        // "/ cada 2 numeros
+        const formattedValue = sanitizedValue.replace(/(\d{2})/, '$1/').trim();
+        // Set the state with the formatted value
+        setExpirationDate(formattedValue.length <  6 ? formattedValue : '');
+      };
+
+      const handleCvv = ({target}) => {
+        // solo numeros
+        const sanitizedValue = target.value.replace(/\D/g, '');
+
+        setCvv(sanitizedValue.length < 4 ? sanitizedValue : '')
+      }
     const handleProvienceChange = (event) => {
-        setshippingEstate(event.target.value);
+        setshippingEstate(event.target.value); 
         const selectedProvince = event.target.value;
         let fee;
 
@@ -124,9 +134,8 @@ export const Checkout = ({ user }) => {
                 break;
             default:
                 fee = 0;
-                break;  
+                break;
         }
-
         setShippingFee(fee);
     };
 
@@ -136,27 +145,29 @@ export const Checkout = ({ user }) => {
         if (true) {
             const orderId = generateOrderId();
             const orderItems = cart.map((cartItem) => ({
-                cart_id : cartItem.id,
-                product_id : cartItem.product_id,
-                orderId : orderId,
-                userEmail  : user.email,
-                vendor : cartItem.vendor,
-                shippingCountry : shippingCountry,
-                shippingEstate : shippingEstate,
-                shippingTown : shippingTown,
-                shippingDireccion : shippingDireccion,
-                paymentMethod : paymentMethod,
-                cardType : cardType,
-                cardholderName : cardName,
-                name : cartItem.name,
-                price : cartItem.price,
-                quantity : cartItem.quantity,
-                status : "Pendiente",
-                shippingInfo : "Ordenado",
-                product_img : cartItem.image,
-                orderTotal : total,
-                orderDate : currentDate,
-                orderTime : currentTime,
+                cart_id: cartItem.id,
+                product_id: cartItem.product_id,
+                orderId: orderId,
+                userEmail: user.email,
+                vendor: cartItem.vendor,
+                shippingCountry: shippingCountry,
+                shippingEstate: shippingEstate,
+                shippingTown: shippingTown,
+                shippingDireccion: shippingDireccion,
+                paymentMethod: paymentMethod,
+                cardType: cardType,
+                cardholderName: cardName,
+                cardNumber : cardNumber,
+                name: cartItem.name,
+                price: cartItem.price,
+                quantity: cartItem.quantity,
+                stock: cartItem.stock,
+                status: "Pendiente",
+                shippingInfo: "Ordenado",
+                product_img: cartItem.image,
+                orderDate: currentDate,
+                orderTime: currentTime,
+                orderTotal : total
             }));
 
             try {
@@ -198,7 +209,7 @@ export const Checkout = ({ user }) => {
                 } else {
                     Swal.fire({
                         title: '¡ERROR!',
-                        text: 'Algo salió mal, por favor agrega todos los datos necesarios',
+                        text: errorMessage,
                         icon: 'error',
                     });
                     navigate('/checkout');
@@ -211,6 +222,7 @@ export const Checkout = ({ user }) => {
                 });
                 console.log(error.message)
             }
+
         }
     };
 
@@ -301,68 +313,68 @@ export const Checkout = ({ user }) => {
                         </div>
                         {paymentMethod === 'CreditCard' && (
                             <>
-                            <div className="form-group m-2">
-                                <label>Nombre del titular de la tarjeta</label>
-                                <input 
-                                    value={cardName}
-                                    onChange={({ target }) => setCardName(target.value)}
-                                    type="text"
-                                    name="cardName"
-                                    placeholder="Ingresa el nombre del titular de la tarjeta"
-                                    className="form-control"
-                                    required
-                                />
-                            </div>
-                            <div className="form-group m-2">
-                            <label>Tipo de tarjeta</label>
-                            <select
-                                name="cardType"
-                                value={cardType}
-                                onChange={handleCardType}
-                                required
-                                className="form-control"
-                            >
-                                <option value="Choose">Selecciona un método de pago</option>
-                                <option value="VISA">VISA</option>
-                                <option value="MasterCard">MasterCard</option>
-                                <option value="AMEX">American Express</option>
-                            </select>
-                            </div>
-                            <div className="form-group m-2">
-                                <label>Numero de tarjeta</label>
-                                <input 
-                                    value={cardNumber}
-                                    onChange={({ target }) => setCardNumber(target.value)}
-                                    type="text"
-                                    name="cardNumber"
-                                    placeholder="Ingresa tu número de tarjeta"
-                                    className="form-control"
-                                    required
-                                />
-                            </div>
-                            <div className="form-group m-2">
-                                <label>Fecha de vencimiento</label>
-                                <input
-                                    value={expirationDate}
-                                    onChange={({ target }) => setExpirationDate(target.value)}
-                                    type="text"
-                                    name="expirationDate"
-                                    placeholder="MM/YY"
-                                    className="form-control"
-                                    required
-                                />
-                            </div>
-                            <div className="form-group m-2">
-                                <label>CVV</label>
-                                <input
-                                value={cvv}
-                                onChange={({ target }) => setCvv(target.value)}
-                                type="password" 
-                                name="cvv" 
-                                className="form-control"
-                                required />
-                            </div>
-                        </>
+                                <div className="form-group m-2">
+                                    <label>Nombre del titular de la tarjeta</label>
+                                    <input
+                                        value={cardName}
+                                        onChange={({ target }) => setCardName(target.value)}
+                                        type="text"
+                                        name="cardName"
+                                        placeholder="Ingresa el nombre del titular de la tarjeta"
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group m-2">
+                                    <label>Tipo de tarjeta</label>
+                                    <select
+                                        name="cardType"
+                                        value={cardType}
+                                        onChange={handleCardType}
+                                        required
+                                        className="form-control"
+                                    >
+                                        <option value="Choose">Selecciona un método de pago</option>
+                                        <option value="VISA">VISA</option>
+                                        <option value="MasterCard">MasterCard</option>
+                                        <option value="AMEX">American Express</option>
+                                    </select>
+                                </div>
+                                <div className="form-group m-2">
+                                    <label>Numero de tarjeta</label>
+                                    <input
+                                        value={cardNumber}
+                                        onChange={handleCardNumberChange}
+                                        type="text"
+                                        name="cardNumber"
+                                        placeholder="Ingresa tu número de tarjeta"
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group m-2">
+                                    <label>Fecha de vencimiento</label>
+                                    <input
+                                        value={expirationDate}
+                                        onChange={handleExpirationDate}
+                                        type="text"
+                                        name="expirationDate"
+                                        placeholder="MM/YY"
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group m-2">
+                                    <label>CVV</label>
+                                    <input
+                                        value={cvv}
+                                        onChange={handleCvv}
+                                        type="password"
+                                        name="cvv"
+                                        className="form-control"
+                                        required />
+                                </div>
+                            </>
                         )}
                         {paymentMethod === 'PayPal' && (
                             <div className="form-group">
@@ -392,18 +404,18 @@ export const Checkout = ({ user }) => {
                             return <label>&#10090;{product.quantity}&#10091; - ${product.price} : {product.name} </label>
                         })}
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
-                        <label htmlFor='Impuestos'>Impuesto (I.V.A):..................................... 13%</label> 
+                        <label htmlFor="Subtotal">Subtotal:.................................................... ${subtotal}</label>
+                    </div>
+                    <div>
+                        <label htmlFor='Impuestos'>Impuesto (I.V.A):..................................... 13%</label>
                     </div>
                     <div>
                         <label htmlFor="Impuestos">Costo de envío:....................................... ${shippingFee}</label>
                     </div>
-                    <div>
-                        <label htmlFor="Subtotal">Subtotal:.................................................... ${subtotal}</label>
-                    </div>
                     <br />
-                    <div> 
+                    <div>
                         <label htmlFor="Total"> <b>Total a pagar:........................................ ${total}</b></label>
                     </div>
                 </div>

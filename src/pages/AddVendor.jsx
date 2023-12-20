@@ -62,8 +62,7 @@ export const AddVendor = ({ setLoggedIn }) => {
         }).then(() => {
             //luego del alert, loggedin = true y navegar al home
             console.log(auth.currentUser);
-            setLoggedIn(true);
-            navigate('/');
+            navigate('/Login');
         })
     }
 

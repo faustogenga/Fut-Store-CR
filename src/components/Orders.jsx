@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../CSS/Orders.css';
 import { Button, Container, Row, Table } from 'react-bootstrap';
 import Swal from 'sweetalert2';
-import { collectionAssignation, onFindOrderById, onFindbyEmail } from '../CRUD/app';
+import { collectionAssignation, onFindOrderById, onFindbyEmail, onUpdate } from '../CRUD/app';
 
 export const Orders = ({ user }) => {
     const [orders, setOrders] = useState([]);
@@ -45,30 +45,33 @@ export const Orders = ({ user }) => {
                         <div>
                             <h4 style="font-weight: bold;">Tu pedido incluye:</h4> 
                             ${orderDetails.map((product, index) => `
-                                <div key=${index} style="display: flex; align-items: center;">
+                                <div key=${index} style="display: flex; justify-contents: left">
                                     <img src="${product.data().product_img}" style="width: 12rem; height: 12rem; margin-right: 2rem; margin-left: 2rem;"/>
-                                    <div>
+                                    <div style="align-items: left;">
                                         <div style="font-weight: bold;">Nombre del producto:</div>
                                         <div>${product.data().name}</div>
-                                        <div> <strong> Cantidad: </strong> ${product.data().quantity}</div>
-                                        <div> <strong> Precio: </strong> $ ${product.data().price}</div>
+                                        <br/>
+                                        <div>Vendor: ${product.data().vendor}</div>
+                                        <br/>
+                                        <div style="font-weight: bold;">Cantidad: ${product.data().quantity}</div>
+                                        <div style="font-weight: bold;">Precio: $${product.data().price}</div>
+                                        
                                     </div>
                                 </div> <br />
                             `).join('')}
                             <div style="align-items: center;" >
                             <h4 style="font-weight: bold;">Información general de tu pedido:</h4>
-                                <div> <strong> Número de pedido: </strong> ${orderDetails[0].data().orderId}</div> <br />
-                                <div> <strong> Estado: </strong> ${orderDetails[0].data().status}</div> <br />
-                                <div> <strong> Información de Envío: </strong> </div>
+                                <div>Número de pedido: ${orderDetails[0].data().orderId}</div> <br />
+                                <div>Estado: ${orderDetails[0].data().status}</div> <br />
+                                <div>Información de Envío: </div>
                                 <div>${orderDetails[0].data().shippingInfo}</div> <br />
-                                <div> <strong> Vendedor: </strong> ${orderDetails[0].data().vendor}</div> <br />
-                                <div> <strong> Pedido realizado el: </strong> ${orderDetails[0].data().orderDate} ${orderDetails[0].data().orderTime}</div> <br />
-                                <div> <strong> País: </strong> ${orderDetails[0].data().shippingCountry}</div> <br />
-                                <div> <strong> Provincia: </strong> ${orderDetails[0].data().shippingEstate} / Ciudad: ${orderDetails[0].data().shippingTown}</div> <br />
-                                <div> <strong> Dirección: </strong> </div> 
+                                <div>Pedido realizado el: ${orderDetails[0].data().orderDate} ${orderDetails[0].data().orderTime}</div> <br />
+                                <div>País: ${orderDetails[0].data().shippingCountry}</div> <br />
+                                <div>Provincia: ${orderDetails[0].data().shippingEstate} / Ciudad: ${orderDetails[0].data().shippingTown}</div> <br />
+                                <div>Dirección:</div> 
                                 <div>${orderDetails[0].data().shippingDireccion}</div> <br />
-                                <div> <strong> Método de pago: </strong> ${orderDetails[0].data().cardType}</div> <br />
-                                <div> <strong> Costo total del pedido: </strong> $ ${orderDetails[0].data().orderTotal}</div> <br />
+                                <div>Método de pago: </div>
+                                <div>${orderDetails[0].data().paymentMethod + " / " + orderDetails[0].data().cardType}</div> <br />
                             </div>    
                         </div>
                     </div>
@@ -93,6 +96,36 @@ export const Orders = ({ user }) => {
             });
         }
     }
+
+    const openShippingStatus = (obj) => {
+        const swalContent =
+            ` 
+        <div style="font-weight: bold;">Orden :</div> 
+        <div>${obj.orderId}</div>
+        <div>${obj.name}</div> <br />
+        <div style="font-weight: bold;">Estado : ${obj.status}</div> <br/>
+        <div style="font-weight: bold;">Informacion :</div> 
+        <div>${obj.shippingInfo}</div> <br />
+        `;
+        Swal.fire({
+            title: 'Estado de Envio',
+            html: swalContent,
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Listo',
+            showCloseButton: true,
+        });
+    }
+
+    const handleChat = async (currentId, estado, infoEnvio) => {
+        collectionAssignation('Chat');
+        await onUpdate(currentId,
+            {   
+                status: estado,
+                shippingInfo: infoEnvio,
+            });
+    };
+
     return (
         <div className='mainOrders'>
             <Container className="py-4">
@@ -104,9 +137,10 @@ export const Orders = ({ user }) => {
                 <Row className="justify-content-center">
                     <Table responsive="sm" className='table table-bordered border-primary align-middle table-info table-sm'>
                         <thead style={{ position: 'sticky', top: '0' }}>
-                            <tr style={{ fontSize: '22px', fontFamily: 'Times New Roman' }}>
+                            <tr style={{ fontSize: '18px', fontFamily: 'Times New Roman' }}>
                                 <th className='text-center'>Imagen</th>
                                 <th className='text-center'>Número de Pedido</th>
+                                <th className='text-center'>Estado</th>
                                 <th className='text-center'>Cantidad</th>
                                 <th className='text-center'>Nombre del Producto</th>
                                 <th className='text-center'>Precio</th>
@@ -118,7 +152,7 @@ export const Orders = ({ user }) => {
                         <tbody>
                             {orders.map((item, index) => {
                                 return (
-                                    <tr key={index} style={{ fontSize: '18px'}}>
+                                    <tr key={index} style={{ fontSize: '16px'}}>
                                         <td className='text-center'>
                                             <div style={{
                                                 background: 'white', height: '8rem', overflow: 'hidden', display: 'flex',
@@ -136,6 +170,11 @@ export const Orders = ({ user }) => {
                                         </td>
                                         <td className='text-center'>
                                             <h6 style={{ whiteSpace: 'nowrap', width: '10rem', overflow: 'hidden', textOverFlow: 'ellipsis', fontSize: '18px' }}>
+                                            <button type="button" className="btn btn-success p-1" onClick={() => openShippingStatus(item)}>{item.status}</button>
+                                            </h6>
+                                        </td>
+                                        <td className='text-center'>
+                                            <h6 style={{ whiteSpace: 'nowrap', width: '5rem', overflow: 'hidden', textOverFlow: 'ellipsis', fontSize: '18px' }}>
                                                 {item.quantity}
                                             </h6>
                                         </td>
@@ -144,10 +183,13 @@ export const Orders = ({ user }) => {
                                                 {item.name}
                                             </h6>
                                         </td>
-                                        <td className='text-center' style={{width: '10rem'}}>$ {item.price}</td>
-                                        <td className='text-center' style={{width: '10rem'}}> {item.orderDate} {item.orderTime}</td>
-                                        <td className='text-center' style={{width: '10rem'}}> {item.status} </td>
-                                        <td className='text-center' style={{width: '15rem'}}>
+                                        <td className='text-center'>
+                                            <h6 style={{ whiteSpace: 'nowrap', width: '5rem', overflow: 'hidden', textOverFlow: 'ellipsis', fontSize: '18px' }}>
+                                                ${item.price}
+                                            </h6>
+                                        </td>
+                                        <td className='text-center'> {item.orderDate} {item.orderTime}</td>
+                                        <td className='text-center'>
                                             <Button className="btn btn-info" onClick={() => showOrderDetails(item.orderId)}>Ver más detalles</Button>
                                         </td>
                                     </tr>

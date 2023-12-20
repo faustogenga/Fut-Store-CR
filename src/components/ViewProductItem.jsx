@@ -126,14 +126,14 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
               <p><strong>Talla:</strong> {productInformation.size}</p>
               <p><strong>Correo registrado del vendedor:</strong> {productInformation.vendor}</p>
               <p><strong>Categoría:</strong> {productInformation.category}</p>
-              <p><strong>Estado:</strong>
-              {Availability === "Disponible" ? (
-                <p style={{ backgroundColor: 'green', color: 'white', width: '5rem', fontWeight: 'bold', marginBottom: "10px" }}>{Availability}</p>
-              ) : (
-                <p style={{ backgroundColor: 'red', color: 'white', width: '6.5rem', fontWeight: 'bold', marginBottom: "10px" }}>{Availability}</p>
-              )}
-              </p>
-              
+              <div className='d-flex'>
+                <strong>Estado:</strong>
+                {Availability === "Disponible" ? (
+                  <div className='mx-1 rounded px-1' style={{ backgroundColor: 'green', color: 'white', fontWeight: 'bold', marginBottom: "10px" }}>{Availability}</div>
+                ) : (
+                  <div className='mx-1 rounded px-1' style={{ backgroundColor: 'red', color: 'white', fontWeight: 'bold', marginBottom: "10px" }}>{Availability}</div>
+                )}
+              </div>
               <p><strong>Cantidad:</strong> {productInformation.stock}</p>
               <button type='button' style={{ marginTop: "10px" }} className='btn btn-info' onClick={onClickAddShoppingCart}>Agregar al carrito</button>
             </div>
