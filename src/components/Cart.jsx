@@ -9,25 +9,25 @@ import Swal from 'sweetalert2';
 export let cart;
 
 export const Cart = ({ user }) => {
-
     const navigate = useNavigate();
-
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
         if (user && user.email) {
-            console.log(user.email);
             fetchProducts();
         }
     }, [user]);
 
 
     const fetchProducts = async () => {
-        try {
+        try {            
             collectionAssignation('CustomerCart');
             const result = await onFindbyEmail(user.email);
             if (result) {
-                const productsData = result.map((doc) => doc.data());
+                const productsData = result.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+            }));
                 setProducts(productsData);
             } else {
                 console.log("Error")
@@ -49,7 +49,6 @@ export const Cart = ({ user }) => {
 
     const updateCartItemQuantity = (index, increase) => {
         const updatedQuantity = [...products];
-
         const productStock = parseInt(products[index].stock);
 
         if ((updatedQuantity[index].quantity === 1 && !increase) || (updatedQuantity[index].quantity === productStock && increase)) {
@@ -79,14 +78,18 @@ export const Cart = ({ user }) => {
     };
 
 
-    const removeItem = async (index, product_id) => {
+    const removeItem = async (index, paramId) => {
         try {
-            console.log(product_id)
-            await onDeleteFromCart('CustomerCart', product_id, user.email);
+            console.log(paramId);
+            await onDeleteFromCart('CustomerCart', paramId);
             const updatedCart = [...products];
             updatedCart.splice(index, 1);
             setProducts(updatedCart);
-
+            Swal.fire({
+                title: "Producto Eliminado",
+                text: "Eliminaste este producto de tu carrito",
+                icon: "success"
+            });
         } catch (error) {
             Swal.fire({
                 title: "Error al eliminar el producto del carrito.",
@@ -101,7 +104,7 @@ export const Cart = ({ user }) => {
             await onClearCart('CustomerCart', user.email);
             setProducts([]);
             Swal.fire({
-                title: "Su carrito se encuentra vacío.",
+                title: "Su carrito ahora esta vacío.",
                 icon: "success"
             });
         } catch (error) {
@@ -176,7 +179,7 @@ export const Cart = ({ user }) => {
                                         <td className='text-center'>
                                             <Button className="btn-info ms-2" onClick={() => updateCartItemQuantity(index, false)}>-</Button>
                                             <Button className="btn-success ms-2" onClick={() => updateCartItemQuantity(index, true)}>+</Button>
-                                            <Button variant="danger" className="ms-2" onClick={() => removeItem(index, item.product_id)}>Eliminar Producto</Button>
+                                            <Button variant="danger" className="ms-2" onClick={() => removeItem(index, item.id)}>Eliminar Producto</Button>
                                         </td>
                                     </tr>
                                 )

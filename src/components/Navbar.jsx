@@ -9,7 +9,6 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
 
   useEffect(() => {
     if (user && user.email) {
-      console.log(user.email);
       getCartNumber();
     }
   }, [user]);
@@ -86,14 +85,21 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
           <div className="d-flex">
             {loggedIn ? (
               <>
-                <a className="nav-link mx-3" href="/orders"
+                <a className="nav-link mx-3" href="/inbox"
                   onMouseOver={(e) => (e.target.style.color = '#3498DB')}
                   onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
                 >
-                  Pedidos
+                  Inbox 📩
                 </a>
+                {!isVendor && (
+                  <a className="nav-link mx-3" href="/orders"
+                    onMouseOver={(e) => (e.target.style.color = '#3498DB')}
+                    onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}
+                  >
+                    Pedidos 🛍️
+                  </a>
+                )}
                 <i className="bi bi-person-circle mx-2 text-info"></i>
-
                 <i className='text-white' id="my-anchor-element">
                   Bienvenido {user.email.split("@")[0]}
                 </i>

@@ -20,7 +20,6 @@ export const Products = ({loggedIn,user,isCatalog, isVendor}) => {
             ));
             setproducts(filterData);
         }
-
         fetchdata();
     }, []);
 

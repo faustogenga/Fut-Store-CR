@@ -6,7 +6,7 @@ export const Delete = ({ currentId, handleDelete}) => {
   const onDeleteItem = () => {
     Swal.fire({
       title: "¿Seguro que quieres eliminar?",
-      text: "Eliminar producto",
+      text: "Eliminando...",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
@@ -18,7 +18,7 @@ export const Delete = ({ currentId, handleDelete}) => {
         console.log("Borrado");
 
         Swal.fire({
-          title: "Producto Eliminado :(",
+          title: "Eliminado :(",
           imageUrl: "https://i.pinimg.com/564x/a6/ea/cb/a6eacbb1e92c055a4e77059d960da8fd.jpg",
           imageWidth: 300,
           imageHeight: 300,
