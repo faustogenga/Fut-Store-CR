@@ -30,7 +30,7 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
 
   const addToFirebaseCart = async () => {
     const product = {
-      product_id : productInformation.id,
+      product_id: productInformation.id,
       image: productInformation.img,
       name: productInformation.name,
       price: productInformation.price,
@@ -112,16 +112,29 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
               </button>
               <img alt='Produt_Image' style={{ width: '90%', height: '100%' }} src={productInformation.img}></img>
             </div>
-            <div style={{ marginTop: "30px" }}>
-              <p style={{ marginTop: "30px", fontSize: '33px' }}><strong>{productInformation.name}</strong></p>
-              <p style={{ marginTop: "30px" }}>Descripción: {productInformation.description}</p>
-              <p style={{ marginTop: "30px" }}>Precio ${productInformation.price}</p>
-              <p style={{ marginTop: "30px" }}>Talla {productInformation.size}</p>
-              <p style={{ marginTop: "30px" }}>Correo registrado del vendedor: {productInformation.vendor}</p>
-              <p style={{ marginTop: "30px" }}>Estado: {Availability}</p>
-              <p style={{ marginTop: "30px" }}>Cantidad: {productInformation.stock}</p>
-              <button type='button' style={{ marginTop: "30px" }} className='btn btn-info'
-                onClick={onClickAddShoppingCart}>Agregar al carrito</button>
+            <div style={{
+              marginTop: "30px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start", // Alinea los elementos a la izquierda
+              fontSize: "16px",     // Tamaño de fuente predeterminado
+            }}>
+              <p style={{ fontSize: '33px', fontWeight: 'bold', marginBottom: "10px" }}>{productInformation.name}</p>
+              <p><strong>Descripción:</strong> {productInformation.description}</p>
+              <p><strong>Precio:</strong> ${productInformation.price}</p>
+              <p><strong>Talla:</strong> {productInformation.size}</p>
+              <p><strong>Correo registrado del vendedor:</strong> {productInformation.vendor}</p>
+              <p><strong>Categoría:</strong> {productInformation.category}</p>
+              <div className='d-flex'>
+                <strong>Estado:</strong>
+                {Availability === "Disponible" ? (
+                  <div className='mx-1 rounded px-1' style={{ backgroundColor: 'green', color: 'white', fontWeight: 'bold', marginBottom: "10px" }}>{Availability}</div>
+                ) : (
+                  <div className='mx-1 rounded px-1' style={{ backgroundColor: 'red', color: 'white', fontWeight: 'bold', marginBottom: "10px" }}>{Availability}</div>
+                )}
+              </div>
+              <p><strong>Cantidad:</strong> {productInformation.stock}</p>
+              <button type='button' style={{ marginTop: "10px" }} className='btn btn-info' onClick={onClickAddShoppingCart}>Agregar al carrito</button>
             </div>
           </div>
         </div>
