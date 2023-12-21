@@ -184,8 +184,8 @@ export const BasicTable = ({ user }) => {
                         <TableHead>
                             <TableRow>
                                 <TableCell style={{ fontWeight: "bolder" }} >Producto</TableCell>
-                                <TableCell align="right" style={{ fontWeight: "bolder" }}>Categoria</TableCell>
-                                <TableCell align="right" style={{ fontWeight: "bolder" }}>Descripcion</TableCell>
+                                <TableCell align="right" style={{ fontWeight: "bolder" }}>Categoría</TableCell>
+                                <TableCell align="right" style={{ fontWeight: "bolder" }}>Descripción</TableCell>
                                 <TableCell align="right" style={{ fontWeight: "bolder" }}>Precio</TableCell>
                                 <TableCell align="right" style={{ fontWeight: "bolder" }}>Talla</TableCell>
                                 <TableCell align="right" style={{ fontWeight: "bolder" }}>Cantidad</TableCell>
@@ -241,9 +241,9 @@ export const BasicTable = ({ user }) => {
                                 <TableCell align="center" style={{ fontWeight: "bolder" }}>Producto</TableCell>
                                 <TableCell align="center" style={{ fontWeight: "bolder" }}>Imagen</TableCell>
                                 <TableCell align="center" style={{ fontWeight: "bolder" }}>Fecha</TableCell>
-                                <TableCell align="center" style={{ fontWeight: "bolder" }}>MetodoPago</TableCell>
+                                <TableCell align="center" style={{ fontWeight: "bolder" }}>MétodoPago</TableCell>
                                 <TableCell align="center" style={{ fontWeight: "bolder" }} className='p-0'>Cantidad</TableCell>
-                                <TableCell align="center" style={{ fontWeight: "bolder" }}>Direccion</TableCell>
+                                <TableCell align="center" style={{ fontWeight: "bolder" }}>Dirección</TableCell>
                                 <TableCell align="center" style={{ fontWeight: "bolder" }}>Usuario</TableCell>
                                 <TableCell align="center" style={{ fontWeight: "bolder" }}>Total</TableCell>
                                 <TableCell align="right" style={{ fontWeight: "bolder" }} >Estatus</TableCell>
