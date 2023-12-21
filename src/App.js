@@ -17,6 +17,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './CRUD/firebase_conection';
 import { Register } from './pages/Register';
 import ViewProductItem from './components/ViewProductItem.jsx'
+import { Reviews } from './components/Reviews';
 
 /*Firebase */
 import { collectionAssignation, onFindByVendor } from './CRUD/app'
@@ -38,6 +39,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isVendor, setIsVendor] = useState(false);
   const [isCatalog, setIsCatalog] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(false);
 
   const authfunctions = useAuth();
 
@@ -80,7 +82,8 @@ function App() {
             <Route path='/Checkout' element={<CheckoutPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
             <Route path='/orders' element={<OrdersPage user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} />}/>
             <Route path='/productscatalog' element={<ProductsCatalog user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} isCatalog={isCatalog} setIsCatalog={setIsCatalog}/>}/>
-            <Route path="/ViewProductItem" element={<ViewProductItem user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} isCatalog={isCatalog} setIsCatalog={setIsCatalog}/>} />          
+            <Route path="/ViewProductItem" element={<ViewProductItem user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} isCatalog={isCatalog} setIsCatalog={setIsCatalog}/>} />    
+            <Route path='/reviews' element={<Reviews user={user} loggedIn={loggedIn} logOut={authfunctions.logOut} isVendor={isVendor} selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct}/>}/>    
           </Routes>
         </BrowserRouter>
       </div>

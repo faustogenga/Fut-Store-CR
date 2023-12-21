@@ -99,17 +99,17 @@ export const BasicTable = ({ user }) => {
         <div style="font-weight: bold;">Orden :</div> 
         <div>${obj.orderId}</div>
         <div>${obj.name}</div> <br />
-        <div style="font-weight: bold;">Pais :</div> 
+        <div style="font-weight: bold;">País:</div> 
         <div>${obj.shippingCountry}</div> <br />
-        <div style="font-weight: bold;">Provincia :</div> 
+        <div style="font-weight: bold;">Provincia:</div> 
         <div>${obj.shippingEstate}</div> <br />
-        <div style="font-weight: bold;">Ciudad :</div> 
+        <div style="font-weight: bold;">Ciudad:</div> 
         <div>${obj.shippingTown}</div> <br />
-        <div style="font-weight: bold;">Direccion :</div> 
+        <div style="font-weight: bold;">Dirección:</div> 
         <div>${obj.shippingDireccion}</div> <br />
         `;
         Swal.fire({
-            title: 'Detalles de Envio',
+            title: 'Detalles de Envío',
             html: swalContent,
             showConfirmButton: true,
             confirmButtonColor: '#3085d6',
@@ -121,15 +121,15 @@ export const BasicTable = ({ user }) => {
     const openShippingStatus = (obj) => {
         const swalContent =
             ` 
-        <div style="font-weight: bold;">Orden :</div> 
+        <div style="font-weight: bold;">Orden:</div> 
         <div>${obj.orderId}</div>
         <div>${obj.name}</div> <br />
-        <div style="font-weight: bold;">Estado : ${obj.status}</div> <br/>
-        <div style="font-weight: bold;">Informacion :</div> 
+        <div style="font-weight: bold;">Estado: ${obj.status}</div> <br/>
+        <div style="font-weight: bold;">Información:</div> 
         <div>${obj.shippingInfo}</div> <br />
         `;
         Swal.fire({
-            title: 'Estado de Envio',
+            title: 'Estado de Envío',
             html: swalContent,
             showConfirmButton: true,
             confirmButtonColor: '#3085d6',

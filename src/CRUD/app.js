@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, getDoc, addDoc, deleteDoc, updateDoc, where, query } from "firebase/firestore"
+import { collection, getDocs, doc, getDoc, addDoc, deleteDoc, updateDoc, where, query, and } from "firebase/firestore"
 import { db } from "./firebase_conection";
 
 /* ***************************** GENERAL METHODS ***************************** */
@@ -86,7 +86,6 @@ export const onUpdateAllVendors = async (vendors) => {
     }
 };
 
-
 /* 7. ELIMINAR OBJETO */
 export const onDelete = async paramId => {
     console.log("Query onDelete");
@@ -148,5 +147,12 @@ export const onFindOrderById = async (orderId) => {
         console.error("Error al obtener la orden por ID:", error);
         throw error;
     }
+};
+
+/* 14. ENCONTRAR PRODUCTO EN LA COLECCIÓN DE ÓRDENES POR ID */
+export const onFindProductOrderbyId = async (product_id, order_id) => {
+    console.log("Query FindProductOrderbyID");
+    const result = await getDocs(query(collection(db, collectionStr), where("product_id", "==", product_id), where("orderId", "==", order_id)));
+    return result.docs;
 };
 

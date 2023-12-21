@@ -2,7 +2,7 @@
     background-image: url('../images/orders_cover.jpeg');
     background-size: auto;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
 }
 
 .container-div {
