@@ -8,7 +8,7 @@ export const Video = ({ isVendor }) => {
 
     const handleScroll = () => {
         const position = window.scrollY;
-        setScrollPosition(position / 100);
+        setScrollPosition(position / 80);
     };
 
 
@@ -22,7 +22,23 @@ export const Video = ({ isVendor }) => {
 
     return (
         <>
-            <div className='container-fluid d-flex mt-2 bg-black' style={{ height: '650px' }}>
+            <div className='container-fluid d-flex bg-black' style={{ marginBottom: "1px" }}>
+                <div className='col-1 mx-3 p-1' style={{ color: "white", fontFamily: "Oswald", fontWeight: "700" }}>FUTSTORE cr</div>
+                <div className='col-9 mx-3 p-1 d-flex overflow-hidden'>
+                    <div className='texto1 text-nowrap'>
+                        NIKE - ADIDAS - PUMA - UNDER ARMOUR - NEW BALANCE - MIZUNO - UMBRO - DIADORA - LOTTO - KAPPA -
+                        REEBOK - ASICS - JOMA - UHLSPORT - HUMMEL - ERREA - CANTERBURY - KELME - PENALTY - LECOQSPORTIF -
+                        MOLTENI - WARRIOR - XARA - AVIA - PEAK - YONEX - MITRE - VOIT - GOLA - CUERVO - STANNO  -
+                    </div>
+                    <div className='texto2 text-nowrap'>
+                        NIKE - ADIDAS - PUMA - UNDER ARMOUR - NEW BALANCE - MIZUNO - UMBRO - DIADORA - LOTTO - KAPPA -
+                        REEBOK - ASICS - JOMA - UHLSPORT - HUMMEL - ERREA - CANTERBURY - KELME - PENALTY - LECOQSPORTIF -
+                        MOLTENI - WARRIOR - XARA - AVIA - PEAK - YONEX - MITRE - VOIT - GOLA - CUERVO - STANNO  -
+                    </div>
+                </div>
+                <div className='col-1 mx-3 p-1' style={{ color: "white", fontFamily: "Oswald", fontWeight: "700" }}>FUTSTORE cr</div>
+            </div>
+            <div className='container-fluid d-flex mb-1 bg-black' style={{ height: '650px' }}>
                 <div className='col-10 d-flex justify-content-center align-items-center p-4' style={{ height: '100%' }}>
                     <ReactPlayer
                         width={"90%"}
@@ -67,22 +83,7 @@ export const Video = ({ isVendor }) => {
                     </div>
                 </div>
             </div>
-            <div className='container-fluid d-flex bg-black' style={{marginBottom: "1px"}}>
-                <div className='col-1 mx-3 p-1' style={{ color: "white", fontFamily: "Oswald", fontWeight:"700" }}>FUTSTORE cr</div>
-                <div className='col-9 mx-3 p-1 d-flex overflow-hidden'>
-                    <div className='texto1 text-nowrap'>
-                        NIKE - ADIDAS - PUMA - UNDER ARMOUR - NEW BALANCE - MIZUNO - UMBRO - DIADORA - LOTTO - KAPPA -
-                        REEBOK - ASICS - JOMA - UHLSPORT - HUMMEL - ERREA - CANTERBURY - KELME - PENALTY - LECOQSPORTIF -
-                        MOLTENI - WARRIOR - XARA - AVIA - PEAK - YONEX - MITRE - VOIT - GOLA - CUERVO - STANNO  -
-                    </div>
-                    <div className='texto2 text-nowrap'>
-                        NIKE - ADIDAS - PUMA - UNDER ARMOUR - NEW BALANCE - MIZUNO - UMBRO - DIADORA - LOTTO - KAPPA -
-                        REEBOK - ASICS - JOMA - UHLSPORT - HUMMEL - ERREA - CANTERBURY - KELME - PENALTY - LECOQSPORTIF -
-                        MOLTENI - WARRIOR - XARA - AVIA - PEAK - YONEX - MITRE - VOIT - GOLA - CUERVO - STANNO  -
-                    </div>
-                </div>
-                <div className='col-1 mx-3 p-1' style={{ color: "white", fontFamily: "Oswald", fontWeight:"700"  }}>FUTSTORE cr</div>
-            </div>
+            
         </>
     )
 }
