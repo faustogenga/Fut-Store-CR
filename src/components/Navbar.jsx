@@ -53,18 +53,15 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                 href="/"
                 onMouseOver={(e) => (e.target.style.color = '#3498DB')}
                 onMouseOut={(e) => (e.target.style.color = 'whitesmoke')}>
-                FutStore
+                ⚽FutStore
                 <span className="visually-hidden">(current)</span>
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/#products">Productos</a>
+              <a className="nav-link" href="/productscatalog">Catálogo de Productos</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/#footer">Contáctanos</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/productscatalog">Catálogo de Productos</a>
             </li>
             {isVendor ? (
               <li className="nav-item bg-warning p-0 size=10">
