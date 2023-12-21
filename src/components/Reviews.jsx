@@ -136,7 +136,7 @@ export const Reviews = ({ isOpen, isClose, selectedProduct }) => {
                     <div className="productDetails">
                         <h1>{selectedProduct.name}</h1>
                         <img
-                            style={{ width: '10rem', height: "10rem", borderRadius: "50%", border: "1px solid black",padding: "1rem", margin: "2.5rem" }}
+                            style={{ width: '12rem', height: "12rem", borderRadius: "10%", border: "1px solid black",padding: "1rem", margin: "2.5rem" }}
                             src= {selectedProduct.product_img}
                             alt="name"
                         />
