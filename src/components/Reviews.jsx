@@ -31,8 +31,8 @@ export const Reviews = ({ isOpen, isClose, selectedProduct }) => {
         collectionAssignation('CustomerReviews');
         await onInsert(reviewData);
         Swal.fire({
-            title: "¡Producto ya esta en el carrito!",
-            text: "Producto ya esta agregado correctamente a tu carrito.",
+            title: "¡Gracias!",
+            text: "Tu reseña ha sido recibida correctamente.",
             icon: "success"
           });
           review.name = '';
