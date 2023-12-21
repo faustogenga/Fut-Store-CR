@@ -11,7 +11,7 @@ export const Checkout = ({ user }) => {
     //const sendEmailToUser = sendEmail();
     //shipping//
     const [shippingCountry, setshippingCountry] = useState('Costa Rica');
-    const [shippingEstate, setshippingEstate] = useState('San Jose');
+    const [shippingEstate, setshippingEstate] = useState('San José');
     const [shippingTown, setshippingTown] = useState('');
     const [shippingDireccion, setshippingDireccion] = useState('');
 
@@ -105,13 +105,14 @@ export const Checkout = ({ user }) => {
 
         setCvv(sanitizedValue.length < 4 ? sanitizedValue : '')
       }
+
     const handleProvienceChange = (event) => {
         setshippingEstate(event.target.value); 
         const selectedProvince = event.target.value;
         let fee;
 
         switch (selectedProvince) {
-            case 'San Jose':
+            case 'San José':
                 fee = 10;
                 break;
             case 'Alajuela':
@@ -129,7 +130,7 @@ export const Checkout = ({ user }) => {
             case 'Guanacaste':
                 fee = 35;
                 break;
-            case 'Limon':
+            case 'Limón':
                 fee = 40;
                 break;
             default:
@@ -187,7 +188,7 @@ export const Checkout = ({ user }) => {
                                 const newStock = productStock - orderedQuantity;
                                 // actualizar el stock en la bd
                                 collectionAssignation("Products");
-                                await onUpdate(orderItem.product_id, { stock: newStock.toString() });
+                               await onUpdate(orderItem.product_id, { stock: newStock.toString()});
                             } else {
                                 //error catch
                                 console.error(`Not enough stock for product with ID ${orderItem.id}`);
@@ -264,8 +265,8 @@ export const Checkout = ({ user }) => {
                                 required
                                 className="form-control"
                             >
-                                <option value="San Jose">San Jose</option>
-                                <option value="Limon">Limon</option>
+                                <option value="San José">San Jose</option>
+                                <option value="Limón">Limon</option>
                                 <option value="Alajuela">Alajuela</option>
                                 <option value="Guanacaste">Guanacaste</option>
                                 <option value="Heredia">Heredia</option>
@@ -286,12 +287,12 @@ export const Checkout = ({ user }) => {
                             />
                         </div>
                         <div className="form-group m-2">
-                            <label> Calle / Direccion</label>
+                            <label> Calle / Dirección</label>
                             <input
                                 value={shippingDireccion}
                                 type="text"
                                 name="shippingDireccion"
-                                placeholder="Direccion"
+                                placeholder="Dirección"
                                 onChange={({ target }) => setshippingDireccion(target.value)}
                                 required
                                 className="form-control"
@@ -341,7 +342,7 @@ export const Checkout = ({ user }) => {
                                     </select>
                                 </div>
                                 <div className="form-group m-2">
-                                    <label>Numero de tarjeta</label>
+                                    <label>Número de tarjeta</label>
                                     <input
                                         value={cardNumber}
                                         onChange={handleCardNumberChange}
