@@ -12,6 +12,7 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
   const navigate = useNavigate();
 
   const [Availability, setAvailability] = useState('');
+  const [productReviews, setProductReviews] = useState([]);
 
   useEffect(() => {
     if (user && user.email) {

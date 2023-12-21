@@ -149,10 +149,5 @@ export const onFindOrderById = async (orderId) => {
     }
 };
 
-/* 14. ENCONTRAR PRODUCTO EN LA COLECCIÓN DE ÓRDENES POR ID */
-export const onFindProductOrderbyId = async (product_id, order_id) => {
-    console.log("Query FindProductOrderbyID");
-    const result = await getDocs(query(collection(db, collectionStr), where("product_id", "==", product_id), where("orderId", "==", order_id)));
-    return result.docs;
-};
+
 

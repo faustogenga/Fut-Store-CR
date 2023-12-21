@@ -4,8 +4,6 @@ import { Button, Container, Row, Table } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { collectionAssignation, onFindOrderById, onFindbyEmail, onUpdate } from '../CRUD/app';
 import { Reviews } from './Reviews';
-import { ReviewsPage } from '../pages/ReviewsPage';
-
 
 export const Orders = ({ user}) => {
     const [orders, setOrders] = useState([]);
@@ -213,7 +211,7 @@ export const Orders = ({ user}) => {
                                         </td>
                                         <td className='text-center'>
                                             <Button className="btn btn-light" onClick={() => showOrderDetails(item.orderId)}>Ver más detalles</Button> <br /> <br />
-                                            <Button className="btn btn-secundary" onClick={() => handleShowReviews(item)}>Enviar Reseña</Button>
+                                            <Button className="btn btn-secundary" id='BtnReview' onClick={() => handleShowReviews(item)}>Enviar Reseña</Button>
                                             {showReviews && selectedProduct && (
                                                 <Reviews
                                                     isOpen={isOpen}
