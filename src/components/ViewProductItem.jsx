@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Swal from "sweetalert2";
 import { Navbar } from '../components/Navbar'
-import { collectionAssignation, onFindAll, onInsert, onFindProductinReviews, onFindVendorinReviews} from '../CRUD/app';
+import { collectionAssignation, onFindAll, onInsert, onFindProductinReviews, onFindVendorinReviews } from '../CRUD/app';
 import { productInformation } from './Productitem'
 import { useNavigate } from "react-router-dom";
 import { Footer } from './Footer';
@@ -29,17 +29,14 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
       collectionAssignation('CustomerReviews');
       const result = await onFindProductinReviews(productInformation.id);
 
-      if (result && result.length > 0) {
+      if (result.length > 0) {
         const totalReviews = result.length;
-        const totalRating = result.reduce(
-          (sum, doc) => sum + doc.data().customer_rating,
-          0
-        );
+        const totalRating = result.reduce((sum, doc) => sum + doc.data().customer_rating, 0);
         const averageRating = totalRating / totalReviews;
         setAverageRating(averageRating);
       } else {
         // No se encontraron valoraciones.
-        setAverageRating(0);
+        setAverageRating(5);
       }
     }
   };
@@ -49,17 +46,14 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
       collectionAssignation('CustomerReviews');
       const result = await onFindVendorinReviews(productInformation.vendor);
 
-      if (result && result.length > 0) {
+      if (result.length > 0) {
         const totalReviews = result.length;
-        const totalRating = result.reduce(
-          (sum, doc) => sum + doc.data().customer_rating,
-          0
-        );
+        const totalRating = result.reduce((sum, doc) => sum + doc.data().customer_rating, 0);
         const averageVendorRating = totalRating / totalReviews;
         setAverageVendorRating(averageVendorRating);
       } else {
         // No se encontraron valoraciones.
-        setAverageVendorRating(0);
+        setAverageVendorRating(5);
       }
     }
   };
@@ -166,18 +160,18 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
               fontSize: "16px",     // Tamaño de fuente predeterminado
             }}>
               <p style={{ fontSize: '33px', fontWeight: 'bold', marginBottom: "10px" }}>{productInformation.name}</p>
-              <div style={{display: "flex", flexDirection: "column", alignItems: "start", fontSize: "16px" }}>
+              <div className='d-flex'>
                 {/* Otros detalles del producto */}
-                <p><strong>Promedio de Valoración:</strong> <StarRating rating={averageRating} /> </p>
-
+                <p className='mt-1' style={{fontWeight:"bold"}}>Valoración del Producto:</p>
+                <StarRating rating={averageRating} />
               </div>
               <p><strong>Descripción:</strong> {productInformation.description}</p>
               <p><strong>Precio:</strong> ${productInformation.price}</p>
               <p><strong>Talla:</strong> {productInformation.size}</p>
               <p><strong>Correo registrado del vendedor:</strong> {productInformation.vendor}</p>
-              <div style={{display: "flex", flexDirection: "column", alignItems: "start", fontSize: "16px" }}>
-                {/* Otros detalles del producto */}
-                <p><strong>Valoración del Vendedor:</strong> <VendorStarRating rating={averageVendorRating} /></p>
+              <div className='d-flex'>
+                <p className='mt-1' style={{fontWeight:"bold"}}>Valoración del Vendedor:</p>
+                <VendorStarRating rating={averageVendorRating} />
               </div>
               <p><strong>Categoría:</strong> {productInformation.category}</p>
               <div className='d-flex'>

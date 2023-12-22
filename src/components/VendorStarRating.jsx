@@ -3,7 +3,7 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 const VendorStarRating = ({ rating }) => {
   return (
-    <div className='starsContainer'>
+    <div className='mx-1' style={{fontSize:"20px"}}>
       {[1, 2, 3, 4, 5].map((index) =>
         rating >= index ? (
           <AiFillStar key={index} style={{ color: 'orange' }} />
