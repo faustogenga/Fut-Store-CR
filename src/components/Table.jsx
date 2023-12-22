@@ -99,17 +99,17 @@ export const BasicTable = ({ user }) => {
         <div style="font-weight: bold;">Orden :</div> 
         <div>${obj.orderId}</div>
         <div>${obj.name}</div> <br />
-        <div style="font-weight: bold;">Pais :</div> 
+        <div style="font-weight: bold;">País :</div> 
         <div>${obj.shippingCountry}</div> <br />
         <div style="font-weight: bold;">Provincia :</div> 
         <div>${obj.shippingEstate}</div> <br />
         <div style="font-weight: bold;">Ciudad :</div> 
         <div>${obj.shippingTown}</div> <br />
-        <div style="font-weight: bold;">Direccion :</div> 
+        <div style="font-weight: bold;">Dirección :</div> 
         <div>${obj.shippingDireccion}</div> <br />
         `;
         Swal.fire({
-            title: 'Detalles de Envio',
+            title: 'Detalles de Envío',
             html: swalContent,
             showConfirmButton: true,
             confirmButtonColor: '#3085d6',
@@ -125,11 +125,11 @@ export const BasicTable = ({ user }) => {
         <div>${obj.orderId}</div>
         <div>${obj.name}</div> <br />
         <div style="font-weight: bold;">Estado : ${obj.status}</div> <br/>
-        <div style="font-weight: bold;">Informacion :</div> 
+        <div style="font-weight: bold;">Información :</div> 
         <div>${obj.shippingInfo}</div> <br />
         `;
         Swal.fire({
-            title: 'Estado de Envio',
+            title: 'Estado de Envío',
             html: swalContent,
             showConfirmButton: true,
             confirmButtonColor: '#3085d6',
@@ -184,8 +184,8 @@ export const BasicTable = ({ user }) => {
                         <TableHead>
                             <TableRow>
                                 <TableCell style={{ fontWeight: "bolder" }} >Producto</TableCell>
-                                <TableCell align="right" style={{ fontWeight: "bolder" }}>Categoria</TableCell>
-                                <TableCell align="right" style={{ fontWeight: "bolder" }}>Descripcion</TableCell>
+                                <TableCell align="right" style={{ fontWeight: "bolder" }}>Categoría</TableCell>
+                                <TableCell align="right" style={{ fontWeight: "bolder" }}>Descripción</TableCell>
                                 <TableCell align="right" style={{ fontWeight: "bolder" }}>Precio</TableCell>
                                 <TableCell align="right" style={{ fontWeight: "bolder" }}>Talla</TableCell>
                                 <TableCell align="right" style={{ fontWeight: "bolder" }}>Cantidad</TableCell>
@@ -241,9 +241,9 @@ export const BasicTable = ({ user }) => {
                                 <TableCell align="center" style={{ fontWeight: "bolder" }}>Producto</TableCell>
                                 <TableCell align="center" style={{ fontWeight: "bolder" }}>Imagen</TableCell>
                                 <TableCell align="center" style={{ fontWeight: "bolder" }}>Fecha</TableCell>
-                                <TableCell align="center" style={{ fontWeight: "bolder" }}>MetodoPago</TableCell>
+                                <TableCell align="center" style={{ fontWeight: "bolder" }}>MétodoPago</TableCell>
                                 <TableCell align="center" style={{ fontWeight: "bolder" }} className='p-0'>Cantidad</TableCell>
-                                <TableCell align="center" style={{ fontWeight: "bolder" }}>Direccion</TableCell>
+                                <TableCell align="center" style={{ fontWeight: "bolder" }}>Dirección</TableCell>
                                 <TableCell align="center" style={{ fontWeight: "bolder" }}>Usuario</TableCell>
                                 <TableCell align="center" style={{ fontWeight: "bolder" }}>Total</TableCell>
                                 <TableCell align="right" style={{ fontWeight: "bolder" }} >Estatus</TableCell>

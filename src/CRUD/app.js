@@ -137,7 +137,7 @@ export const onInsertOrder = async (obj) => {
 }
 
 
-/* 11. OBTENER ORDEN POR ID CON MÚLTIPLES PRODUCTOS */
+/* 13. OBTENER ORDEN POR ID CON MÚLTIPLES PRODUCTOS */
 export const onFindOrderById = async (orderId) => {
     try {
         const orderCollectionRef = collection(db, collectionStr);
@@ -148,4 +148,18 @@ export const onFindOrderById = async (orderId) => {
         console.error("Error al obtener la orden por ID:", error);
         throw error;
     }
+};
+
+/* 14. ENCONTRAR REVIEWS DEL PRODUCTO EN LA COLECCIÓN DE REVIEWS POR ID DEL PRODUCTO */
+export const onFindProductinReviews = async (product_id) => {
+    console.log("Query FindProductiiReviews");
+    const result = await getDocs(query(collection(db, collectionStr), where("product_id", "==", product_id)));
+    return result.docs;
+};
+
+/* 14. ENCONTRAR REVIEWS DEL PRODUCTO EN LA COLECCIÓN DE REVIEWS POR ID DEL PRODUCTO */
+export const onFindVendorinReviews = async (vendor) => {
+    console.log("Query FindProductiiReviews");
+    const result = await getDocs(query(collection(db, collectionStr), where("vendor_name", "==", vendor)));
+    return result.docs;
 };
