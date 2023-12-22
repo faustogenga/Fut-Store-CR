@@ -24,7 +24,7 @@ export const Checkout = ({ user }) => {
     const [cvv, setCvv] = useState('');
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
-    const [shippingFee, setShippingFee] = useState(0)
+    const [shippingFee, setShippingFee] = useState(10)
     const salesTax = 0.13;
 
     const [errorMessage, setErrorMessage] = useState('Algo salió mal, por favor agrega todos los datos necesarios')

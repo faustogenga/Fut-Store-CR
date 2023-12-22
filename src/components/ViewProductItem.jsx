@@ -86,7 +86,7 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
       const productsArray = Object.values(productsCart.docs);
       console.log(productsArray);
       console.log(product.id);
-      if (productsArray.some(doc => doc.data().product_id === product.product_id)) {
+      if (productsArray.some(doc => doc.data().product_id === product.product_id && doc.data().userEmail === user.email)) {
         Swal.fire({
           title: "¡Producto ya esta en el carrito!",
           text: "Producto ya esta agregado correctamente a tu carrito.",
@@ -123,6 +123,10 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
       })
     }
   }
+
+
+
+
 
   if (!productInformation) {
     return navigate("/")
