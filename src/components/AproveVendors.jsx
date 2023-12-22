@@ -67,7 +67,7 @@ export const AproveVendors = ({vendors, setVendors, isOpen, onClose }) => {
                         </div>
                     ))
                 }
-            <button className='container d-flex justify-content-center col-4'
+            <button className='btn btn-success container d-flex justify-content-center col-4'
             onClick={updateVendors}
             >Guardar</button>
             </div>
