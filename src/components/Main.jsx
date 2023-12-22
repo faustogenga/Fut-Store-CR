@@ -16,7 +16,7 @@ export const Main = () => {
                 <div className="top-content">
                     <p className='responsiveTitle'> FUTSTORE </p>
                     <p className='responsiveSubTitle'>¡Marca la diferencia en el campo con estilo!</p>
-                    <button className='responsiveBtn btn btn-outline-info main-boton' onClick={comprarAhora}>Compra Ahora</button>
+                    <button className='btn btn-outline-info main-boton' onClick={comprarAhora}>Compra Ahora</button>
                 </div>
                 <p className="main-info position-absolute bottom-0">
                     <strong className='responsiveText'>El fútbol es la cosa más importante de las cosas menos importantes.</strong>
