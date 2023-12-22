@@ -24,7 +24,7 @@ export const Checkout = ({ user }) => {
     const [cvv, setCvv] = useState('');
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
-    const [shippingFee, setShippingFee] = useState(0)
+    const [shippingFee, setShippingFee] = useState(10)
     const salesTax = 0.13;
 
     const [errorMessage, setErrorMessage] = useState('Algo salió mal, por favor agrega todos los datos necesarios')
@@ -264,8 +264,8 @@ export const Checkout = ({ user }) => {
                                 required
                                 className="form-control"
                             >
-                                <option value="San Jose">San Jose</option>
-                                <option value="Limon">Limon</option>
+                                 <option value="San Jose">San José </option>
+                                <option value="Limon">Limón</option>
                                 <option value="Alajuela">Alajuela</option>
                                 <option value="Guanacaste">Guanacaste</option>
                                 <option value="Heredia">Heredia</option>
@@ -286,12 +286,12 @@ export const Checkout = ({ user }) => {
                             />
                         </div>
                         <div className="form-group m-2">
-                            <label> Calle / Direccion</label>
+                            <label> Calle / Dirección</label>
                             <input
                                 value={shippingDireccion}
                                 type="text"
                                 name="shippingDireccion"
-                                placeholder="Direccion"
+                                placeholder="Dirección"
                                 onChange={({ target }) => setshippingDireccion(target.value)}
                                 required
                                 className="form-control"
@@ -341,7 +341,7 @@ export const Checkout = ({ user }) => {
                                     </select>
                                 </div>
                                 <div className="form-group m-2">
-                                    <label>Numero de tarjeta</label>
+                                    <label>Número de tarjeta</label>
                                     <input
                                         value={cardNumber}
                                         onChange={handleCardNumberChange}

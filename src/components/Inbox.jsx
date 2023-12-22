@@ -207,7 +207,7 @@ export const Inbox = ({ user, isVendor }) => {
     }}
       className='d-flex justify-content-center py-4'>
       <div style={{ width: "40%" }} className=''>
-        <h3 className='text-center mt-3 bg-white rounded-pill opacity-75'>Mensajes</h3>
+        <h3 className='text-center mt-3 bg-white rounded-pill opacity-75'>Mensajes 📧</h3>
         <div className='text-center'>
           <button className='btn btn-info m-3' onClick={() => setIsOpen(true)}>Nuevo</button>
           <button className='btn btn-success m-3' onClick={() => { setIsOpen(false); inboxLoad() }}>Inbox</button>

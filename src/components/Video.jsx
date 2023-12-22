@@ -43,8 +43,8 @@ export const Video = ({ isVendor }) => {
                     <ReactPlayer
                         width={"90%"}
                         height={"100%"}
-                        playing="true"
-                        loop="true"
+                        playing={true}
+                        loop={true}
                         volume={0}
 
                         url='https://www.youtube.com/watch?v=eGUor824a74&ab_channel=SportsOnScreen'
