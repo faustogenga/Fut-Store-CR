@@ -141,7 +141,7 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
         />
         <div style={{
           display: "flex",
-          backgroundImage: "url(https://c1.wallpaperflare.com/path/56/434/430/background-photos-grass-green-33d94cf5f7ef88102f0d4710b4b2c840.jpg)",
+          backgroundImage: "url(https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
           backgroundSize: "cover"
         }}>
           <div className='container bg-white mt-5 mb-5' style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>

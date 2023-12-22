@@ -7,7 +7,7 @@ export const Banner = ({ isVendor }) => {
 
     return (
         <div className='container-fluid mx-auto d-flex justify-content-center align-items-center mt-4' style={{ height: '500px', backgroundColor: '#e3e3e3' }}>
-            <div className='col-8 mx-auto bg-white text-center d-flex flex-column justify-content-center align-items-center' style={{ height: '70%' }}>
+            <div className='responsiveBanner col-8 mx-auto bg-white text-center d-flex flex-column justify-content-center align-items-center' style={{ height: '70%' }}>
                 <h3 className='m-4 px-3 py-1 bg-black' style={{ color: "white", fontFamily: "Oswald", fontWeight: "700", fontStyle:"italic"}}>Vende tus Articulos con Nosotros</h3>
                 <div className='m-3'>
                     <blockquote className="blockquote">

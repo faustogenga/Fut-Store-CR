@@ -1,9 +1,9 @@
-.container-fluid{
+.container-fluid {
   padding: 0;
 }
 
-h1, h2, h3, h4, h5, button{
-    font-family: 'Poppins', sans-serif;
+h1, h2, h3, h4, h5, button {
+  font-family: 'Poppins', sans-serif;
 }
 
 
@@ -15,13 +15,13 @@ h1, h2, h3, h4, h5, button{
 
 .navbar-toggler {
   position: absolute;
-  width: 50px; 
-  height: 30px; 
-  border: white; 
+  width: 50px;
+  height: 30px;
+  border: white;
 }
 
 .navbar-toggler-icon {
-  font-size: 1rem; 
+  font-size: 1rem;
   color: white;
 }
 
@@ -31,66 +31,121 @@ h1, h2, h3, h4, h5, button{
   border-color: #F4F5F6;
 }
 
-.nav-link, i{
-    color: #F4F5F6;
+.nav-link, i {
+  color: #F4F5F6;
 }
 
-.main-box{
-    position: relative;
-    background-image: url(/public/assets/Main1.png);
-    background-size: cover;
+.main-box {
+  position: relative;
+  background-image: url(/public/assets/Main1.png);
+  background-size: cover;
+  margin-bottom: 3%;
+}
+
+/* (desktop, tablet, etc.) */
+@media (min-width: 768px) {
+  .main-box {
     height: 90vh;
-    margin-bottom: 3%;
+  }
+}
+
+/*(iPhone) */
+@media (max-width: 767px) {
+  .main-box {
+    height: 50vh;
+    /* Adjust the height for smaller screens */
+  }
+  .responsiveProduct {
+    text-align: center;
+  }
+  .responsiveBanner {
+    width: 90%;
+  }
+  .responsiveBrands {
+    display: none;
+  }
+  .responsiveBrandsNames {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  .responsiveText {
+    font-size: small;
+  }
+  .responsiveSubTitle {
+    font-size: large;
+  }
+  .top-content {
+    text-align: center;
+  }
+  .responsiveVideo{
+    padding: 2 !important;
+    text-align: center;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    width: 100%;
+  }
+  .responsivePics{
+    display: block !important;
+    width: 100% !important;
+  }
+  .responsivePics2{
+    display: flex !important;
+    width: 100% !important;
+    margin-bottom: 5% !important;
+  }
+  .responsivePics3{
+    width: 20% !important;
   }
 
-.main-left {
-    position: relative;
-    margin: 2%;
-    width: 50%;
+  .responsiveFooter {
+    font-size: small;
+  }
+  .responsiveCategory{
+    width: 100%;
+    display: block !important;
+  }
 }
+
 
 
 .main-boton {
-    font-family: 'Poppins', sans-serif;
-    color:#F4F5F6;
-    background-color: #3498DB;
-    border-color: #000000;
-    margin-top: 1%;
-    padding: 2% 15% 2% 15%;
-    border-radius: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #F4F5F6;
+  background-color: #3498DB;
+  border-color: #000000;
+  margin-top: 1%;
+  padding: 2% 15% 2% 15%;
+  border-radius: 0;
 }
 
 .main-boton:hover {
-    background-color: #8fbedd;
-    border-color: #000000;
+  background-color: #8fbedd;
+  border-color: #000000;
 }
 
-  
+
 .top-content {
-    position: absolute;
-    color: #F4F5F6;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 200%;
-  }
+  position: absolute;
+  color: #F4F5F6;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 200%;
+}
 
 
-  .main-info {
-    position: absolute;
-    font-family: 'Poppins', sans-serif;
-    color: #F4F5F6;
-    
-  }
+.main-info {
+  font-family: 'Poppins', sans-serif;
+  color: #F4F5F6;
+}
 
 
-  .product {
-    font-family: 'Poppins', sans-serif;
-    color: #000;
-  }
+.product {
+  font-family: 'Poppins', sans-serif;
+  color: #000;
+}
 
 
-  .product .descripcion {
-    position: relative;
-  }
-  
-  
+.product .descripcion {
+  position: relative;
+}
