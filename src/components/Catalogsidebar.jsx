@@ -6,7 +6,7 @@ import '../CSS/Catalogsidebar.css'
 export const Catalogsidebar = ({ handleClickPrice, handleClickCategory, categoryClicked, priceClicked}) => {
     return (
         <>
-            <section className="sidebar col-2">
+            <section className="responsiveCategory sidebar col-2">
                 <div className="logo-container justify-content-left d-flex">
                     <h1 className='d-flex'>🛒</h1>
                 </div>

@@ -95,7 +95,7 @@ export const ProductsCatalog = ({ user, loggedIn, logOut, isCatalog, setIsCatalo
         <>
             <Navbar loggedIn={loggedIn} user={user} logOut={logOut} isVendor={isVendor} />
 
-            <div className='d-flex'>
+            <div className='responsiveCategory d-flex'>
                 <Catalogsidebar handleClickCategory={handleClickCategory} handleClickPrice={handleClickPrice} categoryClicked={categoryClicked} priceClicked={priceClicked} />
                 <div className='container'>
                     <div>

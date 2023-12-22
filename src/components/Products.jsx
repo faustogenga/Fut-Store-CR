@@ -30,7 +30,7 @@ export const Products = ({loggedIn,user,isCatalog, isVendor}) => {
                 <div className="row">
                     {products.filter(product => product.category === "Soccer Cleats").slice(0,4).map((product, index) => {
                         return (
-                            <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
+                            <div className="responsiveProduct col-lg-3 col-md-6 col-sm-12" key={index}>
                                  <Productitem loggedIn={loggedIn} user={user} product={product} isCatalog={isCatalog} isVendor={isVendor}/>
                             </div>
                         )

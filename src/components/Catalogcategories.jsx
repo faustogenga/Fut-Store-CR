@@ -5,9 +5,9 @@ import { CataloginputCategory } from './CataloginputCategory';
 export const Catalogcategories = ({ handleClickCategory, categoryClicked }) => {
     return (
         <>
-            <div>
+            <div className=''>
                 <h2 className="sidebar-title">Category</h2>
-                <div>
+                <div className=''>
                     <label className="sidebar-label-container">
                         <input
                             checked={categoryClicked === 'All'}
