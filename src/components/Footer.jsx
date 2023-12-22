@@ -5,11 +5,11 @@ export const Footer = () => {
         <section id='footer'>
             <div className='container-fluid bg-black'>
                 <div className='container-fluid row text-info'>
-                    <h4 className='text-center text-light p-4'>
+                    <h4 className='text-center text-light p-4 pe-none'>
                         FutStore CR <i className="bi bi-shop m-2"></i>
                     </h4>
                     <div className=' col-4 text-center'>
-                        <h4>Contact <i className="bi bi-person-rolodex m-2"></i> </h4>
+                        <h4 className='pe-none'>Contact <i className="bi bi-person-rolodex m-2"></i> </h4>
                         <div className=' mb-2' href="#">
                             <i className="bi bi-envelope m-2"></i>
                             futstorecr@gmail.com
@@ -23,7 +23,7 @@ export const Footer = () => {
                             (506) 2653-23ee42
                         </div>
                     </div>
-                    <div className=' col-4 text-center'>
+                    <div className=' col-4 text-center pe-none'>
                         <h4>About Us <i className="bi bi-file-person m-2"></i></h4>
                         <div className=' mb-2' href="#">
                             <i className="bi bi-balloon-heart-fill m-2"></i>
@@ -33,20 +33,24 @@ export const Footer = () => {
                             <i className="bi bi-people-fill m-2"></i>
                             Nosotros
                         </div>
-                        <div className=' mb-5' href="#">
+                        <div className='mb-5' href="#">
                             <i className="bi bi-newspaper m-2"></i>
                             Politica
                         </div>
                     </div>
                     <div className=' col-4 text-center'>
-                        <h4>Social Media <i className="bi bi-globe m-2"></i></h4>
-                        <div className=' mb-2' href="#">
-                            <i className="bi bi-facebook m-2"></i>
-                            Facebook
+                        <h4 className='pe-none'>Social Media <i className="bi bi-globe m-2"></i></h4>
+                        <div className='m-2'>
+                            <a className='text-success' rel="noreferrer" target="_blank" href="https://www.facebook.com">
+                                <i className="bi bi-facebook m-2"></i>
+                                Facebook
+                            </a>
                         </div>
-                        <div className=' mb-2' href="#">
-                            <i className="bi bi-instagram m-2"></i>
-                            Instagram
+                        <div className='m-2'>
+                            <a rel="noreferrer" target="_blank" href="https://www.instagram.com">
+                                <i className="bi bi-instagram m-2"></i>
+                                Instagram
+                            </a>
                         </div>
                     </div>
                 </div>

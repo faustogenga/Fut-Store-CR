@@ -8,7 +8,7 @@ export const Video = ({ isVendor }) => {
 
     const handleScroll = () => {
         const position = window.scrollY;
-        setScrollPosition(position / 80);
+        setScrollPosition(position /90);
     };
 
 
