@@ -26,7 +26,7 @@ export const Products = ({loggedIn,user,isCatalog, isVendor}) => {
     return (
         <section id='products' className='mt-1 mb-1'>
             <div className="container">
-            <h4 style={{fontWeight:"700"}}>Destacado</h4>
+            <h4 style={{fontWeight:"bold", color:"#5d5e5e"}}>🔥Destacado</h4>
                 <div className="row">
                     {products.filter(product => product.category === "Soccer Cleats").slice(0,4).map((product, index) => {
                         return (
