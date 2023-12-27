@@ -1,5 +1,5 @@
 # FutStore CR 
-##React Project.
+## React Project
 
 This project was made for React Web Design College Class 3CO23-160361G1 DISEÑO WEB II, ULACIT.
 All resources are used for learning / school related purposes.
@@ -10,8 +10,8 @@ Emerson
 Nicolas
 Esteba
 
-## Currently Hosted in Firebase.
-##Link
+## Currently Hosted in Firebase
+## Link
 
 ## Available Scripts
 
