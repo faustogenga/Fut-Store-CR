@@ -19,7 +19,7 @@ export const Main = () => {
                     <button className='btn btn-outline-info main-boton' onClick={comprarAhora}>Compra Ahora</button>
                 </div>
                 <p className="main-info position-absolute bottom-0">
-                    <strong className='responsiveText'>El fútbol es la cosa más importante de las cosas menos importantes.</strong>
+                    <strong className='responsiveText'>El fútbol es la cosa más importante de las cosas menos importantes. - Arrigo Sacchi</strong>
                     <br />
                 </p>
             </div>

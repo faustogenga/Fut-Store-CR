@@ -133,8 +133,8 @@ export const Inbox = ({ user, isVendor }) => {
   const sendNewMessage = async () => {
     try {
       await onInsertNewChat({
-        sender: user.email,
-        vendor: vendor,
+        sender: isVendor ? vendor :  user.email,
+        vendor: isVendor ? user.email :  vendor,
       }, {
         msm: message,
         sender: user.email,
