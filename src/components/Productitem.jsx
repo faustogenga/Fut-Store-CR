@@ -24,7 +24,7 @@ export const Productitem = ({ loggedIn, product, isVendor }) => {
       >
       </img>
       <div className='descripcion m-1'>
-        <small>{product.name}</small>
+        <span>{product.name}</span>
         <p className='m-0'><strong>${product.price}</strong></p>
         <IconButton disabled={isVendor ? true : false} color="primary" aria-label="add to shopping cart"
           onClick={() => (loggedIn ? onButtonClickViewProduct() : Swal.fire({
