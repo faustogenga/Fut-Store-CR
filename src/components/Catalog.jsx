@@ -9,7 +9,7 @@ export const Catalog = ({loggedIn, user, products, isCatalog, isVendor}) => {
                 <div className="row" style={{height:"1%"}}>
                     {products.map((product, index) => {
                         return (
-                            <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
+                            <div className="responsiveProduct col-lg-3 col-md-6 col-sm-12" key={index}>
                                 <Productitem loggedIn={loggedIn} user={user} product={product} isCatalog={isCatalog} isVendor={isVendor}/>
                                 <br/><br/><br/>
                             </div>

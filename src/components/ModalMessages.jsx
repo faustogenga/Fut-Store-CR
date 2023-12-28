@@ -1,12 +1,5 @@
 import "../CSS/Modal.css";
 import { RiCloseLine } from "react-icons/ri";
-import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import { onGetMessages } from "../CRUD/app";
-
 
 const ModalMessages = ({ item, messages, isVendor, isOpen, onClose }) => {
   //solo si el boton edit se apreta, se abre el modal.

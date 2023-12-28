@@ -10,7 +10,7 @@ export const Checkout = ({ user }) => {
     const navigate = useNavigate();
     //const sendEmailToUser = sendEmail();
     //shipping//
-    const [shippingCountry, setshippingCountry] = useState('Costa Rica');
+    const [shippingCountry] = useState('Costa Rica');
     const [shippingEstate, setshippingEstate] = useState('San Jose');
     const [shippingTown, setshippingTown] = useState('');
     const [shippingDireccion, setshippingDireccion] = useState('');

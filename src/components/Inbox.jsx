@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { collectionAssignation, onFindAll, onInsert, onInsertMessageDoc, onInsertNewChat, onUpdate } from '../CRUD/app';
+import { collectionAssignation, onFindAll, onInsertMessageDoc, onInsertNewChat } from '../CRUD/app';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -9,12 +9,10 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import { BarChart } from '@mui/x-charts/BarChart';
 import TablePagination from '@mui/material/TablePagination';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import ModalMessages from './ModalMessages';
 import { ChatMessages } from './ChatMessages';
 
 

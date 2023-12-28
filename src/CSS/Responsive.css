@@ -1,0 +1,67 @@
+
+
+/* (desktop, tablet, etc.) */
+@media (min-width: 768px) {
+    .main-box {
+      height: 90vh;
+    }
+  }
+  
+  /*(iPhone) */
+  @media (max-width: 767px) {
+    .main-box {
+      height: 50vh;
+      /* Adjust the height for smaller screens */
+    }
+    .responsiveProduct {
+      text-align: center;
+    }
+    .responsiveBanner {
+      width: 90%;
+    }
+    .responsiveBrands {
+      display: none;
+    }
+    .responsiveBrandsNames {
+      width: 100%;
+      margin-left: 0 !important;
+    }
+    .responsiveText {
+      font-size: small;
+    }
+    .responsiveSubTitle {
+      font-size: large;
+    }
+    .top-content {
+      text-align: center;
+    }
+    .responsiveVideo{
+      padding: 2 !important;
+      text-align: center;
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+      width: 100%;
+    }
+    .responsivePics{
+      display: block !important;
+      width: 100% !important;
+    }
+    .responsivePics2{
+      display: flex !important;
+      width: 100% !important;
+      margin-bottom: 5% !important;
+    }
+    .responsivePics3{
+      width: 20% !important;
+    }
+  
+    .responsiveFooter {
+      font-size: small;
+    }
+    .responsiveCategory{
+      width: 100%;
+      display: block !important;
+    }
+  }
+  
