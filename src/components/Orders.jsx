@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import '../CSS/Orders.css';
 import { Button, Container, Row, Table } from 'react-bootstrap';
 import Swal from 'sweetalert2';
@@ -8,11 +8,6 @@ import { ReviewButton } from './ReviewButton';
 export const Orders = ({ user }) => {
     const [orders, setOrders] = useState([]);
 
-    useEffect(() => {
-        if (user && user.email) {
-            fetchOrders();
-        }
-    }, [user]);
 
     const fetchOrders = async () => {
         try {
@@ -31,7 +26,15 @@ export const Orders = ({ user }) => {
                 icon: "error"
             });
         }
-    }
+    };
+
+    const fetchOrdersCallBack = useCallback(fetchOrders, [user.email]);
+
+    useEffect(() => {
+        if (user && user.email) {
+            fetchOrdersCallBack();
+        }
+    }, [user, fetchOrdersCallBack]);
 
     const showOrderDetails = async (orderId) => {
         try {

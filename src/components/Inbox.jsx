@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { collectionAssignation, onFindAll, onInsertMessageDoc, onInsertNewChat } from '../CRUD/app';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -30,12 +30,6 @@ export const Inbox = ({ user, isVendor }) => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
 
-  useEffect(() => {
-    if (user) {
-      fetchDataOrders();
-      fetchDataChat();
-    }
-  }, [user, isVendor]);
 
   const fetchDataOrders = async (email) => {
     collectionAssignation('OrderPlaced');
@@ -82,6 +76,18 @@ export const Inbox = ({ user, isVendor }) => {
     ));
     setChats(filterData);
   }
+
+  const fetchDataOrdersCallBack = useCallback(fetchDataOrders, [isVendor, user.email]);
+  const fetchDataChatCallBack = useCallback(fetchDataChat, []);
+
+  useEffect(() => {
+    if (user) {
+      fetchDataOrdersCallBack();
+      fetchDataChatCallBack();
+    }
+  }, [user, fetchDataOrdersCallBack, fetchDataChatCallBack]);
+
+  
 
   const refresh = async () => {
     await fetchDataChat();

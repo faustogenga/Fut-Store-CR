@@ -1,7 +1,6 @@
 import React from 'react'
 import { Navbar } from '../components/Navbar'
 import { Footer } from '../components/Footer'
-import { Cart } from '../components/Cart'
 import { Inbox } from '../components/Inbox'
 
 export const InboxPage = ({ user, loggedIn, logOut, isVendor }) => {

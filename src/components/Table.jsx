@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useCallback } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -67,14 +67,17 @@ export const BasicTable = ({ user }) => {
         setorders(filterData);
     };
 
+    const fetchDataProductsCallBack = useCallback(fetchDataProducts, [user.email]);
+    const fetchDataOrdersCallBack = useCallback(fetchDataOrders, [user.email]);
+    
     useEffect(() => {
         if (!user) {
             return;
         } else {
-            fetchDataProducts(user.email);
-            fetchDataOrders(user.email);
+            fetchDataProductsCallBack(user.email);
+            fetchDataOrdersCallBack(user.email);
         }
-    }, [user]);
+    }, [user, fetchDataProductsCallBack, fetchDataOrdersCallBack]);
 
 
     const handleEditProduct = async (currentId, values) => {

@@ -1,18 +1,11 @@
 import { Tooltip } from 'react-tooltip'
 import { collectionAssignation, onFindbyEmail } from '../CRUD/app';
 import Swal from 'sweetalert2';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
 
   const [number, setNumber] = useState(0);
-
-  useEffect(() => {
-    if (user && user.email) {
-      getCartNumber();
-    }
-  }, [user]);
-
 
   const getCartNumber = async () => {
     try {
@@ -35,6 +28,14 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
       });
     }
   };
+
+  const getCartNumberCallBack = useCallback(getCartNumber, [user.email]);
+
+  useEffect(() => {
+    if (user && user.email) {
+      getCartNumberCallBack();
+    }
+  }, [user, getCartNumberCallBack]);
 
   return (
     <div>
