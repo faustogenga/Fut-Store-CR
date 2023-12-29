@@ -12,7 +12,7 @@ export const Main = () => {
     return (
         <>
         <div className="container-fluid main-box mx-auto p-0 d-flex">
-            <div className='m-3 col-11'>
+            <div className='m-4 col-11'>
                 <div className="top-content">
                     <p className='responsiveTitle'> FUTSTORE </p>
                     <p className='responsiveSubTitle'>¡Marca la diferencia en el campo con estilo!</p>
