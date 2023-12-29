@@ -1,4 +1,4 @@
-import Reac from 'react'
+import React from 'react'
 import { useNavigate } from "react-router-dom";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';

@@ -5,7 +5,7 @@ export const Catalognavigation = ({handleSearchInput}) => {
     return (
         <>
             <nav>
-                <div className="nav-container">
+                <div className="responsiveSearchBar">
                     <SearchIcon />
                     <input
                         className="search-input m-2 p-2"

@@ -8,7 +8,7 @@ import { Video } from '../components/Video'
 
 export const Home = ({user, loggedIn, logOut, isVendor, isCatalog, setIsCatalog}) => {
   
-  useEffect(() => {  setIsCatalog(false); }, []);
+  useEffect(() => {  setIsCatalog(false); }, [setIsCatalog]);
 
   return (
     <div style={{ position: 'relative' }} >

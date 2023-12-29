@@ -63,5 +63,29 @@
       width: 100%;
       display: block !important;
     }
+
+    .logo-container {
+      justify-content: center !important;
+    }
+
+    .responsiveSearchBar {
+      display: flex;
+      flex-direction:row;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .loginform  {
+      text-align: center !important;
+      width: 90%;
+    }
+    .titleContainer {
+        font-size: 45px !important;
+    }
+    
+    .newVendorInput {
+      margin: 2% !important;
+      width: 80% !important;
+    }
   }
   

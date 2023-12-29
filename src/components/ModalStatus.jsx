@@ -1,7 +1,7 @@
 import "../CSS/Modal.css";
 import { RiCloseLine } from "react-icons/ri";
 import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';

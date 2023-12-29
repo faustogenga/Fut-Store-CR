@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import '../CSS/Cart.css';
 import { Button, Container, Col, Row, Table } from 'react-bootstrap';
 import { BsCartCheck, BsCartX } from 'react-icons/bs';
@@ -11,12 +11,6 @@ export let cart;
 export const Cart = ({ user }) => {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        if (user && user.email) {
-            fetchProducts();
-        }
-    }, [user]);
 
 
     const fetchProducts = async () => {
@@ -40,6 +34,18 @@ export const Cart = ({ user }) => {
             });
         }
     };
+
+    const fetchProductsCallback = useCallback(fetchProducts, [user.email]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (user && user.email) {
+                await fetchProductsCallback();
+            }
+        };
+    
+        fetchData();
+    }, [user, fetchProductsCallback]);
 
     let cartTotal = 0;
     products.forEach((item) => {

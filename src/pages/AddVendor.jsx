@@ -158,7 +158,7 @@ export const AddVendor = ({ setLoggedIn }) => {
             </div>
             <h4 className="text-center">Vende con Nosotros</h4>
             <TextField
-                className="m-3 col-3"
+                className="newVendorInput m-3 col-3"
                 required
                 id="outlined-required-nombre"
                 label="Nombre"
@@ -166,7 +166,7 @@ export const AddVendor = ({ setLoggedIn }) => {
                 onChange={(event) => setNombre(event.target.value)}
             />
             <TextField
-                className="m-3 col-3"
+                className="newVendorInput m-3 col-3"
                 required
                 id="outlined-required-apellido"
                 label="Apellido"
@@ -174,7 +174,7 @@ export const AddVendor = ({ setLoggedIn }) => {
                 onChange={(event) => setApellido(event.target.value)}
             />
             <TextField
-                className="m-3 col-3"
+                className="newVendorInput m-3 col-3"
                 required
                 id="outlined-required-telefono"
                 label="Telefono"
@@ -182,7 +182,7 @@ export const AddVendor = ({ setLoggedIn }) => {
                 onChange={(event) => setTelefono(event.target.value)}
             />
             <TextField
-                className="m-3 col-11"
+                className="newVendorInput m-3 col-11"
                 required
                 id="outlined-required-email"
                 label="Correo"
@@ -191,7 +191,7 @@ export const AddVendor = ({ setLoggedIn }) => {
             />
             <br />
             <TextField
-                className="m-3 col-11"
+                className="newVendorInput m-3 col-11"
                 id="outlined-password-input"
                 label="Contraseña"
                 type="password"
@@ -200,7 +200,7 @@ export const AddVendor = ({ setLoggedIn }) => {
             />
 
             <TextField
-                className="m-3 col-11"
+                className="newVendorInput m-3 col-11"
                 id="outlined-repeat-password-input"
                 label="Repetir Contraseña"
                 type="password"
