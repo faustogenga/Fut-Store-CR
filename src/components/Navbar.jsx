@@ -29,7 +29,7 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
     }
   };
 
-  const getCartNumberCallBack = useCallback(getCartNumber, [user.email]);
+  const getCartNumberCallBack = useCallback(getCartNumber, [user?.email]);
 
   useEffect(() => {
     if (user && user.email) {
