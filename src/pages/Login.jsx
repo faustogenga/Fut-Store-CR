@@ -112,7 +112,8 @@ export const Login = ({ setUser, setLoggedIn }) => {
         setErrorMessage("none")
     };
 
-    return <div className="mainContainerlogin">
+    return (
+    <div className="mainContainerlogin">
         <form className="loginform text-center col-4">
             <div className="text-end">
                 <input
@@ -160,4 +161,5 @@ export const Login = ({ setUser, setLoggedIn }) => {
             </div>
         </form>
     </div>
+    )
 }
