@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { useNavigate } from "react-router-dom";
+import { UploadProductImage } from './UploadProductImage';
 
 export const Main = () => {
 
@@ -17,6 +18,7 @@ export const Main = () => {
                     <p className='responsiveTitle'> FUTSTORE </p>
                     <p className='responsiveSubTitle'>¡Marca la diferencia en el campo con estilo!</p>
                     <button className='btn btn-outline-info main-boton' onClick={comprarAhora}>Compra Ahora</button>
+                    <UploadProductImage/>
                 </div>
                 <p className="main-info position-absolute bottom-0">
                     <strong className='responsiveText'>El fútbol es la cosa más importante de las cosas menos importantes. - Arrigo Sacchi</strong>
