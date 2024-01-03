@@ -41,7 +41,7 @@ export const Video = ({ isVendor }) => {
             <div className='responsiveVideo container-fluid d-flex mb-1 bg-black' style={{ height: '650px' }}>
                 <div className='responsiveVideo col-10 d-flex justify-content-center align-items-center p-4' style={{ height: '100%' }}>
                     <ReactPlayer
-                        class="responsiveVideo"
+                        className="responsiveVideo"
                         width={"90%"}
                         height={"100%"}
                         playing={true}

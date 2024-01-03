@@ -6,7 +6,7 @@ import { Catalognavigation } from '../components/Catalognavigation';
 import { Catalog } from '../components/Catalog';
 import { collectionAssignation, onFindAll } from '../CRUD/app';
 
-export const ProductsCatalog = ({ user, loggedIn, logOut, isCatalog, setIsCatalog, isVendor }) => {
+export const ProductsCatalog = ({ user, loggedIn, logOut, isCatalog, setIsCatalog, isVendor, imgsProducts}) => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categoryClicked, setCategoryClicked] = useState('All');
@@ -101,7 +101,7 @@ export const ProductsCatalog = ({ user, loggedIn, logOut, isCatalog, setIsCatalo
                     <div>
                         <Catalognavigation handleSearchInput={handleSearchInput} />
                     </div>
-                    <Catalog loggedIn={loggedIn} user={user} products={filteredProducts} isCatalog={isCatalog} isVendor={isVendor} />
+                    <Catalog loggedIn={loggedIn} user={user} products={filteredProducts} isCatalog={isCatalog} isVendor={isVendor} imgsProducts={imgsProducts} />
                 </div>
             </div>
             <Footer />

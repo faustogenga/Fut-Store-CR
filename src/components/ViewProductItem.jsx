@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Swal from "sweetalert2";
 import { Navbar } from '../components/Navbar'
 import { collectionAssignation, onFindAll, onInsert, onFindProductinReviews, onFindVendorinReviews } from '../CRUD/app';
-import { productInformation } from './Productitem'
+import { productInformation, productImgUrl } from './Productitem'
 import { useNavigate } from "react-router-dom";
 import { Footer } from './Footer';
 import StarRating from './StarRating';
@@ -71,7 +71,7 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
   const addToFirebaseCart = async () => {
     const product = {
       product_id: productInformation.id,
-      image: productInformation.img,
+      image: productImgUrl,
       name: productInformation.name,
       price: productInformation.price,
       quantity: 1,
@@ -124,10 +124,6 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
     }
   }
 
-
-
-
-
   if (!productInformation) {
     return navigate("/")
   } else
@@ -154,7 +150,7 @@ const ViewProductItem = ({ loggedIn, user, logOut, isVendor }) => {
               >
                 Volver
               </button>
-              <img alt='Produt_Image' style={{ width: '90%', height: '100%' }} src={productInformation.img}></img>
+              <img alt='Produt_Image' style={{ width: '90%', height: '100%' }} src={productImgUrl}></img>
             </div>
             <div style={{
               marginTop: "30px",

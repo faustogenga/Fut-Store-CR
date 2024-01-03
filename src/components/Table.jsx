@@ -20,7 +20,7 @@ import { Status } from './Status';
 
 
 
-export const BasicTable = ({ user }) => {
+export const BasicTable = ({ user, imgsProducts }) => {
     const [products, setproducts] = useState([]);
     const [orders, setorders] = useState([]);
 
@@ -214,7 +214,7 @@ export const BasicTable = ({ user }) => {
                                         <TableCell align="right">{row.size}</TableCell>
                                         <TableCell align="right">{row.stock}</TableCell>
                                         <TableCell align="right">
-                                            <Edit user={user} item={row} currentId={row.id} handleEdit={handleEditProduct} />
+                                            <Edit user={user} item={row} currentId={row.id} handleEdit={handleEditProduct} imgsProducts={imgsProducts} />
                                         </TableCell>
                                         <TableCell align="right">
                                             <Delete currentId={row.id} handleDelete={handleDeleteProduct} />
