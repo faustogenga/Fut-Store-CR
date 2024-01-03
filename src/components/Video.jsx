@@ -39,15 +39,13 @@ export const Video = ({ isVendor }) => {
                 <div className='responsiveBrands col-1 mx-3 p-1' style={{ color: "white", fontFamily: "Oswald", fontWeight: "700" }}>FUTSTORE cr</div>
             </div>
             <div className='responsiveVideo container-fluid d-flex mb-1 bg-black' style={{ height: '650px' }}>
-                <div className='responsiveVideo col-10 d-flex justify-content-center align-items-center p-4' style={{ height: '100%' }}>
+                <div className='responsiveVideo2 d-flex justify-content-center align-items-center p-4' style={{ height: '100%', width: "100%" }}>
                     <ReactPlayer
-                        className="responsiveVideo"
-                        width={"90%"}
+                        width={"100%"}
                         height={"100%"}
                         playing={true}
                         loop={true}
                         volume={0}
-
                         url='https://www.youtube.com/watch?v=eGUor824a74&ab_channel=SportsOnScreen'
                     />
                 </div>

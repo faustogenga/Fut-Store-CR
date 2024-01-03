@@ -9,6 +9,24 @@
   
   /*(iPhone) */
   @media (max-width: 767px) {
+
+    .navbar-collapse{
+      margin-top: 5% !important;
+      height: 35vh !important;
+      font-size: large !important;
+      border-bottom: 3px solid white !important; 
+    }
+
+    .navbar-collapse div{
+      text-align: center !important;
+    }
+
+    .navbar-collapse ul li{
+      margin: 2% !important;
+    }
+
+
+
     .main-box {
       height: 50vh;
       /* Adjust the height for smaller screens */
@@ -36,14 +54,18 @@
       text-align: center;
     }
     .responsiveVideo{
-      padding: 2 !important;
       text-align: center;
       width: 100% !important;
       height: 100% !important;
       display: block !important;
-      width: 100%;
+    }
+    .responsiveVideo2{
+      padding: 2% !important;
+      height: 30vh !important;
+      width: 100vw !important;
     }
     .responsivePics{
+      margin-top: 0% !important;
       display: block !important;
       width: 100% !important;
     }
@@ -57,7 +79,12 @@
     }
   
     .responsiveFooter {
-      font-size: small;
+      width: 100% !important;
+      font-size: medium;
+      margin-bottom: 3% !important;
+    }
+    .responsiveFooter div{
+      margin: 3% 10% 3% 3% !important;
     }
     .responsiveCategory{
       width: 100%;

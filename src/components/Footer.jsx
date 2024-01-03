@@ -3,7 +3,7 @@ import React from 'react'
 export const Footer = () => {
     return (
         <section id='footer'>
-            <div className='container-fluid bg-black'>
+            <div className='container-fluid bg-black d-flex justify-content-center'>
                 <div className='container-fluid row text-info'>
                     <h4 className='text-center text-light p-4 pe-none'>
                         FutStore CR <i className="bi bi-shop m-2"></i>
@@ -23,7 +23,7 @@ export const Footer = () => {
                             (506) 2653-23ee42
                         </div>
                     </div>
-                    <div className='responsiveFooter col-4 text-center pe-none'>
+                    <div className='responsiveFooter col-4 text-center'>
                         <h4>About Us <i className="bi bi-file-person m-2"></i></h4>
                         <div className=' mb-2' href="#">
                             <i className="bi bi-balloon-heart-fill m-2"></i>
