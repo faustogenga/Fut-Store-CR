@@ -3,7 +3,7 @@ import {Navbar} from '../components/Navbar'
 import {BasicTable} from '../components/Table'
 import { Footer } from '../components/Footer'
 
-export const AdminVendor = ({user, loggedIn, logOut, isVendor}) => {
+export const AdminVendor = ({user, loggedIn, logOut, isVendor, imgsProducts}) => {
   return (
     <>
     <Navbar 
@@ -12,7 +12,7 @@ export const AdminVendor = ({user, loggedIn, logOut, isVendor}) => {
         logOut = {logOut}
         isVendor = {isVendor}
         />
-    <BasicTable user={user}/>
+    <BasicTable user={user} imgsProducts={imgsProducts}/>
     <Footer/>
     </>
   )

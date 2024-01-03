@@ -2,6 +2,9 @@ import "../CSS/Modal.css";
 import { RiCloseLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { UploadProductImage } from "./UploadProductImage";
+import { storage } from '../CRUD/firebase_conection';
+import { ref, uploadBytes } from "firebase/storage";
 
 const Modal = ({ user, item, currentId, isOpen, onClose, handleEdit }) => {
 
@@ -13,13 +16,13 @@ const Modal = ({ user, item, currentId, isOpen, onClose, handleEdit }) => {
     name: item.name,
     price: item.price,
     size: item.size,
-    img: item.img,
     stock: item.stock,
     vendor: item.vendor
   }
 
   //values con la info del producto
   const [values, setValues] = useState(initialValues);
+  const [selectedFile, setSelectedFile] = useState(null);
 
 
   //onchange para editar VALUES segun vamos ingresando / editando informacion
@@ -46,6 +49,19 @@ const Modal = ({ user, item, currentId, isOpen, onClose, handleEdit }) => {
       confirmButtonText: "Modificar"
     }).then(async (result) => {
       if (result.isConfirmed) {
+        if (selectedFile) {
+          handleUpload();
+        } else {
+          if (values.name !== item.name) {
+            Swal.fire({
+              title: "Editar el nombre requiere volver a subir la imagen!",
+              text: "Vuelve a subir una imagen",
+              icon: "warning",
+              confirmButtonColor: "#3085d6",
+            });
+            return;
+          };
+        }
         handleEdit(currentId, values);
         onClose();
         console.log("Producto Actualizado");
@@ -56,14 +72,26 @@ const Modal = ({ user, item, currentId, isOpen, onClose, handleEdit }) => {
         })
       }
     });
-  }
+  };
+
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleUpload = () => {
+    const imgRef = ref(storage, `Products_Imgs/${values.name}`);
+    uploadBytes(imgRef, selectedFile).then().catch(error => {
+      alert("error", error);
+    });
+  };
 
 
   //solo si el boton edit se apreta, se abre el modal.
   if (!isOpen) return null
   return (
     <>
-    {/*DISPLAY DE MODAL*/}
+      {/*DISPLAY DE MODAL*/}
       <div className="overlay" />
       <div className="modalbox">
         <button className={"closeBtn"} onClick={onClose}>
@@ -77,7 +105,8 @@ const Modal = ({ user, item, currentId, isOpen, onClose, handleEdit }) => {
         <div className="text-start m-0">Descripcion </div>
         <textarea className="form-control p-4" type="text" name="description" value={values.description} onChange={onChangeValues} placeholder='Descripcion' />
         <div className="text-start" >Imagen </div>
-        <input required="required" className='form-control ' type="text" name="img" value={values.img} onChange={onChangeValues} placeholder='Imagen' />
+        <small>{item.name}.jpg</small>
+        <UploadProductImage handleFileChange={handleFileChange} />
         <div className="text-start m-0">Precio </div>
         <input required="required" className='form-control  ' type="text" name="price" value={values.price} onChange={onChangeValues} placeholder='Precio' />
         <div className="text-start m-0">Talla </div>
