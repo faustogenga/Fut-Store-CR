@@ -45,7 +45,6 @@ function App() {
 
   //Loading
   const [loadingUser, setLoadingUser] = useState(true);
-  const [loadingImg, setLoadingImg] = useState(true);
 
   const authfunctions = useAuth();
   const imgProductsListRef = useMemo(() => ref(storage, "Products_Imgs/"), []);
@@ -85,7 +84,6 @@ function App() {
       } catch (error) {
         console.error("Error fetching images:", error);
       }
-      setLoadingImg(false);
     };
 
     // Call the functions

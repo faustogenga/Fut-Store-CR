@@ -28,7 +28,7 @@ export const AddProducts = ({ isOpen, onClose, handleAdd, user }) => {
             setValues({ ...values, vendor: user.email });
         }
 
-    }, [user]);
+    }, [user, values]);
 
 
     const onChangeValues = ({ target }) => {
