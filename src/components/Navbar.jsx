@@ -99,11 +99,11 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
                 )}
                 <i className="bi bi-person-circle mx-2 text-info"></i>
                 <i className='text-white' id="my-anchor-element">
-                  Bienvenido {user.email.split("@")[0]}
+                  Bienvenido {user?.email.split("@")[0]}
                 </i>
                 <Tooltip anchorSelect="#my-anchor-element" place='bottom'>
                   <div>
-                    email : {user.email}
+                    email : {user?.email}
                     <br />
                     Fecha de creacion : {user.metadata.creationTime.substring(5, 16)}
                   </div>

@@ -210,13 +210,13 @@ export const Inbox = ({ user, isVendor }) => {
       backgroundSize: "cover"
     }}
       className='d-flex justify-content-center py-4'>
-      <div style={{ width: "40%" }} className=''>
+      <div style={{ width: "40%" }} className='inbox'>
         <h3 className='text-center mt-3 bg-white rounded-pill opacity-75'>Mensajes 📧</h3>
         <div className='text-center'>
           <button className='btn btn-info m-3' onClick={() => setIsOpen(true)}>Nuevo</button>
           <button className='btn btn-success m-3' onClick={() => { setIsOpen(false); inboxLoad() }}>Inbox</button>
         </div>
-        <div className='p-5 bg-white rounded'>
+        <div className='inbox3 p-5 bg-white rounded'>
           {isOpen ? (
             <>
               <div className='d-flex'>
@@ -253,7 +253,7 @@ export const Inbox = ({ user, isVendor }) => {
               </div>
             </>
           ) : (
-            <div className='text-center'>
+            <div className='inbox2 text-center'>
               <>
                 <TableContainer component={Paper} className='' >
                   <Table aria-label="simple table">

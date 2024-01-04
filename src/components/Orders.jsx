@@ -131,7 +131,7 @@ export const Orders = ({ user }) => {
                     </div>
                 </div>
                 <Row className="justify-content-center">
-                    <Table responsive="sm" className='table table-bordered border-primary align-middle table-info table-sm'>
+                    <Table responsive="sm" className='ordersResponsive table table-bordered border-primary align-middle table-info table-sm'>
                         <thead style={{ position: 'sticky', top: '0' }}>
                             <tr style={{ fontSize: '18px', fontFamily: 'Times New Roman' }}>
                                 <th className='text-center'>Imagen</th>
