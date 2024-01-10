@@ -40,7 +40,9 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
   return (
     <div>
       <div>
-        <img src="/assets/Banner.png" className="img-fluid" width={'100%'} alt="Banner" />
+        <a href='/'>
+          <img src="/assets/Banner.png" className="img-fluid" width={'100%'} alt="Banner" />
+        </a>
       </div>
       <nav className="navbar navbar-expand-lg" data-bs-theme="dark">
         <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
