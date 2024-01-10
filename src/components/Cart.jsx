@@ -14,14 +14,14 @@ export const Cart = ({ user }) => {
 
 
     const fetchProducts = async () => {
-        try {            
+        try {
             collectionAssignation('CustomerCart');
             const result = await onFindbyEmail(user.email);
             if (result) {
                 const productsData = result.map((doc) => ({
                     id: doc.id,
                     ...doc.data(),
-            }));
+                }));
                 setProducts(productsData);
             } else {
                 console.log("Error")
@@ -43,7 +43,7 @@ export const Cart = ({ user }) => {
                 await fetchProductsCallback();
             }
         };
-    
+
         fetchData();
     }, [user, fetchProductsCallback]);
 
@@ -125,7 +125,7 @@ export const Cart = ({ user }) => {
     const proceedToPayment = async () => {
         try {
             console.log(products);
-            if(products.length > 0) {
+            if (products.length > 0) {
                 cart = [...products];
                 console.log(cart);
                 navigate('/Checkout');
@@ -147,78 +147,76 @@ export const Cart = ({ user }) => {
 
     return (
         <div className='mainCart'>
-            <Container className="py-4">
+            <Container className="carritoResponsive py-4">
                 <div className='col-12 d-flex justify-content-center'>
                     <h4 className='col-2 text-center bg-white rounded-2 p-1'>Mi Carrito 🛒</h4>
                 </div>
-                    <Table responsive="sm" className='table align-middle opacity-80'>
-                        <thead>
-                            <tr style={{ fontSize: '20px' }}>
-                                <th className='text-center'>Imagen</th>
-                                <th className='text-center'>Nombre del Producto</th>
-                                <th className='text-center'>Precio</th>
-                                <th className='text-center'>Cantidad</th>
-                                <th className='text-center'>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {products.map((item, index) => {
-                                return (
-                                    <tr key={index} >
-                                        <td>
-                                            <div style={{
-                                                background: 'white', height: '7rem', overflow: 'hidden', display: 'flex',
-                                                justifyContent: 'center', alignItems: 'center'
-                                            }}>
-                                                <div style={{ padding: '.5rem' }}>
-                                                    <img src={item.image} style={{ width: '7rem' }} alt={item.name} />
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className='text-center'>
-                                            <h6 style={{ width: '12rem', marginLeft: '150px', fontSize: '20px' }}>
-                                                {item.name}
-                                            </h6>
-                                        </td>
-                                        <td className='text-center' style={{ fontSize: '18px' }}>$ {item.price}</td>
-                                        <td className='text-center' style={{ fontSize: '18px' }}>{item.quantity}</td>
-                                        <td className='text-center'>
-                                            <Button className="btn-info ms-2" onClick={() => updateCartItemQuantity(index, false)}>-</Button>
-                                            <Button className="btn-success ms-2" onClick={() => updateCartItemQuantity(index, true)}>+</Button>
-                                            <Button variant="danger" className="ms-2" onClick={() => removeItem(index, item.id)}>Eliminar Producto</Button>
-                                        </td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </Table>
+                <Table responsive="sm" className='responsiveTable table align-middle opacity-80'>
+                    <thead>
+                        <tr style={{ fontSize: '20px' }}>
+                            <th className='text-center'>Imagen</th>
+                            <th className='text-center'>Nombre del Producto</th>
+                            <th className='text-center'>Precio</th>
+                            <th className='text-center'>Cantidad</th>
+                            <th className='text-center'>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {products.map((item, index) => {
+                            return (
+                                <tr key={index} >
+                                    <td>
+                                        <div style={{
+                                            background: 'white', height: '7rem', overflow: 'hidden', display: 'flex',
+                                            justifyContent: 'center', alignItems: 'center'
+                                        }}>
+                                            <img src={item.image} style={{ width: '7rem' }} alt={item.name} />
+                                        </div>
+                                    </td>
+                                    <td className='text-center'>
+                                        <h6 style={{ width: '12rem', marginLeft: '150px', fontSize: '20px' }}>
+                                            {item.name}
+                                        </h6>
+                                    </td>
+                                    <td className='text-center' style={{ fontSize: '18px' }}>$ {item.price}</td>
+                                    <td className='text-center' style={{ fontSize: '18px' }}>{item.quantity}</td>
+                                    <td className='text-center'>
+                                        <Button className="btn-info ms-2" onClick={() => updateCartItemQuantity(index, false)}>-</Button>
+                                        <Button className="btn-success ms-2" onClick={() => updateCartItemQuantity(index, true)}>+</Button>
+                                        <Button variant="danger" className="deleteBtn ms-2" onClick={() => removeItem(index, item.id)}>Eliminar Producto</Button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
 
-                    <Row
-                        style={{ position: 'inherit', bottom: 0 }}
-                        className={`justify-content-center w-100`}
-                    >
-                        <Col className="py-2">
-                            <div style={{ width: '200px' }}>
-                                <h4 className='bg-white p-1 rounded-2 text-black'>Total: $ {cartTotal}</h4>
-                            </div>
-                        </Col>
-                        <Col className="p-0" md={4}>
-                            <Button variant="warning"
-                                className="m-2"
-                                onClick={clearCart}
-                            >
-                                <BsCartX size="1.7rem" />
-                                Limpiar Carrito
-                            </Button>
-                            <Button variant="success"
-                                className="m-2"
-                                onClick={proceedToPayment}
-                            >
-                                <BsCartCheck size="1.7rem" />
-                                Proceder al Pago
-                            </Button>
-                        </Col>
-                    </Row>
+                <Row
+                    style={{ position: 'inherit', bottom: 0 }}
+                    className={`justify-content-center w-100`}
+                >
+                    <Col className="py-2">
+                        <div style={{ width: '200px' }}>
+                            <h4 className='bg-white p-1 rounded-2 text-black'>Total: $ {cartTotal}</h4>
+                        </div>
+                    </Col>
+                    <Col className="p-0" md={4}>
+                        <Button variant="warning"
+                            className="m-2"
+                            onClick={clearCart}
+                        >
+                            <BsCartX size="1.7rem" />
+                            Limpiar Carrito
+                        </Button>
+                        <Button variant="success"
+                            className="m-2"
+                            onClick={proceedToPayment}
+                        >
+                            <BsCartCheck size="1.7rem" />
+                            Proceder al Pago
+                        </Button>
+                    </Col>
+                </Row>
             </Container>
         </div>
     )

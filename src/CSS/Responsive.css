@@ -91,7 +91,7 @@
     }
 
     .logo-container {
-      justify-content: left !important;
+      justify-content: center !important;
     }
 
     .responsiveSearchBar {
@@ -119,7 +119,9 @@
       margin: 3% 0% !important;
     }
 
-    .table1  table  tbody  tr  td, th, button {
+    .table1  table  tbody  tr  td, 
+    .table1  table  thead  tr  th,
+    .table1  table  tbody  tr  td button {
       min-width: 12vw !important;
       font-size: x-small !important;
       padding: 2% !important;
@@ -171,6 +173,38 @@
 
     }
 
+    .carritoResponsive div h4 {
+      width: 100% !important;
+
+    }
+
+    .responsiveTable thead tr th {
+      font-size: small !important;
+    }
+
+    .responsiveTable tbody tr td {
+      font-size: small !important;
+    }
+
+    .responsiveTable tbody tr td button{
+      margin: 2% !important;
+      font-size: x-small !important;
+    }
+
+    .responsiveTable tbody tr td button:last-of-type{
+      margin: 3% !important;
+      padding: 0% !important;
+      font-size: xx-small !important;
+    }
+
+    .responsiveTable thead tr:first-child th {
+      width: 30px !important;
+    }
+
+    .responsiveTable tbody tr:first-child td div,
+    .responsiveTable tbody tr td div img {
+      width: 100% !important;
+    }
 
 
   }
