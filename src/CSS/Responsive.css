@@ -206,6 +206,10 @@
       width: 100% !important;
     }
 
+    .ordersResponsive tbody tr td button {
+      margin: 3% !important;
+      font-size: xx-small !important;
+    }
 
   }
   
