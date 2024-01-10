@@ -9,9 +9,26 @@
   
   /*(iPhone) */
   @media (max-width: 767px) {
+
+    .navbar-collapse{
+      margin-top: 10% !important;
+      font-size: large !important;
+      border-bottom: 3px solid white !important;     }
+
+    .navbar-collapse div{
+      margin: 2% !important;
+      margin-top: 5% !important;
+      justify-content: center !important;
+      text-align: center !important;
+    }
+
+    .navbar-collapse ul{
+      text-align: center !important;
+      margin: 2% !important;
+    }
+
     .main-box {
       height: 50vh;
-      /* Adjust the height for smaller screens */
     }
     .responsiveProduct {
       text-align: center;
@@ -36,14 +53,18 @@
       text-align: center;
     }
     .responsiveVideo{
-      padding: 2 !important;
       text-align: center;
       width: 100% !important;
       height: 100% !important;
       display: block !important;
-      width: 100%;
+    }
+    .responsiveVideo2{
+      padding: 2% !important;
+      height: 30vh !important;
+      width: 100vw !important;
     }
     .responsivePics{
+      margin-top: 0% !important;
       display: block !important;
       width: 100% !important;
     }
@@ -57,7 +78,12 @@
     }
   
     .responsiveFooter {
-      font-size: small;
+      width: 100% !important;
+      font-size: medium;
+      margin-bottom: 3% !important;
+    }
+    .responsiveFooter div{
+      margin: 3% 10% 3% 3% !important;
     }
     .responsiveCategory{
       width: 100%;
@@ -65,7 +91,7 @@
     }
 
     .logo-container {
-      justify-content: center !important;
+      justify-content: left !important;
     }
 
     .responsiveSearchBar {
@@ -87,5 +113,65 @@
       margin: 2% !important;
       width: 80% !important;
     }
+
+    .table1 {
+      width: 95% !important;
+      margin: 3% 0% !important;
+    }
+
+    .table1  table  tbody  tr  td, th, button {
+      min-width: 12vw !important;
+      font-size: x-small !important;
+      padding: 2% !important;
+    }
+
+
+    .graph div{
+      width: 100vw !important;
+    }
+
+    .vendorBox {
+      width: 90% !important;
+    }
+
+    .inbox {
+      width: 90% !important;
+    }
+    .inbox2 div div p{
+      font-size: small !important;
+      margin: 0% !important;
+      height: 100%;
+    }
+
+    .inbox3 div{
+      justify-content: center !important;
+    }
+
+    .inbox3 {
+      padding: 0% !important;
+    }
+
+    .productItem {
+      flex-direction: column !important;
+      text-align: center !important;
+    }
+
+    .productItem2 {
+      align-items: center !important;
+    }
+    .productItem2 button {
+      margin-bottom: 10% !important;
+    }
+
+    .ordersResponsive tbody tr td, h6, th {
+      width: 100% !important;
+      padding: 0% !important;
+      margin: 5% !important;
+      font-size: smaller !important;
+
+    }
+
+
+
   }
   
