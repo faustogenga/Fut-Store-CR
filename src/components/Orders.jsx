@@ -180,13 +180,11 @@ export const Orders = ({ user }) => {
                                         </td>
                                         <td className='text-center'> {item.orderDate} {item.orderTime}</td>
                                         <td className='text-center'>
-                                            <h6>
                                                 {item.status === 'Pendiente' ? (
                                                     <button type="button" className="btn btn-primary p-1" onClick={() => openShippingStatus(item)}>{item.status}🕑</button>
                                                 ) : (
                                                     <button type="button" className="btn btn-success p-1" onClick={() => openShippingStatus(item)}>{item.status}📫</button>
                                                 )}
-                                            </h6>
                                         </td>
                                         <td className='text-center'>
                                             <Button className="btn btn-primary mb-1" onClick={() => showOrderDetails(item.orderId)}>Ver más detalles 📃</Button>
