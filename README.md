@@ -1,7 +1,8 @@
 # Fut-Store CR 
 ## Ecommerce Website - React Project
 Link : https://dw---base-de-datos.web.app/.  
-\**Download Run Email Server Rep to have functioning Emails after ordered placed**
+
+\**Download and Run Email Server Rep to have functioning Emails after ordered placed**
 ## Currently Hosted in Firebase
 This project was made for React Web Design College Class 3CO23-160361G1 DISEÑO WEB II, ULACIT. \
 All resources are used for learning / school related purposes. \
