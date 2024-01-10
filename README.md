@@ -1,5 +1,7 @@
 # Fut-Store CR 
 ## Ecommerce Website - React Project
+Link : **`https://dw---base-de-datos.web.app/`**
+## Currently Hosted in Firebase
 This project was made for React Web Design College Class 3CO23-160361G1 DISEÑO WEB II, ULACIT. \
 All resources are used for learning / school related purposes. \
 **`Owner`** : \
@@ -8,7 +10,6 @@ Fausto Genga : *80 commits    27,617 ++    3,807 --* \
 aemersonm : *15 commits    816 ++    347 --* \
 Espaba : *12 commits    1,047 ++    454 --* \
 Apolo-Git : *3 commits    445 ++    39 --* \
-## Currently Hosted in Firebase
 
 ## Project Requierments :
 Functional Requirements of an Ecommerce:
