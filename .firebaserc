@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "dw---base-de-datos"
-  }
+  },
+  "targets": {
+    "dw---base-de-datos": {
+      "hosting": {
+        "main": [
+          "dw---base-de-datos"
+        ],
+        "production": [
+          "futstore"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
