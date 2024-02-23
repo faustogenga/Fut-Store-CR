@@ -6,6 +6,9 @@
 https://github.com/faustogenga/Email-Server
 
 ## Currently Hosted in Firebase
+Developed a college web design project with React and Firebase, presenting a prototype inspired by a fictional soccer store. 
+Showcased proficiency in frontend development and successful backend integration, emphasizing dynamic functionalities and a user-friendly interface.
+
 This project was made for React Web Design College Class 3CO23-160361G1 DISEÑO WEB II, ULACIT. \
 All resources are used for learning / school related purposes. \
 **`Owner`** : \
