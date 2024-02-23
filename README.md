@@ -1,6 +1,6 @@
 # Fut-Store CR 
 ## Ecommerce Website - React Project
-Link : https://dw---base-de-datos.web.app/.  
+Official Link : https://futstore.web.app/
 
 \**Download and Run Email Server Rep to have functioning Emails after ordered placed**
 ## Currently Hosted in Firebase
