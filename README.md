@@ -1,4 +1,4 @@
-# Fut-Store CR 
+# FutStore CR 
 ## https://futstore.web.app/
 ## Ecommerce Website - React Project
 
