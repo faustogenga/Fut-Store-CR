@@ -1,8 +1,10 @@
 # Fut-Store CR 
+## https://futstore.web.app/
 ## Ecommerce Website - React Project
-Official Link : https://futstore.web.app/
 
 \**Download and Run Email Server Rep to have functioning Emails after ordered placed**
+https://github.com/faustogenga/Email-Server
+
 ## Currently Hosted in Firebase
 This project was made for React Web Design College Class 3CO23-160361G1 DISEÑO WEB II, ULACIT. \
 All resources are used for learning / school related purposes. \
