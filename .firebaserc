@@ -1,18 +1,10 @@
 {
   "projects": {
-    "default": "dw---base-de-datos"
+    "default": "dw-futstore"
   },
-  "targets": {
-    "dw---base-de-datos": {
-      "hosting": {
-        "main": [
-          "dw---base-de-datos"
-        ],
-        "production": [
-          "futstore"
-        ]
-      }
-    }
-  },
-  "etags": {}
+  "hosting": {
+    "site": "crfutstore",
+
+    "public": "public"
+  }
 }
