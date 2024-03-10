@@ -1,5 +1,5 @@
 # FutStore CR 
-## https://futstore.web.app/
+## https://crfutstore.web.app/
 ## Ecommerce Website - React Project
 
 \**Download and Run Email Server Rep to have functioning Emails after ordered placed**
