@@ -1,5 +1,10 @@
 {
   "projects": {
-    "default": "dw---base-de-datos"
+    "default": "dw-futstore"
+  },
+  "hosting": {
+    "site": "crfutstore",
+
+    "public": "public"
   }
 }
