@@ -38,7 +38,7 @@ export const Video = ({ isVendor }) => {
                 </div>
                 <div className='responsiveBrands col-1 mx-3 p-1' style={{ color: "white", fontFamily: "Oswald", fontWeight: "700" }}>FUTSTORE cr</div>
             </div>
-            <div className='responsiveVideo container-fluid d-flex mb-1 bg-black' style={{ height: '650px' }}>
+            <div className='responsiveVideo container-fluid d-flex mb-0 bg-black' style={{ height: '650px', marginBottom: '0' }}>
                 <div className='responsiveVideo2 d-flex justify-content-center align-items-center p-4' style={{ height: '100%', width: "100%" }}>
                     <ReactPlayer
                         width={"100%"}
@@ -55,28 +55,28 @@ export const Video = ({ isVendor }) => {
                             className=' responsivePics3 rounded m-2'
                             alt="futbol"
                             width={"82%"}
-                            style={{ transform: `rotate(${scrollPosition - 13}deg)` }}
+                            style={{ transform: 'rotate(0deg)' }}
                             src='https://i.pinimg.com/564x/6c/cd/60/6ccd60c6920ce2041ec084b312614fee.jpg' />
                         <img
                             className='responsivePics3 rounded m-2'
                             alt="futbol"
                             width={"82%"}
                             height={"25%"}
-                            style={{ transform: `rotate(-${scrollPosition - 13}deg)` }}
+                            style={{ transform: 'rotate(0deg)' }}
                             src='https://i.pinimg.com/564x/07/76/da/0776daded68920d37af6e46d08e989ba.jpg' />
                         <img
                             className='responsivePics3 rounded m-2'
                             alt="futbol"
                             width={"82%"}
                             height={"25%"}
-                            style={{ transform: `rotate(${scrollPosition - 13}deg)` }}
+                            style={{ transform: 'rotate(0deg)' }}
                             src='https://i.pinimg.com/564x/68/00/90/680090c1960a48f53f8cbc9778db33e8.jpg' />
                         <img
                             className='responsivePics3 rounded m-2'
                             alt="futbol"
                             width={"82%"}
                             height={"25%"}
-                            style={{ transform: `rotate(-${scrollPosition - 13}deg)` }}
+                            style={{ transform: 'rotate(0deg)' }}
                             src='https://i.pinimg.com/564x/77/2e/80/772e80a8b1683dfa0b59846253f09cf1.jpg' />
 
                     </div>

@@ -6,8 +6,14 @@ export const Banner = ({ isVendor }) => {
     const navigate = useNavigate();
 
     return (
-        <div className='container-fluid mx-auto d-flex justify-content-center align-items-center mt-4' style={{ height: '500px', backgroundColor: '#e3e3e3' }}>
-            <div className='responsiveBanner col-8 mx-auto bg-white text-center d-flex flex-column justify-content-center align-items-center' style={{ height: '70%' }}>
+        <div className='container-fluid mx-auto d-flex justify-content-center align-items-center mt-4' style={{ height: '500px', background: 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)' }}>
+            <div className='responsiveBanner col-8 mx-auto text-center d-flex flex-column justify-content-center align-items-center' style={{ 
+                height: '70%',
+                background: 'rgba(255, 255, 255, 0.95)',
+                borderRadius: '16px',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)',
+                border: '1px solid rgba(0, 0, 0, 0.05)'
+            }}>
                 <h3 className='m-4 px-3 py-1 bg-black' style={{ color: "white", fontFamily: "Oswald", fontWeight: "700", fontStyle:"italic"}}>Vende tus Articulos con Nosotros</h3>
                 <div className='m-3'>
                     <blockquote className="blockquote">

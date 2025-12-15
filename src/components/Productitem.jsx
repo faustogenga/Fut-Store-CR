@@ -37,26 +37,67 @@ export const Productitem = ({ loggedIn, product, isVendor, imgsProducts }) => {
   }, [loadImgCallBack]);
 
   return (
-    <div className='product'>
-      <img alt='Produt_Image'
-        src={imgUrl}
-        loading='lazy'
-        style={{ height: "280px", width: "270px", position: "relative" }}
-      >
-      </img>
-      <div className='descripcion m-1'>
-        <h5>{product.name}</h5>
-        <p className='m-0'><strong>${product.price}</strong></p>
-        <IconButton disabled={isVendor ? true : false} color="primary" aria-label="add to shopping cart"
-          onClick={() => (loggedIn ? onButtonClickViewProduct() : Swal.fire({
-            title: 'Ingresa para poder comprar',
-            text: 'Inscribete / Registrate en la mejor pagina',
-            icon: 'warning',
-          }))}>
-        <AddShoppingCartIcon />
-        <div className='' style={{ fontSize: "20px" }}>Comprar</div>
-      </IconButton>
+    <div className='product h-100 d-flex flex-column'>
+      <div style={{ overflow: 'hidden', borderRadius: '8px 8px 0 0', backgroundColor: '#f8fafc' }}>
+        <img alt={product.name}
+          src={imgUrl}
+          loading='lazy'
+          style={{ 
+            height: "280px", 
+            width: "100%", 
+            objectFit: "cover",
+            transition: 'transform 0.3s ease'
+          }}
+          className="product-image"
+        />
+      </div>
+      <div className='descripcion d-flex flex-column flex-grow-1 p-3'>
+        <h5 style={{ fontWeight: '600', marginBottom: '0.75rem', color: '#1e293b', minHeight: '3rem' }}>
+          {product.name}
+        </h5>
+        <p className='mb-3' style={{ fontSize: "1.5rem", fontWeight: "700", color: "#2563eb" }}>
+          ${product.price}
+        </p>
+        <div className="mt-auto">
+          <IconButton 
+            disabled={isVendor ? true : false} 
+            color="primary" 
+            aria-label="add to shopping cart"
+            onClick={() => (loggedIn ? onButtonClickViewProduct() : Swal.fire({
+              title: 'Ingresa para poder comprar',
+              text: 'Inscríbete / Regístrate en la mejor página',
+              icon: 'warning',
+            }))}
+            style={{
+              width: '100%',
+              padding: '0.75rem',
+              borderRadius: '8px',
+              background: isVendor ? '#e2e8f0' : 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+              color: 'white',
+              fontWeight: '600',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+            }}
+            onMouseEnter={(e) => {
+              if (!isVendor) {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 10px 15px -3px rgb(0 0 0 / 0.2)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isVendor) {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1)';
+              }
+            }}
+          >
+            <AddShoppingCartIcon style={{ marginRight: '0.5rem' }} />
+            <span style={{ fontSize: "0.95rem" }}>Comprar</span>
+          </IconButton>
+        </div>
+      </div>
     </div>
-    </div >
   )
 }
