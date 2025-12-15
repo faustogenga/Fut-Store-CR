@@ -39,15 +39,30 @@ export const Navbar = ({ loggedIn, user, logOut, isVendor }) => {
 
   return (
     <div>
+      <div style={{
+        background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+        color: '#ffffff',
+        padding: '0.5rem 0',
+        textAlign: 'center',
+        fontSize: '0.85rem',
+        fontWeight: '500',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        zIndex: 1001,
+        position: 'relative'
+      }}>
+        <i className="bi bi-exclamation-triangle-fill me-2" style={{ fontSize: '0.9rem' }}></i>
+        <strong>Prototipo Universitario:</strong> Este es un proyecto académico, no una tienda en línea real.
+      </div>
       <nav className="navbar navbar-expand-lg" data-bs-theme="dark">
-        <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)' }}>
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="navbar-collapse collapse" id="navbarColor01">
           <ul className="navbar-nav me-auto">
             <li className="nav-item active">
               <a className="nav-link active"
-                href="/">
+                href="/"
+                style={{ marginLeft: '1.5rem' }}>
                 <i className="bi bi-shop me-2"></i>FutStore
                 <span className="visually-hidden">(current)</span>
               </a>

@@ -11,7 +11,7 @@ export const Footer = () => {
                 <div className='container'>
                     <div className='row g-4'>
                         <div className='col-12 text-center mb-4'>
-                            <h3 className='text-light mb-2' style={{ fontWeight: '700', letterSpacing: '0.5px' }}>
+                            <h3 className='text-light mb-2' style={{ fontWeight: '700', letterSpacing: '0.5px', marginTop: '2rem' }}>
                                 <i className="bi bi-shop me-2" style={{ color: '#60a5fa' }}></i>
                                 FutStore CR
                             </h3>
@@ -60,7 +60,7 @@ export const Footer = () => {
                                 Información
                             </h5>
                             <div className='mb-3'>
-                                <a href="#" className='text-decoration-none text-light d-flex align-items-center justify-content-center justify-content-md-start'
+                                <a href="/#footer" className='text-decoration-none text-light d-flex align-items-center justify-content-center justify-content-md-start'
                                    style={{ transition: 'color 0.3s ease' }}
                                    onMouseEnter={(e) => e.target.style.color = '#60a5fa'}
                                    onMouseLeave={(e) => e.target.style.color = '#f8fafc'}>
@@ -69,7 +69,7 @@ export const Footer = () => {
                                 </a>
                             </div>
                             <div className='mb-3'>
-                                <a href="#" className='text-decoration-none text-light d-flex align-items-center justify-content-center justify-content-md-start'
+                                <a href="/#footer" className='text-decoration-none text-light d-flex align-items-center justify-content-center justify-content-md-start'
                                    style={{ transition: 'color 0.3s ease' }}
                                    onMouseEnter={(e) => e.target.style.color = '#60a5fa'}
                                    onMouseLeave={(e) => e.target.style.color = '#f8fafc'}>
@@ -78,7 +78,7 @@ export const Footer = () => {
                                 </a>
                             </div>
                             <div className='mb-3'>
-                                <a href="#" className='text-decoration-none text-light d-flex align-items-center justify-content-center justify-content-md-start'
+                                <a href="/#footer" className='text-decoration-none text-light d-flex align-items-center justify-content-center justify-content-md-start'
                                    style={{ transition: 'color 0.3s ease' }}
                                    onMouseEnter={(e) => e.target.style.color = '#60a5fa'}
                                    onMouseLeave={(e) => e.target.style.color = '#f8fafc'}>

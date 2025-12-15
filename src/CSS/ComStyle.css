@@ -93,11 +93,13 @@ h1, h2, h3, h4, h5, h6, button {
 
 .navbar-toggler {
   position: absolute;
+  right: 1rem;
   width: 50px;
   height: 40px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 6px;
   transition: var(--transition);
+  z-index: 1051;
 }
 
 .navbar-toggler:hover {
@@ -155,7 +157,7 @@ h1, h2, h3, h4, h5, h6, button {
   position: relative;
   background-image: url(/public/assets/Main1.png);
   background-size: cover;
-  background-position: center;
+  background-position: 20% center;
   background-attachment: fixed;
   margin-bottom: 0;
   min-height: 95vh;
@@ -180,8 +182,8 @@ h1, h2, h3, h4, h5, h6, button {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(248, 250, 252, 0.4) 30%, rgba(248, 250, 252, 0.8) 70%, #f8fafc 100%);
+  height: 60px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(248, 250, 252, 0.5) 50%, #f8fafc 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -283,22 +285,22 @@ h1, h2, h3, h4, h5, h6, button {
 .product {
   font-family: 'Poppins', sans-serif;
   color: var(--text-primary);
-  transition: var(--transition);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 16px;
   overflow: hidden;
   background: var(--bg-light);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   height: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .product:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-  border-color: rgba(37, 99, 235, 0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border-color: rgba(37, 99, 235, 0.3);
 }
 
 .product img,

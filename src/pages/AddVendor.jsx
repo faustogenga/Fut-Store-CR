@@ -144,79 +144,240 @@ export const AddVendor = ({ setLoggedIn }) => {
     };
 
     return <div className="mainContainerlogin">
-        <form className="loginform col-4">
-            <div className="text-end">
-                <input
-                    className="btn btn-close bg-black m-1"
+        <form className="loginform text-center">
+            <div className="text-end" style={{ padding: '1rem 1rem 0 0' }}>
+                <button
+                    className="btn-close"
                     type="button"
                     onClick={Exit}
+                    style={{
+                        background: 'rgba(255, 255, 255, 0.9)',
+                        opacity: 1,
+                        width: '2rem',
+                        height: '2rem',
+                        borderRadius: '50%',
+                        transition: 'all 0.2s ease',
+                        filter: 'invert(0)',
+                        backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\' fill=\'%23000\'%3e%3cpath d=\'M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z\'/%3e%3c/svg%3e")',
+                        backgroundSize: '1em',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.target.style.background = 'rgba(255, 255, 255, 1)';
+                        e.target.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.target.style.background = 'rgba(255, 255, 255, 0.9)';
+                        e.target.style.boxShadow = 'none';
+                    }}
                 />
             </div>
             <div className="titleContainer text-center">
-                <PersonAddAltIcon sx={{ fontSize: 40, margin: 2 }} />
-                <div>Bienvenido</div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', flexDirection: 'column' }}>
+                    <PersonAddAltIcon sx={{ fontSize: 45, color: '#2563eb' }} />
+                    <div>Bienvenido</div>
+                </div>
             </div>
-            <h4 className="text-center">Vende con Nosotros</h4>
-            <TextField
-                className="newVendorInput m-3 col-3"
-                required
-                id="outlined-required-nombre"
-                label="Nombre"
-                name="Nombre"
-                onChange={(event) => setNombre(event.target.value)}
-            />
-            <TextField
-                className="newVendorInput m-3 col-3"
-                required
-                id="outlined-required-apellido"
-                label="Apellido"
-                name="Apellido"
-                onChange={(event) => setApellido(event.target.value)}
-            />
-            <TextField
-                className="newVendorInput m-3 col-3"
-                required
-                id="outlined-required-telefono"
-                label="Telefono"
-                name="Telefono"
-                onChange={(event) => setTelefono(event.target.value)}
-            />
-            <TextField
-                className="newVendorInput m-3 col-11"
-                required
-                id="outlined-required-email"
-                label="Correo"
-                name="Correo"
-                onChange={(event) => setEmail(event.target.value)}
-            />
-            <br />
-            <TextField
-                className="newVendorInput m-3 col-11"
-                id="outlined-password-input"
-                label="Contraseña"
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-            />
-
-            <TextField
-                className="newVendorInput m-3 col-11"
-                id="outlined-repeat-password-input"
-                label="Repetir Contraseña"
-                type="password"
-                value={repeatPassword}
-                onChange={handleRepeatPasswordChange}
-                error={error}
-                helperText={error ? 'Las contraseñas no coinciden' : ''}
-            />
-
-            <div className="container-fluid d-flex justify-content-center">
-                <input
-                    className="btn btn-info col-5 m-3 mx-auto"
-                    type="button"
-                    onClick={onButtonClickAddVendor}
-                    value={"Afiliate"}
+            <h4 className="text-center" style={{ 
+                color: '#64748b', 
+                fontWeight: '500', 
+                fontSize: '1.1rem',
+                marginTop: '-0.5rem',
+                marginBottom: '1.5rem'
+            }}>
+                Vende con Nosotros
+            </h4>
+            <div className="form-content-mobile" style={{ padding: '0 3rem 2rem 3rem' }}>
+                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
+                    <TextField
+                        fullWidth
+                        required
+                        id="outlined-required-nombre"
+                        label="Nombre"
+                        name="Nombre"
+                        onChange={(event) => setNombre(event.target.value)}
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                borderRadius: '10px',
+                                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                                '&:hover fieldset': {
+                                    borderColor: '#2563eb',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#2563eb',
+                                    borderWidth: '2px',
+                                },
+                            },
+                            '& .MuiInputLabel-root.Mui-focused': {
+                                color: '#2563eb',
+                            },
+                        }}
+                    />
+                    <TextField
+                        fullWidth
+                        required
+                        id="outlined-required-apellido"
+                        label="Apellido"
+                        name="Apellido"
+                        onChange={(event) => setApellido(event.target.value)}
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                borderRadius: '10px',
+                                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                                '&:hover fieldset': {
+                                    borderColor: '#2563eb',
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#2563eb',
+                                    borderWidth: '2px',
+                                },
+                            },
+                            '& .MuiInputLabel-root.Mui-focused': {
+                                color: '#2563eb',
+                            },
+                        }}
+                    />
+                </div>
+                <TextField
+                    fullWidth
+                    required
+                    id="outlined-required-telefono"
+                    label="Teléfono"
+                    name="Telefono"
+                    onChange={(event) => setTelefono(event.target.value)}
+                    sx={{
+                        marginBottom: '1.5rem',
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '10px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            '&:hover fieldset': {
+                                borderColor: '#2563eb',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#2563eb',
+                                borderWidth: '2px',
+                            },
+                        },
+                        '& .MuiInputLabel-root.Mui-focused': {
+                            color: '#2563eb',
+                        },
+                    }}
                 />
+                <TextField
+                    fullWidth
+                    required
+                    id="outlined-required-email"
+                    label="Correo electrónico"
+                    name="Correo"
+                    onChange={(event) => setEmail(event.target.value)}
+                    sx={{
+                        marginBottom: '1.5rem',
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '10px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            '&:hover fieldset': {
+                                borderColor: '#2563eb',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#2563eb',
+                                borderWidth: '2px',
+                            },
+                        },
+                        '& .MuiInputLabel-root.Mui-focused': {
+                            color: '#2563eb',
+                        },
+                    }}
+                />
+                <TextField
+                    fullWidth
+                    id="outlined-password-input"
+                    label="Contraseña"
+                    type="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    sx={{
+                        marginBottom: '1.5rem',
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '10px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            '&:hover fieldset': {
+                                borderColor: '#2563eb',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#2563eb',
+                                borderWidth: '2px',
+                            },
+                        },
+                        '& .MuiInputLabel-root.Mui-focused': {
+                            color: '#2563eb',
+                        },
+                    }}
+                />
+                <TextField
+                    fullWidth
+                    id="outlined-repeat-password-input"
+                    label="Repetir Contraseña"
+                    type="password"
+                    value={repeatPassword}
+                    onChange={handleRepeatPasswordChange}
+                    error={error}
+                    helperText={error ? 'Las contraseñas no coinciden' : ''}
+                    sx={{
+                        marginBottom: '2rem',
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '10px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            '&:hover fieldset': {
+                                borderColor: error ? '#ef4444' : '#2563eb',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: error ? '#ef4444' : '#2563eb',
+                                borderWidth: '2px',
+                            },
+                            '&.Mui-error fieldset': {
+                                borderColor: '#ef4444',
+                            },
+                        },
+                        '& .MuiInputLabel-root.Mui-focused': {
+                            color: error ? '#ef4444' : '#2563eb',
+                        },
+                        '& .MuiFormHelperText-root': {
+                            fontSize: '0.85rem',
+                        },
+                    }}
+                />
+
+                <div style={{ marginTop: '2rem' }}>
+                    <button
+                        type="button"
+                        onClick={onButtonClickAddVendor}
+                        style={{
+                            width: '100%',
+                            padding: '0.9rem 2rem',
+                            background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '10px',
+                            fontSize: '1rem',
+                            fontWeight: '600',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)',
+                            letterSpacing: '0.3px'
+                        }}
+                        onMouseEnter={(e) => {
+                            e.target.style.transform = 'translateY(-2px)';
+                            e.target.style.boxShadow = '0 6px 20px rgba(37, 99, 235, 0.4)';
+                        }}
+                        onMouseLeave={(e) => {
+                            e.target.style.transform = 'translateY(0)';
+                            e.target.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.3)';
+                        }}
+                    >
+                        Afiliate
+                    </button>
+                </div>
             </div>
         </form>
     </div>

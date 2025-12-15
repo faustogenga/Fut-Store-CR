@@ -114,50 +114,155 @@ export const Login = ({ setUser, setLoggedIn }) => {
 
     return (
     <div className="mainContainerlogin">
-        <form className="loginform text-center col-4">
-            <div className="text-end">
-                <input
-                    className="btn btn-close bg-black m-1"
+        <form className="loginform text-center">
+            <div className="text-end" style={{ padding: '1rem 1rem 0 0' }}>
+                <button
+                    className="btn-close"
                     type="button"
                     onClick={ExitLogin}
+                    style={{
+                        background: 'rgba(255, 255, 255, 0.9)',
+                        opacity: 1,
+                        width: '2rem',
+                        height: '2rem',
+                        borderRadius: '50%',
+                        transition: 'all 0.2s ease',
+                        backgroundImage: 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\' fill=\'%23000\'%3e%3cpath d=\'M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z\'/%3e%3c/svg%3e")',
+                        backgroundSize: '1em',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        border: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.target.style.background = 'rgba(0, 0, 0, 0.1)';
+                        e.target.style.backgroundImage = 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\' fill=\'%23000\'%3e%3cpath d=\'M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z\'/%3e%3c/svg%3e")';
+                        e.target.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.target.style.background = 'rgba(255, 255, 255, 0.9)';
+                        e.target.style.backgroundImage = 'url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\' fill=\'%23000\'%3e%3cpath d=\'M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z\'/%3e%3c/svg%3e")';
+                        e.target.style.boxShadow = 'none';
+                    }}
                 />
             </div>
             <div className="titleContainer">
-                <div>Inicia sesi
-                    <SportsSoccerIcon sx={{ fontSize: 45 }} />
-                    n</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    Inicia sesi
+                    <SportsSoccerIcon sx={{ fontSize: 45, color: '#2563eb' }} />
+                    n
+                </div>
             </div>
-            <TextField
-                className="m-3 col-11"
-                required
-                id="outlined-required"
-                label="Correo"
-                name="Correo"
-                onChange={(event) => setEmail(event.target.value)}
-            />
-            <br />
-            <TextField
-                className="m-3 col-11"
-                id="outlined-password-input"
-                label="Contraseña"
-                type="password"
-                autoComplete="current-password"
-                onChange={(event) => setPassword(event.target.value)}
-            />
+            <div className="form-content-mobile" style={{ padding: '2rem 3rem', paddingTop: '1rem' }}>
+                <TextField
+                    fullWidth
+                    required
+                    id="outlined-required"
+                    label="Correo electrónico"
+                    name="Correo"
+                    onChange={(event) => setEmail(event.target.value)}
+                    sx={{
+                        marginBottom: '1.5rem',
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '10px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            '&:hover fieldset': {
+                                borderColor: '#2563eb',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#2563eb',
+                                borderWidth: '2px',
+                            },
+                        },
+                        '& .MuiInputLabel-root.Mui-focused': {
+                            color: '#2563eb',
+                        },
+                    }}
+                />
+                <TextField
+                    fullWidth
+                    id="outlined-password-input"
+                    label="Contraseña"
+                    type="password"
+                    autoComplete="current-password"
+                    onChange={(event) => setPassword(event.target.value)}
+                    sx={{
+                        marginBottom: '2rem',
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '10px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            '&:hover fieldset': {
+                                borderColor: '#2563eb',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#2563eb',
+                                borderWidth: '2px',
+                            },
+                        },
+                        '& .MuiInputLabel-root.Mui-focused': {
+                            color: '#2563eb',
+                        },
+                    }}
+                />
 
-            <div className="container-fluid d-flex justify-content-center">
-                <input
-                    className="btn btn-info col-5 m-3 mx-auto"
-                    type="button"
-                    onClick={onButtonClickLogin}
-                    value={"Inicia Sesión"}
-                />
-                <input
-                    className="btn btn-info col-5 m-3 mx-auto"
-                    type="button"
-                    onClick={RegisterNavigate}
-                    value={"Crea tu cuenta"}
-                />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
+                    <button
+                        type="button"
+                        onClick={onButtonClickLogin}
+                        style={{
+                            width: '100%',
+                            padding: '0.9rem 2rem',
+                            background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '10px',
+                            fontSize: '1rem',
+                            fontWeight: '600',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)',
+                            letterSpacing: '0.3px'
+                        }}
+                        onMouseEnter={(e) => {
+                            e.target.style.transform = 'translateY(-2px)';
+                            e.target.style.boxShadow = '0 6px 20px rgba(37, 99, 235, 0.4)';
+                        }}
+                        onMouseLeave={(e) => {
+                            e.target.style.transform = 'translateY(0)';
+                            e.target.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.3)';
+                        }}
+                    >
+                        Inicia Sesión
+                    </button>
+                    <button
+                        type="button"
+                        onClick={RegisterNavigate}
+                        style={{
+                            width: '100%',
+                            padding: '0.9rem 2rem',
+                            background: 'transparent',
+                            color: '#2563eb',
+                            border: '2px solid #2563eb',
+                            borderRadius: '10px',
+                            fontSize: '1rem',
+                            fontWeight: '600',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            letterSpacing: '0.3px'
+                        }}
+                        onMouseEnter={(e) => {
+                            e.target.style.background = '#2563eb';
+                            e.target.style.color = 'white';
+                            e.target.style.transform = 'translateY(-2px)';
+                        }}
+                        onMouseLeave={(e) => {
+                            e.target.style.background = 'transparent';
+                            e.target.style.color = '#2563eb';
+                            e.target.style.transform = 'translateY(0)';
+                        }}
+                    >
+                        Crea tu cuenta
+                    </button>
+                </div>
             </div>
         </form>
     </div>
