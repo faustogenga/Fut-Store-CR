@@ -37,16 +37,16 @@ export const Productitem = ({ loggedIn, product, isVendor, imgsProducts }) => {
   }, [loadImgCallBack]);
 
   return (
-    <div className='product'>
+    <div className='product product-card h-100 text-center'>
       <img alt='Produt_Image'
         src={imgUrl}
         loading='lazy'
-        style={{ height: "280px", width: "270px", position: "relative" }}
+        className='product-image mb-3'
       >
       </img>
       <div className='descripcion m-1'>
-        <h5>{product.name}</h5>
-        <p className='m-0'><strong>${product.price}</strong></p>
+        <h5 className='mb-1'>{product.name}</h5>
+        <p className='m-0'>${product.price}</p>
         <IconButton disabled={isVendor ? true : false} color="primary" aria-label="add to shopping cart"
           onClick={() => (loggedIn ? onButtonClickViewProduct() : Swal.fire({
             title: 'Ingresa para poder comprar',

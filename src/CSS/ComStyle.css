@@ -1,32 +1,52 @@
+:root {
+  --primary: #1e88e5;
+  --primary-dark: #0b3c6f;
+  --accent: #7df4c4;
+  --surface: #0f172a;
+  --muted: #94a3b8;
+  --card: rgba(255, 255, 255, 0.06);
+  --glass: rgba(255, 255, 255, 0.08);
+}
+
 .container-fluid {
   padding: 0;
+}
+
+body {
+  background: radial-gradient(circle at 10% 20%, rgba(126, 180, 255, 0.15), transparent 25%),
+    radial-gradient(circle at 90% 10%, rgba(0, 255, 209, 0.15), transparent 20%),
+    linear-gradient(180deg, #0b1021 0%, #0a0d18 100%);
+  color: #e2e8f0;
+  font-family: 'Poppins', sans-serif;
 }
 
 h1, h2, h3, h4, h5, button {
   font-family: 'Poppins', sans-serif;
 }
 
+.navbar-container {
+  background: linear-gradient(135deg, #0f172a 0%, #0b1021 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
 
 .navbar {
-  padding: 0% !important;
-  border: 0px !important;
-  margin-top: 3px;
-  background-color: #000000;
-  height: 43px;
+  padding: 0.9rem 1rem !important;
+  border: 0 !important;
+  background-color: transparent;
 }
 
 .navbar-toggler {
   position: absolute;
   width: 50px;
   height: 30px;
-  border: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.navbar-toggler:not(.collapsed) .navbar-toggler-icon{
+.navbar-toggler:not(.collapsed) .navbar-toggler-icon {
   opacity: 0.5;
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/0/06/X_blanc_sur_fond_rectangulaire_noir.png");
 }
-
 
 .navbar-toggler-icon {
   font-size: 1rem;
@@ -34,60 +54,208 @@ h1, h2, h3, h4, h5, button {
 }
 
 #navbarColor01 {
-  background-color: black;
+  background-color: transparent;
   z-index: 1000;
-  border-color: #F4F5F6;
+  border-color: transparent;
 }
 
 .nav-link, i {
-  color: #F4F5F6;
+  color: #e2e8f0;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent) !important;
+  transform: translateY(-1px);
+}
+
+.brand-pill {
+  background: linear-gradient(135deg, rgba(125, 244, 196, 0.15), rgba(30, 136, 229, 0.25));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e2e8f0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.brand-pill span {
+  color: var(--accent);
+}
+
+.hero-wrapper {
+  position: relative;
+  overflow: hidden;
 }
 
 .main-box {
   position: relative;
-  background-image: url(/public/assets/Main1.png);
+  background-image: linear-gradient(120deg, rgba(15, 23, 42, 0.92), rgba(11, 12, 32, 0.92)), url(/public/assets/Main1.png);
   background-size: cover;
+  background-position: center;
   margin-bottom: 3%;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(125, 244, 196, 0.12), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(30, 136, 229, 0.12), transparent 40%);
+  pointer-events: none;
+}
 
 .main-boton {
   font-family: 'Poppins', sans-serif;
-  color: #F4F5F6;
-  background-color: #3498DB;
-  border-color: #000000;
-  margin-top: 1%;
-  padding: 2% 15% 2% 15%;
-  border-radius: 0;
+  color: #0b1021;
+  background: linear-gradient(135deg, #7df4c4 0%, #1e88e5 100%);
+  border: 0;
+  margin-top: 1.2rem;
+  padding: 0.95rem 2.8rem;
+  border-radius: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  box-shadow: 0 12px 30px rgba(30, 136, 229, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .main-boton:hover {
-  background-color: #8fbedd;
-  border-color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(125, 244, 196, 0.25);
+  filter: brightness(1.05);
 }
-
 
 .top-content {
-  position: absolute;
-  color: #F4F5F6;
+  position: relative;
+  color: #e2e8f0;
   font-family: 'Poppins', sans-serif;
-  font-weight: bold;
-  font-size: 200%;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 2.8vw, 3.4rem);
+  z-index: 1;
 }
 
+.top-content p {
+  color: var(--muted);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+}
 
 .main-info {
   font-family: 'Poppins', sans-serif;
-  color: #F4F5F6;
+  color: #cbd5e1;
 }
-
 
 .product {
   font-family: 'Poppins', sans-serif;
-  color: #000;
+  color: #e2e8f0;
 }
 
+.product-card {
+  background: var(--glass);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
 
-.product .descripcion {
-  position: relative;
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(125, 244, 196, 0.35);
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.45);
+}
+
+.product-image {
+  border-radius: 14px;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  background: #0b1021;
+}
+
+.product .descripcion h5 {
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.product .descripcion p {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.banner-card {
+  background: linear-gradient(135deg, rgba(125, 244, 196, 0.12), rgba(30, 136, 229, 0.18));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.banner-heading {
+  letter-spacing: 1px;
+  font-size: clamp(1.6rem, 2vw, 2rem);
+  text-transform: uppercase;
+}
+
+.cta-subtitle {
+  color: #cbd5e1;
+  max-width: 460px;
+}
+
+.cta-button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e2e8f0;
+  padding: 0.75rem 1.8rem;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.cta-button:hover {
+  background: rgba(125, 244, 196, 0.16);
+  border-color: rgba(125, 244, 196, 0.6);
+  color: #7df4c4;
+}
+
+.footer-modern {
+  background: linear-gradient(180deg, #0b1021 0%, #0f172a 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-modern h4 {
+  color: #e2e8f0;
+  font-weight: 700;
+}
+
+.footer-modern a,
+.footer-modern div {
+  color: #cbd5e1;
+  transition: color 0.2s ease;
+}
+
+.footer-modern a:hover {
+  color: var(--accent);
+}
+
+.badge-soft {
+  background: rgba(125, 244, 196, 0.1);
+  color: #7df4c4;
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.progress {
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #7df4c4, #1e88e5);
 }
